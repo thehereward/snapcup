@@ -1,0 +1,13 @@
+name: unitTests
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches: [main]
+jobs:
+  Jest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - run: npm ci && npm test
