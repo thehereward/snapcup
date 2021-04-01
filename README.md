@@ -1,8 +1,8 @@
 # snapcup
 
-## Credentials
+## Environment Variables
 
-To set up your Firebase Firestore credentials, follow the `.env.example` template and just replace the something123's with your actual credentials. This will then be injected into your environment by dotenv.
+To run locally with your own backend, add a .env.local file to root project directory with your own firebase credential variables
 
 ## Parcel
 
