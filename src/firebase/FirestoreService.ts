@@ -12,5 +12,7 @@ const firebaseConfig = {
 
 export function initializeDatabase() {
     firebase.initializeApp(firebaseConfig);
-    return firebase.firestore();
 }
+
+
+// https://firebase.google.com/docs/firestore/manage-data/add-data

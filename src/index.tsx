@@ -1,5 +1,10 @@
 // index.tsx
 import React from "react";
 import ReactDOM from "react-dom";
+import { initializeDatabase } from "~firebase/FirestoreService";
+import App from "./app";
 
-ReactDOM.render(<h1>Hello world!</h1>, document.getElementById("root"));
+initializeDatabase();
+ReactDOM.render((
+    <App/>
+), document.getElementById("root"));
