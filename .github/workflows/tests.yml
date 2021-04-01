@@ -11,7 +11,4 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: runTests
-      - run: |
-        npm install 
-        npm test
-
+      - run: npm ci && npm test
