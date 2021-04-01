@@ -1,4 +1,4 @@
-function product(a, b) { //dummy function for tests
+function product(a, b) { //dummy function for test
     return a * b;
   }
   
