@@ -13,6 +13,3 @@ const firebaseConfig = {
 export function initializeDatabase() {
     firebase.initializeApp(firebaseConfig);
 }
-
-
-// https://firebase.google.com/docs/firestore/manage-data/add-data
