@@ -6,5 +6,5 @@
       "~*": ["./*"]
     }
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "__tests__/sum.test.ts"]
 }
