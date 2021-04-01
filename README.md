@@ -1,5 +1,11 @@
 # snapcup
 
+## Credentials
+
+To set up your Firebase Firestore credentials, follow the `.env.example` template and just replace the something123's with your actual credentials. This will then be injected into your environment by dotenv.
+
+## Parcel
+
 The following has been done to set up Parcel:
 
     npm init -y
