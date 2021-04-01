@@ -2,7 +2,7 @@
 
 ## Environment Variables
 
-To run locally with your own backend, add a .env.development file to root project directory with your own firebase credential variables
+To run locally with your own backend, add a .env.local file to root project directory with your own firebase credential variables
 
 ## Parcel
 
