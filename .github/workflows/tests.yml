@@ -2,16 +2,16 @@ name: unitTests
 on:
   push:
     branches:
-      -main
+      - main
   pull_request:
     branches: [main]
 jobs:
   Jest:
     runs-on: ubuntu-latest
     steps:
-      -uses: actions/checkout@v1
-      -name: runTests
-      run: |
+      - uses: actions/checkout@v1
+      - name: runTests
+      - run: |
         npm install 
         npm test
 
