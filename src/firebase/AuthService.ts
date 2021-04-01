@@ -9,8 +9,7 @@ class AuthService {
     constructor() {
         this.provider = new firebase.auth.OAuthProvider('microsoft.com');
         this.provider.setCustomParameters({
-            // Force re-consent.
-            prompt: 'consent',
+            prompt: 'select_account',
             // Only users from a particular Azure AD tenant to sign into the application
             tenant: 'Softwire.onmicrosoft.com'
         });
