@@ -1,11 +1,12 @@
 // index.tsx
 import React from "react";
 import ReactDOM from "react-dom";
-import SubmissionTextBox from './components/submissionPage/SubmissionTextBox';
+import { initializeDatabase } from "~firebase/FirestoreService";
+import SubmissionTextBox from "./components/submissionPage/SubmissionTextBox";
 
-ReactDOM.render(
-    <React.StrictMode>
-      <SubmissionTextBox />
-    </React.StrictMode>,
-    document.getElementById('root')
-  );
+initializeDatabase();
+ReactDOM.render((
+  <React.StrictMode>
+    <SubmissionTextBox />
+  </React.StrictMode>
+), document.getElementById("root"));
