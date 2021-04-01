@@ -1,4 +1,4 @@
-name: unitTests
+name: Unit Tests using Jest
 on:
   push:
     branches:
@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [main]
 jobs:
-  Jest:
+  unit_tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
