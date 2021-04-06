@@ -1,4 +1,4 @@
-import React = require("react");
+import React from 'react';
 import { useState, useEffect } from 'react';
 import Snap from '../../firebase/snap/Snap';
 import SubmitSnap from '../../firebase/snap/SubmitSnap';
