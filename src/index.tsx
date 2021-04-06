@@ -1,7 +1,7 @@
 // index.tsx
 import React from "react";
 import ReactDOM from "react-dom";
-import { initializeDatabase } from "~firebase/FirestoreService";
+import { initializeDatabase } from "./firebase/FirestoreService";
 import SubmissionTextBox from "./components/submissionPage/SubmissionTextBox";
 
 initializeDatabase();

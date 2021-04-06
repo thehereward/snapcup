@@ -4,7 +4,7 @@ import firebase from 'firebase/app'
 /* Submits a snap to the firebase collection*/
 
 const SubmitSnap = (snap : Snap): boolean => {
-
+    /*
     firebase.firestore().collection("snaps").doc("snap1").set(snap)
     .then(() => {
         return true;
@@ -12,9 +12,8 @@ const SubmitSnap = (snap : Snap): boolean => {
     .catch((error) => {
         return false;
     });
+    8?
     /* restore database implementation */
-    return true
-    return true
     return true
 }
 export default SubmitSnap
