@@ -3,5 +3,5 @@ export default interface Snap {
     to : [string];  /* Recipient UIDs */
     from: string;   /* Sender UID */
     body: string;   /* Main Message */
-    date: string;   /* Date/time of Submission*/
+    timestamp: Date;   /* Date/time of Submission*/
 }
