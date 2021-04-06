@@ -1,3 +1,5 @@
+require('dotenv').config({path: "./.env.test"})
+
 module.exports = {
   "roots": [
     "<rootDir>/src"
