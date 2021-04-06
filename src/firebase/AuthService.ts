@@ -31,17 +31,15 @@ class AuthService {
         }
     }
 
-    async signIn() {
+    async signIn(successCb: () => void, errorCb: (err: string) => void) {
         try {
-            const result = await firebase.auth().signInWithPopup(this.provider);
-            const credential: firebase.auth.OAuthCredential = result.credential;
-            this.accessToken = credential.accessToken;
-            this.idToken = credential.idToken;
+            await firebase.auth().signInWithPopup(this.provider);
             this.createUserProfileIfRequired();
+            // If we get to here the sign up has been successful
+            successCb();
         } catch(e) {
-            // TODO: Handle error
-            console.log('sign in error')
             console.error(e);
+            errorCb("There was an error signing in!");
         }
     }
 }
