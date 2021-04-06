@@ -5,7 +5,10 @@ interface ProfileData {
     isAdmin: boolean;
     isSnapper: boolean;
 }
-
+// assert user logged in
+// get current user profile
+// if profile not exists create
+// return user profile
 export async function getOrCreateUserProfile(): Promise<ProfileData> {
     const user = firebase.auth().currentUser;
     if (!user) {

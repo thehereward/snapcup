@@ -5,7 +5,6 @@ import React, { useState, useEffect } from "react";
 import PrettyPageWrap from "./components/PrettyPageWrap";
 import LoginPage from "./components/loginPage/LoginPage";
 import LogoutButton from "./components/logoutButton";
-import AdminControls from "./components/AdminControls";
 
 import firebase from "firebase/app";
 import { getOrCreateUserProfile } from "./firebase/AuthService";
@@ -39,7 +38,6 @@ const App = () => {
                 }
             >
                 <h1>Hi {firebase.auth().currentUser.displayName}!</h1>
-                {userProfile.isAdmin && <AdminControls />}
             </PrettyPageWrap>
         );
     } else {
