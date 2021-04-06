@@ -6,4 +6,7 @@ service cloud.firestore {
           request.time < timestamp.date(2021, 5, 1);
     }
   }
+  match /users/{user} {
+    allow create: if (!request.resource.data.isAdmin) || (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true);
+  }
 }
