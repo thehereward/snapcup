@@ -1,5 +1,5 @@
 import firebase from 'firebase/app';
-import React from "react";
+import React = require("react");
 import AuthService from "./firebase/AuthService";
 
 const firebaseAuth = new AuthService();
