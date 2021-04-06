@@ -2,7 +2,12 @@
 
 ## Environment Variables
 
-To run locally with your own backend, add a .env.local file to root project directory with your own firebase credential variables
+To run locally with your own backend, add a .env.local file to root project directory with your own firebase credential variables.
+If you want to run on the test server you need to set the environment variable NODE_ENV=true, for example in bash
+
+```bash
+NODE_ENV=test npm start
+```
 
 ## Parcel
 
