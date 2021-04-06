@@ -26,7 +26,6 @@ const SubmissionTextBox: React.FunctionComponent = () => {
     );
   }
 
-  /* Updates the value in the webhook "message" */
   function handleMessageTextChanged(event) {
     setMessage(event.target.value)
     setConfirmation(false)
