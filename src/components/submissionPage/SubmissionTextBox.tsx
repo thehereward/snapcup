@@ -7,7 +7,6 @@ import SubmitSnap from '../../firebase/snap/SubmitSnap';
 const SubmissionTextBox:React.FunctionComponent = () => {
   /* Containing body of the snap */
   const [message, setMessage] = useState<string>("");
-  const [charactersLeft, setCharactersLeft] = useState<Number>(280);
   const [confirmation, setConfirmation] = useState<Boolean>(false);
   const [error,setError] = useState<string>("");
   
@@ -23,7 +22,6 @@ const SubmissionTextBox:React.FunctionComponent = () => {
     const res = SubmitSnap(resultingSnap, setError, setConfirmation).then(
       () => {
         setMessage("");
-        setCharactersLeft(280);
       }
     );
   }
@@ -31,7 +29,6 @@ const SubmissionTextBox:React.FunctionComponent = () => {
   /* Updates the value in the webhook "message" */
   function handleChange(event){
     setMessage(event.target.value)
-    setCharactersLeft(280 - event.target.value.length)
     setConfirmation(false)
     setError("")
   }
@@ -45,7 +42,7 @@ const SubmissionTextBox:React.FunctionComponent = () => {
             <textarea value={message} onChange={handleChange} maxLength={280}/>
             <input type="submit" value="Submit" />
         </form>
-        <p>There are {charactersLeft} characters remaining</p>
+        <p>There are {280 - message.length} characters remaining</p>
         {confirmation && <p>Snap submitted!</p>}
         {error != "" && <p>{error}</p>}
     </div>
