@@ -1,0 +1,15 @@
+mention-planning
+    - Collect a list of snappable people from firestore
+    - Use trigger "@" to handle the parsing 
+    - user "displayTransform" to customise matched text <- make it blue 
+    - 
+
+Data Collection
+    - Query all users that are snappable
+        snappables = firebase.firestore().collection("users").where("isSnappable", "==", true).get()
+        [names] = snappables.forEach(elem => elem.name)
+(assume names are unique since it's only 40-50 people)
+
+firebase
+    - users
+        - GetSnappables.ts  <- returns snappable users
