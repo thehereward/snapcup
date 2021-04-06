@@ -1,5 +1,5 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
+import firebase from "firebase/app";
+import "firebase/auth";
 
 class AuthService {
     provider: firebase.auth.OAuthProvider;
@@ -7,11 +7,11 @@ class AuthService {
     idToken: string | undefined;
 
     constructor() {
-        this.provider = new firebase.auth.OAuthProvider('microsoft.com');
+        this.provider = new firebase.auth.OAuthProvider("microsoft.com");
         this.provider.setCustomParameters({
             prompt: process.env.REACT_APP_PROMPT,
             // Only users from a particular Azure AD tenant to sign into the application
-            tenant: process.env.REACT_APP_TENANT
+            tenant: process.env.REACT_APP_TENANT,
         });
     }
 
