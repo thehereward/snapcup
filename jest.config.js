@@ -16,6 +16,7 @@ module.exports = {
     }
   },
   "moduleNameMapper":{
+    /* Mocking all style related files so that we don't need to configure Jest to handle scss */
     "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/stylemock.js",
   }
 }
