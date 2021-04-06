@@ -1,11 +1,6 @@
-<<<<<<< HEAD
-import firebase from 'firebase/app';
-import React = require("react");
-=======
 import './app.scss';
 
 import React, {useState} from "react";
->>>>>>> upstream/main
 import AuthService from "./firebase/AuthService";
 import PrettyPageWrap from './components/PrettyPageWrap';
 import LoginPage from './components/loginPage/LoginPage';
