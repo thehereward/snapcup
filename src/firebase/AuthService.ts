@@ -2,14 +2,14 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 interface ProfileData {
-    isAdmin: boolean,
-    isSnapper: boolean
+    isAdmin: boolean;
+    isSnapper: boolean;
 }
 
 export async function getOrCreateUserProfile(): Promise<any> {
     const user = firebase.auth().currentUser;
     if (!user) {
-        throw new Error('Should be logged in by here!')
+        throw new Error("Should be logged in by here!");
     }
     const email = user.email;
     const db = firebase.firestore();
@@ -21,9 +21,9 @@ export async function getOrCreateUserProfile(): Promise<any> {
     } else {
         profileData = {
             isAdmin: false,
-            isSnapper: true
-        }
-        db.collection("users").doc(email).set(profileData)
+            isSnapper: true,
+        };
+        db.collection("users").doc(email).set(profileData);
     }
     return profileData;
 }

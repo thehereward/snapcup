@@ -5,10 +5,10 @@ import React, { useState, useEffect } from "react";
 import PrettyPageWrap from "./components/PrettyPageWrap";
 import LoginPage from "./components/loginPage/LoginPage";
 import LogoutButton from "./components/logoutButton";
+import AdminControls from "./components/AdminControls";
 
-import firebase from 'firebase/app';
-import {getOrCreateUserProfile} from './firebase/AuthService';
-
+import firebase from "firebase/app";
+import { getOrCreateUserProfile } from "./firebase/AuthService";
 
 const App = () => {
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
@@ -16,37 +16,36 @@ const App = () => {
 
     useEffect(() => {
         firebase.auth().onAuthStateChanged(async (user) => {
-            if(user) {
+            if (user) {
                 setUserProfile(await getOrCreateUserProfile());
                 setLoggedIn(true);
             }
-        })
-    }, [setLoggedIn])
+        });
+    }, [setLoggedIn]);
 
     if (loggedIn) {
         return (
             <PrettyPageWrap
                 navExtra={
                     <>
-                    <div className="flex-grow-1" />
-                    {userProfile.isAdmin && (
-                        <span className="nav-item mr-2">
-                            You are an admin
-                        </span>
-                    )}
-                    <LogoutButton setLoggedIn={setLoggedIn} />
+                        <div className="flex-grow-1" />
+                        {userProfile.isAdmin && (
+                            <span className="nav-item mr-2">
+                                You are an admin
+                            </span>
+                        )}
+                        <LogoutButton setLoggedIn={setLoggedIn} />
                     </>
                 }
             >
                 <h1>Hi {firebase.auth().currentUser.displayName}!</h1>
+                {userProfile.isAdmin && <AdminControls />}
             </PrettyPageWrap>
         );
     } else {
         return (
             <PrettyPageWrap>
-                <LoginPage
-                    setLoggedIn={setLoggedIn}
-                />
+                <LoginPage setLoggedIn={setLoggedIn} />
             </PrettyPageWrap>
         );
     }
