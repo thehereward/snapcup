@@ -10,7 +10,7 @@ const SubmitSnap = async (
   return new Promise(function (resolve, reject) {
     const result = firebase
       .firestore()
-      .collection("snaps") /* Contains all snaps*/
+      .collection("snaps")
       .add(snap)
       .then(() => {
         setConfirmation(true);
