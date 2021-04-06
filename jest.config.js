@@ -14,5 +14,8 @@ module.exports = {
     "ts-jest": {
       "tsconfig": "jest.tsconfig.json"
     }
+  },
+  "moduleNameMapper":{
+    "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/stylemock.js",
   }
 }
