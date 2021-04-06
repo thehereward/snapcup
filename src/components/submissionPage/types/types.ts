@@ -1,4 +1,1 @@
-type Message = {
-    text: string;
-    charactersLeft: number
-}
+// for types, delete if no extra types are used
