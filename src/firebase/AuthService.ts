@@ -41,12 +41,8 @@ function createUserProfile(): ProfileData {
 
 export async function getOrCreateUserProfile(): Promise<ProfileData> {
     assertUserIsLoggedIn();
-    const currentProfile = getCurrentUserProfile();
-    if (currentProfile) {
-        return currentProfile;
-    } else {
-        return createUserProfile();
-    }
+    const currentProfile = await getCurrentUserProfile();
+    return currentProfile ?? createUserProfile();
 }
 
 export async function signIn() {
