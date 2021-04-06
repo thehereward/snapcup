@@ -5,6 +5,7 @@ name: Deploy to Firebase Hosting on merge
       - main
 jobs:
   build_and_deploy:
+    if: github.repository == "thehereward/snapcup"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
