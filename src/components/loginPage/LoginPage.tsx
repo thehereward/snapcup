@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthService from '~firebase/AuthService';
+import AuthService from '../../firebase/AuthService';
 
 interface Props {
     authService: AuthService
