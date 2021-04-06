@@ -6,7 +6,7 @@ interface ProfileData {
     isSnapper: boolean;
 }
 
-export async function getOrCreateUserProfile(): Promise<any> {
+export async function getOrCreateUserProfile(): Promise<ProfileData> {
     const user = firebase.auth().currentUser;
     if (!user) {
         throw new Error("Should be logged in by here!");
@@ -16,7 +16,7 @@ export async function getOrCreateUserProfile(): Promise<any> {
     const docRef = db.collection("users").doc(uid);
     const doc = await docRef.get();
     let profileData: ProfileData;
-    if (doc.exists && doc.data() != null) {
+    if (doc.exists && doc.data()) {
         profileData = doc.data() as ProfileData;
     } else {
         profileData = {
