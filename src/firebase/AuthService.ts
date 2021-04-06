@@ -3,11 +3,10 @@ import "firebase/auth";
 
 interface ProfileData {
     isAdmin: boolean,
-    isSnappable: boolean,
-    friendlyName: String
+    isSnapper: boolean
 }
 
-export async function getOrCreateUserProfile(): Promise<ProfileData> {
+export async function getOrCreateUserProfile(): Promise<any> {
     const user = firebase.auth().currentUser;
     if (!user) {
         throw new Error('Should be logged in by here!')
@@ -20,11 +19,9 @@ export async function getOrCreateUserProfile(): Promise<ProfileData> {
     if (doc.exists && doc.data() != null) {
         profileData = doc.data() as ProfileData;
     } else {
-        const defaultFriendlyName = email.split("@")[0];
         profileData = {
             isAdmin: false,
-            isSnappable: true,
-            friendlyName: defaultFriendlyName
+            isSnapper: true
         }
         db.collection("users").doc(email).set(profileData)
     }

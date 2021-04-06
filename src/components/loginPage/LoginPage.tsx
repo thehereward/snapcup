@@ -5,19 +5,16 @@ interface Props {
     setLoggedIn: Dispatch<SetStateAction<boolean>>;
 }
 
-const LoginPage: React.FunctionalComponent<Props> = ({
-    setLoggedIn,
-}) => {
+const LoginPage: React.FunctionalComponent<Props> = () => {
     const [loginError, setLoginError] = useState("");
 
     const handleSignIn = useCallback(() => {
         try {
             signIn();
-            setLoggedIn(true);
         } catch {
             setLoginError("There was an error logging in! Please try again.")
         }
-    }, [setLoggedIn]);
+    }, []);
 
     return (
         <div className="text-center p-5">

@@ -9,9 +9,6 @@ import LogoutButton from "./components/logoutButton";
 import firebase from 'firebase/app';
 import {getOrCreateUserProfile} from './firebase/AuthService';
 
-interface UserProfile {
-    isAdmin: boolean
-}
 
 const App = () => {
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
@@ -32,13 +29,16 @@ const App = () => {
                 navExtra={
                     <>
                     <div className="flex-grow-1" />
-                    {userProfile.isAdmin && (<span className="nav-item mr-2">
-                        You are an admin</span>)}
+                    {userProfile.isAdmin && (
+                        <span className="nav-item mr-2">
+                            You are an admin
+                        </span>
+                    )}
                     <LogoutButton setLoggedIn={setLoggedIn} />
                     </>
                 }
             >
-                <h1>Hi {userProfile.friendlyName}</h1>
+                <h1>Hi {firebase.auth().currentUser.displayName}!</h1>
             </PrettyPageWrap>
         );
     } else {
