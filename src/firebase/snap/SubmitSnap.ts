@@ -8,7 +8,6 @@ const SubmitSnap = async (
   setConfirmation: Dispatch<SetStateAction<Boolean>>
 ) => {
   return new Promise(function (resolve, reject) {
-    // Do async job
     const result = firebase
       .firestore()
       .collection("snaps") /* Contains all snaps*/
