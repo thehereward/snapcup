@@ -15,12 +15,29 @@ class AuthService {
         });
     }
 
+    private async createUserProfileIfRequired() {
+        const user = firebase.auth().currentUser;
+        if (user) {
+            const id = user.uid;
+            const db = firebase.firestore();
+            const docRef = db.collection("users").doc(id);
+            const doc = await docRef.get();
+            if (!doc.exists) {
+                db.collection("users").doc(id).set({
+                    isAdmin: false,
+                    isSnappable: true
+                })
+            }
+        }
+    }
+
     async signIn() {
         try {
             const result = await firebase.auth().signInWithPopup(this.provider);
             const credential: firebase.auth.OAuthCredential = result.credential;
             this.accessToken = credential.accessToken;
             this.idToken = credential.idToken;
+            this.createUserProfileIfRequired();
         } catch(e) {
             // TODO: Handle error
             console.log('sign in error')
