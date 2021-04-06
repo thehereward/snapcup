@@ -5,7 +5,6 @@ import SubmitSnap from '../../firebase/snap/SubmitSnap';
 
 
 const SubmissionTextBox: React.FunctionComponent = () => {
-  /* Containing body of the snap */
   const [message, setMessage] = useState<string>("");
   const [confirmation, setConfirmation] = useState<Boolean>(false);
   const [error, setError] = useState<string>("");
