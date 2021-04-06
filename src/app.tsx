@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import AuthService from "./firebase/AuthService";
 import PrettyPageWrap from "./components/PrettyPageWrap";
 import LoginPage from "./components/loginPage/LoginPage";
+import LogoutButton from "./components/logoutButton";
 
 const authService = new AuthService();
 
@@ -12,7 +13,9 @@ const App = () => {
 
     if (loggedIn) {
         return (
-            <PrettyPageWrap>
+            <PrettyPageWrap
+                navExtra={<LogoutButton setLoggedIn={setLoggedIn} />}
+            >
                 <h1>Woo logged in!!!</h1>
             </PrettyPageWrap>
         );
