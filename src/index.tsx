@@ -2,11 +2,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { initializeDatabase } from "./firebase/FirestoreService";
-import SubmissionTextBox from "./components/submissionPage/SubmissionTextBox";
+import App from "./app"
 
 initializeDatabase();
 ReactDOM.render((
   <React.StrictMode>
-    <SubmissionTextBox />
+    <App />
   </React.StrictMode>
 ), document.getElementById("root"));
