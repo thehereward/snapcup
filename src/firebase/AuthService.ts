@@ -11,9 +11,9 @@ export async function getOrCreateUserProfile(): Promise<any> {
     if (!user) {
         throw new Error("Should be logged in by here!");
     }
-    const email = user.email;
+    const uid = user.uid;
     const db = firebase.firestore();
-    const docRef = db.collection("users").doc(email);
+    const docRef = db.collection("users").doc(uid);
     const doc = await docRef.get();
     let profileData: ProfileData;
     if (doc.exists && doc.data() != null) {
@@ -23,7 +23,7 @@ export async function getOrCreateUserProfile(): Promise<any> {
             isAdmin: false,
             isSnapper: true,
         };
-        db.collection("users").doc(email).set(profileData);
+        db.collection("users").doc(uid).set(profileData);
     }
     return profileData;
 }
