@@ -1,6 +1,3 @@
-import firebase from "firebase/app";
-import "firebase/auth";
-
 export interface ProfileData {
     isAdmin: boolean;
     isSnapper: boolean;
