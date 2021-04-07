@@ -1,7 +1,7 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Snap from "../../firebase/snap/Snap";
-import SubmitSnap from "../../firebase/snap/SubmitSnap";
+import submitSnap from "../../firebase/snap/SubmitSnap";
 
 const SubmissionTextBox: React.FunctionComponent = () => {
     const [message, setMessage] = useState<string>("");
@@ -17,11 +17,12 @@ const SubmissionTextBox: React.FunctionComponent = () => {
             body: message,
             timestamp: new Date(),
         };
-        const res = SubmitSnap(resultingSnap, setError, setConfirmation).then(
-            () => {
-                setMessage("");
-            }
-        );
+        try {
+            submitSnap(resultingSnap);
+            setConfirmation(true);
+        } catch (error) {
+            setError(error.toString());
+        }
     }
 
     function handleMessageTextChanged(event) {
