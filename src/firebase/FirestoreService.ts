@@ -13,7 +13,5 @@ const firebaseConfig = {
 };
 
 export function initializeDatabase() {
-    console.log(firebaseConfig);
-    console.log(process.env.NODE_ENV);
     firebase.initializeApp(firebaseConfig);
 }
