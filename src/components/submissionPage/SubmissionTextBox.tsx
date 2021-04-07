@@ -4,33 +4,47 @@ import Snap from "../../firebase/snap/Snap";
 import SubmitSnap from "../../firebase/snap/SubmitSnap";
 import { MentionsInput, Mention } from "react-mentions";
 import MentionElements from "../../types/MentionElements";
+import GetExtraLength from './GetExtraLength'
+import CharactersLeftDisplay from './CharactersLeftDisplay'
+import OnSubmitMessageDisplay from './OnSubmitMessageDisplay'
+import SubmissionBoxErrorDisplay from './SubmissionBoxErrorDisplay'
+import ValidateSnap from './ValidateSnap'
 
-const SubmissionTextBox: React.FunctionComponent = (props) => {
+export interface Props {
+  snappables: MentionElements[],
+  user: String
+}
+
+const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
   /* Containing body of the snap */
   const [message, setMessage] = useState<string>("");
   const [confirmation, setConfirmation] = useState<Boolean>(false);
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState<String>("");
   const [snappedUsers, setSnappedUsers] = useState<MentionElements[]>([]);
 
   function handleSubmit(event) {
     event.preventDefault();
     console.log(props);
-    const ids: string[] = [];
+    const ids: String[] = [];
     for (let elem of snappedUsers) {
       ids.push(elem.id);
     }
     const resultingSnap: Snap = {
       to: ids,
-      from: props.user,// firebase.auth().currentUser.uid,
+      from: props.user,
       body: message,
       timestamp: new Date(),
     };
-    const res = SubmitSnap(resultingSnap, setError, setConfirmation).then(
-      () => {
-        setMessage("");
-      }
-    );
-    setSnappedUsers([]);
+    if (ValidateSnap(resultingSnap, snappedUsers)) {
+      const res = SubmitSnap(resultingSnap, setError, setConfirmation).then(
+        () => {
+          setMessage("");
+        }
+      );
+      setSnappedUsers([]);
+    } else {
+      setError("there was an error with the creation of the snap, log out and log in again.")
+    }
   }
 
   /* Updates the value in the webhook "message" */
@@ -41,15 +55,6 @@ const SubmissionTextBox: React.FunctionComponent = (props) => {
     setSnappedUsers(mentions);
   }
 
-  /* Returns the length of the metadata characters */
-  function getExtraLength() {
-    let total = 280;
-    for (var elem of snappedUsers) {
-      total = total + elem.id.length + 4;
-    }
-    return total;
-  }
-
   return (
     <div className="SubmissionTextBox">
       <form onSubmit={handleSubmit}>
@@ -58,18 +63,15 @@ const SubmissionTextBox: React.FunctionComponent = (props) => {
           style={{ "zIndex": 1 }}
           value={message}
           onChange={handleChange}
-          maxLength={getExtraLength()}
+          maxLength={GetExtraLength(snappedUsers)}
         >
           <Mention style={{ "backgroundColor": "#daf4fa", "zIndex": 0 }} trigger="@" data={props.snappables} />
         </MentionsInput>
         <input type="submit" value="Submit" />
       </form>
-      <p>
-        There are {getExtraLength() - message.length} characters
-                remaining
-            </p>
-      {confirmation && <p>Snap submitted!</p>}
-      {error != "" && <p>{error}</p>}
+      <CharactersLeftDisplay snappedUsers={snappedUsers} message={message} />
+      <OnSubmitMessageDisplay confirmation={confirmation} />
+      <SubmissionBoxErrorDisplay error={error} />
     </div>
   );
 };

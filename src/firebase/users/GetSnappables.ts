@@ -1,5 +1,5 @@
 import firebase from 'firebase/app'
-import MentionElements from '../../types/MentionElements'
+import Snappable from '../../types/Snappable'
 
 /* Gets a list of Nicknames that are unique */
 const GetSnappables = async () => {
@@ -9,10 +9,11 @@ const GetSnappables = async () => {
             .collection("snappables")
             .get()
             .then((querySnapshot) => {
-                let result: MentionElements[] = [];
+                let result: Snappable[] = [];
                 querySnapshot.forEach((doc) => {
                     if (doc.exists) {
-                        result.push({ id: doc.data().email, display: doc.data().fullName })
+                        const tempSnap = { id: doc.id, email: doc.data().email, fullName: doc.data().fullName, username: doc.data().email }
+                        result.push(tempSnap)
                     }
                 })
                 return res(result)
@@ -23,6 +24,5 @@ const GetSnappables = async () => {
             })
     })
 }
-
 
 export default GetSnappables;
