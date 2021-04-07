@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import PrettyPageWrap from "./components/PrettyPageWrap";
 import LoginPage from "./components/loginPage/LoginPage";
 import LogoutButton from "./components/logoutButton";
+import SubmissionTextBox from "./components/submissionPage/SubmissionTextBox";
 
 import {
     getCurrentUserName,
@@ -40,7 +41,8 @@ const App = () => {
                     </>
                 }
             >
-                <h1>Hi {getCurrentUserName()}!</h1>
+              <h1>Hi {getCurrentUserName()}!</h1>
+              <SubmissionTextBox />
             </PrettyPageWrap>
         );
     } else {
