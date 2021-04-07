@@ -41,6 +41,7 @@ const SubmissionTextBox: React.FunctionComponent = () => {
         setMessage("");
       }
     );
+    setSnappedUsers([]);
   }
 
   /* Updates the value in the webhook "message" */
