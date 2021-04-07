@@ -6,17 +6,15 @@ const GetSnappables = async () => {
     return new Promise(function (res, rej) {
         const snappables = firebase
             .firestore()
-            .collection("users")
-            .where("isSnappable", "==", true)
+            .collection("snappables")
             .get()
             .then((querySnapshot) => {
                 let result: MentionElements[] = [];
                 querySnapshot.forEach((doc) => {
                     if (doc.exists) {
-                        result.push({ id: doc.id, display: doc.data().friendlyName })
+                        result.push({ id: doc.data().email, display: doc.data().fullName })
                     }
                 })
-
                 return res(result)
             })
             .catch((e) => {

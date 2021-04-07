@@ -1,38 +1,27 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import Snap from "../../firebase/snap/Snap";
-import firebase from "firebase/app";
 import SubmitSnap from "../../firebase/snap/SubmitSnap";
 import { MentionsInput, Mention } from "react-mentions";
-import GetSnappables from "../../firebase/users/GetSnappables";
 import MentionElements from "../../types/MentionElements";
 
-const SubmissionTextBox: React.FunctionComponent = () => {
+const SubmissionTextBox: React.FunctionComponent = (props) => {
   /* Containing body of the snap */
   const [message, setMessage] = useState<string>("");
   const [confirmation, setConfirmation] = useState<Boolean>(false);
   const [error, setError] = useState<string>("");
   const [snappedUsers, setSnappedUsers] = useState<MentionElements[]>([]);
-  const [snappableUsers, setSnappableUsers] = useState<MentionElements[]>([]);
-
-  useEffect(() => {
-    const res = GetSnappables()
-      .then((res) => {
-        setSnappableUsers(res);
-      })
-      .catch((err) => console.log("Unable to fetch snappable users."));
-  }, []);
 
   function handleSubmit(event) {
-    //TODO: Get auth().userID
     event.preventDefault();
+    console.log(props);
     const ids: string[] = [];
     for (let elem of snappedUsers) {
       ids.push(elem.id);
     }
     const resultingSnap: Snap = {
       to: ids,
-      from: firebase.auth().currentUser.uid,
+      from: props.user,// firebase.auth().currentUser.uid,
       body: message,
       timestamp: new Date(),
     };
@@ -71,7 +60,7 @@ const SubmissionTextBox: React.FunctionComponent = () => {
           onChange={handleChange}
           maxLength={getExtraLength()}
         >
-          <Mention style={{ "background-color": "#daf4fa", "zIndex": 0 }} trigger="@" data={snappableUsers} />
+          <Mention style={{ "backgroundColor": "#daf4fa", "zIndex": 0 }} trigger="@" data={props.snappables} />
         </MentionsInput>
         <input type="submit" value="Submit" />
       </form>
