@@ -20,5 +20,7 @@ export const setFirstUserAsAdmin = functions.firestore
             const adminUser = { ...original, isAdmin: true };
             // You must return a Promise when performing asynchronous tasks inside a Functions such as writing to Firestore.
             return snapshot.ref.set({ adminUser }, { merge: true });
+        } else {
+            return Promise.resolve();
         }
     });
