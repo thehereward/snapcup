@@ -41,8 +41,8 @@ const App = () => {
                     </>
                 }
             >
-                <h1>Hi {getCurrentUserName()}!</h1>
-                <SubmissionTextBox />
+              <h1>Hi {getCurrentUserName()}!</h1>
+              <SubmissionTextBox />
             </PrettyPageWrap>
         );
     } else {
