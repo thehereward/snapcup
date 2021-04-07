@@ -8,7 +8,7 @@ import LogoutButton from "./components/logoutButton";
 
 import {
     getCurrentUserName,
-    getUserProfile,
+    onAuthStateChanged,
     ProfileData,
 } from "./firebase/AuthService";
 
@@ -22,7 +22,7 @@ const App = () => {
     };
 
     useEffect(() => {
-        getUserProfile(setUser);
+        onAuthStateChanged(setUser);
     }, [setLoggedIn, setUserProfile]);
 
     if (loggedIn) {

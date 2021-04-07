@@ -52,7 +52,7 @@ export function getCurrentUserName(): String {
     return firebase.auth().currentUser.displayName;
 }
 
-export function getUserProfile(cb: (p: ProfileData) => void) {
+export function onAuthStateChanged(cb: (p: ProfileData) => void) {
     firebase.auth().onAuthStateChanged(async (user) => {
         if (user) {
             const profile = await getOrCreateUserProfile(user);
