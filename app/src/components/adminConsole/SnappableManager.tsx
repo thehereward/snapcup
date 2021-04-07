@@ -1,19 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import GetSnappables from "../../firebase/users/GetSnappables";
-import snappablesToCsvDownload from "./csvManager";
-
-const SnappableRows = ({ snappables }) =>
-    snappables.map(({ id, fullName, email, username }, i) => (
-        <tr key={id}>
-            <th scope="row">{i + 1}</th>
-            <td>{fullName}</td>
-            <td>{email}</td>
-            <td>{username}</td>
-        </tr>
-    ));
+import { snappablesToCsvDownload, readFileAndUpload } from "./csvManager";
 
 const SnappableManager = () => {
     const [status, setStatus] = useState({ status: "idle" });
+    const fileRef = useRef(null);
 
     const downloadSnappables = useCallback(() => {
         setStatus({ status: "loading" });
@@ -31,7 +22,9 @@ const SnappableManager = () => {
     }, []);
 
     const uploadSnappables = useCallback(() => {
-        console.log(this);
+        if (fileRef.current.files.length) {
+            readFileAndUpload(fileRef.current.files[0]);
+        }
     });
 
     return (
@@ -52,8 +45,10 @@ const SnappableManager = () => {
                 </button>
                 <input
                     type="file"
-                    onChange={useCallback}
+                    ref={fileRef}
+                    onChange={uploadSnappables}
                     disabled={status.status === "Loading"}
+                    accept=".csv"
                 />
             </div>
             {status.status !== "idle" && (

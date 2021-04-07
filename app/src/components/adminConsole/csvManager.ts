@@ -31,10 +31,28 @@ function stringToFileDownload(
     }
 }
 
-export default function snappablesToCsvDownload(
+export function snappablesToCsvDownload(
     snappables,
     filename = "snappable_list.csv"
 ) {
     const csvContent = snappablesToCsvContent(snappables);
     stringToFileDownload(csvContent, filename, "text/csv;charset=utf-8;");
+}
+
+export async function readFileAndUpload(file: Blob) {
+    const fileText = await file.text();
+    const toUpdate = [];
+    const toAdd = [];
+    fileText.split("\n").forEach((line, i) => {
+        if (i === 0) {
+            return;
+        }
+
+        const splitLine = line.split(",");
+        if (splitLine.length === 4) {
+            const [id, name, email, username] = splitLine;
+            if (id) {
+            }
+        }
+    });
 }
