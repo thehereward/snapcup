@@ -8,7 +8,7 @@
         "start": "parcel public/index.html",
         "build": "parcel build public/index.html",
         "prepare": "husky install",
-        "gitsetup": "chmod +x ./.husky/precommit"
+        "gitsetup": "chmod +x ./.husky/pre-commit"
     },
     "repository": {
         "type": "git",
