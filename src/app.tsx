@@ -6,7 +6,11 @@ import PrettyPageWrap from "./components/PrettyPageWrap";
 import LoginPage from "./components/loginPage/LoginPage";
 import LogoutButton from "./components/logoutButton";
 
-import { getCurrentUserName, getUserProfile, ProfileData } from "./firebase/AuthService";
+import {
+    getCurrentUserName,
+    getUserProfile,
+    ProfileData,
+} from "./firebase/AuthService";
 
 const App = () => {
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
@@ -15,10 +19,10 @@ const App = () => {
     const setUser = (profile: ProfileData) => {
         setUserProfile(profile);
         setLoggedIn(true);
-    }
+    };
 
     useEffect(() => {
-        getUserProfile(setUser)
+        getUserProfile(setUser);
     }, [setLoggedIn, setUserProfile]);
 
     if (loggedIn) {

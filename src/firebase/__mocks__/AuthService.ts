@@ -19,6 +19,6 @@ export function getCurrentUserName(): String {
 }
 
 export function getUserProfile(cb: (p: ProfileData) => void) {
-    const mockProfile = {isAdmin: true, isSnapper: true};
+    const mockProfile = { isAdmin: true, isSnapper: true };
     cb(mockProfile);
 }

@@ -6,11 +6,10 @@ export interface ProfileData {
     isSnapper: boolean;
 }
 
-async function getCurrentUserProfile(user: firebase.User): Promise<ProfileData | null> {
-    const docRef = firebase
-        .firestore()
-        .collection("users")
-        .doc(user.uid);
+async function getCurrentUserProfile(
+    user: firebase.User
+): Promise<ProfileData | null> {
+    const docRef = firebase.firestore().collection("users").doc(user.uid);
     const doc = await docRef.get();
     if (doc.exists && doc.data()) {
         return doc.data() as ProfileData;
@@ -24,15 +23,13 @@ function createUserProfile(user: firebase.User): ProfileData {
         isAdmin: false,
         isSnapper: true,
     };
-    firebase
-        .firestore()
-        .collection("users")
-        .doc(user.uid)
-        .set(profileData);
+    firebase.firestore().collection("users").doc(user.uid).set(profileData);
     return profileData;
 }
 
-async function getOrCreateUserProfile(user: firebase.User): Promise<ProfileData> {
+async function getOrCreateUserProfile(
+    user: firebase.User
+): Promise<ProfileData> {
     const currentProfile = await getCurrentUserProfile(user);
     return currentProfile ?? createUserProfile(user);
 }
