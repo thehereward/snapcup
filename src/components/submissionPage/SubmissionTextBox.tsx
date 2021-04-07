@@ -30,13 +30,8 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
       ids.push(elem.id);
     }
     const resultingSnap: Snap = {
-<<<<<<< HEAD
-      to: [],
-      from: "",
-=======
       to: ids,
       from: props.user,
->>>>>>> mention
       body: message,
       timestamp: new Date(),
     };
