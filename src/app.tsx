@@ -1,32 +1,54 @@
 import "./app.scss";
 
-import React, { useState } from "react";
-import AuthService from "./firebase/AuthService";
+import React, { useState, useEffect } from "react";
+
 import PrettyPageWrap from "./components/PrettyPageWrap";
 import LoginPage from "./components/loginPage/LoginPage";
 import LogoutButton from "./components/logoutButton";
 import SubmissionTextBox from "./components/submissionPage/SubmissionTextBox";
 
-const authService = new AuthService();
+import {
+    getCurrentUserName,
+    onAuthStateChanged,
+    ProfileData,
+} from "./firebase/AuthService";
 
 const App = () => {
-    const [loggedIn, setLoggedIn] = useState(false);
+    const [loggedIn, setLoggedIn] = useState<boolean>(false);
+    const [userProfile, setUserProfile] = useState(null);
+
+    const setUser = (profile: ProfileData) => {
+        setUserProfile(profile);
+        setLoggedIn(true);
+    };
+
+    useEffect(() => {
+        onAuthStateChanged(setUser);
+    }, [setLoggedIn, setUserProfile]);
 
     if (loggedIn) {
         return (
             <PrettyPageWrap
-                navExtra={<LogoutButton setLoggedIn={setLoggedIn} />}
+                navExtra={
+                    <>
+                        <div className="flex-grow-1" />
+                        {userProfile.isAdmin && (
+                            <span className="nav-item mr-2">
+                                You are an admin
+                            </span>
+                        )}
+                        <LogoutButton setLoggedIn={setLoggedIn} />
+                    </>
+                }
             >
-                <SubmissionTextBox />
+              <h1>Hi {getCurrentUserName()}!</h1>
+              <SubmissionTextBox />
             </PrettyPageWrap>
         );
     } else {
         return (
             <PrettyPageWrap>
-                <LoginPage
-                    authService={authService}
-                    setLoggedIn={setLoggedIn}
-                />
+                <LoginPage setLoggedIn={setLoggedIn} />
             </PrettyPageWrap>
         );
     }
