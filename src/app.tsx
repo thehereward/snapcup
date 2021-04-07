@@ -5,11 +5,12 @@ import AuthService from "./firebase/AuthService";
 import PrettyPageWrap from "./components/PrettyPageWrap";
 import LoginPage from "./components/loginPage/LoginPage";
 import LogoutButton from "./components/logoutButton";
+import SubmissionTextBox from "./components/submissionPage/SubmissionTextBox";
 
 const authService = new AuthService();
 
 const App = () => {
-                     // Blafh blah sdfsf
+    // Blafh blah sdfsf
     const [loggedIn, setLoggedIn] = useState(false);
 
     if (loggedIn) {
@@ -17,7 +18,7 @@ const App = () => {
             <PrettyPageWrap
                 navExtra={<LogoutButton setLoggedIn={setLoggedIn} />}
             >
-                <h1>Woo logged in!!!</h1>
+                <SubmissionTextBox />
             </PrettyPageWrap>
         );
     } else {
