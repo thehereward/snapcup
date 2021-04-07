@@ -13,7 +13,7 @@ const SubmissionTextBox: React.FunctionComponent = () => {
     //TODO: Get auth().userID
     event.preventDefault();
     const resultingSnap: Snap = {
-      to: [""],
+      to: [],
       from: "",
       body: message,
       timestamp: new Date()
