@@ -1,13 +1,17 @@
-export default function snappablesToCsvDownload(
-    snappables,
-    filename = "snappable_list.csv"
-) {
+function snappablesToCsvContent(snappables) {
     let csvContent = "id,fullName,email,username";
     snappables.forEach(({ id, fullName, email, username }) => {
         csvContent += `\n${id},${fullName},${email},${username}`;
     });
+    return csvContent;
+}
 
-    var blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+function stringToFileDownload(
+    content: string,
+    filename: string,
+    type = "text/csv;charset=utf-8;"
+) {
+    var blob = new Blob([content], { type });
     if (navigator.msSaveBlob) {
         // IE 10+
         navigator.msSaveBlob(blob, filename);
@@ -25,4 +29,12 @@ export default function snappablesToCsvDownload(
             document.body.removeChild(link);
         }
     }
+}
+
+export default function snappablesToCsvDownload(
+    snappables,
+    filename = "snappable_list.csv"
+) {
+    const csvContent = snappablesToCsvContent(snappables);
+    stringToFileDownload(csvContent, filename, "text/csv;charset=utf-8;");
 }

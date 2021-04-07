@@ -1,12 +1,12 @@
 import React from "react";
-import SnappableTable from "./SnappableTable";
+import SnappableManager from "./SnappableManager";
 
 const AdminConsole = () => {
     return (
         <>
             <hr />
             <h2>Admin Console</h2>
-            <SnappableTable />
+            <SnappableManager />
         </>
     );
 };
