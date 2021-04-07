@@ -41,8 +41,7 @@ export function snappablesToCsvDownload(
 
 export async function readFileAndUpload(file: Blob) {
     const fileText = await file.text();
-    const toUpdate = [];
-    const toAdd = [];
+    const snappableList = [];
     fileText.split("\n").forEach((line, i) => {
         if (i === 0) {
             return;
@@ -51,8 +50,12 @@ export async function readFileAndUpload(file: Blob) {
         const splitLine = line.split(",");
         if (splitLine.length === 4) {
             const [id, name, email, username] = splitLine;
-            if (id) {
-            }
+            snappableList.push({
+                id,
+                name,
+                email,
+                username,
+            });
         }
     });
 }
