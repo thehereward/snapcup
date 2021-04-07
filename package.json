@@ -4,9 +4,6 @@
     "description": "Give compliments to colleagues!",
     "scripts": {
         "install:all": "npm install && cd app && npm install && cd ../functions && npm install && cd ..",
-        "test": "cd app && jest",
-        "start": "cd app && parcel public/index.html",
-        "build": "cd app && parcel build public/index.html",
         "prepare": "husky install",
         "gitsetup": "chmod +x ./.husky/pre-commit"
     },

@@ -2,21 +2,21 @@
 
 ## Setup repository
 
-After downloading the repository please `cd` into the `app/` directory, and then run
+After downloading the repository please run
 
 ```bash
-npm install
+npm install:all
 ```
 
-```bash
-npm run prepare
-```
+This will install the top level npm packages as well as the npm packages for `app/` and `functions/`
 
 and if you are working in a linux environment please then run
 
 ```bash
 npm run gitsetup
 ```
+
+to make the pre-commit hook executable
 
 ## Environment Variables
 
