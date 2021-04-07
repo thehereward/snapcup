@@ -1,13 +1,13 @@
 name: Unit Tests using Jest
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches: [main]
+    push:
+        branches:
+            - main
+    pull_request:
+        branches: [main]
 jobs:
-  unit_tests:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - run: npm ci && npm test
+    unit_tests:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v1
+            - run: npm ci && npm test
