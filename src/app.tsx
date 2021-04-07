@@ -10,7 +10,6 @@ import SubmissionTextBox from "./components/submissionPage/SubmissionTextBox";
 const authService = new AuthService();
 
 const App = () => {
-    // blah blah
     const [loggedIn, setLoggedIn] = useState(false);
 
     if (loggedIn) {
