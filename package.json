@@ -1,0 +1,31 @@
+{
+    "name": "snapcuproot",
+    "version": "1.0.0",
+    "description": "Give compliments to colleagues!",
+    "scripts": {
+        "install:all": "npm install && cd app && npm install && cd ../functions && npm install && cd ..",
+        "test": "cd app && jest",
+        "start": "cd app && parcel public/index.html",
+        "build": "cd app && parcel build public/index.html",
+        "prepare": "husky install",
+        "gitsetup": "chmod +x ./.husky/pre-commit"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/thehereward/snapcup.git"
+    },
+    "keywords": [
+        "compliment"
+    ],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/thehereward/snapcup/issues"
+    },
+    "homepage": "https://github.com/thehereward/snapcup#readme",
+    "devDependencies": {
+        "husky": "^6.0.0",
+        "prettier": "^2.2.1",
+        "pretty-quick": "^3.1.0"
+    }
+}
