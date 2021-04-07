@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "jsx": "react",
+        "baseUrl": "./src",
+        "lib": ["dom", "esnext"],
+        "module": "esnext",
+        "esModuleInterop": true,
+        "paths": {
+            "~*": ["./*"]
+        }
+    },
+    "include": ["src/**/*"]
+}
