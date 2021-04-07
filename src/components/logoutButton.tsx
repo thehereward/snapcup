@@ -1,10 +1,10 @@
 import React, { useCallback } from "react";
-import firebase from "firebase/app";
+import { signOut } from "../firebase/AuthService";
 
 const LogoutButton = ({ setLoggedIn }) => {
     const logout = useCallback(() => {
         (async () => {
-            await firebase.auth().signOut();
+            await signOut();
             setLoggedIn(false);
         })();
     }, [setLoggedIn]);

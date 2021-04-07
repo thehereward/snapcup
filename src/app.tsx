@@ -6,21 +6,20 @@ import PrettyPageWrap from "./components/PrettyPageWrap";
 import LoginPage from "./components/loginPage/LoginPage";
 import LogoutButton from "./components/logoutButton";
 
-import firebase from "firebase/app";
-import { getOrCreateUserProfile } from "./firebase/AuthService";
+import { getCurrentUserName, getUserProfile, ProfileData } from "./firebase/AuthService";
 
 const App = () => {
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
     const [userProfile, setUserProfile] = useState(null);
 
+    const setUser = (profile: ProfileData) => {
+        setUserProfile(profile);
+        setLoggedIn(true);
+    }
+
     useEffect(() => {
-        firebase.auth().onAuthStateChanged(async (user) => {
-            if (user) {
-                setUserProfile(await getOrCreateUserProfile());
-                setLoggedIn(true);
-            }
-        });
-    }, [setLoggedIn]);
+        getUserProfile(setUser)
+    }, [setLoggedIn, setUserProfile]);
 
     if (loggedIn) {
         return (
@@ -37,7 +36,7 @@ const App = () => {
                     </>
                 }
             >
-                <h1>Hi {firebase.auth().currentUser.displayName}!</h1>
+                <h1>Hi {getCurrentUserName()}!</h1>
             </PrettyPageWrap>
         );
     } else {

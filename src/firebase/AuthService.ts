@@ -1,23 +1,16 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 
-interface ProfileData {
+export interface ProfileData {
     isAdmin: boolean;
     isSnapper: boolean;
 }
 
-function assertUserIsLoggedIn() {
-    const user = firebase.auth().currentUser;
-    if (!user) {
-        throw new Error("Should be logged in by here!");
-    }
-}
-
-async function getCurrentUserProfile(): Promise<ProfileData | null> {
+async function getCurrentUserProfile(user: firebase.User): Promise<ProfileData | null> {
     const docRef = firebase
         .firestore()
         .collection("users")
-        .doc(firebase.auth().currentUser.uid);
+        .doc(user.uid);
     const doc = await docRef.get();
     if (doc.exists && doc.data()) {
         return doc.data() as ProfileData;
@@ -26,7 +19,7 @@ async function getCurrentUserProfile(): Promise<ProfileData | null> {
     }
 }
 
-function createUserProfile(): ProfileData {
+function createUserProfile(user: firebase.User): ProfileData {
     const profileData = {
         isAdmin: false,
         isSnapper: true,
@@ -34,15 +27,14 @@ function createUserProfile(): ProfileData {
     firebase
         .firestore()
         .collection("users")
-        .doc(firebase.auth().currentUser.uid)
+        .doc(user.uid)
         .set(profileData);
     return profileData;
 }
 
-export async function getOrCreateUserProfile(): Promise<ProfileData> {
-    assertUserIsLoggedIn();
-    const currentProfile = await getCurrentUserProfile();
-    return currentProfile ?? createUserProfile();
+async function getOrCreateUserProfile(user: firebase.User): Promise<ProfileData> {
+    const currentProfile = await getCurrentUserProfile(user);
+    return currentProfile ?? createUserProfile(user);
 }
 
 export async function signIn() {
@@ -53,4 +45,21 @@ export async function signIn() {
         tenant: process.env.REACT_APP_TENANT,
     });
     await firebase.auth().signInWithPopup(provider);
+}
+
+export async function signOut() {
+    firebase.auth().signOut();
+}
+
+export function getCurrentUserName(): String {
+    return firebase.auth().currentUser.displayName;
+}
+
+export function getUserProfile(cb: (p: ProfileData) => void) {
+    firebase.auth().onAuthStateChanged(async (user) => {
+        if (user) {
+            const profile = await getOrCreateUserProfile(user);
+            cb(profile);
+        }
+    });
 }
