@@ -4,6 +4,9 @@ import { act } from "react-dom/test-utils";
 
 import App from "./app";
 
+jest.mock("./firebase/AuthService");
+jest.mock("./firebase/FirestoreService");
+
 let container = null;
 beforeEach(() => {
     // setup a DOM element as a render target

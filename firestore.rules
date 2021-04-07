@@ -6,4 +6,8 @@ service cloud.firestore {
           request.time < timestamp.date(2021, 5, 1);
     }
   }
+  match /users/{user} {
+    allow delete, update: if (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true);
+    allow create: if (!request.resource.data.isAdmin && request.resource.data.isSnapper) || if (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true);
+  }
 }
