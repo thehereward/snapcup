@@ -66,11 +66,12 @@ const SubmissionTextBox: React.FunctionComponent = () => {
       <form onSubmit={handleSubmit}>
         <h1>Submit Snap</h1>
         <MentionsInput
+          style={{ "zIndex": 1 }}
           value={message}
           onChange={handleChange}
           maxLength={getExtraLength()}
         >
-          <Mention trigger="@" data={snappableUsers} />
+          <Mention style={{ "background-color": "#daf4fa", "zIndex": 0 }} trigger="@" data={snappableUsers} />
         </MentionsInput>
         <input type="submit" value="Submit" />
       </form>
