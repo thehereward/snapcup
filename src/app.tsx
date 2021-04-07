@@ -23,9 +23,8 @@ const App = () => {
             for (let elem of res) {
                 snappables.push({ id: elem.id, display: elem.fullName })
             }
-            setSnappables(res)
+            setSnappables(snappables)
         }).catch((e) => console.log(e))
-        console.log(snappables)
     }, [loggedIn]);
 
     if (loggedIn) {
