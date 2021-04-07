@@ -9,7 +9,7 @@ import LogoutButton from "./components/logoutButton";
 const authService = new AuthService();
 
 const App = () => {
-                     // Blah blah
+                     // Blafh blah
     const [loggedIn, setLoggedIn] = useState(false);
 
     if (loggedIn) {
