@@ -7,7 +7,7 @@
         "test": "jest",
         "start": "parcel public/index.html",
         "build": "parcel build public/index.html",
-        "prepare": "chmod +x ./.husky/precommit && husky install"
+        "prepare": "husky install && chmod +x ./.husky/precommit"
     },
     "repository": {
         "type": "git",
