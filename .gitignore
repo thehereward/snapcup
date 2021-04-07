@@ -1,2 +1,10 @@
 **/.cache/**
 **/node_modules/**
+**/_/**
+**/lib/**/*.js
+**/lib/**/*.js.map
+**/typings/
+**/dist/**
+*.env.local
+*.env.*.local
+
