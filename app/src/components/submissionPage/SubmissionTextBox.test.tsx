@@ -1,4 +1,3 @@
-// SubmissionTextBox.test.tsx
 import React from "react";
 import renderer from "react-test-renderer";
 import { render as librender } from "@testing-library/react";
