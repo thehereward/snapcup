@@ -5,33 +5,19 @@ interface SnapListProps {
     snaps: Snap[];
 }
 
-const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-];
-
 const SnapList: React.FunctionComponent<SnapListProps> = ({ snaps }) => {
     function formatAts(ats: string[]): string {
         return ats.map((s) => `@${s}`).join(" ");
     }
 
     function formatTimestamp(date: Date) {
-        const day = date.getDate();
-        const month = monthNames[date.getMonth()];
-        const year = date.getFullYear();
-        const hrs = date.getHours();
-        const mins = date.getMinutes();
-        return `${day} ${month} ${year} at ${hrs}:${mins}`;
+        return date.toLocaleDateString(undefined, {
+            year: "numeric",
+            month: "long",
+            day: "2-digit",
+            minute: "2-digit",
+            hour: "2-digit",
+        });
     }
 
     const listItems = snaps.map((snap: Snap, index: number) => (
