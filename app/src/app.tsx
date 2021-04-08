@@ -41,7 +41,7 @@ const App = () => {
                 setSnappables(snappables);
             })
             .catch((e) => console.log(e));
-    }, [setSnappables]);
+    }, [setSnappables, GetSnappables]);
 
     if (loggedIn) {
         return (
