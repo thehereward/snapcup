@@ -6,16 +6,20 @@ import PrettyPageWrap from "./components/PrettyPageWrap";
 import LoginPage from "./components/loginPage/LoginPage";
 import LogoutButton from "./components/logoutButton";
 import SubmissionTextBox from "./components/submissionPage/SubmissionTextBox";
+import MentionElements from "./types/MentionElements";
+import Snappable from "./types/Snappable";
 
 import {
     getCurrentUserName,
     onAuthStateChanged,
     ProfileData,
 } from "./firebase/AuthService";
+import GetSnappables from "./firebase/users/GetSnappables";
 
 const App = () => {
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
     const [userProfile, setUserProfile] = useState(null);
+    const [snappables, setSnappables] = useState<MentionElements[]>([]);
 
     const setUser = (profile: ProfileData) => {
         setUserProfile(profile);
@@ -24,7 +28,16 @@ const App = () => {
 
     useEffect(() => {
         onAuthStateChanged(setUser);
-    }, [setLoggedIn, setUserProfile]);
+        GetSnappables()
+            .then((res: Snappable[]) => {
+                const snappables: MentionElements[] = [];
+                for (let elem of res) {
+                    snappables.push({ id: elem.id, display: elem.fullName });
+                }
+                setSnappables(snappables);
+            })
+            .catch((e) => console.log(e));
+    }, [setLoggedIn, setUserProfile, setSnappables]);
 
     if (loggedIn) {
         return (
@@ -42,7 +55,10 @@ const App = () => {
                 }
             >
                 <h1>Hi {getCurrentUserName()}!</h1>
-                <SubmissionTextBox />
+                <SubmissionTextBox
+                    snappables={snappables}
+                    user={getCurrentUserName()}
+                />
             </PrettyPageWrap>
         );
     } else {

@@ -23,8 +23,8 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
     const [snappedUsers, setSnappedUsers] = useState<MentionElements[]>([]);
 
     function handleSubmit(event) {
+        console.log(props.snappables);
         event.preventDefault();
-        console.log(props);
         const ids: String[] = [];
         for (let elem of snappedUsers) {
             ids.push(elem.id);
@@ -35,6 +35,7 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
             body: message,
             timestamp: new Date(),
         };
+        console.log(resultingSnap);
         if (ValidateSnap(resultingSnap, snappedUsers)) {
             const res = SubmitSnap(
                 resultingSnap,
