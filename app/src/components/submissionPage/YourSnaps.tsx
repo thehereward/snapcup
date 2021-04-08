@@ -9,10 +9,12 @@ const YourSnaps: React.FunctionComponent = () => {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        streamSubmittedSnapsForCurrentUser(
+        const unsubscribe = streamSubmittedSnapsForCurrentUser(
             (updatedSnaps) => setSnaps(updatedSnaps),
             (error) => setError(error.message)
         );
+        // clean up function
+        return unsubscribe;
     }, [setSnaps, setError]);
 
     return (

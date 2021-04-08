@@ -4,7 +4,6 @@ export async function submitSnap(snap: Snap) {
     return;
 }
 
-// returns an unsubscribe function
 export function streamSubmittedSnapsForCurrentUser(
     onSnapsRecieved: (snaps: Snap[]) => void,
     onError: (error: Error) => void
