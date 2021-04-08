@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { signOut } from "../../firebase/AuthService";
-import NavItem from "./NavItem";
+import { NavItemClickable } from "./NavItem";
 
 const SignOutButton: React.FunctionComponent = ({ setLoggedIn }) => {
     const logout = useCallback(() => {
@@ -10,7 +10,7 @@ const SignOutButton: React.FunctionComponent = ({ setLoggedIn }) => {
         })();
     }, [setLoggedIn]);
 
-    return <NavItem onClick={logout}>Sign Out</NavItem>;
+    return <NavItemClickable onClick={logout}>Sign Out</NavItemClickable>;
 };
 
 export default SignOutButton;

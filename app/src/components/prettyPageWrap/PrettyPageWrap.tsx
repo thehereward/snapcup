@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import styled, { css } from "styled-components";
 import SignOutButton from "./SignOutButton";
-import NavItem from "./NavItem";
+import { NavItem, NavItemClickable } from "./NavItem";
 
 import { getCurrentUserName } from "../../firebase/AuthService";
 
@@ -36,11 +36,11 @@ const PrettyPageWrap: React.FunctionComponent = ({
 
                 <LinkList>
                     {isAdmin && (
-                        <NavItem as={Link} to="/admin">
+                        <NavItemClickable as={Link} to="/admin">
                             Manage Teams
-                        </NavItem>
+                        </NavItemClickable>
                     )}
-                    <SignOutButton as="a" setLoggedIn={setLoggedIn} />
+                    <SignOutButton setLoggedIn={setLoggedIn} />
                     <NavItem>{getCurrentUserName()}</NavItem>
                 </LinkList>
             </nav>
