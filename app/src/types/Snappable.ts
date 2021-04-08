@@ -1,6 +1,6 @@
 export default interface Snappable {
-    id: String;
-    email: String;
-    fullName: String;
-    username: String;
+    id: string;
+    email: string;
+    fullName: string;
+    username: string;
 }

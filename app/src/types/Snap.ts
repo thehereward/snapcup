@@ -1,4 +1,3 @@
-/* Snap Structure */
 export default interface Snap {
     to: string[] /* Recipient UIDs */;
     from: string /* Sender UID */;

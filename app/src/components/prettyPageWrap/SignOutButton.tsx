@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { signOut } from "../../firebase/AuthService";
+import { signOut } from "../../firebase/users/UserService";
 import NavItem from "./NavItem";
 
 const SignOutButton: React.FunctionComponent = ({ setLoggedIn }) => {

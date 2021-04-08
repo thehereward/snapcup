@@ -2,12 +2,12 @@ import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 
-import AppWrap from "./appWrap";
+import YourSnaps from "./YourSnaps";
 
-jest.mock("./firebase/users/UserService");
-jest.mock("./firebase/users/GetSnappables");
-jest.mock("./firebase/InitializeDatabase");
-jest.mock("./firebase/snaps/SnapService");
+jest.mock("../../firebase/users/UserService");
+jest.mock("../../firebase/InitializeDatabase");
+jest.mock("../../firebase/snaps/SnapService");
+jest.mock("../../firebase/users/GetSnappables");
 
 let container = null;
 beforeEach(() => {
@@ -25,7 +25,7 @@ afterEach(() => {
 
 it("renders without crashing", () => {
     act(() => {
-        render(<AppWrap />, container);
+        render(<YourSnaps />, container);
     });
     expect(container.children.length).toBeGreaterThan(0);
 });
