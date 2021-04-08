@@ -1,20 +1,15 @@
 import "./app.scss";
 
 import React, { useState, useEffect } from "react";
+import { Switch, Route, Link } from "react-router-dom";
 
-import PrettyPageWrap from "./components/PrettyPageWrap";
+import PrettyPageWrap from "./components/prettyPageWrap/PrettyPageWrap";
 import LoginPage from "./components/loginPage/LoginPage";
-import LogoutButton from "./components/logoutButton";
-import SubmissionTextBox from "./components/submissionPage/SubmissionTextBox";
+import SubmissionPage from "./components/submissionPage/SubmissionPage";
 import MentionElements from "./types/MentionElements";
 import Snappable from "./types/Snappable";
-import AdminConsole from "./components/adminConsole/AdminConsole";
 
-import {
-    getCurrentUserName,
-    onAuthStateChanged,
-    ProfileData,
-} from "./firebase/AuthService";
+import { onAuthStateChanged, ProfileData } from "./firebase/AuthService";
 import GetSnappables from "./firebase/users/GetSnappables";
 
 const App = () => {
@@ -34,11 +29,14 @@ const App = () => {
     useEffect(() => {
         GetSnappables()
             .then((res: Snappable[]) => {
-                const snappables: MentionElements[] = [];
+                const foundSnappables: MentionElements[] = [];
                 for (let elem of res) {
-                    snappables.push({ id: elem.id, display: elem.fullName });
+                    foundSnappables.push({
+                        id: elem.id,
+                        display: elem.fullName,
+                    });
                 }
-                setSnappables(snappables);
+                setSnappables(foundSnappables);
             })
             .catch((e) => console.log(e));
     }, [setSnappables, GetSnappables]);
@@ -46,32 +44,19 @@ const App = () => {
     if (loggedIn) {
         return (
             <PrettyPageWrap
-                navExtra={
-                    <>
-                        <div className="flex-grow-1" />
-                        {userProfile.isAdmin && (
-                            <span className="nav-item mr-2">
-                                You are an admin
-                            </span>
-                        )}
-                        <LogoutButton setLoggedIn={setLoggedIn} />
-                    </>
-                }
+                isAdmin={userProfile.isAdmin}
+                setLoggedIn={setLoggedIn}
             >
-                <h1>Hi {getCurrentUserName()}!</h1>
-                <SubmissionTextBox
-                    snappables={snappables}
-                    user={getCurrentUserName()}
-                />
-                {userProfile.isAdmin && <AdminConsole />}
+                <Switch>
+                    <Route path="/admin">Admin page will go here.</Route>
+                    <Route path="/">
+                        <SubmissionPage snappables={snappables} />
+                    </Route>
+                </Switch>
             </PrettyPageWrap>
         );
     } else {
-        return (
-            <PrettyPageWrap>
-                <LoginPage setLoggedIn={setLoggedIn} />
-            </PrettyPageWrap>
-        );
+        return <LoginPage setLoggedIn={setLoggedIn} />;
     }
 };
 
