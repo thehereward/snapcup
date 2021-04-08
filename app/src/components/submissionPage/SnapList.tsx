@@ -5,9 +5,31 @@ interface SnapListProps {
     snaps: Snap[];
 }
 
+const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+];
+
 const SnapList: React.FunctionComponent<SnapListProps> = ({ snaps }) => {
     function formatAts(ats: string[]): string {
         return ats.map((s) => `@${s}`).join(" ");
+    }
+
+    function formatTimestamp(date: Date) {
+        const day = date.getDate();
+        const month = monthNames[date.getMonth()];
+        const year = date.getFullYear();
+        return `${day} ${month} ${year}`;
     }
 
     const listItems = snaps.map((snap: Snap, index: number) => (
@@ -17,7 +39,9 @@ const SnapList: React.FunctionComponent<SnapListProps> = ({ snaps }) => {
                     <h5 className="card-title">{formatAts(snap.to)}</h5>
                     <p className="card-text">{snap.body}</p>
                 </div>
-                <div className="card-footer text-muted">{"8 April 2021"}</div>
+                <div className="card-footer text-muted">
+                    {formatTimestamp(snap.timestamp)}
+                </div>
             </div>
         </div>
     ));

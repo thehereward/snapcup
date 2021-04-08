@@ -6,6 +6,15 @@ export async function submitSnap(snap: Snap) {
     await firebase.firestore().collection("snaps").add(snap);
 }
 
+function docToSnap(data: any) {
+    return {
+        body: data.body,
+        timestamp: data.timestamp.toDate(),
+        to: data.to,
+        from: data.from,
+    };
+}
+
 async function getSubmittedSnaps(user: firebase.User): Promise<Snap[]> {
     // .orderBy("timestamp", "desc")
     const userSnaps = await firebase
@@ -13,7 +22,7 @@ async function getSubmittedSnaps(user: firebase.User): Promise<Snap[]> {
         .collection("snaps")
         .where("from", "==", user.uid.toString())
         .get();
-    return userSnaps.docs.map((d) => d.data() as Snap);
+    return userSnaps.docs.map((doc) => docToSnap(doc.data()));
 }
 
 export async function getSubmittedSnapsForCurrentUser(): Promise<Snap[]> {
