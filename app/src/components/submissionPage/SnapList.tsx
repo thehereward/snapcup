@@ -11,7 +11,7 @@ const SnapList: React.FunctionComponent<SnapListProps> = ({ snaps }) => {
     }
 
     function formatTimestamp(date: Date) {
-        return date.toLocaleDateString(undefined, {
+        return date.toLocaleString(undefined, {
             year: "numeric",
             month: "long",
             day: "2-digit",
