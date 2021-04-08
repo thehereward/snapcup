@@ -6,6 +6,7 @@ import App from "./app";
 
 jest.mock("./firebase/users/UserService");
 jest.mock("./firebase/InitializeDatabase");
+jest.mock("./firebase/snaps/SnapService");
 
 let container = null;
 beforeEach(() => {
