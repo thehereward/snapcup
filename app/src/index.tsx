@@ -1,8 +1,8 @@
 // index.tsx
 import React from "react";
 import ReactDOM from "react-dom";
-import { initializeDatabase } from "./firebase/FirestoreService";
-import App from "./app";
+import { initializeDatabase } from "./firebase/InitializeDatabase";
+import AppWrap from "./appWrap";
 
 initializeDatabase();
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<AppWrap />, document.getElementById("root"));
