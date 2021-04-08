@@ -2,23 +2,28 @@ import React, { useState, useRef, useCallback } from "react";
 import GetSnappables from "../../firebase/users/GetSnappables";
 import { snappablesToCsvDownload, readFileAndUpload } from "./csvManager";
 
+const LOADING = "loading";
+const IDLE = "idle";
+const ERROR = "error";
+
 const SnappableManager = () => {
-    const [status, setStatus] = useState({ status: "idle" });
+    const [status, setStatus] = useState({ status: IDLE });
     const fileRef = useRef(null);
 
     const downloadSnappables = useCallback(() => {
-        setStatus({ status: "loading" });
-        GetSnappables()
-            .then((snappables) => {
+        setStatus({ status: LOADING });
+        (async () => {
+            try {
+                const snappables = await GetSnappables();
                 snappablesToCsvDownload(snappables);
-                setStatus({ status: "idle" });
-            })
-            .catch(() => {
+                setStatus({ status: IDLE });
+            } catch {
                 setStatus({
-                    status: "error",
+                    status: ERROR,
                     error: "There was an error loading snappable people.",
                 });
-            });
+            }
+        })();
     }, []);
 
     const uploadSnappables = useCallback(() => {
@@ -39,7 +44,7 @@ const SnappableManager = () => {
                     type="button"
                     className="btn btn-primary"
                     onClick={() => downloadSnappables()}
-                    disabled={status.status === "Loading"}
+                    disabled={status.status === LOADING}
                 >
                     Download as CSV
                 </button>
@@ -47,13 +52,13 @@ const SnappableManager = () => {
                     type="file"
                     ref={fileRef}
                     onChange={uploadSnappables}
-                    disabled={status.status === "Loading"}
+                    disabled={status.status === LOADING}
                     accept=".csv"
                 />
             </div>
-            {status.status !== "idle" && (
+            {status.status !== IDLE && (
                 <p>
-                    {status.status === "error" ? (
+                    {status.status === ERROR ? (
                         <span className="text-danger">{status.error}</span>
                     ) : (
                         <b>Loading...</b>
