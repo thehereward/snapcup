@@ -2,7 +2,7 @@ import firebase from "firebase/app";
 import Snappable from "../../types/Snappable";
 
 /* Gets a list of Nicknames that are unique */
-export default async function GetSnappables(): Promise<Snappable[]> {
+export default async function getSnappables(): Promise<Snappable[]> {
     const querySnapshot = await firebase
         .firestore()
         .collection("snappables")
