@@ -1,19 +1,18 @@
 import "./app.scss";
 
 import React, { useState, useEffect } from "react";
+import { Switch, Route, Link } from "react-router-dom";
 
-import PrettyPageWrap from "./components/PrettyPageWrap";
+import PrettyPageWrap from "./components/prettyPageWrap/PrettyPageWrap";
 import LoginPage from "./components/loginPage/LoginPage";
-import LogoutButton from "./components/logoutButton";
-import SubmissionTextBox from "./components/submissionPage/SubmissionTextBox";
-import AdminConsole from "./components/adminConsole/AdminConsole";
+import SubmissionPage from "./components/submissionPage/SubmissionPage";
 
 import {
     getCurrentUserName,
     onAuthStateChanged,
 } from "./firebase/users/UserService";
 import { UserProfile } from "./types/UserProfile";
-import YourSnaps from "./components/submissionPage/YourSnaps";
+import AdminConsole from "~components/adminConsole/AdminConsole";
 
 const App = () => {
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
@@ -31,30 +30,24 @@ const App = () => {
     if (loggedIn) {
         return (
             <PrettyPageWrap
-                navExtra={
-                    <>
-                        <div className="flex-grow-1" />
-                        {userProfile.isAdmin && (
-                            <span className="nav-item mr-2">
-                                You are an admin
-                            </span>
-                        )}
-                        <LogoutButton setLoggedIn={setLoggedIn} />
-                    </>
-                }
+                isAdmin={userProfile.isAdmin}
+                setLoggedIn={setLoggedIn}
             >
                 <h1>Hi {getCurrentUserName()}!</h1>
-                <SubmissionTextBox />
-                <YourSnaps />
-                {userProfile.isAdmin && <AdminConsole />}
+                <Switch>
+                    {userProfile.isAdmin && (
+                        <Route path="/admin">
+                            <AdminConsole />
+                        </Route>
+                    )}
+                    <Route path="/">
+                        <SubmissionPage />
+                    </Route>
+                </Switch>
             </PrettyPageWrap>
         );
     } else {
-        return (
-            <PrettyPageWrap>
-                <LoginPage setLoggedIn={setLoggedIn} />
-            </PrettyPageWrap>
-        );
+        return <LoginPage setLoggedIn={setLoggedIn} />;
     }
 };
 

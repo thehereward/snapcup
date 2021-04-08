@@ -1,8 +1,9 @@
 // index.tsx
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import { initializeDatabase } from "./firebase/InitializeDatabase";
-import App from "./app";
+import AppWrap from "./appWrap";
 
 initializeDatabase();
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<AppWrap />, document.getElementById("root"));

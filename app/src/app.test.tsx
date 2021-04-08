@@ -2,7 +2,7 @@ import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 
-import App from "./app";
+import AppWrap from "./appWrap";
 
 jest.mock("./firebase/users/UserService");
 jest.mock("./firebase/users/GetSnappables");
@@ -25,7 +25,7 @@ afterEach(() => {
 
 it("renders without crashing", () => {
     act(() => {
-        render(<App />, container);
+        render(<AppWrap />, container);
     });
     expect(container.children.length).toBeGreaterThan(0);
 });
