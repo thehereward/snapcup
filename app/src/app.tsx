@@ -11,7 +11,7 @@ import {
     getCurrentUserName,
     onAuthStateChanged,
 } from "./firebase/users/UserService";
-import { UserProfile } from "~firebase/users/UserProfile";
+import { UserProfile } from "./firebase/users/UserProfile";
 
 const App = () => {
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
