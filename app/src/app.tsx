@@ -6,6 +6,7 @@ import PrettyPageWrap from "./components/PrettyPageWrap";
 import LoginPage from "./components/loginPage/LoginPage";
 import LogoutButton from "./components/logoutButton";
 import SubmissionTextBox from "./components/submissionPage/SubmissionTextBox";
+import AdminConsole from "./components/adminConsole/AdminConsole";
 
 import {
     getCurrentUserName,
@@ -45,6 +46,7 @@ const App = () => {
                 <h1>Hi {getCurrentUserName()}!</h1>
                 <SubmissionTextBox />
                 <YourSnaps />
+                {userProfile.isAdmin && <AdminConsole />}
             </PrettyPageWrap>
         );
     } else {
