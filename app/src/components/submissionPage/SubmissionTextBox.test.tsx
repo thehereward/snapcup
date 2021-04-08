@@ -104,7 +104,6 @@ describe("SubmissionBoxErrorDisplay", () => {
 /*  */
 describe("<SubmissionTextBox />", () => {
     test("test for successful submission of a legitimate snap", () => {
-        /*  Ensure that snaps are legitimate before firebase submission */
         const elem1: MentionElements = {
             id: "RandomUNiqueID1",
             display: "Jimathy",
