@@ -28,6 +28,9 @@ const App = () => {
 
     useEffect(() => {
         onAuthStateChanged(setUser);
+    }, [setLoggedIn, setUserProfile]);
+
+    useEffect(() => {
         GetSnappables()
             .then((res: Snappable[]) => {
                 const snappables: MentionElements[] = [];
@@ -37,7 +40,7 @@ const App = () => {
                 setSnappables(snappables);
             })
             .catch((e) => console.log(e));
-    }, [setLoggedIn, setUserProfile, setSnappables]);
+    }, [setSnappables]);
 
     if (loggedIn) {
         return (
