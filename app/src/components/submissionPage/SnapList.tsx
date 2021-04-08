@@ -29,7 +29,9 @@ const SnapList: React.FunctionComponent<SnapListProps> = ({ snaps }) => {
         const day = date.getDate();
         const month = monthNames[date.getMonth()];
         const year = date.getFullYear();
-        return `${day} ${month} ${year}`;
+        const hrs = date.getHours();
+        const mins = date.getMinutes();
+        return `${day} ${month} ${year} at ${hrs}:${mins}`;
     }
 
     const listItems = snaps.map((snap: Snap, index: number) => (
