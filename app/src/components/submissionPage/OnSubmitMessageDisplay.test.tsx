@@ -2,15 +2,18 @@ import React from "react";
 import { render as librender } from "@testing-library/react";
 import { screen } from "@testing-library/react";
 import OnSubmitMessageDisplay from "./OnSubmitMessageDisplay";
+import each from "jest-each";
 
 describe("OnSubmitMessageDisplay", () => {
-    test("Submit message appears if confirmation is true", () => {
-        librender(<OnSubmitMessageDisplay confirmation={true} />);
-        screen.getByText("Snap submitted!");
-    });
-    test("Submit message is empty if confirmation is false", () => {
-        librender(<OnSubmitMessageDisplay confirmation={false} />);
-        const text = screen.queryByText("Snap submitted!");
-        expect(text).toBe(null);
-    });
+    each([
+        [true, 1],
+        [false, 0],
+    ]).test(
+        "Submit message appears if confirmation is %s",
+        (confirmation, matches) => {
+            librender(<OnSubmitMessageDisplay confirmation={confirmation} />);
+            const text = screen.queryAllByText("Snap submitted!");
+            expect(text.length).toBe(matches);
+        }
+    );
 });
