@@ -3,10 +3,9 @@ import "./app.scss";
 import React, { useState, useEffect } from "react";
 import { Switch, Route, Link } from "react-router-dom";
 
-import PrettyPageWrap from "./components/PrettyPageWrap";
+import PrettyPageWrap from "./components/prettyPageWrap/PrettyPageWrap";
 import LoginPage from "./components/loginPage/LoginPage";
 import SubmissionPage from "./components/submissionPage/SubmissionPage";
-import LogoutButton from "./components/logoutButton";
 
 import {
     getCurrentUserName,
@@ -30,15 +29,10 @@ const App = () => {
     if (loggedIn) {
         return (
             <PrettyPageWrap
-                navExtra={
-                    <>
-                        <div className="flex-grow-1" />
-                        {userProfile.isAdmin && (
-                            <Link to="/admin">Admin Console</Link>
-                        )}
-                        <LogoutButton setLoggedIn={setLoggedIn} />
-                    </>
-                }
+                isAdmin={userProfile.isAdmin}
+                setLoggedIn={setLoggedIn}
+                name={getCurrentUserName().split(" ")[0]}
+                loggedIn={true}
             >
                 <Switch>
                     <Route path="/admin">Admin page will go here.</Route>
@@ -50,7 +44,7 @@ const App = () => {
         );
     } else {
         return (
-            <PrettyPageWrap>
+            <PrettyPageWrap loggedIn={false}>
                 <LoginPage setLoggedIn={setLoggedIn} />
             </PrettyPageWrap>
         );
