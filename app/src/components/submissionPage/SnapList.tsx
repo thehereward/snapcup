@@ -11,7 +11,7 @@ const SnapList: React.FunctionComponent<SnapListProps> = ({ snaps }) => {
     }
 
     const listItems = snaps.map((snap: Snap, index: number) => (
-        <div className="col-sm-6 mb-2" key={index}>
+        <div className="col-sm-6 col-md-4 mb-2" key={index}>
             <div className="card">
                 <div className="card-body">
                     <h5 className="card-title">{formatAts(snap.to)}</h5>
