@@ -1,11 +1,12 @@
 import "./app.scss";
 
 import React, { useState, useEffect } from "react";
+import { Switch, Route, Link } from "react-router-dom";
 
 import PrettyPageWrap from "./components/PrettyPageWrap";
 import LoginPage from "./components/loginPage/LoginPage";
+import SubmissionPage from "./components/submissionPage/SubmissionPage";
 import LogoutButton from "./components/logoutButton";
-import SubmissionTextBox from "./components/submissionPage/SubmissionTextBox";
 
 import {
     getCurrentUserName,
@@ -33,16 +34,18 @@ const App = () => {
                     <>
                         <div className="flex-grow-1" />
                         {userProfile.isAdmin && (
-                            <span className="nav-item mr-2">
-                                You are an admin
-                            </span>
+                            <Link to="/admin">Admin Console</Link>
                         )}
                         <LogoutButton setLoggedIn={setLoggedIn} />
                     </>
                 }
             >
-                <h1>Hi {getCurrentUserName()}!</h1>
-                <SubmissionTextBox />
+                <Switch>
+                    <Route path="/admin">Admin page will go here.</Route>
+                    <Route path="/">
+                        <SubmissionPage />
+                    </Route>
+                </Switch>
             </PrettyPageWrap>
         );
     } else {

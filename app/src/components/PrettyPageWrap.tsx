@@ -1,10 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const PrettyPageWrap: React.FunctionComponent = ({ children, navExtra }) => (
     <>
         <header>
             <nav className="navbar bg-light">
-                <span className="navbar-brand">🥤 SnapCup</span>
+                <Link to="/" className="navbar-brand">
+                    🥤 SnapCup
+                </Link>
                 {navExtra}
             </nav>
         </header>
