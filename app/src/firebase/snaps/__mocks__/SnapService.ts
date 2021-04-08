@@ -1,4 +1,4 @@
-import Snap from "../Snap";
+import Snap from "../../../types/Snap";
 
 export async function submitSnap(snap: Snap) {
     return;

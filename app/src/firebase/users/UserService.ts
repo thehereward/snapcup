@@ -1,6 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth";
-import { UserProfile } from "./UserProfile";
+import { UserProfile } from "../../types/UserProfile";
 
 async function getCurrentUserProfile(
     user: firebase.User

@@ -7,6 +7,7 @@ import YourSnaps from "./YourSnaps";
 jest.mock("../../firebase/users/UserService");
 jest.mock("../../firebase/InitializeDatabase");
 jest.mock("../../firebase/snaps/SnapService");
+jest.mock("../../firebase/users/GetSnappables");
 
 let container = null;
 beforeEach(() => {

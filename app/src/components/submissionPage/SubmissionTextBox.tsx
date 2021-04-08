@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { getCurrentUserUid } from "../../firebase/users/UserService";
-import Snap from "../../firebase/snaps/Snap";
+import Snap from "../../types/Snap";
 import { submitSnap } from "../../firebase/snaps/SnapService";
 
 const SubmissionTextBox: React.FunctionComponent = () => {

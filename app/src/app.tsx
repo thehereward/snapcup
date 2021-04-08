@@ -12,7 +12,7 @@ import {
     getCurrentUserName,
     onAuthStateChanged,
 } from "./firebase/users/UserService";
-import { UserProfile } from "./firebase/users/UserProfile";
+import { UserProfile } from "./types/UserProfile";
 import YourSnaps from "./components/submissionPage/YourSnaps";
 
 const App = () => {

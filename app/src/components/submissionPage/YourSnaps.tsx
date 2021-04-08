@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import Snap from "../../firebase/snaps/Snap";
+import Snap from "../../types/Snap";
 import { getSubmittedSnapsForCurrentUser } from "../../firebase/snaps/SnapService";
 import SnapList from "./SnapList";
 

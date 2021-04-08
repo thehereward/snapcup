@@ -5,6 +5,7 @@ import { act } from "react-dom/test-utils";
 import App from "./app";
 
 jest.mock("./firebase/users/UserService");
+jest.mock("./firebase/users/GetSnappables");
 jest.mock("./firebase/InitializeDatabase");
 jest.mock("./firebase/snaps/SnapService");
 

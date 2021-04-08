@@ -1,4 +1,4 @@
-import Snap from "./Snap";
+import Snap from "../../types/Snap";
 import firebase from "firebase/app";
 import "firebase/auth";
 

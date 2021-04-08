@@ -1,4 +1,4 @@
-import { UserProfile } from "../UserProfile";
+import { UserProfile } from "../../../types/UserProfile";
 
 export async function signIn() {
     return;
