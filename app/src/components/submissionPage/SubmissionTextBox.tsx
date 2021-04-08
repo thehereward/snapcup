@@ -36,18 +36,17 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
             timestamp: new Date(),
         };
         if (ValidateSnap(resultingSnap, snappedUsers)) {
-            const res = SubmitSnap(
-                resultingSnap,
-                setError,
-                setConfirmation
-            ).then(() => {
+            try {
+                submitSnap(resultingSnap);
+                setConfirmation(true);
                 setMessage("");
-            });
-            setSnappedUsers([]);
+                setSnappedUsers([]);
+            } catch (error) {
+                setError(error.toString());
+            }
         } else {
-            setError(
-                "there was an error with the creation of the snap, log out and log in again."
-            );
+            setError("Your snap is invalid.");
+            setConfirmation(false);
         }
     }
 
