@@ -2,16 +2,20 @@
 
 exports[`CharactersLeftDisplay characters remaining string renders 1`] = `
 <p>
-  There are 
+  There are
+   
   236
-   characters remaining
+   
+  characters remaining
 </p>
 `;
 
 exports[`CharactersLeftDisplay characters remaining string renders 2`] = `
 <p>
-  There are 
+  There are
+   
   280
-   characters remaining
+   
+  characters remaining
 </p>
 `;
