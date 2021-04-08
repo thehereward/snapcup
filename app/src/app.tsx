@@ -7,9 +7,8 @@ import PrettyPageWrap from "./components/prettyPageWrap/PrettyPageWrap";
 import LoginPage from "./components/loginPage/LoginPage";
 import SubmissionPage from "./components/submissionPage/SubmissionPage";
 import MentionElements from "./types/MentionElements";
-import Snappable from "./types/Snappable";
 
-import GetSnappables from "./firebase/users/GetSnappables";
+import getSnappables from "./firebase/users/GetSnappables";
 import {
     getCurrentUserName,
     onAuthStateChanged,
@@ -31,20 +30,17 @@ const App = () => {
         onAuthStateChanged(setUser);
     }, [setLoggedIn, setUserProfile]);
 
-    useEffect(() => {
-        GetSnappables()
-            .then((res: Snappable[]) => {
-                const foundSnappables: MentionElements[] = [];
-                for (let elem of res) {
-                    foundSnappables.push({
-                        id: elem.id,
-                        display: elem.fullName,
-                    });
-                }
-                setSnappables(foundSnappables);
-            })
-            .catch((e) => console.log(e));
-    }, [setSnappables, GetSnappables]);
+    useEffect(async () => {
+        try {
+            const snappables = await getSnappables();
+            const mentionElements: MentionElements[] = snappables.map((s) => {
+                return { id: s.id, display: s.fullName };
+            });
+            setSnappables(mentionElements);
+        } catch (error) {
+            console.log(error.message);
+        }
+    }, [setSnappables, getSnappables]);
 
     if (loggedIn) {
         return (

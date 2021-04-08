@@ -21,6 +21,8 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
     --purp-selected: #{$elle};
     --purp-hover: #896bc7;
     --our-grey: #838385;
+    --text-main: #3d3d3d;
+    --text-muted: #75737a;
 }
 
 $font-family-base: var(--open-sans);
