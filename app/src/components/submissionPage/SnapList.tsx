@@ -21,7 +21,7 @@ const monthNames = [
 ];
 
 const SnapList: React.FunctionComponent<SnapListProps> = ({ snaps }) => {
-    function formatAts(ats: string[]): string {
+    function formatAts(ats: String[]): String {
         return ats.map((s) => `@${s}`).join(" ");
     }
 

@@ -1,6 +1,6 @@
 export default interface Snap {
-    to: string[] /* Recipient UIDs */;
-    from: string /* Sender UID */;
-    body: string /* Main Message */;
+    to: String[] /* Recipient UIDs */;
+    from: String /* Sender UID */;
+    body: String /* Main Message */;
     timestamp: Date /* Date/time of Submission*/;
 }
