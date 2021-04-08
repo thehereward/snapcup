@@ -1,5 +1,5 @@
 import MentionElements from "../../types/MentionElements";
-import Snap from "../../firebase/snap/Snap";
+import Snap from "../../types/Snap";
 import ValidateSnap from "./ValidateSnap";
 
 describe("ValidateSnap", () => {

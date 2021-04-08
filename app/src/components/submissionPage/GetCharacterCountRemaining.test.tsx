@@ -1,8 +1,5 @@
 import MentionElements from "../../types/MentionElements";
-import GetExtraLength from "./GetExtraLength";
 import { GetCharacterCountRemaining } from "./CharactersLeftDisplay";
-import Snap from "../../firebase/snap/Snap";
-import ValidateSnap from "./ValidateSnap";
 
 describe("<SubmissionTextBox />", () => {
     const elem1: MentionElements = {
