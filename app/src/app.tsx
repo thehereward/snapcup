@@ -52,7 +52,6 @@ const App = () => {
                 isAdmin={userProfile.isAdmin}
                 setLoggedIn={setLoggedIn}
             >
-                <h1>Hi {getCurrentUserName()}!</h1>
                 <Switch>
                     {userProfile.isAdmin && (
                         <Route path="/admin">
