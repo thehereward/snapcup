@@ -8,6 +8,7 @@ import LogoutButton from "./components/logoutButton";
 import SubmissionTextBox from "./components/submissionPage/SubmissionTextBox";
 import MentionElements from "./types/MentionElements";
 import Snappable from "./types/Snappable";
+import AdminConsole from "./components/adminConsole/AdminConsole";
 
 import {
     getCurrentUserName,
@@ -62,6 +63,7 @@ const App = () => {
                     snappables={snappables}
                     user={getCurrentUserName()}
                 />
+                {userProfile.isAdmin && <AdminConsole />}
             </PrettyPageWrap>
         );
     } else {
