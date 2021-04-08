@@ -32,6 +32,7 @@ interface Snappable {
 
 export const uploadSnappableList = functions.https.onCall(
     async (data, context) => {
+        console.log(context);
         // Check they are an admin
         if (!context.auth) {
             throw new functions.https.HttpsError(
