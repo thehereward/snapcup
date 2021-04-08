@@ -4,8 +4,8 @@ import { act } from "react-dom/test-utils";
 
 import App from "./app";
 
-jest.mock("./firebase/AuthService");
-jest.mock("./firebase/FirestoreService");
+jest.mock("./firebase/users/UserService");
+jest.mock("./firebase/InitializeDatabase");
 
 let container = null;
 beforeEach(() => {

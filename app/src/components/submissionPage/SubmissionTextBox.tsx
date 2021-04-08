@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import Snap from "../../firebase/snap/Snap";
-import submitSnap from "../../firebase/snap/SubmitSnap";
+import Snap from "../../firebase/snaps/Snap";
+import submitSnap from "../../firebase/snaps/SubmitSnap";
 
 const SubmissionTextBox: React.FunctionComponent = () => {
     const [message, setMessage] = useState<string>("");

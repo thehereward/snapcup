@@ -10,14 +10,14 @@ import SubmissionTextBox from "./components/submissionPage/SubmissionTextBox";
 import {
     getCurrentUserName,
     onAuthStateChanged,
-    ProfileData,
-} from "./firebase/AuthService";
+} from "./firebase/users/UserService";
+import { UserProfile } from "~firebase/users/UserProfile";
 
 const App = () => {
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
     const [userProfile, setUserProfile] = useState(null);
 
-    const setUser = (profile: ProfileData) => {
+    const setUser = (profile: UserProfile) => {
         setUserProfile(profile);
         setLoggedIn(true);
     };

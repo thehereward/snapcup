@@ -1,24 +1,20 @@
 import firebase from "firebase/app";
 import "firebase/auth";
-
-export interface ProfileData {
-    isAdmin: boolean;
-    isSnapper: boolean;
-}
+import { UserProfile } from "./UserProfile";
 
 async function getCurrentUserProfile(
     user: firebase.User
-): Promise<ProfileData | null> {
+): Promise<UserProfile | null> {
     const docRef = firebase.firestore().collection("users").doc(user.uid);
     const doc = await docRef.get();
     if (doc.exists && doc.data()) {
-        return doc.data() as ProfileData;
+        return doc.data() as UserProfile;
     } else {
         return null;
     }
 }
 
-function createUserProfile(user: firebase.User): ProfileData {
+function createUserProfile(user: firebase.User): UserProfile {
     const profileData = {
         isAdmin: false,
         isSnapper: true,
@@ -29,7 +25,7 @@ function createUserProfile(user: firebase.User): ProfileData {
 
 async function getOrCreateUserProfile(
     user: firebase.User
-): Promise<ProfileData> {
+): Promise<UserProfile> {
     const currentProfile = await getCurrentUserProfile(user);
     return currentProfile ?? createUserProfile(user);
 }
@@ -52,7 +48,7 @@ export function getCurrentUserName(): String {
     return firebase.auth().currentUser.displayName;
 }
 
-export function onAuthStateChanged(cb: (p: ProfileData) => void) {
+export function onAuthStateChanged(cb: (p: UserProfile) => void) {
     firebase.auth().onAuthStateChanged(async (user) => {
         if (user) {
             const profile = await getOrCreateUserProfile(user);
