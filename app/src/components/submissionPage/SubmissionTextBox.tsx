@@ -1,50 +1,88 @@
 import React from "react";
 import { useState } from "react";
-import Snap from "../../firebase/snap/Snap";
-import submitSnap from "../../firebase/snap/SubmitSnap";
+import { MentionsInput, Mention } from "react-mentions";
+import MentionElements from "../../types/MentionElements";
+import GetExtraLength from "./GetExtraLength";
+import CharactersLeftDisplay from "./CharactersLeftDisplay";
+import OnSubmitMessageDisplay from "./OnSubmitMessageDisplay";
+import SubmissionBoxErrorDisplay from "./SubmissionBoxErrorDisplay";
+import ValidateSnap from "./ValidateSnap";
+import { getCurrentUserUid } from "../../firebase/users/UserService";
+import Snap from "../../types/Snap";
+import { submitSnap } from "../../firebase/snaps/SnapService";
 
-const SubmissionTextBox: React.FunctionComponent = () => {
+export interface Props {
+    snappables: MentionElements[];
+    user: String;
+}
+
+const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
+    /* Containing body of the snap */
     const [message, setMessage] = useState<string>("");
     const [confirmation, setConfirmation] = useState<Boolean>(false);
-    const [error, setError] = useState<string>("");
+    const [error, setError] = useState<String>("");
+    const [snappedUsers, setSnappedUsers] = useState<MentionElements[]>([]);
 
     function handleSubmit(event) {
-        //TODO: Get auth().userID
+        const uid = getCurrentUserUid();
         event.preventDefault();
+        const ids: String[] = [];
+        for (let elem of snappedUsers) {
+            ids.push(elem.id);
+        }
         const resultingSnap: Snap = {
-            to: [],
-            from: "",
+            to: ids,
+            from: uid,
             body: message,
             timestamp: new Date(),
         };
-        try {
-            submitSnap(resultingSnap);
-            setConfirmation(true);
-        } catch (error) {
-            setError(error.toString());
+        if (ValidateSnap(resultingSnap, snappedUsers)) {
+            try {
+                submitSnap(resultingSnap);
+                setConfirmation(true);
+                setMessage("");
+                setSnappedUsers([]);
+            } catch (error) {
+                setError(error.toString());
+            }
+        } else {
+            setError("Your snap is invalid.");
+            setConfirmation(false);
         }
     }
 
-    function handleMessageTextChanged(event) {
+    /* Updates the value in the webhook "message" */
+    function handleChange(event, newValue, newPlainTextValue, mentions) {
         setMessage(event.target.value);
         setConfirmation(false);
         setError("");
+        setSnappedUsers(mentions);
     }
 
     return (
         <div className="SubmissionTextBox">
             <form onSubmit={handleSubmit}>
                 <h1>Submit Snap</h1>
-                <textarea
+                <MentionsInput
+                    style={{ zIndex: 1 }}
                     value={message}
-                    onChange={handleMessageTextChanged}
-                    maxLength={280}
-                />
+                    onChange={handleChange}
+                    maxLength={GetExtraLength(snappedUsers)}
+                >
+                    <Mention
+                        style={{ backgroundColor: "#daf4fa", zIndex: 0 }}
+                        trigger="@"
+                        data={props.snappables}
+                    />
+                </MentionsInput>
                 <input type="submit" value="Submit" />
             </form>
-            <p>There are {280 - message.length} characters remaining</p>
-            {confirmation && <p>Snap submitted!</p>}
-            {error != "" && <p>{error}</p>}
+            <CharactersLeftDisplay
+                snappedUsers={snappedUsers}
+                message={message}
+            />
+            <OnSubmitMessageDisplay confirmation={confirmation} />
+            <SubmissionBoxErrorDisplay error={error} />
         </div>
     );
 };
