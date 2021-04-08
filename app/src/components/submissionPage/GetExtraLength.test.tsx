@@ -1,7 +1,7 @@
 import MentionElements from "../../types/MentionElements";
 import GetExtraLength from "./GetExtraLength";
 
-describe("<SubmissionTextBox />", () => {
+describe("GetExtraLength", () => {
     const elem1: MentionElements = {
         id: "RandomUNiqueID1",
         display: "Jimathy",
