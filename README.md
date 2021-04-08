@@ -21,11 +21,14 @@ to make the pre-commit hook executable
 ## Environment Variables
 
 To run locally with your own backend, add a `.env.local` file to `app/` with your own firebase credential variables.
-If you want to run on the test server you need to set the environment variable NODE_ENV=true, for example in bash
+
+Then, `cd` into `app/` and run
 
 ```bash
-cd app && NODE_ENV=test npm start
+npm start
 ```
+
+to run the front end React app.
 
 ## Testing
 
