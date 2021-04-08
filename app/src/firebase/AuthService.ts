@@ -41,7 +41,7 @@ export async function signIn() {
         // Only users from a particular Azure AD tenant to sign into the application
         tenant: process.env.REACT_APP_TENANT,
     });
-    await firebase.auth().signInWithPopup(provider);
+    await firebase.auth().signInWithPopup(provider).catch((e) => console.log(e));
 }
 
 export async function signOut() {

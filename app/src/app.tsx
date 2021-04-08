@@ -7,6 +7,9 @@ import LoginPage from "./components/loginPage/LoginPage";
 import LogoutButton from "./components/logoutButton";
 import SubmissionTextBox from "./components/submissionPage/SubmissionTextBox";
 
+// Snapitform
+import SnapItForm from "./components/submissionPage/SnapItForm";
+
 import {
     getCurrentUserName,
     onAuthStateChanged,
@@ -48,7 +51,8 @@ const App = () => {
     } else {
         return (
             <PrettyPageWrap>
-                <LoginPage setLoggedIn={setLoggedIn} />
+                <SnapItForm/>
+                {/*<LoginPage setLoggedIn={setLoggedIn} />*/}
             </PrettyPageWrap>
         );
     }
