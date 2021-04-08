@@ -23,3 +23,85 @@ export const setFirstUserAsAdmin = functions.firestore
         // You must return a Promise when performing asynchronous tasks inside a Functions such as writing to Firestore.
         return snapshot.ref.set({ adminUser }, { merge: true });
     });
+
+interface Snappable {
+    fullName: string;
+    email: string;
+    username: string;
+}
+
+export const uploadSnappableList = functions.https.onCall(
+    async (data, context) => {
+        // Check they are an admin
+        if (!context.auth) {
+            throw new functions.https.HttpsError(
+                "failed-precondition",
+                "The function must be called while authenticated."
+            );
+        }
+        if (!Array.isArray(data)) {
+            throw new functions.https.HttpsError(
+                "failed-precondition",
+                "Data must be array."
+            );
+        }
+        const user = await db.collection("users").doc(context.auth.uid).get();
+        if (!user.exists || !user.data()?.isAdmin) {
+            throw new functions.https.HttpsError(
+                "failed-precondition",
+                "The function can only be called by admins."
+            );
+        }
+
+        const snapsInWithId: { [key: string]: Snappable } = {};
+        const toAdd: Snappable[] = [];
+        const toDeleteIds: string[] = [];
+        const toChange: { id: string; data: Snappable }[] = [];
+
+        data.forEach(({ id, fullName, email, username }) => {
+            if (!fullName || !email || !username) {
+                throw new functions.https.HttpsError(
+                    "failed-precondition",
+                    "All snappable people must have a full name, email and username."
+                );
+            }
+            if (id) {
+                snapsInWithId[id] = { fullName, email, username };
+            } else {
+                toAdd.push({ fullName, email, username });
+            }
+        });
+
+        const snappablesCollection = db.collection("snappables");
+        const snappables = await snappablesCollection.get();
+        snappables.forEach((outDocSnapshot) => {
+            const inDoc = snapsInWithId[outDocSnapshot.id];
+            if (inDoc === undefined) {
+                toDeleteIds.push(outDocSnapshot.id);
+            }
+            const outDoc = outDocSnapshot.data();
+            if (
+                inDoc.fullName !== outDoc.fullName ||
+                inDoc.email !== outDoc.email ||
+                inDoc.username !== outDoc.username
+            ) {
+                toChange.push({ id: outDocSnapshot.id, data: inDoc });
+            }
+        });
+
+        const bulkWriter = db.bulkWriter();
+
+        toAdd.forEach((doc) => {
+            bulkWriter.create(snappablesCollection.doc(), doc);
+        });
+        toDeleteIds.forEach((id) => {
+            bulkWriter.delete(snappablesCollection.doc(id));
+        });
+        toChange.forEach((docMeta) => {
+            bulkWriter.set(snappablesCollection.doc(docMeta.id), docMeta.data);
+        });
+
+        await bulkWriter.close();
+        return { result: "success" };
+    }
+);
