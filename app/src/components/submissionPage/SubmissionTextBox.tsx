@@ -10,103 +10,23 @@ import ValidateSnap from "./ValidateSnap";
 import { getCurrentUserUid } from "../../firebase/users/UserService";
 import Snap from "../../types/Snap";
 import { submitSnap } from "../../firebase/snaps/SnapService";
-import styled from "styled-components";
+import Elle from "../../images/Elle.svg";
+import {
+    ElleImg,
+    LeftSideOfScreen,
+    RightSideOfScreen,
+    SnapCupTextArea,
+    SnapCupText,
+    SnapItButton,
+    LabelText,
+    TaggedTeamMembers,
+    HelperText,
+} from "./SnapSubmissionStyles";
 
 export interface Props {
     snappables: MentionElements[];
     user: String;
 }
-
-const LeftSideOfScreen = styled.div`
-    height: 370px;
-    background-color: #7040d6;
-    border-radius: 10px 0px 0px 10px;
-    padding: 5%;
-    @media (max-width: 576px) {
-        display: none;
-    }
-`;
-
-const RightSideOfScreen = styled.div`
-    height: 370px;
-    background-color: #7040d6;
-    border-radius: 0px 10px 10px 0px;
-    padding: 5%;
-    @media (max-width: 576px) {
-        border-radius: 10px 10px 10px 10px;
-        height: 370px;
-        margin-top: 10px;
-    }
-`;
-
-const SnapCupText = styled.p`
-    text-align: center;
-    font-family: var(--asap);
-    font-style: normal;
-    font-weight: 500;
-    font-size: 30px;
-    line-height: 36px;
-    color: #ffffff;
-`;
-
-const SnapCupTextArea = styled(MentionsInput)`
-    font-family: var(--open-sans);
-    font-style: normal;
-    font-weight: normal;
-    font-size: 15px;
-    line-height: 22px;
-    width: 95%;
-    resize: none;
-    background-color: #ffffff;
-    height: 120px;
-`;
-
-const TaggedTeamMembers = styled.input`
-    width: 95%;
-    background-color: #7040d6;
-    border: 0px;
-    border-bottom: 1px solid;
-    border-color: #ffffff;
-`;
-
-const LabelText = styled.p`
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 19px;
-    color: #faf8f8;
-    margin-bottom: 5px;
-`;
-
-const HelperText = styled.p`
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 16px;
-    color: #faf8f8;
-    margin-right: 10px;
-`;
-
-const SnapItButton = styled.button`
-    margin-left: 5%;
-    margin-right: auto;
-    width: 85%;
-    background: #a07ee8;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-    border: 0px;
-    &:hover {
-        background-color: #3a09a2;
-        border: 0px;
-    }
-    &:focus {
-        background-color: #3a09a2;
-        border: 0px;
-        box-shadow: none;
-    }
-`;
 
 const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
     /* Containing body of the snap */
@@ -151,33 +71,6 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
         setSnappedUsers(mentions);
     }
 
-    /* 
-    <div className="SubmissionTextBox">
-            <form onSubmit={handleSubmit}>
-                <h1>Submit Snap</h1>
-                <MentionsInput
-                    style={{ zIndex: 1 }}
-                    value={message}
-                    onChange={handleChange}
-                    maxLength={GetExtraLength(snappedUsers)}
-                >
-                    <Mention
-                        style={{ backgroundColor: "#daf4fa", zIndex: 0 }}
-                        trigger="@"
-                        data={props.snappables}
-                    />
-                </MentionsInput>
-                <input type="submit" value="Submit" />
-            </form>
-            <CharactersLeftDisplay
-                snappedUsers={snappedUsers}
-                message={message}
-            />
-            <OnSubmitMessageDisplay confirmation={confirmation} />
-            <SubmissionBoxErrorDisplay error={error} />
-        </div>
-    */
-
     return (
         <div className="container-sm">
             <div className="row justify-content-md-center">
@@ -185,6 +78,7 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
                     <SnapCupText>
                         Add a Snap to the current SnapCup.
                     </SnapCupText>
+                    <ElleImg src={Elle} className="w-100" />
                 </LeftSideOfScreen>
                 <RightSideOfScreen className="col-sm col-lg-5">
                     <form>

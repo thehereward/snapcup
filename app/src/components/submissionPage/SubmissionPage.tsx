@@ -1,7 +1,6 @@
 import React from "react";
 import SubmissionTextBox from "./SubmissionTextBox";
 import styled from "styled-components";
-import MentionElements from "../../types/MentionElements";
 import { getCurrentUserName } from "../../firebase/users/UserService";
 import YourSnaps from "./YourSnaps";
 
