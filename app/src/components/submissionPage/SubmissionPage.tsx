@@ -6,7 +6,6 @@ import YourSnaps from "./YourSnaps";
 const SubmissionPage = () => {
     return (
         <>
-            <h1>Hi {getCurrentUserName()}</h1>
             <SubmissionTextBox />
             <YourSnaps />
         </>
