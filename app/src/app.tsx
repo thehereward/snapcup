@@ -1,7 +1,7 @@
 import "./app.scss";
 
 import React, { useState, useEffect } from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 import PrettyPageWrap from "./components/prettyPageWrap/PrettyPageWrap";
 import LoginPage from "./components/loginPage/LoginPage";
@@ -12,7 +12,7 @@ import {
     onAuthStateChanged,
 } from "./firebase/users/UserService";
 import { UserProfile } from "./types/UserProfile";
-import AdminConsole from "~components/adminConsole/AdminConsole";
+import AdminConsole from "./components/adminConsole/AdminConsole";
 
 const App = () => {
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
