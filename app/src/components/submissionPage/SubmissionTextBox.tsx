@@ -12,8 +12,13 @@ import Snap from "../../types/Snap";
 import { submitSnap } from "../../firebase/snaps/SnapService";
 import styled from "styled-components";
 
+export interface Props {
+    snappables: MentionElements[];
+    user: String;
+}
+
 const LeftSideOfScreen = styled.div`
-    height: 400px;
+    height: 370px;
     background-color: #7040d6;
     border-radius: 10px 0px 0px 10px;
     padding: 5%;
@@ -23,16 +28,19 @@ const LeftSideOfScreen = styled.div`
 `;
 
 const RightSideOfScreen = styled.div`
-    height: 400px;
+    height: 370px;
     background-color: #7040d6;
     border-radius: 0px 10px 10px 0px;
     padding: 5%;
     @media (max-width: 576px) {
         border-radius: 10px 10px 10px 10px;
+        height: 370px;
+        margin-top: 10px;
     }
 `;
 
 const SnapCupText = styled.p`
+    text-align: center;
     font-family: var(--asap);
     font-style: normal;
     font-weight: 500;
@@ -41,7 +49,7 @@ const SnapCupText = styled.p`
     color: #ffffff;
 `;
 
-const SnapCupTextArea = styled.textarea`
+const SnapCupTextArea = styled(MentionsInput)`
     font-family: var(--open-sans);
     font-style: normal;
     font-weight: normal;
@@ -49,6 +57,8 @@ const SnapCupTextArea = styled.textarea`
     line-height: 22px;
     width: 95%;
     resize: none;
+    background-color: #ffffff;
+    height: 120px;
 `;
 
 const TaggedTeamMembers = styled.input`
@@ -66,6 +76,7 @@ const LabelText = styled.p`
     font-size: 14px;
     line-height: 19px;
     color: #faf8f8;
+    margin-bottom: 5px;
 `;
 
 const HelperText = styled.p`
@@ -75,30 +86,27 @@ const HelperText = styled.p`
     font-size: 12px;
     line-height: 16px;
     color: #faf8f8;
+    margin-right: 10px;
 `;
 
 const SnapItButton = styled.button`
-    margin-left: auto;
+    margin-left: 5%;
     margin-right: auto;
-    width: 80%;
+    width: 85%;
     background: #a07ee8;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
     border: 0px;
     &:hover {
-        background: #3a09a2;
+        background-color: #3a09a2;
         border: 0px;
     }
-    &:visited {
-        background: #3a09a2;
+    &:focus {
+        background-color: #3a09a2;
         border: 0px;
+        box-shadow: none;
     }
 `;
-
-export interface Props {
-    snappables: MentionElements[];
-    user: String;
-}
 
 const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
     /* Containing body of the snap */
@@ -203,14 +211,33 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
                                 className="form-control"
                                 value={message}
                                 onChange={handleMessageTextChanged}
-                                maxLength={280}
+                                maxLength={GetExtraLength(snappedUsers)}
                                 rows={5}
                                 placeholder="You can tag users using @."
-                            />
-                            <HelperText>
-                                You have {280 - message.length} Characters
-                                Remaining
-                            </HelperText>
+                            >
+                                <Mention
+                                    style={{
+                                        backgroundColor: "#daf4fa",
+                                        zIndex: 0,
+                                    }}
+                                    trigger="@"
+                                    data={props.snappables}
+                                    rows={5}
+                                />
+                            </SnapCupTextArea>
+                            {confirmation ? (
+                                <OnSubmitMessageDisplay
+                                    confirmation={confirmation}
+                                />
+                            ) : (
+                                <CharactersLeftDisplay
+                                    snappedUsers={snappedUsers}
+                                    message={message}
+                                />
+                            )}
+                            {error ? (
+                                <SubmissionBoxErrorDisplay error={error} />
+                            ) : null}
                         </div>
                         <SnapItButton
                             type="submit"
