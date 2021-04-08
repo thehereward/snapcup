@@ -1,21 +1,21 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import Snap from "../../types/Snap";
-import { getSubmittedSnapsForCurrentUser } from "../../firebase/snaps/SnapService";
+import { streamSubmittedSnapsForCurrentUser } from "../../firebase/snaps/SnapService";
 import SnapList from "./SnapList";
 
 const YourSnaps: React.FunctionComponent = () => {
     const [snaps, setSnaps] = useState<Snap[]>([]);
     const [error, setError] = useState<string | null>(null);
 
-    useEffect(async () => {
-        try {
-            const snaps = await getSubmittedSnapsForCurrentUser();
-            setSnaps(snaps);
-        } catch (error) {
-            setError(error);
-        }
-    }, []);
+    useEffect(() => {
+        const unsubscribe = streamSubmittedSnapsForCurrentUser(
+            (updatedSnaps) => setSnaps(updatedSnaps),
+            (error) => setError(error.message)
+        );
+        // clean up function
+        return unsubscribe;
+    }, [setSnaps, setError]);
 
     return (
         <div>
