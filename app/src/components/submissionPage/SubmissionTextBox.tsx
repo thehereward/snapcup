@@ -1,7 +1,7 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Snap from "../../firebase/snap/Snap";
-import SubmitSnap from "../../firebase/snap/SubmitSnap";
+import submitSnap from "../../firebase/snap/SubmitSnap";
 import { MentionsInput, Mention } from "react-mentions";
 import MentionElements from "../../types/MentionElements";
 import GetExtraLength from "./GetExtraLength";
@@ -35,7 +35,6 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
             body: message,
             timestamp: new Date(),
         };
-        console.log(resultingSnap);
         if (ValidateSnap(resultingSnap, snappedUsers)) {
             const res = SubmitSnap(
                 resultingSnap,
