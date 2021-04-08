@@ -10,6 +10,7 @@ import ValidateSnap from "./ValidateSnap";
 import { getCurrentUserUid } from "../../firebase/users/UserService";
 import Snap from "../../types/Snap";
 import { submitSnap } from "../../firebase/snaps/SnapService";
+// @ts-ignore
 import Elle from "../../images/Elle.svg";
 import {
     ElleImg,
