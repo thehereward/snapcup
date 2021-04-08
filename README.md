@@ -5,7 +5,7 @@
 After downloading the repository please run
 
 ```bash
-npm install:all
+npm run install:all
 ```
 
 This will install the top level npm packages as well as the npm packages for `app/` and `functions/`
