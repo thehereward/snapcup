@@ -23,5 +23,4 @@ const CharactersLeftDisplay: React.FunctionComponent = (props: {
     );
 };
 
-//characters left display
 export default CharactersLeftDisplay;
