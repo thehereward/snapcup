@@ -60,7 +60,8 @@ const LoginPage: React.FunctionalComponent<Props> = () => {
         (async () => {
             try {
                 await signIn();
-            } catch {
+            } catch (err) {
+                console.error(err);
                 setLoginError(
                     "There was an error logging in! Please try again."
                 );
