@@ -44,8 +44,12 @@ export async function signOut() {
     firebase.auth().signOut();
 }
 
-export function getCurrentUserName(): String {
+export function getCurrentUserName(): string {
     return firebase.auth().currentUser.displayName;
+}
+
+export function getCurrentUserUid(): string {
+    return firebase.auth().currentUser.uid;
 }
 
 export function onAuthStateChanged(cb: (p: UserProfile) => void) {

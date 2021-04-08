@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
+import { getCurrentUserUid } from "../../firebase/users/UserService";
 import Snap from "../../firebase/snaps/Snap";
-import submitSnap from "../../firebase/snaps/SubmitSnap";
+import { submitSnap } from "../../firebase/snaps/SnapService";
 
 const SubmissionTextBox: React.FunctionComponent = () => {
     const [message, setMessage] = useState<string>("");
@@ -9,11 +10,11 @@ const SubmissionTextBox: React.FunctionComponent = () => {
     const [error, setError] = useState<string>("");
 
     function handleSubmit(event) {
-        //TODO: Get auth().userID
+        const uid = getCurrentUserUid();
         event.preventDefault();
         const resultingSnap: Snap = {
             to: [],
-            from: "",
+            from: uid,
             body: message,
             timestamp: new Date(),
         };
