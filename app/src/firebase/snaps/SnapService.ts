@@ -16,13 +16,17 @@ function docToSnap(data: any) {
 }
 
 async function getSubmittedSnaps(user: firebase.User): Promise<Snap[]> {
-    // .orderBy("timestamp", "desc")
-    const userSnaps = await firebase
-        .firestore()
-        .collection("snaps")
-        .where("from", "==", user.uid.toString())
-        .get();
-    return userSnaps.docs.map((doc) => docToSnap(doc.data()));
+    try {
+        const userSnaps = await firebase
+            .firestore()
+            .collection("snaps")
+            .where("from", "==", user.uid.toString())
+            .orderBy("timestamp", "desc")
+            .get();
+        return userSnaps.docs.map((doc) => docToSnap(doc.data()));
+    } catch (error) {
+        throw new Error(error.message);
+    }
 }
 
 export async function getSubmittedSnapsForCurrentUser(): Promise<Snap[]> {
