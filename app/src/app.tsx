@@ -9,18 +9,22 @@ import SubmissionPage from "./components/submissionPage/SubmissionPage";
 
 // Snapitform
 import SnapItForm from "./components/submissionPage/SnapItForm";
-
+import GetSnappables from "./firebase/users/GetSnappables";
 import {
     getCurrentUserName,
     onAuthStateChanged,
-    ProfileData,
-} from "./firebase/AuthService";
+} from "./firebase/users/UserService";
+import { UserProfile } from "./types/UserProfile";
+import AdminConsole from "./components/adminConsole/AdminConsole";
+import MentionElements from "./types/MentionElements";
+import Snappable from "./types/Snappable";
 
 const App = () => {
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
     const [userProfile, setUserProfile] = useState(null);
+    const [snappables, setSnappables] = useState<MentionElements[]>([]);
 
-    const setUser = (profile: ProfileData) => {
+    const setUser = (profile: UserProfile) => {
         setUserProfile(profile);
         setLoggedIn(true);
     };
@@ -28,6 +32,21 @@ const App = () => {
     useEffect(() => {
         onAuthStateChanged(setUser);
     }, [setLoggedIn, setUserProfile]);
+
+    useEffect(() => {
+        GetSnappables()
+            .then((res: Snappable[]) => {
+                const foundSnappables: MentionElements[] = [];
+                for (let elem of res) {
+                    foundSnappables.push({
+                        id: elem.id,
+                        display: elem.fullName,
+                    });
+                }
+                setSnappables(foundSnappables);
+            })
+            .catch((e) => console.log(e));
+    }, [setSnappables, GetSnappables]);
 
     if (loggedIn) {
         return (

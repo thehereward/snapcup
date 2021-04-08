@@ -1,7 +1,9 @@
 import React from "react";
 import SubmissionTextBox from "./SubmissionTextBox";
-import { getCurrentUserName } from "../../firebase/AuthService";
 import styled from "styled-components";
+import MentionElements from "../../types/MentionElements";
+import { getCurrentUserName } from "../../firebase/users/UserService";
+import YourSnaps from "./YourSnaps";
 
 const WelcomeMessage = styled.p`
     font-family: var(--asap);
@@ -19,6 +21,7 @@ const SubmissionPage = () => {
                 Welcome, {getCurrentUserName().split(" ")[0]!}
             </WelcomeMessage>
             <SubmissionTextBox />
+            <YourSnaps />
         </>
     );
 };

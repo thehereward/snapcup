@@ -1,5 +1,5 @@
 import React, { useCallback, useState, Dispatch, SetStateAction } from "react";
-import { signIn } from "../../firebase/AuthService";
+import { signIn } from "../../firebase/users/UserService";
 
 interface Props {
     setLoggedIn: Dispatch<SetStateAction<boolean>>;
