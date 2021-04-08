@@ -2,7 +2,7 @@ import React, { useCallback, useState, Dispatch, SetStateAction } from "react";
 import { signIn } from "../../firebase/users/UserService";
 import styled from "styled-components";
 // @ts-ignore
-import Elle from "./Elle.svg";
+import Elle from "../../images/Elle.svg";
 
 interface Props {
     setLoggedIn: Dispatch<SetStateAction<boolean>>;
