@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
-import ManageTeams from "./ManageTeams";
-import NameNav from "./NameNav";
+
+import styled, { css } from "styled-components";
 import SignOutButton from "./SignOutButton";
+import NavItem from "./NavItem";
+
+import { getCurrentUserName } from "../../firebase/AuthService";
 
 const BrandLink = styled(Link)`
     font-family: var(--open-sans);
@@ -17,31 +19,30 @@ const BrandLink = styled(Link)`
     }
 `;
 
+const LinkList = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
 const PrettyPageWrap: React.FunctionComponent = ({
     children,
     isAdmin,
     setLoggedIn,
-    name,
-    loggedIn,
 }) => (
     <>
         <header>
             <nav className="navbar bg-light">
                 <BrandLink to="/">SnapCup</BrandLink>
 
-                <ul className="nav justify-content-end">
-                    <li className="nav-item">
-                        <ManageTeams isAdmin={isAdmin} />
-                    </li>
-                    <li className="nav-item">
-                        {loggedIn && (
-                            <SignOutButton setLoggedIn={setLoggedIn} />
-                        )}
-                    </li>
-                    <li className="nav-item">
-                        <NameNav name={name} />
-                    </li>
-                </ul>
+                <LinkList>
+                    {isAdmin && (
+                        <NavItem as={Link} to="/admin">
+                            Manage Teams
+                        </NavItem>
+                    )}
+                    <SignOutButton as="a" setLoggedIn={setLoggedIn} />
+                    <NavItem>{getCurrentUserName()}</NavItem>
+                </LinkList>
             </nav>
         </header>
         <main className="container">{children}</main>

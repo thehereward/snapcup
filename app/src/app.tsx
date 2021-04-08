@@ -31,8 +31,6 @@ const App = () => {
             <PrettyPageWrap
                 isAdmin={userProfile.isAdmin}
                 setLoggedIn={setLoggedIn}
-                name={getCurrentUserName().split(" ")[0]}
-                loggedIn={true}
             >
                 <Switch>
                     <Route path="/admin">Admin page will go here.</Route>
@@ -43,11 +41,7 @@ const App = () => {
             </PrettyPageWrap>
         );
     } else {
-        return (
-            <PrettyPageWrap loggedIn={false}>
-                <LoginPage setLoggedIn={setLoggedIn} />
-            </PrettyPageWrap>
-        );
+        return <LoginPage setLoggedIn={setLoggedIn} />;
     }
 };
 
