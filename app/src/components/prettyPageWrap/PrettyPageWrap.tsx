@@ -5,7 +5,7 @@ import styled, { css } from "styled-components";
 import SignOutButton from "./SignOutButton";
 import NavItem from "./NavItem";
 
-import { getCurrentUserName } from "../../firebase/AuthService";
+import { getCurrentUserName } from "../../firebase/users/UserService";
 
 const BrandLink = styled(Link)`
     font-family: var(--open-sans);

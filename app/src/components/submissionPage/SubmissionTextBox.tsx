@@ -1,7 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import Snap from "../../firebase/snap/Snap";
-import submitSnap from "../../firebase/snap/SubmitSnap";
 import { MentionsInput, Mention } from "react-mentions";
 import MentionElements from "../../types/MentionElements";
 import GetExtraLength from "./GetExtraLength";
@@ -9,6 +7,9 @@ import CharactersLeftDisplay from "./CharactersLeftDisplay";
 import OnSubmitMessageDisplay from "./OnSubmitMessageDisplay";
 import SubmissionBoxErrorDisplay from "./SubmissionBoxErrorDisplay";
 import ValidateSnap from "./ValidateSnap";
+import { getCurrentUserUid } from "../../firebase/users/UserService";
+import Snap from "../../types/Snap";
+import { submitSnap } from "../../firebase/snaps/SnapService";
 
 export interface Props {
     snappables: MentionElements[];
@@ -23,7 +24,7 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
     const [snappedUsers, setSnappedUsers] = useState<MentionElements[]>([]);
 
     function handleSubmit(event) {
-        console.log(props.snappables);
+        const uid = getCurrentUserUid();
         event.preventDefault();
         const ids: String[] = [];
         for (let elem of snappedUsers) {
@@ -31,7 +32,7 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
         }
         const resultingSnap: Snap = {
             to: ids,
-            from: props.user,
+            from: uid,
             body: message,
             timestamp: new Date(),
         };

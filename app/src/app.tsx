@@ -1,7 +1,7 @@
 import "./app.scss";
 
 import React, { useState, useEffect } from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 import PrettyPageWrap from "./components/prettyPageWrap/PrettyPageWrap";
 import LoginPage from "./components/loginPage/LoginPage";
@@ -9,15 +9,20 @@ import SubmissionPage from "./components/submissionPage/SubmissionPage";
 import MentionElements from "./types/MentionElements";
 import Snappable from "./types/Snappable";
 
-import { onAuthStateChanged, ProfileData } from "./firebase/AuthService";
 import GetSnappables from "./firebase/users/GetSnappables";
+import {
+    getCurrentUserName,
+    onAuthStateChanged,
+} from "./firebase/users/UserService";
+import { UserProfile } from "./types/UserProfile";
+import AdminConsole from "./components/adminConsole/AdminConsole";
 
 const App = () => {
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
     const [userProfile, setUserProfile] = useState(null);
     const [snappables, setSnappables] = useState<MentionElements[]>([]);
 
-    const setUser = (profile: ProfileData) => {
+    const setUser = (profile: UserProfile) => {
         setUserProfile(profile);
         setLoggedIn(true);
     };
@@ -47,8 +52,13 @@ const App = () => {
                 isAdmin={userProfile.isAdmin}
                 setLoggedIn={setLoggedIn}
             >
+                <h1>Hi {getCurrentUserName()}!</h1>
                 <Switch>
-                    <Route path="/admin">Admin page will go here.</Route>
+                    {userProfile.isAdmin && (
+                        <Route path="/admin">
+                            <AdminConsole />
+                        </Route>
+                    )}
                     <Route path="/">
                         <SubmissionPage snappables={snappables} />
                     </Route>

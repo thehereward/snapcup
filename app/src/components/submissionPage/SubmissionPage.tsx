@@ -1,7 +1,8 @@
 import React from "react";
 import SubmissionTextBox from "./SubmissionTextBox";
-import { getCurrentUserName } from "../../firebase/AuthService";
 import MentionElements from "../../types/MentionElements";
+import { getCurrentUserName } from "../../firebase/users/UserService";
+import YourSnaps from "./YourSnaps";
 
 const SubmissionPage = (props: { snappables: MentionElements[] }) => {
     return (
@@ -11,6 +12,7 @@ const SubmissionPage = (props: { snappables: MentionElements[] }) => {
                 snappables={props.snappables}
                 user={getCurrentUserName()}
             />
+            <YourSnaps />
         </>
     );
 };
