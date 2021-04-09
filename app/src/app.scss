@@ -29,7 +29,7 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
     --purple-textbox: #7040d6;
     --purple-button-default: #a07ee8;
     --purple-button-hover: #{$elle-purple};
-    --purple-button-focus: #3a09a2;
+    --purple-button-focus: #{$elle-purple};
     --button-hover-border: #e3daf8;
 }
 
