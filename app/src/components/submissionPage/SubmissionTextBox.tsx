@@ -12,8 +12,7 @@ import Snap from "../../types/Snap";
 import { submitSnap } from "../../firebase/snaps/SnapService";
 import {
     ElleImg,
-    LeftSideOfScreen,
-    RightSideOfScreen,
+    SnapSubmissionColumnDiv,
     SnapCupTextArea,
     SnapCupText,
     SnapItButton,
@@ -77,14 +76,14 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
 
     return (
         <div className="container-sm">
-            <div className="row justify-content-md-center">
-                <LeftSideOfScreen className="d-none d-sm-block col col-lg-5 ">
+            <SnapSubmissionColumnDiv className="row justify-content-md-center">
+                <div className="d-none d-sm-block col col-lg-5 ">
                     <SnapCupText>
                         Add a Snap to the current SnapCup.
                     </SnapCupText>
                     <ElleImg className="w-100" />
-                </LeftSideOfScreen>
-                <RightSideOfScreen className="col col-lg-5">
+                </div>
+                <div className="col col-lg-5">
                     <form>
                         <div>
                             <LabelText>Tag Team Members</LabelText>
@@ -138,8 +137,8 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
                             Snap it
                         </SnapItButton>
                     </form>
-                </RightSideOfScreen>
-            </div>
+                </div>
+            </SnapSubmissionColumnDiv>
         </div>
     );
 };

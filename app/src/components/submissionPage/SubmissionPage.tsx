@@ -10,7 +10,7 @@ const WelcomeMessage = styled.p`
     font-weight: 500;
     font-size: 30px;
     line-height: 34px;
-    color: var(--purp-selected);
+    color: var(--purple-selected);
     padding-top: 3%;
 `;
 
