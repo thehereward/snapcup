@@ -36,10 +36,7 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
     function handleSubmit(event) {
         const uid = getCurrentUserUid();
         event.preventDefault();
-        const ids: String[] = [];
-        for (let elem of snappedUsers) {
-            ids.push(elem.id);
-        }
+        const ids = snappedUsers.map((u: MentionElements) => u.id);
         const resultingSnap: Snap = {
             to: ids,
             from: uid,
