@@ -5,7 +5,6 @@ import {
     MiniElleImg,
     NewCupButton,
 } from "../AdminConsoleStyles";
-//import Elle from "../../../images/Elle.svg";
 
 const CurrentCupHeader: React.FunctionComponent = (props: {
     isCup: Boolean;
