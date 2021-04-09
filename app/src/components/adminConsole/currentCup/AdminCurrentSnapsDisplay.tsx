@@ -2,6 +2,7 @@ import React from "react";
 import { MessageDisplay } from "../AdminConsoleStyles";
 const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
     isCup: Boolean;
+    isOpen: Boolean;
 }) => {
     if (props.isCup) {
         return (

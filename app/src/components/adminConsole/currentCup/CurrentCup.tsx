@@ -13,7 +13,10 @@ const CurrentCup: React.FunctionComponent = (props: {
                 isCup={props.isCup}
                 updateIsCup={props.updateIsCup}
             />
-            <AdminCurrentSnapsDisplay isCup={props.isCup} />
+            <AdminCurrentSnapsDisplay
+                isCup={props.isCup}
+                isOpen={props.isOpen}
+            />
         </div>
     );
 };
