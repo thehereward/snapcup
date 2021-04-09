@@ -24,7 +24,7 @@ const LoginBox = styled.div`
 `;
 
 const FormColumn = styled.div`
-    color: var(--purp-selected);
+    color: var(--purple-selected);
 
     display: flex;
     flex-direction: column;
@@ -80,7 +80,7 @@ const LoginPage: React.FunctionalComponent<Props> = () => {
 
                         <button
                             role="button"
-                            className="btn btn-elle btn-lg mt-4"
+                            className="btn btn-purple btn-lg mt-4"
                             onClick={handleSignIn}
                         >
                             Log In

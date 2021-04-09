@@ -12,7 +12,7 @@ const YourSnapsHeader = styled.h2`
     font-weight: 500;
     font-size: 30px;
     line-height: 34px;
-    color: var(--elle);
+    color: var(--purple-selected);
     margin-bottom: 25px;
 `;
 
