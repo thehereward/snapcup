@@ -10,8 +10,6 @@ import ValidateSnap from "./ValidateSnap";
 import { getCurrentUserUid } from "../../firebase/users/UserService";
 import Snap from "../../types/Snap";
 import { submitSnap } from "../../firebase/snaps/SnapService";
-// @ts-ignore
-import Elle from "../../images/Elle.svg";
 import {
     ElleImg,
     LeftSideOfScreen,
@@ -84,7 +82,7 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
                     <SnapCupText>
                         Add a Snap to the current SnapCup.
                     </SnapCupText>
-                    <ElleImg src={Elle} className="w-100" />
+                    <ElleImg className="w-100" />
                 </LeftSideOfScreen>
                 <RightSideOfScreen className="col col-lg-5">
                     <form>
