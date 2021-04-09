@@ -25,7 +25,6 @@ export function getBodyElements(body: string): BodyElement[] {
             isTag: false,
         });
         // match[1] is the capture group
-        console.log(match[1]);
         bodyElements.push({ text: match[1], isTag: true });
         prevIndex = tagRegex.lastIndex;
     }
