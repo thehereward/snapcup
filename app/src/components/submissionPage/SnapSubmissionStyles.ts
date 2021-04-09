@@ -6,20 +6,13 @@ export const ElleImg = styled.img`
 `;
 
 export const SnapSubmissionColumnDiv = styled.div`
-    height: 430px;
+    height: 400px;
     background-color: #7040d6;
     padding: 5%;
-`;
-
-export const LeftSideOfScreen = styled(SnapSubmissionColumnDiv)`
-    border-radius: 10px 0px 0px 10px;
-`;
-
-export const RightSideOfScreen = styled(SnapSubmissionColumnDiv)`
-    border-radius: 0px 10px 10px 0px;
+    border-radius: 10px 10px 10px 10px;
     @media (max-width: 576px) {
         border-radius: 10px 10px 10px 10px;
-        height: 400px;
+        height: 380px;
         margin-top: 10px;
     }
 `;
