@@ -8,14 +8,10 @@ export const ElleImg = styled(Elle)`
 `;
 
 export const SnapSubmissionColumnDiv = styled.div`
-    height: 400px;
     background-color: var(--purple-textbox);
-    padding: 5%;
+    padding-top: 3%;
+    padding-bottom: 3%;
     border-radius: 10px 10px 10px 10px;
-    @media (max-width: 576px) {
-        height: 380px;
-        margin-top: 10px;
-    }
 `;
 
 export const SnapCupText = styled.p`
@@ -40,6 +36,7 @@ export const SnapCupTextArea = styled(MentionsInput)`
     height: 180px;
     &:focus {
         outline: none;
+        border: none;
     }
 `;
 
@@ -56,6 +53,9 @@ export const TaggedTeamMembers = styled.input`
     border-color: white;
     &:focus {
         outline: none;
+        border: 0px;
+        border-bottom: 1px solid;
+        border-color: white;
     }
 `;
 
