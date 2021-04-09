@@ -5,7 +5,7 @@ const CurrentCupHeader: React.FunctionComponent = (props: {
     isOpen: Boolean;
 }) => {
     return (
-        <div id="currentCupHeader">
+        <div>
             <h5>Current SnapCups</h5>
             <CreateCupButton isCup={props.isCup} isOpen={props.isOpen} />
         </div>
