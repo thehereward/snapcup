@@ -18,8 +18,11 @@ const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
     if (props.isCup) {
         console.log(currentCupName);
         return (
-            <CupNameDisplay>{currentCupName}</CupNameDisplay>
-            // add snaps in current cup here
+            <div>
+                <CupNameDisplay>{currentCupName}</CupNameDisplay>
+                // add snaps in current cup here
+                <CurrentCupOptionsBar />
+            </div>
         );
     } else {
         return (
