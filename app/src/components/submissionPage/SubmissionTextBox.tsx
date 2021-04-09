@@ -13,7 +13,7 @@ import { submitSnap } from "../../firebase/snaps/SnapService";
 
 export interface Props {
     snappables: MentionElements[];
-    user: String;
+    user: string;
 }
 
 const SubmissionTextBox: React.FunctionComponent = (props: Props) => {

@@ -9,8 +9,8 @@ describe("ValidateSnap", () => {
     };
     const emptyMentions: MentionElements[] = [];
     const someMentions: MentionElements[] = [elem1];
-    const message1: String = "Hello mate, how are you?";
-    const message2: String = "Hello @(Jimathy)[RandomUNiqueID1], you are cool";
+    const message1: string = "Hello mate, how are you?";
+    const message2: string = "Hello @(Jimathy)[RandomUNiqueID1], you are cool";
     test("test for unsuccessful attempt at submission of an illegitimate snap", () => {
         const invalidSnap1: Snap = {
             body: message1,

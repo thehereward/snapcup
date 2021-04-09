@@ -4,7 +4,7 @@ import React from "react";
 
 /* Calculate the amount of characters left for you to use*/
 export const GetCharacterCountRemaining = (
-    message: String,
+    message: string,
     snappedUsers: MentionElements[]
 ) => {
     return GetExtraLength(snappedUsers) - message.length;

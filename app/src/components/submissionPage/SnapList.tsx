@@ -66,6 +66,9 @@ const SnapList: React.FunctionComponent<SnapListProps> = ({ snaps }) => {
 
     const formattedSnapBody = (body: string) => {
         const tags = body.match(tagRegex);
+        if (!tags) {
+            return <span>{body}</span>;
+        }
         const arbitraryDelimiter = "--@!--";
         const withSpaces = body.replace(
             tagRegex,
