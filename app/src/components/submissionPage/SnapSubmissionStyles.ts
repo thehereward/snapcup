@@ -9,7 +9,7 @@ export const ElleImg = styled(Elle)`
 
 export const SnapSubmissionColumnDiv = styled.div`
     height: 400px;
-    background-color: #7040d6;
+    background-color: var(--purple-textbox);
     padding: 5%;
     border-radius: 10px 10px 10px 10px;
     @media (max-width: 576px) {
@@ -38,14 +38,25 @@ export const SnapCupTextArea = styled(MentionsInput)`
     resize: none;
     background-color: white;
     height: 180px;
+    &:focus {
+        outline: none;
+    }
 `;
 
 export const TaggedTeamMembers = styled.input`
+    font-family: var(--open-sans);
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 22px;
     width: 95%;
-    background-color: ;
+    background-color: var(--purple-textbox);
     border: 0px;
     border-bottom: 1px solid;
     border-color: white;
+    &:focus {
+        outline: none;
+    }
 `;
 
 export const LabelText = styled.p`
