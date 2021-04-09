@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CreateCupButton from "./CreateCupButton";
+
 const CurrentCupHeader: React.FunctionComponent = (props: {
     isCup: Boolean;
-    isOpen: Boolean;
+    updateIsCup: () => void;
 }) => {
     return (
         <div id="currentCupHeader">
-            <h5>Current SnapCups</h5>
-            <CreateCupButton isCup={props.isCup} isOpen={props.isOpen} />
+            <h5>Current SnapCup </h5>
+            <CreateCupButton
+                isCup={props.isCup}
+                updateIsCup={props.updateIsCup}
+            />
         </div>
     );
 };
