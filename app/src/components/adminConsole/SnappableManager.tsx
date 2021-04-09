@@ -29,8 +29,8 @@ const SnappableManager = () => {
 
     const uploadSnappables = useCallback((event) => {
         event.preventDefault();
-        (async () => {
-            if (fileRef.current.files.length) {
+        if (fileRef.current.files.length) {
+            (async () => {
                 setStatus({ status: LOADING });
                 try {
                     await readFileAndUpload(fileRef.current.files[0]);
@@ -44,13 +44,32 @@ const SnappableManager = () => {
                             "There was an error uploading your list of people.",
                     });
                 }
-            }
-        })();
+            })();
+        } else {
+            setStatus({
+                status: ERROR,
+                error: "You don't have a file to upload.",
+            });
+        }
     });
 
     return (
         <>
             <h5>Snappable People</h5>
+            <p>
+                When uploading the list of snappable people please leave the ID
+                cell blank for new users. Leaving the ID column blank tells the
+                database that this is a new user and not an existing user to
+                update.
+            </p>
+            <p>
+                Also be aware that using the upload list of users feature sets
+                the list of users to *exactly* match those in your CSV file.
+                This means that if you omit a user from the list that you
+                upload, they will be deleted. For this reason it is recommended
+                to download the list of users, make edits to it, then reupload
+                it.
+            </p>
             <div
                 className="btn-group ml-2"
                 role="group"
@@ -75,7 +94,7 @@ const SnappableManager = () => {
                 <input
                     type="submit"
                     className="btn btn-purple"
-                    value="Submit"
+                    value="Upload complete list of users."
                 />
             </form>
             {status.status !== IDLE && (
