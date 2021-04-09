@@ -1,5 +1,5 @@
 import React from "react";
-import Snap from "../../types/Snap";
+import Snap, { Entity } from "../../types/Snap";
 import styled, { css } from "styled-components";
 import { formatTimestamp, getBodyElements } from "./helpers/snapFormatting";
 import TrashIcon from "../../images/TrashIcon";
@@ -69,7 +69,7 @@ const SnapList: React.FunctionComponent<SnapListProps> = ({ snaps }) => {
         ));
     }
 
-    const onDeleteSnapPressed = async (snap: Snap) => {
+    const onDeleteSnapPressed = async (snap: Entity<Snap>) => {
         if (!confirm("Are you sure you want to delete this snap?")) {
             return;
         }
@@ -80,7 +80,7 @@ const SnapList: React.FunctionComponent<SnapListProps> = ({ snaps }) => {
         }
     };
 
-    const listItems = snaps.map((snap: Snap) => (
+    const listItems = snaps.map((snap: Entity<Snap>) => (
         <div className="col-sm-6 col-md-4 mb-4" key={snap.id}>
             <SnapCard>
                 <SnapText>
