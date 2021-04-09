@@ -16,7 +16,8 @@ const SnapCard = styled.div`
 
 const SnapText = styled.div`
     padding: 20px 40px;
-    font-family: Open Sans;
+    font-family: var(--open-sans);
+    font-weight: 600;
     font-size: 16px;
     line-height: 22px;
     display: flex;
@@ -26,15 +27,8 @@ const SnapText = styled.div`
     align-items: left;
 `;
 
-const SnapCardHeading = styled.p`
-    font-weight: bold;
-    var(--text-grey);
-    padding: 0;
-    margin: 0 0 13px 0;
-`;
-
 const SnapCardBody = styled.p`
-    color: var(--text-grey);
+    color: var(--text-muted);
     padding: 0;
     margin: 0 0 13px 0;
 `;
@@ -44,15 +38,16 @@ const SnapCardSpacer = styled.div`
 `;
 
 const SnapCardFooter = styled.p`
-    color: var(--text-muted);
+    color: var(--text-main);
     padding: 0;
     margin: 0;
 `;
 
 const SnapList: React.FunctionComponent<SnapListProps> = ({ snaps }) => {
-    function formatAts(ats: String[]): String {
-        return ats.map((s) => `@${s}`).join(" ");
-    }
+    // The regex matches something of the form [full name]
+    const fullNameRegex = /\[[A-Za-z0-9 _]*\]/g;
+    // The regex matches something of the form @[full name](username)
+    const tagRegex = /@\[[A-Za-z0-9 _]*\]\([A-Za-z0-9 _]*\)/g;
 
     function formatTimestamp(date: Date) {
         return date.toLocaleString(undefined, {
@@ -64,12 +59,37 @@ const SnapList: React.FunctionComponent<SnapListProps> = ({ snaps }) => {
         });
     }
 
+    function getNameFromTag(tag: string): string {
+        const namePart = tag.match(fullNameRegex)[0];
+        return namePart.substring(1, namePart.length - 1);
+    }
+
+    const formattedSnapBody = (body: string) => {
+        const tags = body.match(tagRegex);
+        const arbitraryDelimiter = "--@!--";
+        const withSpaces = body.replace(
+            tagRegex,
+            `${arbitraryDelimiter}$&${arbitraryDelimiter}`
+        );
+        const split = withSpaces.split(arbitraryDelimiter);
+        return split.map((part, index) => {
+            if (tags.includes(part)) {
+                return (
+                    <span
+                        key={index}
+                        className="text-light-purple"
+                    >{`@${getNameFromTag(part)} `}</span>
+                );
+            }
+            return <span key={index}>{`${part} `}</span>;
+        });
+    };
+
     const listItems = snaps.map((snap: Snap, index: number) => (
         <div className="col-sm-6 col-md-4 mb-4" key={index}>
             <SnapCard>
                 <SnapText>
-                    <SnapCardHeading>{formatAts(snap.to)}</SnapCardHeading>
-                    <SnapCardBody>{snap.body}</SnapCardBody>
+                    <SnapCardBody>{formattedSnapBody(snap.body)}</SnapCardBody>
                     <SnapCardSpacer />
                     <SnapCardFooter>
                         {formatTimestamp(snap.timestamp)}

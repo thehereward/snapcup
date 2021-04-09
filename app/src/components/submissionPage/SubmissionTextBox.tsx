@@ -20,13 +20,13 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
     /* Containing body of the snap */
     const [message, setMessage] = useState<string>("");
     const [confirmation, setConfirmation] = useState<Boolean>(false);
-    const [error, setError] = useState<String>("");
+    const [error, setError] = useState<string>("");
     const [snappedUsers, setSnappedUsers] = useState<MentionElements[]>([]);
 
     function handleSubmit(event) {
         const uid = getCurrentUserUid();
         event.preventDefault();
-        const ids: String[] = [];
+        const ids: string[] = [];
         for (let elem of snappedUsers) {
             ids.push(elem.id);
         }
