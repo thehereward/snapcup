@@ -1,3 +1,6 @@
+import firebase from "firebase/app";
+import "firebase/functions";
+
 function snappablesToCsvContent(snappables) {
     let csvContent = "id,fullName,email,username";
     snappables.forEach(({ id, fullName, email, username }) => {
@@ -37,20 +40,31 @@ export function snappablesToCsvDownload(
 export async function readFileAndUpload(file: Blob) {
     const fileText = await file.text();
     const snappableList = [];
-    fileText.split("\n").forEach((line, i) => {
-        if (i === 0) {
-            return;
-        }
+    fileText
+        .trim()
+        .split("\n")
+        .forEach((line, i) => {
+            if (i === 0) {
+                // Skip first line (headings)
+                return;
+            }
 
-        const splitLine = line.split(",");
-        if (splitLine.length === 4) {
-            const [id, name, email, username] = splitLine;
-            snappableList.push({
-                id,
-                name,
-                email,
-                username,
-            });
-        }
-    });
+            const [id, fullName, email, username] = line.split(",");
+            if (fullName && email && username) {
+                snappableList.push({
+                    id,
+                    fullName,
+                    email,
+                    username,
+                });
+            } else {
+                throw new Error(
+                    "All people in the spreadsheet must have name and email and username"
+                );
+            }
+        });
+    const result = await firebase
+        .functions()
+        .httpsCallable("uploadSnappableList")(snappableList);
+    console.log(result);
 }

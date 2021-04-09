@@ -17,7 +17,8 @@ const SnappableManager = () => {
                 const snappables = await GetSnappables();
                 snappablesToCsvDownload(snappables);
                 setStatus({ status: IDLE });
-            } catch {
+            } catch (err) {
+                console.error(err);
                 setStatus({
                     status: ERROR,
                     error: "There was an error loading snappable people.",
@@ -26,10 +27,25 @@ const SnappableManager = () => {
         })();
     }, []);
 
-    const uploadSnappables = useCallback(() => {
-        if (fileRef.current.files.length) {
-            readFileAndUpload(fileRef.current.files[0]);
-        }
+    const uploadSnappables = useCallback((event) => {
+        event.preventDefault();
+        (async () => {
+            if (fileRef.current.files.length) {
+                setStatus({ status: LOADING });
+                try {
+                    await readFileAndUpload(fileRef.current.files[0]);
+                    setStatus({ status: IDLE });
+                    fileRef.current.value = "";
+                } catch (err) {
+                    console.error(err);
+                    setStatus({
+                        status: ERROR,
+                        error:
+                            "There was an error uploading your list of people.",
+                    });
+                }
+            }
+        })();
     });
 
     return (
@@ -48,14 +64,20 @@ const SnappableManager = () => {
                 >
                     Download as CSV
                 </button>
+            </div>
+            <form onSubmit={uploadSnappables}>
                 <input
                     type="file"
                     ref={fileRef}
-                    onChange={uploadSnappables}
                     disabled={status.status === LOADING}
                     accept=".csv"
                 />
-            </div>
+                <input
+                    type="submit"
+                    className="btn btn-purple"
+                    value="Submit"
+                />
+            </form>
             {status.status !== IDLE && (
                 <p>
                     {status.status === ERROR ? (
