@@ -55,9 +55,7 @@ const CreateCupButton: React.FunctionComponent = (props: {
                     className="btn-createCup"
                     onClick={() => handleCreateClick()}
                     disabled={
-                        status.status === LOADING ||
-                        newCupName.length == 0 ||
-                        allCupNames.includes(newCupName)
+                        status.status === LOADING || newCupName.length == 0
                     }
                 >
                     + New SnapCup
