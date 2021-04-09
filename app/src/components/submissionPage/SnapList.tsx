@@ -1,6 +1,7 @@
 import React from "react";
 import Snap from "../../types/Snap";
 import styled, { css } from "styled-components";
+import { formatTimestamp, getBodyElements } from "./helpers/snapFormatting";
 
 interface SnapListProps {
     snaps: Snap[];
@@ -50,26 +51,23 @@ const SnapCardFooter = styled.p`
 `;
 
 const SnapList: React.FunctionComponent<SnapListProps> = ({ snaps }) => {
-    function formatAts(ats: String[]): String {
-        return ats.map((s) => `@${s}`).join(" ");
-    }
-
-    function formatTimestamp(date: Date) {
-        return date.toLocaleString(undefined, {
-            year: "numeric",
-            month: "long",
-            day: "2-digit",
-            minute: "2-digit",
-            hour: "2-digit",
-        });
+    function formatBody(body: string) {
+        const elements = getBodyElements(body);
+        return elements.map((e, i) => (
+            <span
+                key={i}
+                className={e.isTag ? "text-light-purple font-weight-bold" : ""}
+            >
+                {e.text}
+            </span>
+        ));
     }
 
     const listItems = snaps.map((snap: Snap, index: number) => (
         <div className="col-sm-6 col-md-4 mb-4" key={index}>
             <SnapCard>
                 <SnapText>
-                    <SnapCardHeading>{formatAts(snap.to)}</SnapCardHeading>
-                    <SnapCardBody>{snap.body}</SnapCardBody>
+                    <SnapCardBody>{formatBody(snap.body)}</SnapCardBody>
                     <SnapCardSpacer />
                     <SnapCardFooter>
                         {formatTimestamp(snap.timestamp)}
