@@ -37,7 +37,7 @@ function docToSnap(
 
 // returns an unsubscribe function
 export function streamSubmittedSnapsForCurrentUser(
-    onSnapsRecieved: (snaps: Entity<Snap>[]) => void,
+    onSnapsReceived: (snaps: Entity<Snap>[]) => void,
     onError: (error: Error) => void
 ): () => void {
     const currentUserUid = getCurrentUserUid();
@@ -49,7 +49,7 @@ export function streamSubmittedSnapsForCurrentUser(
         .onSnapshot({
             next: (querySnapshot) => {
                 const updatedSnaps = querySnapshot.docs.map(docToSnap);
-                onSnapsRecieved(updatedSnaps);
+                onSnapsReceived(updatedSnaps);
             },
             error: (error) => {
                 onError(error);

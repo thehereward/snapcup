@@ -9,7 +9,7 @@ export async function deleteSnap(snap: Snap) {
 }
 
 export function streamSubmittedSnapsForCurrentUser(
-    onSnapsRecieved: (snaps: Snap[]) => void,
+    onSnapsReceived: (snaps: Snap[]) => void,
     onError: (error: Error) => void
 ): () => void {
     const mockSnaps = [
@@ -21,7 +21,7 @@ export function streamSubmittedSnapsForCurrentUser(
             body: "Hello there",
         },
     ];
-    onSnapsRecieved(mockSnaps);
+    onSnapsReceived(mockSnaps);
     return () => {
         return;
     };
