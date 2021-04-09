@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { HelperText } from "./SnapSubmissionStyles";
 
 const ErrorMessage = styled(HelperText)`
-    color: #fc4528;
+    color: var(--text-error);
 `;
 
 const SubmissionBoxErrorDisplay: React.FunctionComponent = (props: {

@@ -7,7 +7,7 @@ import { HelperText } from "./SnapSubmissionStyles";
 
 const CharactersLeft = styled(HelperText)`
     text-align: right;
-    color: #faf8f8;
+    color: var(--text-normal);
 `;
 
 /* Calculate the amount of characters left for you to use*/
