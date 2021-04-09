@@ -70,11 +70,11 @@ const SnapList: React.FunctionComponent<SnapListProps> = ({ snaps }) => {
             return <span>{body}</span>;
         }
         const arbitraryDelimiter = "--@!--";
-        const withSpaces = body.replace(
+        const withDelimters = body.replace(
             tagRegex,
             `${arbitraryDelimiter}$&${arbitraryDelimiter}`
         );
-        const split = withSpaces.split(arbitraryDelimiter);
+        const split = withDelimters.split(arbitraryDelimiter);
         return split.map((part, index) => {
             if (tags.includes(part)) {
                 return (
