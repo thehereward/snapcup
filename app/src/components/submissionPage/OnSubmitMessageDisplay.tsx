@@ -1,15 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import { HelperText } from "./SnapSubmissionStyles";
 
-const SnapSuccessText = styled.p`
-    text-align: right;
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 16px;
+const SnapSuccessText = styled(HelperText)`
     color: #b6faa2;
-    margin-right: 10px;
 `;
 
 const OnSubmitMessageDisplay: React.FunctionComponent = (props: {
