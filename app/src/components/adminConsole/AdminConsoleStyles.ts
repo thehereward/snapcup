@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Elle from "../../images/Elle";
 
 export const SectionHeader = styled.h2`
     font-family: Asap;
@@ -9,7 +10,7 @@ export const SectionHeader = styled.h2`
     margin-botton: 10px;
 `;
 
-export const MiniElleImg = styled.img`
+export const MiniElleImg = styled(Elle)`
     height: 66px;
     width: auto;
     vertical-align: text-bottom;
