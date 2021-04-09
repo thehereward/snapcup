@@ -1,28 +1,26 @@
 import styled from "styled-components";
 import { MentionsInput } from "react-mentions";
 
-/* A list of styled components for SubmissionTextBox.tsx */
-
 export const ElleImg = styled.img`
     width: 100%;
     max-height: 250px;
 `;
 
-export const LeftSideOfScreen = styled.div`
+export const SnapSubmissionColumnDiv = styled.div`
     height: 430px;
     background-color: #7040d6;
-    border-radius: 10px 0px 0px 10px;
     padding: 5%;
+`;
+
+export const LeftSideOfScreen = styled(SnapSubmissionColumnDiv)`
+    border-radius: 10px 0px 0px 10px;
     @media (max-width: 576px) {
         display: none;
     }
 `;
 
-export const RightSideOfScreen = styled.div`
-    height: 430px;
-    background-color: #7040d6;
+export const RightSideOfScreen = styled(SnapSubmissionColumnDiv)`
     border-radius: 0px 10px 10px 0px;
-    padding: 5%;
     @media (max-width: 576px) {
         border-radius: 10px 10px 10px 10px;
         height: 400px;
