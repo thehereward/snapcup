@@ -15,7 +15,7 @@ const CurrentCupHeader: React.FunctionComponent = (props: {
         <div className="container">
             <div id="currentCupHeader" className="row">
                 <div className="col-md-3">
-                    <SectionHeader>SnapCups</SectionHeader>
+                    <SectionHeader>Current SnapCup</SectionHeader>
                 </div>
                 <div className="col-md-9">
                     <CreateCupButton

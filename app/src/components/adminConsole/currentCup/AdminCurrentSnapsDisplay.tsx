@@ -1,5 +1,5 @@
 import React from "react";
-
+import { MessageDisplay } from "../AdminConsoleStyles";
 const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
     isCup: Boolean;
 }) => {
@@ -9,7 +9,9 @@ const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
         );
     } else {
         return (
-            <p>No cup yet. Create a new cup to let your users get snapping!</p>
+            <MessageDisplay>
+                No cup yet. Create a new cup to let your users get snapping!
+            </MessageDisplay>
         );
     }
 };

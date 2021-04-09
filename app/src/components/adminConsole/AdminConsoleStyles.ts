@@ -6,7 +6,7 @@ export const SectionHeader = styled.h2`
     font-size: 30px;
     line-height: 34px;
     color: var(--purple-selected);
-    margin-bottom: 25px;
+    margin-botton: 10px;
 `;
 
 export const MiniElleImg = styled.img`
@@ -40,4 +40,11 @@ export const NewCupButton = styled.button`
         background-color: #aaaaaa;
         border: 0px;
     }
+`;
+
+export const MessageDisplay = styled.p`
+    font-family: Asap;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--purple-selected);
 `;
