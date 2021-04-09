@@ -34,7 +34,6 @@ const CreateCupButton: React.FunctionComponent = (props: {
         try {
             createNewCup(newCup);
             setNewCupName("");
-            //TODO: change isCup
             props.updateIsCup();
         } catch (error) {
             console.log(error.toString());
