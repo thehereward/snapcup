@@ -20,6 +20,8 @@ import {
     TaggedTeamMembers,
     HelperText,
 } from "./SnapSubmissionStyles";
+// @ts-ignore
+import Elle from "../../images/Elle.svg";
 
 export interface Props {
     snappables: MentionElements[];
@@ -79,15 +81,25 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
     }
 
     return (
-        <div className="container-sm ">
-            <div className="row">
-                <div className="col col-lg-8">
-                    <SnapSubmissionColumnDiv className="row justify-content-md-center">
-                        <div className="d-none d-sm-block col col-lg-5 ">
-                            <SnapCupText>
-                                Add a Snap to the current SnapCup.
-                            </SnapCupText>
-                            <ElleImg className="w-100" />
+        <div className="container-sm">
+            <SnapSubmissionColumnDiv className="row justify-content-md-center">
+                <div className="d-none d-sm-block col col-lg-5 ">
+                    <SnapCupText>
+                        Add a Snap to the current SnapCup.
+                    </SnapCupText>
+                    <ElleImg src={Elle} className="w-100" />
+                </div>
+                <div className="col col-lg-5">
+                    <form>
+                        <div>
+                            <LabelText>Tag Team Members</LabelText>
+                            <TaggedTeamMembers
+                                type="text"
+                                className="form-control"
+                            />
+                            <HelperText>
+                                Enter their email address or use the @ symbol
+                            </HelperText>
                         </div>
                         <div className="col col-lg-7">
                             <form>
