@@ -8,6 +8,7 @@ jest.mock("./firebase/users/UserService");
 jest.mock("./firebase/users/GetSnappables");
 jest.mock("./firebase/InitializeDatabase");
 jest.mock("./firebase/snaps/SnapService");
+jest.mock("./images/TrashIcon");
 
 let container = null;
 beforeEach(() => {

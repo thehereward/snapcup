@@ -6,12 +6,28 @@ export async function submitSnap(snap: Snap) {
     await firebase.firestore().collection("snaps").add(snap);
 }
 
-function docToSnap(data: any) {
+export async function deleteSnap(snap: Snap) {
+    if (!snap.id) {
+        throw Error("Cannot delete snap - snap has no id");
+    }
+    try {
+        await firebase.firestore().collection("snaps").doc(snap.id).delete();
+    } catch (error) {
+        throw Error("Error deleting snap " + error.message);
+    }
+}
+
+function docToSnap(
+    docSnapshot: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>
+): Snap {
+    const data = docSnapshot.data();
+    const id = docSnapshot.id;
     return {
         body: data.body,
         timestamp: data.timestamp.toDate(),
         to: data.to,
         from: data.from,
+        id: id,
     };
 }
 
@@ -28,9 +44,7 @@ export function streamSubmittedSnapsForCurrentUser(
         .orderBy("timestamp", "desc")
         .onSnapshot({
             next: (querySnapshot) => {
-                const updatedSnaps = querySnapshot.docs.map((docSnapshot) =>
-                    docToSnap(docSnapshot.data())
-                );
+                const updatedSnaps = querySnapshot.docs.map(docToSnap);
                 onSnapsRecieved(updatedSnaps);
             },
             error: (error) => {

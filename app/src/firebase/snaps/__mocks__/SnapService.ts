@@ -4,6 +4,10 @@ export async function submitSnap(snap: Snap) {
     return;
 }
 
+export async function deleteSnap(snap: Snap) {
+    return;
+}
+
 export function streamSubmittedSnapsForCurrentUser(
     onSnapsRecieved: (snaps: Snap[]) => void,
     onError: (error: Error) => void
