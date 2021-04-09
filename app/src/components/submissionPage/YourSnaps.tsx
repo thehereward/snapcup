@@ -5,7 +5,7 @@ import { streamSubmittedSnapsForCurrentUser } from "../../firebase/snaps/SnapSer
 import SnapList from "./SnapList";
 import styled, { css } from "styled-components";
 // @ts-ignore
-import Elle from "../../images/Elle.svg";
+import Elle from "../../images/Elle";
 
 const YourSnapsHeader = styled.h2`
     font-family: Asap;
