@@ -39,18 +39,20 @@ const SnapCardSpacer = styled.div`
     flex-grow: 1;
 `;
 
-const SnapCardFooter = styled.p`
+const SnapCardFooter = styled.div`
     color: var(--text-muted);
+    display: flex;
+    flex-direction: row;
     padding: 0;
     margin: 0;
 `;
 
 const StyledTrashIcon = styled(TrashIcon)`
-    height: 40px;
+    height: 30px;
     width: auto;
 `;
 
-const PlainButton = styled.button`
+const TrashButton = styled.button`
     all: unset;
 `;
 
@@ -85,10 +87,11 @@ const SnapList: React.FunctionComponent<SnapListProps> = ({ snaps }) => {
                     <SnapCardBody>{formatBody(snap.body)}</SnapCardBody>
                     <SnapCardSpacer />
                     <SnapCardFooter>
-                        {formatTimestamp(snap.timestamp)}{" "}
-                        <PlainButton onClick={() => onDeleteSnapPressed(snap)}>
+                        {formatTimestamp(snap.timestamp)}
+                        <SnapCardSpacer />
+                        <TrashButton onClick={() => onDeleteSnapPressed(snap)}>
                             <StyledTrashIcon alt="Delete snap" />
-                        </PlainButton>
+                        </TrashButton>
                     </SnapCardFooter>
                 </SnapText>
             </SnapCard>
