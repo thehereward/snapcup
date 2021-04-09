@@ -1,13 +1,28 @@
 import React from "react";
 import CreateCupButton from "./CreateCupButton";
+import {
+    SectionHeader,
+    MiniElleImg,
+    NewCupButton,
+} from "../AdminConsoleStyles";
+
 const CurrentCupHeader: React.FunctionComponent = (props: {
     isCup: Boolean;
-    isOpen: Boolean;
+    updateIsCup: () => void;
 }) => {
     return (
-        <div>
-            <h5>Current SnapCups</h5>
-            <CreateCupButton isCup={props.isCup} isOpen={props.isOpen} />
+        <div className="container">
+            <div id="currentCupHeader" className="row">
+                <div className="col-md-3">
+                    <SectionHeader>Current SnapCup</SectionHeader>
+                </div>
+                <div className="col-md-9">
+                    <CreateCupButton
+                        isCup={props.isCup}
+                        updateIsCup={props.updateIsCup}
+                    />
+                </div>
+            </div>
         </div>
     );
 };
