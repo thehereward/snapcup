@@ -28,10 +28,11 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
     --text-normal: #faf8f8;
     --text-success: #b6faa2;
     --text-error: #fc4528;
-    --purp-textbox: #7040d6;
-    --purp-button-default: #a07ee8;
-    --purp-button-hover: #3a09a1;
-    --purp-button-focus: #3a09a2;
+    --purple-textbox: #7040d6;
+    --purple-button-default: #a07ee8;
+    --purple-button-hover: #3a09a1;
+    --purple-button-focus: #3a09a2;
+    --button-hover-border: #e3daf8;
 }
 
 .finalTextBox textarea {
