@@ -14,7 +14,7 @@ export async function getExistsUnpublished() {
         const { isPublished, isOpen, timeCreated, name } = doc.data();
         return isPublished;
     });
-    return result.includes(false);
+    return result.indexOf(false) >= 0;
 }
 
 export async function GetCupNames(): Promise<String[]> {
