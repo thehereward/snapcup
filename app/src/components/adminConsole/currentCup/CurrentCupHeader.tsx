@@ -1,6 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import CreateCupButton from "./CreateCupButton";
-import { Words, MiniElleImg, NewCupButton } from "../AdminConsoleStyles";
+import {
+    SectionHeader,
+    MiniElleImg,
+    NewCupButton,
+} from "../AdminConsoleStyles";
 //import Elle from "../../../images/Elle.svg";
 
 const CurrentCupHeader: React.FunctionComponent = (props: {
@@ -11,7 +15,7 @@ const CurrentCupHeader: React.FunctionComponent = (props: {
         <div className="container">
             <div id="currentCupHeader" className="row">
                 <div className="col-md-3">
-                    <Words>SnapCups</Words>
+                    <SectionHeader>SnapCups</SectionHeader>
                 </div>
                 <div className="col-md-9">
                     <CreateCupButton

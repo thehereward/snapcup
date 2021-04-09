@@ -1,6 +1,6 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-export const Words = styled.h2`
+export const SectionHeader = styled.h2`
     font-family: Asap;
     font-weight: 500;
     font-size: 30px;

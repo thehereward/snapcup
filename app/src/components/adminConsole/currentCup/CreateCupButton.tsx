@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { createNewCup, GetCupNames } from "../../../firebase/cups/CupService";
 import Cup from "../../../types/Cup";
 import { NewCupButton } from "../AdminConsoleStyles";
-import styled, { css } from "styled-components";
 
 const LOADING = "loading";
 const IDLE = "idle";
