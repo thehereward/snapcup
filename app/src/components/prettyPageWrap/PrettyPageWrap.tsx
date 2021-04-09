@@ -11,11 +11,11 @@ const BrandLink = styled(Link)`
     font-family: var(--open-sans);
     font-weight: 800;
     font-size: 30px;
-    color: var(--purp-selected);
+    color: var(--purple-selected);
     text-decoration: none !important;
 
     &:hover {
-        color: var(--purp-selected-hover);
+        color: var(--purple-selected-hover);
     }
 `;
 
