@@ -27,6 +27,7 @@ const AdminConsole = () => {
             <hr />
             <h2>Admin Console</h2>
             <SnappableManager />
+            <hr />
             <CurrentCup
                 isCup={isCup}
                 isOpen={false}

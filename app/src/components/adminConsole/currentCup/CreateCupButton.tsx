@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { createNewCup, GetCupNames } from "../../../firebase/cups/CupService";
 import Cup from "../../../types/Cup";
+import { NewCupButton } from "../AdminConsoleStyles";
+import styled, { css } from "styled-components";
 
 const LOADING = "loading";
 const IDLE = "idle";
@@ -53,7 +55,7 @@ const CreateCupButton: React.FunctionComponent = (props: {
                     onChange={handleNCNChange}
                     placeholder="Name your new Cup..."
                 />
-                <button
+                <NewCupButton
                     type="button"
                     className="btn-createCup"
                     onClick={() => handleCreateClick()}
@@ -62,7 +64,7 @@ const CreateCupButton: React.FunctionComponent = (props: {
                     }
                 >
                     + New SnapCup
-                </button>
+                </NewCupButton>
             </div>
         );
     } else {
