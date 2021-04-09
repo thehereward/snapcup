@@ -28,3 +28,19 @@ export async function GetCupNames(): Promise<string[]> {
     });
     return result;
 }
+
+export async function getCurrentCupName(): Promise<String> {
+    const querySnapshot = await firebase
+        .firestore()
+        .collection("cups")
+        .get({ source: "server" });
+    const result = querySnapshot.docs.map((doc) => {
+        const { isPublished, isOpen, timeCreated, name } = doc.data();
+        if (!isPublished) {
+            return name;
+        } else {
+            return undefined;
+        }
+    });
+    return result.find((el) => el !== undefined);
+}

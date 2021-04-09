@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Elle from "../../images/Elle";
 
 export const SectionHeader = styled.h2`
     font-family: Asap;
@@ -9,7 +10,7 @@ export const SectionHeader = styled.h2`
     margin-botton: 10px;
 `;
 
-export const MiniElleImg = styled.img`
+export const MiniElleImg = styled(Elle)`
     height: 66px;
     width: auto;
     vertical-align: text-bottom;
@@ -47,4 +48,20 @@ export const MessageDisplay = styled.p`
     font-weight: 500;
     font-size: 16px;
     color: var(--purple-selected);
+`;
+
+export const CupNameDisplay = styled.p`
+    font-family: Asap;
+    font-weight: 500;
+    font-size: 22px;
+    color: var(--purple-selected);
+`;
+
+export const SectionHeaderUnderline = styled.p`
+    width: 1250px;
+    height: 0px;
+    left: 37px;
+    top: 748px;
+
+    border: 1px solid var(--purple-selected);
 `;

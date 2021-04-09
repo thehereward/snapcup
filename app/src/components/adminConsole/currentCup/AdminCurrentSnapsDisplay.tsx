@@ -1,11 +1,28 @@
-import React from "react";
-import { MessageDisplay } from "../AdminConsoleStyles";
+import React, { useEffect, useState } from "react";
+import { getCurrentCupName } from "../../../firebase/cups/CupService";
+import { MessageDisplay, CupNameDisplay } from "../AdminConsoleStyles";
+import CurrentCupOptionsBar from "./CurrentCupOptionsBar";
+
 const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
     isCup: Boolean;
+    isOpen: Boolean;
 }) => {
+    const [currentCupName, setCurrentCupName] = useState<String>("");
+    useEffect(() => {
+        getCurrentCupName()
+            .then((res: String) => {
+                setCurrentCupName(res);
+            })
+            .catch((e) => console.log(e));
+    }, [getCurrentCupName, setCurrentCupName]);
     if (props.isCup) {
+        console.log(currentCupName);
         return (
-            <p></p> //grid of current snaps, or polite 'no snaps yet' message
+            <div>
+                <CupNameDisplay>{currentCupName}</CupNameDisplay>
+                // add snaps in current cup here
+                <CurrentCupOptionsBar />
+            </div>
         );
     } else {
         return (
