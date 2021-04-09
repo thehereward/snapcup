@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CreateCupButton from "./CreateCupButton";
 import styled, { css } from "styled-components";
 import Elle from "../../../images/Elle.svg";
@@ -21,15 +21,17 @@ const MiniElleImg = styled.img`
 
 const CurrentCupHeader: React.FunctionComponent = (props: {
     isCup: Boolean;
-    isOpen: Boolean;
+    updateIsCup: () => void;
 }) => {
     return (
-        <div>
+        <div id="currentCupHeader">
             <YourSnapsHeader>
                 <MiniElleImg src={Elle} />
-                Current SnapCup
+                <CreateCupButton
+                    isCup={props.isCup}
+                    updateIsCup={props.updateIsCup}
+                />
             </YourSnapsHeader>
-            <CreateCupButton isCup={props.isCup} isOpen={props.isOpen} />
         </div>
     );
 };

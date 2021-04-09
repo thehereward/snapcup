@@ -8,7 +8,7 @@ const ERROR = "error";
 
 const CreateCupButton: React.FunctionComponent = (props: {
     isCup: Boolean;
-    isOpen: Boolean;
+    updateIsCup: () => void;
 }) => {
     const [status, setStatus] = useState({ status: IDLE });
     const [newCupName, setNewCupName] = useState<String>("");
@@ -33,7 +33,7 @@ const CreateCupButton: React.FunctionComponent = (props: {
         try {
             createNewCup(newCup);
             setNewCupName("");
-            //TODO: change isCup
+            props.updateIsCup();
         } catch (error) {
             console.log(error.toString());
             console.log("error in firebase");
@@ -48,7 +48,11 @@ const CreateCupButton: React.FunctionComponent = (props: {
     if (!props.isCup) {
         return (
             <div>
-                <input value={newCupName} onChange={handleNCNChange} />
+                <input
+                    value={newCupName}
+                    onChange={handleNCNChange}
+                    placeholder="Name your new Cup..."
+                />
                 <button
                     type="button"
                     className="btn-createCup"
