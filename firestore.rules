@@ -7,7 +7,10 @@ service cloud.firestore {
     }
   }
   match /users/{user} {
-    allow delete, update: if (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true);
-    allow create: if (!request.resource.data.isAdmin && request.resource.data.isSnapper) || (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true);
+    allow create: if (!request.resource.data.isAdmin && request.resource.data.isSnapper);
+  }
+  match /snaps/{snap} {
+    allow create: if request.auth != null && request.auth.uid == request.resource.data.from;
+    allow read, delete: if request.auth != null && request.auth.uid == snap.from;
   }
 }
