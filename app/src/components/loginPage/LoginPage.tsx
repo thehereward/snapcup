@@ -44,7 +44,7 @@ const FormColumn = styled.div`
     }
 `;
 
-const ElleImg = styled.img`
+const ElleImg = styled(Elle)`
     width: 100%;
     max-height: calc(100vh - 50px);
 
@@ -89,7 +89,7 @@ const LoginPage: React.FunctionalComponent<Props> = () => {
                     </FormColumn>
 
                     <div className="col-12 col-sm-6 text-center order-1 order-sm-2">
-                        <ElleImg src={Elle} className="w-100" />
+                        <ElleImg />
                     </div>
                 </div>
             </div>

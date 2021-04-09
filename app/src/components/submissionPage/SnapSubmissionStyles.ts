@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { MentionsInput } from "react-mentions";
+// @ts-ignore
+import Elle from "../../images/Elle.svg";
 
-export const ElleImg = styled.img`
+export const ElleImg = styled(Elle)`
     max-height: 250px;
 `;
 
