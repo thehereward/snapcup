@@ -1,3 +1,6 @@
+import firebase from "firebase/app";
+import "firebase/functions";
+
 function snappablesToCsvContent(snappables) {
     let csvContent = "id,fullName,email,username";
     snappables.forEach(({ id, fullName, email, username }) => {
@@ -34,23 +37,43 @@ export function snappablesToCsvDownload(
     stringToFileDownload(csvContent, filename, "text/csv;charset=utf-8;");
 }
 
-export async function readFileAndUpload(file: Blob) {
-    const fileText = await file.text();
-    const snappableList = [];
-    fileText.split("\n").forEach((line, i) => {
-        if (i === 0) {
-            return;
-        }
+function assertSnappableRecordValid(fullName, email, username, i = null) {
+    if (!(fullName && email && username)) {
+        throw new Error(
+            "All people in the spreadsheet must have name and email and username. " +
+                `Error at line ${i}. Fields at present are fullName=${fullName}, email=${email}, username=${username}.`
+        );
+    }
+}
 
-        const splitLine = line.split(",");
-        if (splitLine.length === 4) {
-            const [id, name, email, username] = splitLine;
+function csvTextToSnappableList(csvText) {
+    const snappableList = [];
+    csvText
+        .trim()
+        .split("\n")
+        .forEach((line, i) => {
+            if (i === 0) {
+                // Skip first line (headings)
+                return;
+            }
+
+            const [id, fullName, email, username] = line.split(",");
+            assertSnappableRecordValid(fullName, email, username, i);
             snappableList.push({
                 id,
-                name,
+                fullName,
                 email,
                 username,
             });
-        }
-    });
+        });
+    return snappableList;
+}
+
+export async function readFileAndUpload(file: Blob) {
+    const csvText = await file.text();
+    const snappableList = csvTextToSnappableList(csvText);
+
+    return firebase.functions().httpsCallable("uploadSnappableList")(
+        snappableList
+    );
 }
