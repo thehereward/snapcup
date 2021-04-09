@@ -20,6 +20,8 @@ import {
     TaggedTeamMembers,
     HelperText,
 } from "./SnapSubmissionStyles";
+// @ts-ignore
+import Elle from "../../images/Elle.svg";
 
 export interface Props {
     snappables: MentionElements[];
@@ -78,7 +80,7 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
                     <SnapCupText>
                         Add a Snap to the current SnapCup.
                     </SnapCupText>
-                    <ElleImg className="w-100" />
+                    <ElleImg src={Elle} className="w-100" />
                 </div>
                 <div className="col col-lg-5">
                     <form>
