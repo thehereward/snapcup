@@ -4,6 +4,22 @@ import * as admin from "firebase-admin";
 admin.initializeApp();
 const db = admin.firestore();
 
+async function assertUserIsAdmin(context) {
+    if (!context.auth) {
+        throw new functions.https.HttpsError(
+            "failed-precondition",
+            "The function must be called while authenticated."
+        );
+    }
+    const user = await db.collection("users").doc(context.auth.uid).get();
+    if (!user.exists || !user.data()?.isAdmin) {
+        throw new functions.https.HttpsError(
+            "failed-precondition",
+            "The function can only be called by admins."
+        );
+    }
+}
+
 export const setFirstUserAsAdmin = functions.firestore
     .document("/users/{uid}")
     .onCreate(async (snapshot, context) => {
@@ -32,27 +48,14 @@ interface Snappable {
 
 export const uploadSnappableList = functions.https.onCall(
     async (data, context) => {
-        console.log(context);
-        // Check they are an admin
-        if (!context.auth) {
-            throw new functions.https.HttpsError(
-                "failed-precondition",
-                "The function must be called while authenticated."
-            );
-        }
         if (!Array.isArray(data)) {
             throw new functions.https.HttpsError(
                 "failed-precondition",
                 "Data must be array."
             );
         }
-        const user = await db.collection("users").doc(context.auth.uid).get();
-        if (!user.exists || !user.data()?.isAdmin) {
-            throw new functions.https.HttpsError(
-                "failed-precondition",
-                "The function can only be called by admins."
-            );
-        }
+
+        assertUserIsAdmin(context);
 
         const snapsInWithId: { [key: string]: Snappable } = {};
         const toAdd: Snappable[] = [];

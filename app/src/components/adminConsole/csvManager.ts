@@ -37,10 +37,18 @@ export function snappablesToCsvDownload(
     stringToFileDownload(csvContent, filename, "text/csv;charset=utf-8;");
 }
 
-export async function readFileAndUpload(file: Blob) {
-    const fileText = await file.text();
+function assertSnappableRecordValid(fullName, email, username, i = null) {
+    if (!(fullName && email && username)) {
+        throw new Error(
+            "All people in the spreadsheet must have name and email and username. " +
+                `Error at line ${i}. Fields at present are fullName=${fullName}, email=${email}, username=${username}.`
+        );
+    }
+}
+
+function csvTextToSnappableList(csvText) {
     const snappableList = [];
-    fileText
+    csvText
         .trim()
         .split("\n")
         .forEach((line, i) => {
@@ -50,19 +58,21 @@ export async function readFileAndUpload(file: Blob) {
             }
 
             const [id, fullName, email, username] = line.split(",");
-            if (fullName && email && username) {
-                snappableList.push({
-                    id,
-                    fullName,
-                    email,
-                    username,
-                });
-            } else {
-                throw new Error(
-                    "All people in the spreadsheet must have name and email and username"
-                );
-            }
+            assertSnappableRecordValid(fullName, email, username, i);
+            snappableList.push({
+                id,
+                fullName,
+                email,
+                username,
+            });
         });
+    return snappableList;
+}
+
+export async function readFileAndUpload(file: Blob) {
+    const csvText = await file.text();
+    const snappableList = csvTextToSnappableList(csvText);
+
     return firebase.functions().httpsCallable("uploadSnappableList")(
         snappableList
     );

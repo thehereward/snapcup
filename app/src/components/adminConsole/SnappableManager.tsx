@@ -29,28 +29,27 @@ const SnappableManager = () => {
 
     const uploadSnappables = useCallback((event) => {
         event.preventDefault();
-        if (fileRef.current.files.length) {
-            (async () => {
-                setStatus({ status: LOADING });
-                try {
-                    await readFileAndUpload(fileRef.current.files[0]);
-                    setStatus({ status: IDLE });
-                    fileRef.current.value = "";
-                } catch (err) {
-                    console.error(err);
-                    setStatus({
-                        status: ERROR,
-                        error:
-                            "There was an error uploading your list of people.",
-                    });
-                }
-            })();
-        } else {
+        if (!fileRef.current.files.length) {
             setStatus({
                 status: ERROR,
                 error: "You don't have a file to upload.",
             });
+            return;
         }
+        (async () => {
+            setStatus({ status: LOADING });
+            try {
+                await readFileAndUpload(fileRef.current.files[0]);
+                setStatus({ status: IDLE });
+                fileRef.current.value = "";
+            } catch (err) {
+                console.error(err);
+                setStatus({
+                    status: ERROR,
+                    error: "There was an error uploading your list of people.",
+                });
+            }
+        })();
     });
 
     return (
