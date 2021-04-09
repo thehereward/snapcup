@@ -63,8 +63,7 @@ export async function readFileAndUpload(file: Blob) {
                 );
             }
         });
-    const result = await firebase
-        .functions()
-        .httpsCallable("uploadSnappableList")(snappableList);
-    console.log(result);
+    return firebase.functions().httpsCallable("uploadSnappableList")(
+        snappableList
+    );
 }

@@ -1,6 +1,6 @@
 import Snap from "../../types/Snap";
 import firebase from "firebase/app";
-import "firebase/auth";
+import { getCurrentUserUid } from "../users/UserService";
 
 export async function submitSnap(snap: Snap) {
     await firebase.firestore().collection("snaps").add(snap);
@@ -15,22 +15,26 @@ function docToSnap(data: any) {
     };
 }
 
-async function getSubmittedSnaps(user: firebase.User): Promise<Snap[]> {
-    try {
-        const userSnaps = await firebase
-            .firestore()
-            .collection("snaps")
-            .where("from", "==", user.uid.toString())
-            .orderBy("timestamp", "desc")
-            .get();
-        return userSnaps.docs.map((doc) => docToSnap(doc.data()));
-    } catch (error) {
-        throw new Error(error.message);
-    }
-}
-
-export async function getSubmittedSnapsForCurrentUser(): Promise<Snap[]> {
-    const currentUser = firebase.auth().currentUser;
-    const snaps = await getSubmittedSnaps(currentUser);
-    return snaps;
+// returns an unsubscribe function
+export function streamSubmittedSnapsForCurrentUser(
+    onSnapsRecieved: (snaps: Snap[]) => void,
+    onError: (error: Error) => void
+): () => void {
+    const currentUserUid = getCurrentUserUid();
+    return firebase
+        .firestore()
+        .collection("snaps")
+        .where("from", "==", currentUserUid)
+        .orderBy("timestamp", "desc")
+        .onSnapshot({
+            next: (querySnapshot) => {
+                const updatedSnaps = querySnapshot.docs.map((docSnapshot) =>
+                    docToSnap(docSnapshot.data())
+                );
+                onSnapsRecieved(updatedSnaps);
+            },
+            error: (error) => {
+                onError(error);
+            },
+        });
 }

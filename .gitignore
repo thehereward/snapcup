@@ -8,4 +8,4 @@
 *.env.local
 *.env.*.local
 **/__snapshots__/**
-*.log
+**/*.log

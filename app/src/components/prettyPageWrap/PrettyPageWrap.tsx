@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import styled, { css } from "styled-components";
 import SignOutButton from "./SignOutButton";
-import NavItem from "./NavItem";
+import { NavItem, NavItemClickable } from "./NavItem";
 
 import { getCurrentUserName } from "../../firebase/users/UserService";
 
@@ -11,11 +11,11 @@ const BrandLink = styled(Link)`
     font-family: var(--open-sans);
     font-weight: 800;
     font-size: 30px;
-    color: var(--purp-selected);
+    color: var(--purple-selected);
     text-decoration: none !important;
 
     &:hover {
-        color: var(--purp-selected-hover);
+        color: var(--purple-selected-hover);
     }
 `;
 
@@ -36,11 +36,11 @@ const PrettyPageWrap: React.FunctionComponent = ({
 
                 <LinkList>
                     {isAdmin && (
-                        <NavItem as={Link} to="/admin">
+                        <NavItemClickable as={Link} to="/admin">
                             Manage Teams
-                        </NavItem>
+                        </NavItemClickable>
                     )}
-                    <SignOutButton as="a" setLoggedIn={setLoggedIn} />
+                    <SignOutButton setLoggedIn={setLoggedIn} />
                     <NavItem>{getCurrentUserName()}</NavItem>
                 </LinkList>
             </nav>

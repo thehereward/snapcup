@@ -4,8 +4,11 @@ export async function submitSnap(snap: Snap) {
     return;
 }
 
-export async function getSubmittedSnapsForCurrentUser(): Promise<Snap[]> {
-    return [
+export function streamSubmittedSnapsForCurrentUser(
+    onSnapsRecieved: (snaps: Snap[]) => void,
+    onError: (error: Error) => void
+): () => void {
+    const mockSnaps = [
         {
             to: ["Jane", "Bob"],
             from: "Helen",
@@ -13,4 +16,8 @@ export async function getSubmittedSnapsForCurrentUser(): Promise<Snap[]> {
             body: "Hello there",
         },
     ];
+    onSnapsRecieved(mockSnaps);
+    return () => {
+        return;
+    };
 }

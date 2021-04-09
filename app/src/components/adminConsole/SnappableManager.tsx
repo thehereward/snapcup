@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback } from "react";
-import GetSnappables from "../../firebase/users/GetSnappables";
+import getSnappables from "../../firebase/users/GetSnappables";
 import { snappablesToCsvDownload, readFileAndUpload } from "./csvManager";
 
 const LOADING = "loading";
@@ -14,7 +14,7 @@ const SnappableManager = () => {
         setStatus({ status: LOADING });
         (async () => {
             try {
-                const snappables = await GetSnappables();
+                const snappables = await getSnappables();
                 snappablesToCsvDownload(snappables);
                 setStatus({ status: IDLE });
             } catch (err) {

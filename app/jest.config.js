@@ -7,6 +7,7 @@ module.exports = {
     /* Tells jest to use ts-jest for ts/tsx files*/
     transform: {
         "^.+\\.(ts|tsx)$": "ts-jest",
+        "^.+\\.svg$": "jest-svg-transformer",
     },
     globals: {
         "ts-jest": {
