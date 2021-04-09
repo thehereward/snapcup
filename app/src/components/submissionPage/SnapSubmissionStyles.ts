@@ -13,7 +13,6 @@ export const SnapSubmissionColumnDiv = styled.div`
     padding: 5%;
     border-radius: 10px 10px 10px 10px;
     @media (max-width: 576px) {
-        border-radius: 10px 10px 10px 10px;
         height: 380px;
         margin-top: 10px;
     }
@@ -69,23 +68,23 @@ export const SnapItButton = styled.button`
     margin-left: 5%;
     margin-right: auto;
     width: 85%;
-    background: var(--purp-button-default);
+    background: var(--purple-button-default);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
     border: 0px;
     &:hover {
-        background-color: var(--purp-button-hover);s
-        border: 2px solid #e3daf8;
+        background-color: var(--purple-button-hover);
+        border: 2px solid var(--button-hover-border);
         box-sizing: border-box;
         box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
     }
     &:focus {
-        background-color: var(--purp-button-focus);
+        background-color: var(--purple-selected);
         border: 0px;
         box-shadow: none;
     }
     &:active {
-        background-color: var(--purp-button-focus);
+        background-color: var(--purple-selected);
         border: 0px;
         box-shadow: none;
     }
