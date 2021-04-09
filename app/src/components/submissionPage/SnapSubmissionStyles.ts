@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { MentionsInput } from "react-mentions";
 
 export const ElleImg = styled.img`
-    width: 100%;
     max-height: 250px;
 `;
 
@@ -14,9 +13,6 @@ export const SnapSubmissionColumnDiv = styled.div`
 
 export const LeftSideOfScreen = styled(SnapSubmissionColumnDiv)`
     border-radius: 10px 0px 0px 10px;
-    @media (max-width: 576px) {
-        display: none;
-    }
 `;
 
 export const RightSideOfScreen = styled(SnapSubmissionColumnDiv)`
