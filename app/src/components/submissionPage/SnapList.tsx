@@ -58,7 +58,7 @@ const SnapList: React.FunctionComponent<SnapListProps> = ({ snaps }) => {
                 key={i}
                 className={e.isTag ? "text-light-purple font-weight-bold" : ""}
             >
-                {e.text}
+                {`${e.isTag ? "@" : ""}${e.text}`}
             </span>
         ));
     }
