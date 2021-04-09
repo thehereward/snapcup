@@ -25,6 +25,14 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
     --our-grey: #838385;
     --text-main: #3d3d3d;
     --text-muted: #75737a;
+    --text-normal: #faf8f8;
+    --text-success: #b6faa2;
+    --text-error: #fc4528;
+    --purple-textbox: #7040d6;
+    --purple-button-default: #a07ee8;
+    --purple-button-hover: #{$elle-purple};
+    --purple-button-focus: #{$elle-purple};
+    --button-hover-border: #e3daf8;
 }
 
 $font-family-base: var(--open-sans);
