@@ -2,6 +2,8 @@ import React from "react";
 import Snap from "../../types/Snap";
 import styled, { css } from "styled-components";
 import { formatTimestamp, getBodyElements } from "./helpers/snapFormatting";
+import TrashIcon from "../../images/TrashIcon";
+import { deleteSnap } from "../../firebase/snaps/SnapService";
 
 interface SnapListProps {
     snaps: Snap[];
@@ -27,13 +29,6 @@ const SnapText = styled.div`
     align-items: left;
 `;
 
-const SnapCardHeading = styled.p`
-    font-weight: bold;
-    var(--text-grey);
-    padding: 0;
-    margin: 0 0 13px 0;
-`;
-
 const SnapCardBody = styled.p`
     color: var(--text-grey);
     padding: 0;
@@ -50,6 +45,15 @@ const SnapCardFooter = styled.p`
     margin: 0;
 `;
 
+const StyledTrashIcon = styled(TrashIcon)`
+    height: 40px;
+    width: auto;
+`;
+
+const PlainButton = styled.button`
+    all: unset;
+`;
+
 const SnapList: React.FunctionComponent<SnapListProps> = ({ snaps }) => {
     function formatBody(body: string) {
         const elements = getBodyElements(body);
@@ -63,14 +67,28 @@ const SnapList: React.FunctionComponent<SnapListProps> = ({ snaps }) => {
         ));
     }
 
+    const onDeleteSnapPressed = async (snap: Snap) => {
+        if (!confirm("Are you sure you want to delete this snap?")) {
+            return;
+        }
+        try {
+            await deleteSnap(snap);
+        } catch (error) {
+            alert(`There was an error deleting your snap ${error.message}`);
+        }
+    };
+
     const listItems = snaps.map((snap: Snap, index: number) => (
-        <div className="col-sm-6 col-md-4 mb-4" key={index}>
+        <div className="col-sm-6 col-md-4 mb-4" key={snap.id ?? index}>
             <SnapCard>
                 <SnapText>
                     <SnapCardBody>{formatBody(snap.body)}</SnapCardBody>
                     <SnapCardSpacer />
                     <SnapCardFooter>
-                        {formatTimestamp(snap.timestamp)}
+                        {formatTimestamp(snap.timestamp)}{" "}
+                        <PlainButton onClick={() => onDeleteSnapPressed(snap)}>
+                            <StyledTrashIcon alt="Delete snap" />
+                        </PlainButton>
                     </SnapCardFooter>
                 </SnapText>
             </SnapCard>
