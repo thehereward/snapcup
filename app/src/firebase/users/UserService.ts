@@ -31,6 +31,12 @@ async function getOrCreateUserProfile(
 }
 
 export async function signIn() {
+    if (process.env.REACT_APP_EMULATE_FIREBASE) {
+        await firebase
+            .auth()
+            .signInWithEmailAndPassword("test@test.com", "testtest");
+        return;
+    }
     const provider = new firebase.auth.OAuthProvider("microsoft.com");
     provider.setCustomParameters({
         prompt: process.env.REACT_APP_PROMPT,

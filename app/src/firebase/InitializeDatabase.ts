@@ -1,7 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
-import dotenv from "dotenv";
-dotenv.config();
+import "firebase/auth";
+import "firebase/functions";
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -14,4 +14,9 @@ const firebaseConfig = {
 
 export function initializeDatabase() {
     firebase.initializeApp(firebaseConfig);
+    if (process.env.REACT_APP_EMULATE_FIREBASE) {
+        firebase.firestore().useEmulator("localhost", 8080);
+        firebase.auth().useEmulator("http://localhost:9099");
+        firebase.functions().useEmulator("localhost", 5001);
+    }
 }
