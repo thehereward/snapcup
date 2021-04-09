@@ -32,7 +32,7 @@ export const NewCupButton = styled.button`
         border: 0px;
     }
     &:focus {
-        background-color: #3a09a2;
+        background-color: var(--purple-focus);
         border: 0px;
         box-shadow: none;
     }
