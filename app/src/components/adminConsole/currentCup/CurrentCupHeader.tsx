@@ -1,6 +1,5 @@
 import React from "react";
 import CreateCupButton from "./CreateCupButton";
-
 const CurrentCupHeader: React.FunctionComponent = (props: {
     isCup: Boolean;
     isOpen: Boolean;
