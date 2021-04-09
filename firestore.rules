@@ -10,7 +10,7 @@ service cloud.firestore {
     allow create: if (!request.resource.data.isAdmin && request.resource.data.isSnapper);
   }
   match /snaps/{snap} {
-    allow create: if request.auth != null;
+    allow create: if request.auth != null && request.auth.uid == request.resource.data.from;
     allow read, delete: if request.auth != null && request.auth.uid == snap.from;
   }
 }
