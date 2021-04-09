@@ -12,7 +12,7 @@ const CharactersLeft = styled(HelperText)`
 
 /* Calculate the amount of characters left for you to use*/
 export const GetCharacterCountRemaining = (
-    message: String,
+    message: string,
     snappedUsers: MentionElements[]
 ) => {
     return GetExtraLength(snappedUsers) - message.length;

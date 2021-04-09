@@ -12,12 +12,12 @@ const CreateCupButton: React.FunctionComponent = (props: {
     updateIsCup: () => void;
 }) => {
     const [status, setStatus] = useState({ status: IDLE });
-    const [newCupName, setNewCupName] = useState<String>("");
-    const [allCupNames, setAllCupNames] = useState<String[]>([]);
+    const [newCupName, setNewCupName] = useState<string>("");
+    const [allCupNames, setAllCupNames] = useState<string[]>([]);
 
     useEffect(() => {
         GetCupNames()
-            .then((res: String[]) => {
+            .then((res: string[]) => {
                 setAllCupNames(res);
             })
             .catch((e) => console.log(e));
@@ -36,7 +36,7 @@ const CreateCupButton: React.FunctionComponent = (props: {
             setNewCupName("");
             props.updateIsCup();
         } catch (error) {
-            console.log(error.toString());
+            console.log(error.tostring());
             console.log("error in firebase");
         }
         setStatus({ status: IDLE });

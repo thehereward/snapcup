@@ -17,7 +17,7 @@ export async function getExistsUnpublished() {
     return result.indexOf(false) >= 0;
 }
 
-export async function GetCupNames(): Promise<String[]> {
+export async function GetCupNames(): Promise<string[]> {
     const querySnapshot = await firebase
         .firestore()
         .collection("cups")

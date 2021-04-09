@@ -23,14 +23,14 @@ import {
 
 export interface Props {
     snappables: MentionElements[];
-    user: String;
+    user: string;
 }
 
 const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
     /* Containing body of the snap */
     const [message, setMessage] = useState<string>("");
     const [confirmation, setConfirmation] = useState<Boolean>(false);
-    const [error, setError] = useState<String>("");
+    const [error, setError] = useState<string>("");
     const [snappedUsers, setSnappedUsers] = useState<MentionElements[]>([]);
 
     function handleSubmit(event) {
@@ -50,7 +50,7 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
                 setMessage("");
                 setSnappedUsers([]);
             } catch (error) {
-                setError(error.toString());
+                setError(error.tostring());
             }
         } else {
             setError("Your snap is invalid.");
