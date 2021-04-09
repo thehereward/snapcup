@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { GetCupNames } from "../../../firebase/cups/CupService";
-import { createNewCup } from "../../../firebase/cups/CupService";
+import { createNewCup, GetCupNames } from "../../../firebase/cups/CupService";
 import Cup from "../../../types/Cup";
 
 const LOADING = "loading";
