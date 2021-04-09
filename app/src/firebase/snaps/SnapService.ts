@@ -7,13 +7,17 @@ export async function submitSnap(snap: Snap) {
 }
 
 export async function deleteSnap(snap: Snap) {
-    if (!snap.id) {
-        throw Error("Cannot delete snap - snap has no id");
-    }
+    assertHasId(snap);
     try {
         await firebase.firestore().collection("snaps").doc(snap.id).delete();
     } catch (error) {
         throw Error("Error deleting snap " + error.message);
+    }
+}
+
+function assertHasId(snap: Snap) {
+    if (!snap.id) {
+        throw Error("Cannot delete snap - snap has no id");
     }
 }
 

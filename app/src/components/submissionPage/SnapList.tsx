@@ -80,8 +80,8 @@ const SnapList: React.FunctionComponent<SnapListProps> = ({ snaps }) => {
         }
     };
 
-    const listItems = snaps.map((snap: Snap, index: number) => (
-        <div className="col-sm-6 col-md-4 mb-4" key={snap.id ?? index}>
+    const listItems = snaps.map((snap: Snap) => (
+        <div className="col-sm-6 col-md-4 mb-4" key={snap.id}>
             <SnapCard>
                 <SnapText>
                     <SnapCardBody>{formatBody(snap.body)}</SnapCardBody>
