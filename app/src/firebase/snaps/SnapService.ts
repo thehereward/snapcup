@@ -1,4 +1,4 @@
-import Snap from "../../types/Snap";
+import Snap, { Entity } from "../../types/Snap";
 import firebase from "firebase/app";
 import { getCurrentUserUid } from "../users/UserService";
 
@@ -6,7 +6,7 @@ export async function submitSnap(snap: Snap) {
     await firebase.firestore().collection("snaps").add(snap);
 }
 
-export async function deleteSnap(snap: Snap) {
+export async function deleteSnap(snap: Entity<Snap>) {
     assertHasId(snap);
     try {
         await firebase.firestore().collection("snaps").doc(snap.id).delete();
@@ -15,7 +15,7 @@ export async function deleteSnap(snap: Snap) {
     }
 }
 
-function assertHasId(snap: Snap) {
+function assertHasId(snap: Entity<Snap>) {
     if (!snap.id) {
         throw Error("Cannot delete snap - snap has no id");
     }
@@ -23,7 +23,7 @@ function assertHasId(snap: Snap) {
 
 function docToSnap(
     docSnapshot: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>
-): Snap {
+): Entity<Snap> {
     const data = docSnapshot.data();
     const id = docSnapshot.id;
     return {
@@ -37,7 +37,7 @@ function docToSnap(
 
 // returns an unsubscribe function
 export function streamSubmittedSnapsForCurrentUser(
-    onSnapsRecieved: (snaps: Snap[]) => void,
+    onSnapsRecieved: (snaps: Entity<Snap>[]) => void,
     onError: (error: Error) => void
 ): () => void {
     const currentUserUid = getCurrentUserUid();

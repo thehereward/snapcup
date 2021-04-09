@@ -14,6 +14,7 @@ export function streamSubmittedSnapsForCurrentUser(
 ): () => void {
     const mockSnaps = [
         {
+            id: "mock-snap-id",
             to: ["Jane", "Bob"],
             from: "Helen",
             timestamp: new Date(),
