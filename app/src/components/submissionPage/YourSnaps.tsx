@@ -16,7 +16,7 @@ const YourSnapsHeader = styled.h2`
     margin-bottom: 25px;
 `;
 
-const MiniElleImg = styled.img`
+const MiniElleImg = styled(Elle)`
     height: 66px;
     width: auto;
     vertical-align: text-bottom;
@@ -39,7 +39,7 @@ const YourSnaps: React.FunctionComponent = () => {
     return (
         <div>
             <YourSnapsHeader>
-                <MiniElleImg src={Elle} />
+                <MiniElleImg />
                 SnapCups
             </YourSnapsHeader>
             {error && <p>Error: {error}</p>}
