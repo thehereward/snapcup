@@ -70,13 +70,9 @@ export const LabelText = styled.p`
     margin-bottom: 5px;
 `;
 
-export const HelperText = styled.p`
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: 600;
+export const HelperText = styled(LabelText)`
     font-size: 12px;
     line-height: 16px;
-    color: #faf8f8;
     margin-right: 10px;
 `;
 
