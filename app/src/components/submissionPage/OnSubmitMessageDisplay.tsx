@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { HelperText } from "./SnapSubmissionStyles";
 
 const SnapSuccessText = styled(HelperText)`
-    color: #b6faa2;
+    color: var(--text-success);
 `;
 
 const OnSubmitMessageDisplay: React.FunctionComponent = (props: {
