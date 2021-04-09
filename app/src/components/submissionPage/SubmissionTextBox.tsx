@@ -50,7 +50,7 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
                 setMessage("");
                 setSnappedUsers([]);
             } catch (error) {
-                setError(error.tostring());
+                setError(error.toString());
             }
         } else {
             setError("Your snap is invalid.");
