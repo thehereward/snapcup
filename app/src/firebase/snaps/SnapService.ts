@@ -1,4 +1,5 @@
-import Snap, { Entity } from "../../types/Snap";
+import Snap from "../../types/Snap";
+import { Entity } from "../../types/Entity";
 import firebase from "firebase/app";
 import { getCurrentUserUid } from "../users/UserService";
 

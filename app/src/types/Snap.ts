@@ -4,5 +4,3 @@ export default interface Snap {
     body: string /* Main Message */;
     timestamp: Date /* Date/time of Submission*/;
 }
-
-export type Entity<T> = T & { id: string };

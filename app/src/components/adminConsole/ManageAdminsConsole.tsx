@@ -4,7 +4,7 @@ import {
     updateAdmin,
 } from "../../firebase/users/UserService";
 import { UserProfile } from "../../types/UserProfile";
-import { Entity } from "../../types/Snap";
+import { Entity } from "../../types/Entity";
 
 interface UserRowProps {
     user: Entity<UserProfile>;
