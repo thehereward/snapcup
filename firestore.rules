@@ -7,7 +7,7 @@ service cloud.firestore {
     }
   }
   match /users/{user} {
-    allow create: if (!request.resource.data.isAdmin && request.resource.data.isSnapper);
+    allow create: if (!request.resource.data.isAdmin);
   }
   match /snaps/{snap} {
     allow create: if request.auth != null && request.auth.uid == request.resource.data.from;

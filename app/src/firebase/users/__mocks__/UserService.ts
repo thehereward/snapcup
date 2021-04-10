@@ -17,6 +17,6 @@ export function getCurrentUserUid(): string {
 }
 
 export function onAuthStateChanged(cb: (p: UserProfile) => void) {
-    const mockProfile = { isAdmin: true, isSnapper: true };
+    const mockProfile = { isAdmin: true };
     cb(mockProfile);
 }
