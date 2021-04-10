@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import { UserProfile } from "../../types/UserProfile";
+import { Entity } from "../../types/Snap";
 
 async function getCurrentUserProfile(
     user: firebase.User
@@ -66,4 +67,38 @@ export function onAuthStateChanged(cb: (p: UserProfile) => void) {
             cb(profile);
         }
     });
+}
+
+function docToUserProfile(
+    docSnapshot: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>
+): Entity<UserProfile> {
+    const data = docSnapshot.data();
+    const id = docSnapshot.id;
+    return {
+        email: data.email,
+        displayName: data.displayName,
+        isAdmin: data.isAdmin,
+        id: id,
+    };
+}
+
+export function streamAllUserProfiles(
+    onSnapsReceived: (snaps: Entity<UserProfile>[]) => void,
+    onError: (error: Error) => void
+): () => void {
+    const collectionRef = firebase.firestore().collection("users");
+    return collectionRef.onSnapshot({
+        next: (querySnapshot) => {
+            const updatedSnaps = querySnapshot.docs.map(docToUserProfile);
+            onSnapsReceived(updatedSnaps);
+        },
+        error: (error) => {
+            onError(error);
+        },
+    });
+}
+
+export async function updateAdmin(userId: string, isAdmin: boolean) {
+    const docRef = firebase.firestore().collection("users").doc(userId);
+    docRef.update({ isAdmin: isAdmin });
 }

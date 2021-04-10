@@ -36,9 +36,14 @@ const PrettyPageWrap: React.FunctionComponent = ({
 
                 <LinkList>
                     {isAdmin && (
-                        <NavItemClickable as={Link} to="/admin">
-                            Manage Teams
-                        </NavItemClickable>
+                        <>
+                            <NavItemClickable as={Link} to="/manage-admins">
+                                Manage Admins
+                            </NavItemClickable>
+                            <NavItemClickable as={Link} to="/admin">
+                                Manage Teams
+                            </NavItemClickable>
+                        </>
                     )}
                     <SignOutButton setLoggedIn={setLoggedIn} />
                     <NavItem>{getCurrentUserName()}</NavItem>

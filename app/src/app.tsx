@@ -15,6 +15,7 @@ import {
 } from "./firebase/users/UserService";
 import { UserProfile } from "./types/UserProfile";
 import AdminConsole from "./components/adminConsole/AdminConsole";
+import ManageAdminsConsole from "./components/adminConsole/ManageAdminsConsole";
 
 const App = () => {
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
@@ -52,6 +53,11 @@ const App = () => {
                     {userProfile.isAdmin && (
                         <Route path="/admin">
                             <AdminConsole />
+                        </Route>
+                    )}
+                    {userProfile.isAdmin && (
+                        <Route path="/manage-admins">
+                            <ManageAdminsConsole />
                         </Route>
                     )}
                     <Route path="/">
