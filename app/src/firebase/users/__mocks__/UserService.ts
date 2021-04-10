@@ -17,6 +17,10 @@ export function getCurrentUserUid(): string {
 }
 
 export function onAuthStateChanged(cb: (p: UserProfile) => void) {
-    const mockProfile = { isAdmin: true };
+    const mockProfile = {
+        isAdmin: true,
+        email: "test@example.com",
+        displayName: "Test Example",
+    };
     cb(mockProfile);
 }

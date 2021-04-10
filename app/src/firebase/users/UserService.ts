@@ -17,6 +17,8 @@ async function getCurrentUserProfile(
 function createUserProfile(user: firebase.User): UserProfile {
     const profileData = {
         isAdmin: false,
+        email: user.email,
+        displayName: user.displayName,
     };
     firebase.firestore().collection("users").doc(user.uid).set(profileData);
     return profileData;
