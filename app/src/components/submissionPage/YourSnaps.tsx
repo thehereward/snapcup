@@ -13,7 +13,28 @@ const YourSnapsHeader = styled.h2`
     font-size: 30px;
     line-height: 34px;
     color: var(--purple-selected);
+    margin-top: 25px;
     margin-bottom: 25px;
+    border: 0px;
+    border-bottom: 1px solid;
+    border-color: var(--horizontal-divider);
+    padding-bottom: 10px;
+`;
+
+const SnapCupName = styled.p`
+    font-family: Asap;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 23px;
+    color: var(--purple-selected);
+`;
+
+const PublishedStatus = styled(SnapCupName)`
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 18px;
 `;
 
 const MiniElleImg = styled(Elle)`
@@ -36,13 +57,25 @@ const YourSnaps: React.FunctionComponent = () => {
         return unsubscribe;
     }, [setSnaps, setError]);
 
+    /* Skeleton Function to get snapcup name*/
+    const getSnapCupName = () => {
+        return "SnapCup";
+    };
+
+    /* Skeleton Function to get the status of a snapcup */
+    const getPublishedStatus = () => {
+        return "Not Yet Published";
+    };
+
     return (
         <div>
             <YourSnapsHeader>
                 <MiniElleImg />
                 SnapCups
             </YourSnapsHeader>
+            <SnapCupName>CupName {getSnapCupName()}</SnapCupName>
             {error && <p>Error: {error}</p>}
+            <PublishedStatus>{getPublishedStatus()}</PublishedStatus>
             {snaps.length > 0 && <SnapList snaps={snaps} />}
         </div>
     );
