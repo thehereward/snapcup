@@ -1,6 +1,12 @@
 import React, { useState, useRef, useCallback } from "react";
-import getSnappables from "../../firebase/users/GetSnappables";
-import { snappablesToCsvDownload, readFileAndUpload } from "./csvManager";
+import getSnappables from "../../../firebase/users/GetSnappables";
+import {
+    FileUploadWrapper,
+    SectionHeader,
+    SectionHeaderUnderline,
+} from "../AdminConsoleStyles";
+import { snappablesToCsvDownload, readFileAndUpload } from "../csvManager";
+import DownloadButton from "./DownloadButton";
 
 const LOADING = "loading";
 const IDLE = "idle";
@@ -10,7 +16,6 @@ const SnappableManager = () => {
     const [status, setStatus] = useState({ status: IDLE });
     const [filename, setFilename] = useState<String | null>(null);
     const fileRef = useRef(null);
-
     const onClickDownload = useCallback(() => {
         setStatus({ status: LOADING });
         (async () => {
