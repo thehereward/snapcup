@@ -18,8 +18,6 @@ export const MiniElleImg = styled(Elle)`
 `;
 
 export const NewCupButton = styled.button`
-    position: absolute;
-    bottom: 10px;
     font-family: var(--asap);
     font-weight: 500;
     font-size: 18px;
