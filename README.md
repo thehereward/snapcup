@@ -55,7 +55,9 @@ To use the firebase emulator simply run
 npm run emulator --proj=your-project-id
 ```
 
-from the root directory (replace your-project-id with the same project id that you added to .env.local). This allows you to open the firebase emulator console and it mocks firestore, auth and firebase functions from your directory. When you first start the emulator you should go to the auth tab and add a test account, with credentials
+from the root directory (replace your-project-id with the same project id that you added to .env.local). This allows you to open the firebase emulator console and it mocks firestore, auth and firebase functions from your directory.
+
+**Every time** you start the emulator you should go to the auth tab and add a test account, with credentials
 
 ```
 username: test@test.com

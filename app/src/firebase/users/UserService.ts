@@ -56,6 +56,10 @@ export function getCurrentUserName(): string {
     return firebase.auth().currentUser.displayName;
 }
 
+export function getCurrentEmail(): string {
+    return firebase.auth().currentUser.email;
+}
+
 export function getCurrentUserUid(): string {
     return firebase.auth().currentUser.uid;
 }

@@ -17,7 +17,6 @@ import {
     SnapCupText,
     SnapItButton,
     LabelText,
-    TaggedTeamMembers,
     HelperText,
 } from "./SnapSubmissionStyles";
 
