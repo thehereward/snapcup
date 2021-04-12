@@ -1,25 +1,35 @@
 import React from "react";
 import CreateCupButton from "./CreateCupButton";
-import {
-    SectionHeader,
-    MiniElleImg,
-    NewCupButton,
-} from "../AdminConsoleStyles";
+import { SectionHeader } from "../AdminConsoleStyles";
+import Elle from "../../../images/Elle";
+import styled from "styled-components";
+import Cup from "../../../types/Cup";
+import { Entity } from "../../../types/Entity";
+
+export const MiniElleImg = styled(Elle)`
+    height: 66px;
+    width: auto;
+    vertical-align: text-bottom;
+    margin-right: 19px;
+`;
 
 const CurrentCupHeader: React.FunctionComponent = (props: {
-    isCup: Boolean;
-    updateIsCup: () => void;
+    cups: Entity<Cup>[];
+    updateCups: () => void;
 }) => {
     return (
-        <div className="container">
+        <div>
             <div id="currentCupHeader" className="row">
-                <div className="col-md-3">
-                    <SectionHeader>Current SnapCup</SectionHeader>
+                <div className="col-md-4">
+                    <SectionHeader>
+                        <MiniElleImg />
+                        Current SnapCups
+                    </SectionHeader>
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-8">
                     <CreateCupButton
-                        isCup={props.isCup}
-                        updateIsCup={props.updateIsCup}
+                        cups={props.cups}
+                        updateCups={props.updateCups}
                     />
                 </div>
             </div>
