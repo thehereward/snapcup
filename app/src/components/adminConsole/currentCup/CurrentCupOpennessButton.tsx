@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from "react";
-import { CurrentCupOptionsButton } from "../AdminConsoleStyles";
 import { setCupOpenness } from "../../../firebase/cups/CupService";
 
 const CurrentCupOpennessButton = ({ cup, setCup }) => {
@@ -27,9 +26,13 @@ const CurrentCupOpennessButton = ({ cup, setCup }) => {
     }, [cup.id, cup.isOpen, setLoading, setError, setCup]);
 
     return (
-        <CurrentCupOptionsButton disabled={loading} onClick={clickSetOpenness}>
+        <button
+            className="btn btn-purple"
+            disabled={loading}
+            onClick={clickSetOpenness}
+        >
             {buttonText}
-        </CurrentCupOptionsButton>
+        </button>
     );
 };
 

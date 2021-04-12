@@ -57,7 +57,7 @@ const TrashButton = styled.button`
     all: unset;
 `;
 
-const SnapList: React.FunctionComponent<SnapListProps> = ({ snaps }) => {
+const SnapList: React.FunctionComponent<SnapListProps> = ({ snaps, cup }) => {
     function formatBody(body: string) {
         const elements = getBodyElements(body);
         return elements.map((e, i) => (
@@ -75,7 +75,7 @@ const SnapList: React.FunctionComponent<SnapListProps> = ({ snaps }) => {
             return;
         }
         try {
-            await deleteSnap(snap);
+            await deleteSnap(snap, cup.id);
         } catch (error) {
             alert(`There was an error deleting your snap ${error.message}`);
         }

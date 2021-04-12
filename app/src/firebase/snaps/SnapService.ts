@@ -3,14 +3,24 @@ import { Entity } from "../../types/Entity";
 import firebase from "firebase/app";
 import { getCurrentUserUid } from "../users/UserService";
 
-export async function submitSnap(snap: Snap) {
-    await firebase.firestore().collection("snaps").add(snap);
+function getSnapsCollectionFromCupId(cupId: string) {
+    return firebase
+        .firestore()
+        .collection("cups")
+        .doc(cupId)
+        .collection("snaps");
 }
 
-export async function deleteSnap(snap: Entity<Snap>) {
+export async function submitSnap(snap: Snap, cupId: string) {
+    console.log(JSON.stringify(firebase.auth().currentUser));
+    console.log(cupId);
+    await getSnapsCollectionFromCupId(cupId).add(snap);
+}
+
+export async function deleteSnap(snap: Entity<Snap>, cupId: string) {
     assertHasId(snap);
     try {
-        await firebase.firestore().collection("snaps").doc(snap.id).delete();
+        await getSnapsCollectionFromCupId(cupId).doc(snap.id).delete();
     } catch (error) {
         throw Error("Error deleting snap " + error.message);
     }
@@ -39,12 +49,11 @@ function docToSnap(
 // returns an unsubscribe function
 export function streamSubmittedSnapsForCurrentUser(
     onSnapsReceived: (snaps: Entity<Snap>[]) => void,
-    onError: (error: Error) => void
+    onError: (error: Error) => void,
+    cupId: string
 ): () => void {
     const currentUserUid = getCurrentUserUid();
-    return firebase
-        .firestore()
-        .collection("snaps")
+    return getSnapsCollectionFromCupId(cupId)
         .where("from", "==", currentUserUid)
         .orderBy("timestamp", "desc")
         .onSnapshot({

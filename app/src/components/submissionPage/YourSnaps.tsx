@@ -44,18 +44,19 @@ const MiniElleImg = styled(Elle)`
     margin-right: 19px;
 `;
 
-const YourSnaps: React.FunctionComponent = () => {
+const YourSnaps: React.FunctionComponent = ({ cup }) => {
     const [snaps, setSnaps] = useState<Snap[]>([]);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const unsubscribe = streamSubmittedSnapsForCurrentUser(
             (updatedSnaps) => setSnaps(updatedSnaps),
-            (error) => setError(error.message)
+            (error) => setError(error.message),
+            cup.id
         );
         // clean up function
         return unsubscribe;
-    }, [setSnaps, setError]);
+    }, [setSnaps, setError, cup]);
 
     /* Skeleton Function to get snapcup name*/
     const getSnapCupName = () => {
@@ -76,7 +77,7 @@ const YourSnaps: React.FunctionComponent = () => {
             <SnapCupName>CupName {getSnapCupName()}</SnapCupName>
             {error && <p>Error: {error}</p>}
             <PublishedStatus>{getPublishedStatus()}</PublishedStatus>
-            {snaps.length > 0 && <SnapList snaps={snaps} />}
+            {snaps.length > 0 && <SnapList snaps={snaps} cup={cup} />}
         </div>
     );
 };

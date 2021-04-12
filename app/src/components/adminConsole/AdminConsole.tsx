@@ -27,7 +27,7 @@ const AdminConsole = () => {
     return (
         <div className="my-3">
             <SnappableManager />
-            <CurrentCup cup={cup} isOpen={false} updateCup={updateCup} />
+            <CurrentCup cup={cup} setCup={setCup} updateCup={updateCup} />
             <ExportAllSnaps />
         </div>
     );

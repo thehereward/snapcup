@@ -19,10 +19,12 @@ import {
     HelperText,
 } from "./SnapSubmissionStyles";
 import SubmissionBoxWrapper from "./SubmissionBoxWrapper";
+import { CupWithId } from "../../types/Cup";
 
 export interface Props {
     snappables: MentionElements[];
     user: string;
+    cup: CupWithId;
 }
 
 const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
@@ -50,11 +52,12 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
 
         (async () => {
             try {
-                await submitSnap(resultingSnap);
+                await submitSnap(resultingSnap, props.cup.id);
                 setConfirmation(true);
                 setMessage("");
                 setSnappedUsers([]);
             } catch (error) {
+                console.error(error);
                 setError("There was an error submitting the snap!");
             }
         })();

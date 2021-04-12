@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import MentionElements from "../../types/MentionElements";
 import SubmissionTextBox from "./SubmissionTextBox";
 import { getCurrentUserName } from "../../firebase/users/UserService";
-import { getCurrentCupIfExists } from "../../firebase/cups/CupService";
-import { CupWithId } from "../../types/Cup";
 import SubmissionBoxWrapper from "./SubmissionBoxWrapper";
 
 const MessageInBox = ({ message }) => (
@@ -14,27 +12,12 @@ const MessageInBox = ({ message }) => (
     </SubmissionBoxWrapper>
 );
 
-const TextBoxIfSnapcupOpen = (props: { snappables: MentionElements[] }) => {
-    const [status, setStatus] = useState<string>("Loading...");
-    const [cup, setCup] = useState<CupWithId | undefined>(undefined);
-
-    useEffect(() => {
-        setStatus("Loading...");
-        (async () => {
-            try {
-                setCup(await getCurrentCupIfExists());
-                setStatus("");
-            } catch (err) {
-                console.error("Getting cup", err);
-                setStatus("There was an unexpected error loading the snapcup.");
-            }
-        })();
-    }, [setCup]);
-
+const TextBoxIfSnapcupOpen = ({ cup, snappables, status }) => {
     if (cup?.isOpen) {
         return (
             <SubmissionTextBox
-                snappables={props.snappables}
+                cup={cup}
+                snappables={snappables}
                 user={getCurrentUserName()}
             />
         );
