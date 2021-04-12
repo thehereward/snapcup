@@ -71,71 +71,77 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
         setSnappedUsers(mentions);
     }
 
+    /* Allows ctrl-enter to submit the form*/
+    function handleKeyPress(e) {
+        if (e.charCode == 13 && e.ctrlKey == true) {
+            handleSubmit(e);
+        }
+    }
+
     return (
-        <div className="container-sm">
-            <SnapSubmissionColumnDiv className="row justify-content-md-center">
-                <div className="d-none d-sm-block col col-lg-5 ">
-                    <SnapCupText>
-                        Add a Snap to the current SnapCup.
-                    </SnapCupText>
-                    <ElleImg className="w-100" />
-                </div>
-                <div className="col col-lg-5">
-                    <form>
-                        <div>
-                            <LabelText>Tag Team Members</LabelText>
-                            <TaggedTeamMembers
-                                type="text"
-                                className="form-control"
-                            />
-                            <HelperText>
-                                Enter their email address or use the @ symbol
-                            </HelperText>
+        <div className="container-sm ">
+            <div className="row">
+                <div className="col col-lg-8">
+                    <SnapSubmissionColumnDiv className="row justify-content-md-center">
+                        <div className="d-none d-sm-block col col-lg-5 ">
+                            <SnapCupText>
+                                Add a Snap to the current SnapCup.
+                            </SnapCupText>
+                            <ElleImg className="w-100" />
                         </div>
-                        <div className="form-group">
-                            <LabelText>Message:</LabelText>
-                            <SnapCupTextArea
-                                className="form-control"
-                                value={message}
-                                onChange={handleMessageTextChanged}
-                                maxLength={GetExtraLength(snappedUsers)}
-                                rows={5}
-                                placeholder="You can tag users using @."
-                            >
-                                <Mention
-                                    style={{
-                                        backgroundColor: "#daf4fa",
-                                        zIndex: 0,
-                                    }}
-                                    trigger="@"
-                                    data={props.snappables}
-                                    rows={5}
-                                />
-                            </SnapCupTextArea>
-                            {confirmation ? (
-                                <OnSubmitMessageDisplay
-                                    confirmation={confirmation}
-                                />
-                            ) : (
-                                <CharactersLeftDisplay
-                                    snappedUsers={snappedUsers}
-                                    message={message}
-                                />
-                            )}
-                            {error ? (
-                                <SubmissionBoxErrorDisplay error={error} />
-                            ) : null}
+                        <div className="col col-lg-7">
+                            <form>
+                                <div className="form-group">
+                                    <LabelText>Message:</LabelText>
+                                    <SnapCupTextArea
+                                        className="form-control finalTextBox"
+                                        value={message}
+                                        onChange={handleMessageTextChanged}
+                                        maxLength={GetExtraLength(snappedUsers)}
+                                        rows={5}
+                                        onKeyPress={handleKeyPress}
+                                        placeholder="You can tag users using @."
+                                    >
+                                        <Mention
+                                            style={{
+                                                backgroundColor: "#daf4fa",
+                                                zIndex: 0,
+                                                outline: "none",
+                                            }}
+                                            className="mentions__mention"
+                                            trigger="@"
+                                            data={props.snappables}
+                                            rows={5}
+                                        />
+                                    </SnapCupTextArea>
+                                    {confirmation ? (
+                                        <OnSubmitMessageDisplay
+                                            confirmation={confirmation}
+                                        />
+                                    ) : (
+                                        <CharactersLeftDisplay
+                                            snappedUsers={snappedUsers}
+                                            message={message}
+                                        />
+                                    )}
+                                    {error ? (
+                                        <SubmissionBoxErrorDisplay
+                                            error={error}
+                                        />
+                                    ) : null}
+                                </div>
+                                <SnapItButton
+                                    type="submit"
+                                    className="btn btn-primary"
+                                    onClick={handleSubmit}
+                                >
+                                    Snap it
+                                </SnapItButton>
+                            </form>
                         </div>
-                        <SnapItButton
-                            type="submit"
-                            className="btn btn-primary"
-                            onClick={handleSubmit}
-                        >
-                            Snap it
-                        </SnapItButton>
-                    </form>
+                    </SnapSubmissionColumnDiv>
                 </div>
-            </SnapSubmissionColumnDiv>
+            </div>
         </div>
     );
 };
