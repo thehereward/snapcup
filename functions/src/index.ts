@@ -4,7 +4,13 @@ import * as admin from "firebase-admin";
 admin.initializeApp();
 const db = admin.firestore();
 
-async function assertUserIsAdmin(context) {
+interface Context {
+    auth?: {
+        uid: string;
+    };
+}
+
+async function assertUserIsAdmin(context: Context) {
     if (!context.auth) {
         throw new functions.https.HttpsError(
             "failed-precondition",
