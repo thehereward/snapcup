@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import getSnaps from "../../firebase/snaps/GetSnaps";
-import { snapsToCsvContent, csvContentToCsvDownload } from "./csvManager";
+import { snapsToCsvDownload } from "./csvManager";
 
 const LOADING = "loading";
 const IDLE = "idle";
@@ -14,7 +14,7 @@ const ExportAllSnaps = () => {
         (async () => {
             try {
                 const snaps = await getSnaps();
-                csvContentToCsvDownload(snapsToCsvContent(snaps), "snaps.csv");
+                snapsToCsvDownload(snaps);
                 setStatus({ status: IDLE });
             } catch (err) {
                 console.error(err);
@@ -28,7 +28,7 @@ const ExportAllSnaps = () => {
 
     return (
         <div>
-            <h1>Export all snaps</h1>
+            <h2>Export all snaps</h2>
             <p>
                 To get all of the snaps sent, press the download snaps button.
             </p>

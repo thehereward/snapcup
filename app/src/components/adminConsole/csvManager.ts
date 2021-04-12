@@ -1,9 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/functions";
-import {
-    getBodyElements,
-    BodyElement,
-} from "../../components/submissionPage/helpers/snapFormatting";
+import { formatBody } from "../../components/submissionPage/helpers/snapFormatting";
 
 export function snappablesToCsvContent(snappables) {
     let csvContent = "id,fullName,email,username";
@@ -13,19 +10,9 @@ export function snappablesToCsvContent(snappables) {
     return csvContent;
 }
 
-/* Formats the body of a snap so the meta data is removed */
-function formatBody(body: string) {
-    var newBody = "";
-    const bodyElems = getBodyElements(body);
-    for (var elem of bodyElems) {
-        newBody += elem.text;
-    }
-    return newBody;
-}
-
-export function snapsToCsvContent(snappables) {
+export function snapsToCsvContent(snaps) {
     let csvContent = "messages";
-    snappables.forEach(({ to, from, body, timestamp }) => {
+    snaps.forEach(({ to, from, body, timestamp }) => {
         csvContent += `\n${formatBody(body)}`;
     });
     return csvContent;
@@ -50,11 +37,18 @@ export function stringToFileDownload(
     }
 }
 
-export function csvContentToCsvDownload(
-    csvContent,
-    filename = "snappable_list.csv"
-) {
-    stringToFileDownload(csvContent, filename, "text/csv;charset=utf-8;");
+export function snapsToCsvDownload(snaps) {
+    const csvContent = snapsToCsvContent(snaps);
+    stringToFileDownload(csvContent, "snaps", "text/csv;charset=utf-8;");
+}
+
+export function snappablesToCsvDownload(snappables) {
+    const csvContent = snappablesToCsvContent(snappables);
+    stringToFileDownload(
+        csvContent,
+        "snappable_list.csv",
+        "text/csv;charset=utf-8;"
+    );
 }
 
 function assertSnappableRecordValid(fullName, email, username, i = null) {
