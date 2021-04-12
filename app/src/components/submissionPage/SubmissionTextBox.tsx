@@ -71,6 +71,13 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
         setSnappedUsers(mentions);
     }
 
+    /* Allows ctrl-enter to submit the form*/
+    function handleKeyPress(e) {
+        if (e.charCode == 13 && e.ctrlKey == true) {
+            handleSubmit(e);
+        }
+    }
+
     return (
         <div className="container-sm ">
             <div className="row">
@@ -103,6 +110,7 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
                                         onChange={handleMessageTextChanged}
                                         maxLength={GetExtraLength(snappedUsers)}
                                         rows={5}
+                                        onKeyPress={handleKeyPress}
                                         placeholder="You can tag users using @."
                                     >
                                         <Mention
