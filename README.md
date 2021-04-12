@@ -55,7 +55,9 @@ To use the firebase emulator simply run
 firebase emulators:start
 ```
 
-from the root directory. This allows you to open the firebase emulator console and it mocks firestore, auth and firebase functions from your directory. When you first start the emulator you should go to the auth tab and add a test account, with credentials
+from the root directory. This allows you to open the firebase emulator console and it mocks firestore, auth and firebase functions from your directory. 
+
+**Every time** you start the emulator you should go to the auth tab and add a test account, with credentials
 
 ```
 username: test@test.com
