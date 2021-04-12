@@ -23,7 +23,7 @@ async function assertUserIsAdmin(context: CallableContext) {
     }
 }
 
-export const setFirstUserAsAdmin = functions.firestore
+export const setFirstUserAsAdmin = regionalFunctions.firestore
     .document("/users/{uid}")
     .onCreate(async (snapshot, context) => {
         const users = await db.collection("users").get();
