@@ -1,5 +1,6 @@
 import React, { useState, useRef, useCallback } from "react";
 import getSnappables from "../../firebase/users/GetSnappables";
+import { FileUploadWrapper } from "./AdminConsoleStyles";
 import { snappablesToCsvDownload, readFileAndUpload } from "./csvManager";
 
 const LOADING = "loading";
@@ -8,6 +9,7 @@ const ERROR = "error";
 
 const SnappableManager = () => {
     const [status, setStatus] = useState({ status: IDLE });
+    const [filetext, setFiletext] = useState("Browse...");
     const fileRef = useRef(null);
 
     const downloadSnappables = useCallback(() => {
@@ -52,6 +54,10 @@ const SnappableManager = () => {
         })();
     });
 
+    const handleFilenameChange = (event) => {
+        setFiletext(event.target.files[0]?.name ?? "Browse");
+    };
+
     return (
         <>
             <h5>Snappable People</h5>
@@ -70,41 +76,42 @@ const SnappableManager = () => {
                 it.
             </p>
             <div
-                className="btn-group ml-2"
                 role="group"
+                className="mb-3"
                 aria-label="Buttons for manipulating data"
             >
                 <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={() => downloadSnappables()}
+                    className="btn btn-purple"
+                    onClick={downloadSnappables}
                     disabled={status.status === LOADING}
                 >
                     Download as CSV
                 </button>
             </div>
             <form onSubmit={uploadSnappables}>
-                <input
-                    type="file"
-                    ref={fileRef}
-                    disabled={status.status === LOADING}
-                    accept=".csv"
-                />
-                <input
-                    type="submit"
-                    className="btn btn-purple"
-                    value="Upload complete list of users."
-                />
+                <FileUploadWrapper className="btn">
+                    {filetext}
+                    <input
+                        type="file"
+                        ref={fileRef}
+                        disabled={status.status === LOADING}
+                        accept=".csv"
+                        onChange={handleFilenameChange}
+                    />
+                </FileUploadWrapper>
+                <button type="submit" className="btn btn-purple">
+                    Upload complete list of users
+                </button>
+                {status.status !== IDLE && (
+                    <p>
+                        {status.status === ERROR ? (
+                            <span className="text-danger">{status.error}</span>
+                        ) : (
+                            <b>Loading...</b>
+                        )}
+                    </p>
+                )}
             </form>
-            {status.status !== IDLE && (
-                <p>
-                    {status.status === ERROR ? (
-                        <span className="text-danger">{status.error}</span>
-                    ) : (
-                        <b>Loading...</b>
-                    )}
-                </p>
-            )}
         </>
     );
 };
