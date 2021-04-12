@@ -4,8 +4,19 @@ import { Entity } from "../../../types/Entity";
 import styled from "styled-components";
 import { MessageDisplay } from "../AdminConsoleStyles";
 
-function formatTimePublished(date: Date): string {
-    return date.toDateString();
+function formatTimePublished(time: {
+    seconds: number;
+    nanoseconds: number;
+}): string {
+    const d = new Date(time.seconds * 1000);
+    return (
+        "Published: " +
+        d.toLocaleString(undefined, {
+            year: "numeric",
+            month: "long",
+            day: "2-digit",
+        })
+    );
 }
 
 const CupCard = styled.div`
@@ -48,17 +59,16 @@ const PublishedCupsList: React.FunctionComponent = (props: {
     cups: Entity<Cup>[];
 }) => {
     const listCups = props.cups.map((cup: Entity<Cup>) => {
-        const time =
+        const timemsg =
             cup.timePublished == undefined
                 ? ""
                 : formatTimePublished(cup.timePublished);
-        console.log(time);
         return (
             <div className="col-sm-6 col-md-4 mb-4" key={cup.id}>
                 <CupCard>
                     <CupText>
                         <CupCardName>{cup.name}</CupCardName>
-                        <CupCardDate>Published: {time}</CupCardDate>
+                        <CupCardDate>{timemsg}</CupCardDate>
                     </CupText>
                 </CupCard>
             </div>

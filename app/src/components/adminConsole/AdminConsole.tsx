@@ -39,7 +39,11 @@ const AdminConsole = () => {
             />
             <hr />
             <PublishedCups
-                cups={cups.filter((cup) => cup.isPublished == true)}
+                cups={cups
+                    .filter((cup) => cup.isPublished == true)
+                    .sort((a, b) =>
+                        a.timePublished < b.timePublished ? 1 : -1
+                    )}
             />
         </div>
     );
