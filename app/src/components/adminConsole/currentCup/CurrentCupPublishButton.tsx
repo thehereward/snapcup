@@ -1,16 +1,30 @@
-import React from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { CurrentCupOptionsButton } from "../AdminConsoleStyles";
 import { CupWithId } from "../../../types/Cup";
+import { setCupPublished } from "../../../firebase/cups/CupService";
 
 const CurrentCupPublishButton: React.FunctionComponent = (props: {
-    CupWithId: CupWithId;
+    cup: CupWithId;
     updateIsCup: () => void;
 }) => {
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string>("");
+
     const handlePublish = () => {
-        //change publish status in firebase
-        //re-find isCup
-        return null;
+        (async () => {
+            try {
+                setLoading(true);
+                await setCupPublished(props.cup.id);
+                setLoading(false);
+                setError("");
+                props.updateIsCup();
+            } catch (err) {
+                console.error(err);
+                setError("Error!");
+            }
+        })();
     };
+
     return (
         <CurrentCupOptionsButton onClick={handlePublish}>
             Publish SnapCup

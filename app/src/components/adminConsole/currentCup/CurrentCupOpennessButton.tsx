@@ -24,7 +24,7 @@ const CurrentCupOpennessButton = ({ cup, setCup }) => {
                 setError("Error!");
             }
         })();
-    }, [cup.id, cup.isOpen]);
+    }, [cup.id, cup.isOpen, setLoading, setError, setCup]);
 
     return (
         <CurrentCupOptionsButton disabled={loading} onClick={clickSetOpenness}>
