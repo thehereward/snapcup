@@ -6,7 +6,7 @@ import { Entity } from "../../../types/Entity";
 
 const CurrentCupPublishButton: React.FunctionComponent = (props: {
     cup: Entity<Cup>;
-    updateIsCup: () => void;
+    updateCups: () => void;
 }) => {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
@@ -25,13 +25,13 @@ const CurrentCupPublishButton: React.FunctionComponent = (props: {
                 await setCupPublished(props.cup.id);
                 setLoading(false);
                 setError("");
-                props.updateIsCup();
+                props.updateCups();
             } catch (err) {
                 console.error(err);
                 setError("Error!");
             }
         })();
-    }, [props.cup, setLoading, setCupPublished, setError, props.updateIsCup]);
+    }, [props.cup, setLoading, setCupPublished, setError, props.updateCups]);
 
     return (
         <CurrentCupOptionsButton onClick={handlePublish}>

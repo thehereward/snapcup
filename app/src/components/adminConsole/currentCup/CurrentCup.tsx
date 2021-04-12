@@ -10,6 +10,7 @@ const CurrentCup: React.FunctionComponent = (props: {
     updateCups: () => void;
     setCups;
 }) => {
+    console.log(props.cups);
     return (
         <div className="CurrentCup">
             <CurrentCupHeader cups={props.cups} updateCup={props.updateCups} />

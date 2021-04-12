@@ -8,6 +8,10 @@ import { Entity } from "../../types/Entity";
 const AdminConsole = () => {
     const [cups, setCups] = useState<Entity<Cup>[]>([]);
 
+    function isCurrent(cup: Cup) {
+        return !cup.isPublished;
+    }
+
     const updateCups = () => {
         (async () => {
             try {
@@ -27,7 +31,11 @@ const AdminConsole = () => {
         <div className="my-3">
             <SnappableManager />
             <hr />
-            <CurrentCup cups={cups} updateCup={updateCups} setCup={setCups} />
+            <CurrentCup
+                cups={cups.filter(isCurrent)}
+                updateCup={updateCups}
+                setCup={setCups}
+            />
         </div>
     );
 };

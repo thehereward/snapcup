@@ -15,16 +15,6 @@ const CreateCupButton: React.FunctionComponent = (props: {
     const [status, setStatus] = useState({ status: IDLE });
     const [newCupName, setNewCupName] = useState<string>("");
     const [allCupNames, setAllCupNames] = useState<string[]>([]);
-    const [isCup, setIsCup] = useState<Boolean>(false);
-
-    const existsUnpublished = (cups: Entity<Cup>[]) => {
-        for (const cup of cups) {
-            if (!cup.isPublished) {
-                return true;
-            }
-        }
-        return false;
-    };
 
     useEffect(() => {
         GetCupNames()
@@ -58,7 +48,7 @@ const CreateCupButton: React.FunctionComponent = (props: {
         setNewCupName(event.target.value);
     };
 
-    if (!existsUnpublished(props.cups)) {
+    if (props.cups.length == 0) {
         return (
             <form>
                 <input

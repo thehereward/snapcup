@@ -10,19 +10,15 @@ const AllCurrentCupsDisplay: React.FunctionComponent = (props: {
     setCups;
 }) => {
     const cupsList = props.cups.map((cup) => {
-        if (cup.isPublished) {
-            return null;
-        } else {
-            return (
-                <div key={cup.id}>
-                    <AdminCurrentSnapsDisplay
-                        cup={cup}
-                        updateCups={props.updateCups}
-                        setCups={props.setCups}
-                    />
-                </div>
-            );
-        }
+        return (
+            <div key={cup.id}>
+                <AdminCurrentSnapsDisplay
+                    cup={cup}
+                    updateCups={props.updateCups}
+                    setCups={props.setCups}
+                />
+            </div>
+        );
     });
     if (
         cupsList.some(function (el) {
