@@ -16,7 +16,6 @@ const SnappableManager = () => {
     const [status, setStatus] = useState({ status: IDLE });
     const [filename, setFilename] = useState<String | null>(null);
     const fileRef = useRef(null);
-
     const onClickDownload = useCallback(() => {
         setStatus({ status: LOADING });
         (async () => {

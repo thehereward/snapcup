@@ -8,7 +8,7 @@ export function formatTimestamp(date: Date): string {
     });
 }
 
-interface BodyElement {
+export interface BodyElement {
     text: string;
     isTag: boolean;
 }
@@ -32,4 +32,14 @@ export function getBodyElements(body: string): BodyElement[] {
         bodyElements.push({ text: body.substring(prevIndex), isTag: false });
     }
     return bodyElements;
+}
+
+/* Formats the body of a snap so the meta data is removed */
+export function formatBody(body: string) {
+    var newBody = "";
+    const bodyElems = getBodyElements(body);
+    for (var elem of bodyElems) {
+        newBody += elem.text;
+    }
+    return newBody;
 }

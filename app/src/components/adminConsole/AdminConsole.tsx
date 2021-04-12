@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import SnappableManager from "./manageTeam/SnappableManager";
 import CurrentCup from "./currentCup/CurrentCup";
 import { getExistsUnpublished } from "../../firebase/cups/CupService";
+import ExportAllSnaps from "./ExportAllSnaps";
 
 const AdminConsole = () => {
     const [isCup, setIsCup] = useState<Boolean>(false);
@@ -30,6 +31,7 @@ const AdminConsole = () => {
                 isOpen={false}
                 updateIsCup={updateIsCup}
             />
+            <ExportAllSnaps />
         </div>
     );
 };

@@ -1,10 +1,19 @@
 import firebase from "firebase/app";
 import "firebase/functions";
+import { formatBody } from "../../components/submissionPage/helpers/snapFormatting";
 
 function snappablesToCsvContent(snappables) {
     let csvContent = "id,fullName,email,username";
     snappables.forEach(({ id, fullName, email, username }) => {
         csvContent += `\n${id},${fullName},${email},${username}`;
+    });
+    return csvContent;
+}
+
+function snapsToCsvContent(snaps) {
+    let csvContent = "messages";
+    snaps.forEach(({ to, from, body, timestamp }) => {
+        csvContent += `\n${formatBody(body)}`;
     });
     return csvContent;
 }
@@ -29,12 +38,18 @@ function stringToFileDownload(
     }
 }
 
-export function snappablesToCsvDownload(
-    snappables,
-    filename = "snappable_list.csv"
-) {
+export function snapsToCsvDownload(snaps) {
+    const csvContent = snapsToCsvContent(snaps);
+    stringToFileDownload(csvContent, "snaps", "text/csv;charset=utf-8;");
+}
+
+export function snappablesToCsvDownload(snappables) {
     const csvContent = snappablesToCsvContent(snappables);
-    stringToFileDownload(csvContent, filename, "text/csv;charset=utf-8;");
+    stringToFileDownload(
+        csvContent,
+        "snappable_list.csv",
+        "text/csv;charset=utf-8;"
+    );
 }
 
 function assertSnappableRecordValid(fullName, email, username, i = null) {
