@@ -5,7 +5,8 @@
     "scripts": {
         "install:all": "npm install && cd app && npm install && cd ../functions && npm install && cd ..",
         "prepare": "husky install",
-        "gitsetup": "chmod +x ./.husky/pre-commit"
+        "gitsetup": "chmod +x ./.husky/pre-commit",
+        "emulator": "firebase use $npm_config_proj && firebase emulators:start"
     },
     "repository": {
         "type": "git",
