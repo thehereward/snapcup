@@ -85,6 +85,7 @@ export const uploadSnappableList = regionalFunctions.https.onCall(
             const inDoc = snapsInWithId[outDocSnapshot.id];
             if (inDoc === undefined) {
                 toDeleteIds.push(outDocSnapshot.id);
+                return;
             }
             const outDoc = outDocSnapshot.data();
             if (
