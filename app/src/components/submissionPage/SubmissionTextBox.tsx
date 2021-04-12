@@ -19,7 +19,6 @@ import {
     LabelText,
     TaggedTeamMembers,
     HelperText,
-    VerticallyCenteredDiv,
 } from "./SnapSubmissionStyles";
 
 export interface Props {
