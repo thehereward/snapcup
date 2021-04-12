@@ -89,7 +89,8 @@ export async function readFileAndUpload(file: Blob) {
     const csvText = await file.text();
     const snappableList = csvTextToSnappableList(csvText);
 
-    return firebase.functions().httpsCallable("uploadSnappableList")(
-        snappableList
-    );
+    return firebase
+        .app()
+        .functions("europe-west2")
+        .httpsCallable("uploadSnappableList")(snappableList);
 }
