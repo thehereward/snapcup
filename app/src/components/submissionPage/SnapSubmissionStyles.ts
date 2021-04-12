@@ -38,25 +38,8 @@ export const SnapCupTextArea = styled(MentionsInput)`
     background-color: white;
     height: 250px;
     outline: none;
-`;
-
-export const TaggedTeamMembers = styled.input`
-    font-family: var(--open-sans);
-    font-style: normal;
-    font-weight: normal;
-    font-size: 15px;
-    line-height: 22px;
-    width: 95%;
-    background-color: var(--purple-textbox);
-    border: 0px;
-    border-bottom: 1px solid;
-    border-color: white;
-    &:focus {
-        outline: none;
-        border: 0px;
-        border-bottom: 1px solid;
-        border-color: white;
-    }
+    margin-left: auto;
+    margin-right: auto;
 `;
 
 export const LabelText = styled.p`
