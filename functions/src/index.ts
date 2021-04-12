@@ -2,7 +2,7 @@ import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 import { CallableContext } from "firebase-functions/lib/providers/https";
 
-admin.initializeApp();
+admin.initializeApp({ projectId: "snapcup-nina" });
 const db = admin.firestore();
 
 async function assertUserIsAdmin(context: CallableContext) {
