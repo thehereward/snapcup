@@ -66,7 +66,7 @@ password: testtest
 
 The command will fail if you do not have the Java JDK installed, however the command will give you a link to openjdk, from where you can download it.
 
-On windows you can install a zip file with the JDK, unzip it to C:/jdk-16, and then add C:/jdk-16/bin to my global path variable.
+On windows you can install a zip file with the JDK, unzip it to C:/jdk-16, and then add C:/jdk-16/bin to the global path variable.
 
 In wsl/ubuntu, you can just run `sudo apt update` and then `sudo apt install default-jdk` and this will install the jdk for you.
 
