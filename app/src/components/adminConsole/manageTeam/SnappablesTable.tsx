@@ -10,6 +10,7 @@ const SnappablesTable = () => {
             <td>{p.email}</td>
             <td>{p.fullName}</td>
             <td>{p.username}</td>
+            <td>2</td>
         </tr>
     ));
 
@@ -29,6 +30,7 @@ const SnappablesTable = () => {
                     <th scope="col">Email</th>
                     <th scope="col">Full Name</th>
                     <th scope="col">Username</th>
+                    <th scope="col">Snaps Recieved</th>
                 </tr>
             </thead>
             <tbody>{rows}</tbody>
