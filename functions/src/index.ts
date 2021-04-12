@@ -5,7 +5,7 @@ import { CallableContext } from "firebase-functions/lib/providers/https";
 admin.initializeApp();
 const db = admin.firestore();
 
-const regionalFunctions = functions.region("europe-west1");
+const regionalFunctions = functions.region("europe-west2");
 
 async function assertUserIsAdmin(context: CallableContext) {
     if (!context.auth) {
