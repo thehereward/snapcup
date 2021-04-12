@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Cup from "../../../types/Cup";
 import { Entity } from "../../../types/Entity";
 import AdminCurrentSnapsDisplay from "./AdminCurrentSnapsDisplay";
-import { CupNameDisplay, MessageDisplay } from "../AdminConsoleStyles";
+import { MessageDisplay } from "../AdminConsoleStyles";
 
 const AllCurrentCupsDisplay: React.FunctionComponent = (props: {
     cups: Entity<Cup>[];
@@ -20,11 +20,7 @@ const AllCurrentCupsDisplay: React.FunctionComponent = (props: {
             </div>
         );
     });
-    if (
-        cupsList.some(function (el) {
-            return el != null;
-        })
-    ) {
+    if (props.cups.length > 0) {
         return <div>{cupsList}</div>;
     } else {
         return (
