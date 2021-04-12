@@ -12,6 +12,13 @@ const CurrentCupPublishButton: React.FunctionComponent = (props: {
     const [error, setError] = useState<string>("");
 
     const handlePublish = useCallback(() => {
+        if (
+            !confirm(
+                "Are you sure you want to publish this cup? This cannot be reversed!"
+            )
+        ) {
+            return;
+        }
         (async () => {
             try {
                 setLoading(true);
