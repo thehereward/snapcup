@@ -12,6 +12,9 @@ export const SnapSubmissionColumnDiv = styled.div`
     padding-top: 3%;
     padding-bottom: 3%;
     border-radius: 10px 10px 10px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const SnapCupText = styled.p`
@@ -33,7 +36,7 @@ export const SnapCupTextArea = styled(MentionsInput)`
     width: 95%;
     resize: none;
     background-color: white;
-    height: 180px;
+    height: 250px;
     outline: none;
 `;
 

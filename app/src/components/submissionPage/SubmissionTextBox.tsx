@@ -19,6 +19,7 @@ import {
     LabelText,
     TaggedTeamMembers,
     HelperText,
+    VerticallyCenteredDiv,
 } from "./SnapSubmissionStyles";
 
 export interface Props {
@@ -91,17 +92,6 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
                         </div>
                         <div className="col col-lg-7">
                             <form>
-                                <div>
-                                    <LabelText>Tag Team Members</LabelText>
-                                    <TaggedTeamMembers
-                                        type="text"
-                                        className="form-control"
-                                    />
-                                    <HelperText>
-                                        Enter their email address or use the @
-                                        symbol
-                                    </HelperText>
-                                </div>
                                 <div className="form-group">
                                     <LabelText>Message:</LabelText>
                                     <SnapCupTextArea
