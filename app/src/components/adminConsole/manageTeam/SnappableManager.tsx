@@ -6,6 +6,7 @@ import {
     SectionHeaderUnderline,
 } from "../AdminConsoleStyles";
 import { snappablesToCsvDownload, readFileAndUpload } from "../csvManager";
+import FileUploadError from "../FileUploadError";
 import DownloadButton from "./DownloadButton";
 import SnappablesTable from "./SnappablesTable";
 
@@ -34,30 +35,39 @@ const SnappableManager = () => {
         })();
     }, [setStatus]);
 
-    const uploadSnappables = useCallback((event) => {
-        event.preventDefault();
-        if (!fileRef.current.files.length) {
-            setStatus({
-                status: ERROR,
-                error: "You don't have a file to upload.",
-            });
-            return;
-        }
-        (async () => {
-            setStatus({ status: LOADING });
-            try {
-                await readFileAndUpload(fileRef.current.files[0]);
-                setStatus({ status: IDLE });
-                fileRef.current.value = "";
-            } catch (err) {
-                console.error(err);
+    const uploadSnappables = useCallback(
+        (event) => {
+            event.preventDefault();
+            if (!fileRef.current.files.length) {
                 setStatus({
                     status: ERROR,
-                    error: "There was an error uploading your list of people.",
+                    error: "You don't have a file to upload.",
                 });
+                return;
             }
-        })();
-    });
+            (async () => {
+                setStatus({ status: LOADING });
+                try {
+                    await readFileAndUpload(fileRef.current.files[0]);
+                    setStatus({ status: IDLE });
+                    setFilename(null);
+                    fileRef.current.value = "";
+                } catch (err) {
+                    console.error(err);
+                    let message =
+                        "There was an error uploading your list of people.";
+                    if (err instanceof FileUploadError) {
+                        message = err.message;
+                    }
+                    setStatus({
+                        status: ERROR,
+                        error: message,
+                    });
+                }
+            })();
+        },
+        [setStatus, setFilename]
+    );
 
     const handleFilenameChange = (event) => {
         setFilename(event.target.files[0]?.name ?? null);

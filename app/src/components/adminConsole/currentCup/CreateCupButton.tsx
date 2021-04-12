@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import { createNewCup, GetCupNames } from "../../../firebase/cups/CupService";
 import Cup from "../../../types/Cup";
 import { NewCupButton } from "../AdminConsoleStyles";
+import { Entity } from "../../../types/Entity";
 
 const LOADING = "loading";
 const IDLE = "idle";
 const ERROR = "error";
 
 const CreateCupButton: React.FunctionComponent = (props: {
-    isCup: Boolean;
-    updateIsCup: () => void;
+    cups: Entity<Cup>[];
+    updateCups: () => void;
 }) => {
     const [status, setStatus] = useState({ status: IDLE });
     const [newCupName, setNewCupName] = useState<string>("");
@@ -30,11 +31,12 @@ const CreateCupButton: React.FunctionComponent = (props: {
             isOpen: false,
             timeCreated: new Date(),
             name: newCupName,
+            timePublished: null,
         };
         try {
             createNewCup(newCup);
             setNewCupName("");
-            props.updateIsCup();
+            props.updateCups();
         } catch (error) {
             console.log(error.toString());
             console.log("error in firebase");
@@ -46,7 +48,7 @@ const CreateCupButton: React.FunctionComponent = (props: {
         setNewCupName(event.target.value);
     };
 
-    if (!props.isCup) {
+    if (props.cups.length == 0) {
         return (
             <form>
                 <input

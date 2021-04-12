@@ -1,37 +1,41 @@
 import React, { useState, useEffect, useCallback } from "react";
 import SnappableManager from "./manageTeam/SnappableManager";
 import CurrentCup from "./currentCup/CurrentCup";
-import { getExistsUnpublished } from "../../firebase/cups/CupService";
-import ExportAllSnaps from "./ExportAllSnaps";
+import { getAllCups } from "../../firebase/cups/CupService";
+import Cup from "../../types/Cup";
+import { Entity } from "../../types/Entity";
 
 const AdminConsole = () => {
-    const [isCup, setIsCup] = useState<Boolean>(false);
+    const [cups, setCups] = useState<Entity<Cup>[]>([]);
+
+    function isCurrent(cup: Cup) {
+        return !cup.isPublished;
+    }
+
+    const updateCups = () => {
+        (async () => {
+            try {
+                const res = await getAllCups();
+                setCups(res);
+            } catch (err) {
+                console.error(err);
+            }
+        })();
+    };
 
     useEffect(() => {
-        getExistsUnpublished()
-            .then((res: Boolean) => {
-                setIsCup(res);
-            })
-            .catch((e) => console.log(e));
-    }, [getExistsUnpublished, setIsCup]);
-
-    const updateIsCup = useCallback(() => {
-        getExistsUnpublished()
-            .then((res: Boolean) => {
-                setIsCup(res);
-            })
-            .catch((e) => console.log(e));
-    }, [setIsCup]);
+        updateCups();
+    }, [setCups, getAllCups]);
 
     return (
         <div className="my-3">
             <SnappableManager />
+            <hr />
             <CurrentCup
-                isCup={isCup}
-                isOpen={false}
-                updateIsCup={updateIsCup}
+                cups={cups.filter(isCurrent)}
+                updateCup={updateCups}
+                setCup={setCups}
             />
-            <ExportAllSnaps />
         </div>
     );
 };
