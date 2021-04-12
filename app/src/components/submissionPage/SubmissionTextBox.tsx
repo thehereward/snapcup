@@ -110,6 +110,7 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
                                         onChange={handleMessageTextChanged}
                                         maxLength={GetExtraLength(snappedUsers)}
                                         rows={5}
+                                        onKeyPress={handleKeyPress}
                                         placeholder="You can tag users using @."
                                     >
                                         <Mention
