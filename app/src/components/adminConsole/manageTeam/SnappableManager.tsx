@@ -1,12 +1,10 @@
 import React, { useState, useRef, useCallback } from "react";
-import getSnappables from "../../../firebase/users/GetSnappables";
+import getSnappables from "../../firebase/users/GetSnappables";
 import {
-    FileUploadWrapper,
-    SectionHeader,
-    SectionHeaderUnderline,
-} from "../AdminConsoleStyles";
-import { snappablesToCsvDownload, readFileAndUpload } from "../csvManager";
-import DownloadButton from "./DownloadButton";
+    csvContentToCsvDownload,
+    readFileAndUpload,
+    snappablesToCsvContent,
+} from "./csvManager";
 
 const LOADING = "loading";
 const IDLE = "idle";
@@ -22,7 +20,7 @@ const SnappableManager = () => {
         (async () => {
             try {
                 const snappables = await getSnappables();
-                snappablesToCsvDownload(snappables);
+                csvContentToCsvDownload(snappablesToCsvContent(snappables));
                 setStatus({ status: IDLE });
             } catch (err) {
                 console.error(err);

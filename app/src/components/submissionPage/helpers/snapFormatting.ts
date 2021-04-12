@@ -8,7 +8,7 @@ export function formatTimestamp(date: Date): string {
     });
 }
 
-interface BodyElement {
+export interface BodyElement {
     text: string;
     isTag: boolean;
 }

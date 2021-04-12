@@ -1,7 +1,11 @@
 import firebase from "firebase/app";
 import "firebase/functions";
+import {
+    getBodyElements,
+    BodyElement,
+} from "../../components/submissionPage/helpers/snapFormatting";
 
-function snappablesToCsvContent(snappables) {
+export function snappablesToCsvContent(snappables) {
     let csvContent = "id,fullName,email,username";
     snappables.forEach(({ id, fullName, email, username }) => {
         csvContent += `\n${id},${fullName},${email},${username}`;
@@ -9,7 +13,24 @@ function snappablesToCsvContent(snappables) {
     return csvContent;
 }
 
-function stringToFileDownload(
+/* Formats the body of a snap so the meta data is removed */
+function formatBody(body: string) {
+    var newBody = "";
+    const bodyElems = getBodyElements(body);
+    for (var elem of bodyElems) {
+        newBody += elem.text;
+    }
+    return newBody;
+}
+
+export function snapsToCsvContent(snappables) {
+    let csvContent = "messages";
+    snappables.forEach(({ to, from, body, timestamp }) => {
+        csvContent += `\n${formatBody(body)}`;
+    });
+    return csvContent;
+}
+export function stringToFileDownload(
     content: string,
     filename: string,
     type = "text/csv;charset=utf-8;"
@@ -29,11 +50,10 @@ function stringToFileDownload(
     }
 }
 
-export function snappablesToCsvDownload(
-    snappables,
+export function csvContentToCsvDownload(
+    csvContent,
     filename = "snappable_list.csv"
 ) {
-    const csvContent = snappablesToCsvContent(snappables);
     stringToFileDownload(csvContent, filename, "text/csv;charset=utf-8;");
 }
 
