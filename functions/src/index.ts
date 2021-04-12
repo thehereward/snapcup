@@ -1,10 +1,11 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
+import { CallableContext } from "firebase-functions/lib/providers/https";
 
 admin.initializeApp();
 const db = admin.firestore();
 
-async function assertUserIsAdmin(context) {
+async function assertUserIsAdmin(context: CallableContext) {
     if (!context.auth) {
         throw new functions.https.HttpsError(
             "failed-precondition",
