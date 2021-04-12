@@ -34,10 +34,7 @@ export const SnapCupTextArea = styled(MentionsInput)`
     resize: none;
     background-color: white;
     height: 180px;
-    &:focus {
-        outline: none;
-        border: none;
-    }
+    outline: none;
 `;
 
 export const TaggedTeamMembers = styled.input`

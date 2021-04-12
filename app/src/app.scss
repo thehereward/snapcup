@@ -35,6 +35,15 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
     --button-hover-border: #e3daf8;
 }
 
+.finalTextBox textarea {
+    border: 0;
+    outline: 0;
+    padding: 5px;
+    textarea:focus {
+        outline: none;
+    }
+}
+
 $font-family-base: var(--open-sans);
 
 @import "bootstrap/scss/root"; // Required

@@ -98,7 +98,7 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
                                 <div className="form-group">
                                     <LabelText>Message:</LabelText>
                                     <SnapCupTextArea
-                                        className="form-control"
+                                        className="form-control finalTextBox"
                                         value={message}
                                         onChange={handleMessageTextChanged}
                                         maxLength={GetExtraLength(snappedUsers)}
@@ -109,7 +109,9 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
                                             style={{
                                                 backgroundColor: "#daf4fa",
                                                 zIndex: 0,
+                                                outline: "none",
                                             }}
+                                            className="mentions__mention"
                                             trigger="@"
                                             data={props.snappables}
                                             rows={5}
