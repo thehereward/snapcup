@@ -4,6 +4,7 @@ import CurrentCup from "./currentCup/CurrentCup";
 import { getAllCups } from "../../firebase/cups/CupService";
 import Cup from "../../types/Cup";
 import { Entity } from "../../types/Entity";
+import PublishedCups from "./publishedCups/PublishedCups";
 
 const AdminConsole = () => {
     const [cups, setCups] = useState<Entity<Cup>[]>([]);
@@ -35,6 +36,10 @@ const AdminConsole = () => {
                 cups={cups.filter(isCurrent)}
                 updateCup={updateCups}
                 setCup={setCups}
+            />
+            <hr />
+            <PublishedCups
+                cups={cups.filter((cup) => cup.isPublished == true)}
             />
         </div>
     );
