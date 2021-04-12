@@ -2,22 +2,21 @@ import React from "react";
 import AdminCurrentSnapsDisplay from "./AdminCurrentSnapsDisplay";
 import CurrentCupHeader from "./CurrentCupHeader";
 import { SectionHeaderUnderline } from "../AdminConsoleStyles";
+import { CupWithId } from "../../../types/Cup";
 
 const CurrentCup: React.FunctionComponent = (props: {
-    isCup: Boolean;
-    isOpen: Boolean;
-    updateIsCup: () => void;
+    cup: CupWithId | undefined;
+    updateCup: () => void;
+    setCup;
 }) => {
     return (
         <div className="CurrentCup">
-            <CurrentCupHeader
-                isCup={props.isCup}
-                updateIsCup={props.updateIsCup}
-            />
+            <CurrentCupHeader cup={props.cup} updateCup={props.updateCup} />
             <SectionHeaderUnderline />
             <AdminCurrentSnapsDisplay
-                isCup={props.isCup}
-                isOpen={props.isOpen}
+                cup={props.cup}
+                updateCup={props.updateCup}
+                setCup={props.setCup}
             />
         </div>
     );
