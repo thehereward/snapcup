@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { MentionsInput, Mention } from "react-mentions";
 import MentionElements from "../../types/MentionElements";
 import GetExtraLength from "./GetExtraLength";
@@ -33,7 +32,7 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
     const [error, setError] = useState<string>("");
     const [snappedUsers, setSnappedUsers] = useState<MentionElements[]>([]);
 
-    function handleSubmit(event) {
+    const handleSubmit = useCallback((event) => {
         const uid = getCurrentUserUid();
         event.preventDefault();
         const ids = snappedUsers.map((u: MentionElements) => u.id);
@@ -43,20 +42,23 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
             body: message,
             timestamp: new Date(),
         };
-        if (ValidateSnap(resultingSnap, snappedUsers)) {
+        if (!ValidateSnap(resultingSnap, snappedUsers)) {
+            setError("Your snap is invalid.");
+            setConfirmation(false);
+            return;
+        }
+
+        (async () => {
             try {
-                submitSnap(resultingSnap);
+                await submitSnap(resultingSnap);
                 setConfirmation(true);
                 setMessage("");
                 setSnappedUsers([]);
             } catch (error) {
-                setError(error.toString());
+                setError("There was an error submitting the snap!");
             }
-        } else {
-            setError("Your snap is invalid.");
-            setConfirmation(false);
-        }
-    }
+        })();
+    });
 
     /* Updates the value in the webhook "message" */
     function handleMessageTextChanged(
