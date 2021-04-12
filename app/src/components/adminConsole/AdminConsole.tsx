@@ -32,7 +32,7 @@ const AdminConsole = () => {
                 updateIsCup={updateIsCup}
             />
             <ExportAllSnaps />
-        </>
+        </div>
     );
 };
 
