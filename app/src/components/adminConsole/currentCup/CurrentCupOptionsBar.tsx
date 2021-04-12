@@ -1,10 +1,11 @@
 import React from "react";
-import { CupWithId } from "../../../types/Cup";
+import Cup from "../../../types/Cup";
 import CurrentCupOpennessButton from "./CurrentCupOpennessButton";
 import CurrentCupPublishButton from "./CurrentCupPublishButton";
+import { Entity } from "../../../types/Entity";
 
 const CurrentCupOptionsBar: React.FunctionComponent = (props: {
-    cup: CupWithId;
+    cup: Entity<Cup>;
     setCup;
     updateCup: () => void;
 }) => {

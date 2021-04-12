@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { createNewCup, GetCupNames } from "../../../firebase/cups/CupService";
 import Cup, { CupWithId } from "../../../types/Cup";
 import { NewCupButton } from "../AdminConsoleStyles";
+import { Entity } from "../../../types/Entity";
 
 const LOADING = "loading";
 const IDLE = "idle";
 const ERROR = "error";
 
 const CreateCupButton: React.FunctionComponent = (props: {
-    cup: CupWithId;
+    cup: Entity<Cup>;
     updateCup: () => void;
 }) => {
     const [status, setStatus] = useState({ status: IDLE });

@@ -3,7 +3,8 @@ import CreateCupButton from "./CreateCupButton";
 import { SectionHeader } from "../AdminConsoleStyles";
 import Elle from "../../../images/Elle";
 import styled from "styled-components";
-import { CupWithId } from "../../../types/Cup";
+import Cup from "../../../types/Cup";
+import { Entity } from "../../../types/Entity";
 
 export const MiniElleImg = styled(Elle)`
     height: 66px;
@@ -13,7 +14,7 @@ export const MiniElleImg = styled(Elle)`
 `;
 
 const CurrentCupHeader: React.FunctionComponent = (props: {
-    cup: CupWithId | undefined;
+    cup: Entity<Cup> | undefined;
     updateCup: () => void;
 }) => {
     return (

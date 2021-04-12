@@ -2,10 +2,11 @@ import React from "react";
 import AdminCurrentSnapsDisplay from "./AdminCurrentSnapsDisplay";
 import CurrentCupHeader from "./CurrentCupHeader";
 import { SectionHeaderUnderline } from "../AdminConsoleStyles";
-import { CupWithId } from "../../../types/Cup";
+import Cup from "../../../types/Cup";
+import { Entity } from "../../../types/Entity";
 
 const CurrentCup: React.FunctionComponent = (props: {
-    cup: CupWithId | undefined;
+    cup: Entity<Cup> | undefined;
     updateCup: () => void;
     setCup;
 }) => {

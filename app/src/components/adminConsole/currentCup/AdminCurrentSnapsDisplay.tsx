@@ -1,10 +1,11 @@
 import React from "react";
 import { MessageDisplay, CupNameDisplay } from "../AdminConsoleStyles";
 import CurrentCupOptionsBar from "./CurrentCupOptionsBar";
-import { CupWithId } from "../../../types/Cup";
+import Cup from "../../../types/Cup";
+import { Entity } from "../../../types/Entity";
 
 const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
-    cup: CupWithId | undefined;
+    cup: Entity<Cup> | undefined;
     updateCup: () => void;
     setCup;
 }) => {

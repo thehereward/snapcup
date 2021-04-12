@@ -1,10 +1,11 @@
 import React, { useCallback, useState, useEffect } from "react";
 import { CurrentCupOptionsButton } from "../AdminConsoleStyles";
-import { CupWithId } from "../../../types/Cup";
+import Cup from "../../../types/Cup";
 import { setCupPublished } from "../../../firebase/cups/CupService";
+import { Entity } from "../../../types/Entity";
 
 const CurrentCupPublishButton: React.FunctionComponent = (props: {
-    cup: CupWithId;
+    cup: Entity<Cup>;
     updateIsCup: () => void;
 }) => {
     const [loading, setLoading] = useState<boolean>(false);

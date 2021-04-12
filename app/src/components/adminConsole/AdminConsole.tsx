@@ -3,11 +3,12 @@ import SnappableManager from "./SnappableManager";
 import CurrentCup from "./currentCup/CurrentCup";
 import { getCurrentCupIfExists } from "../../firebase/cups/CupService";
 import Cup from "../../types/Cup";
+import { Entity } from "../../types/Entity";
 
 const AdminConsole = () => {
-    const [cup, setCup] = useState<Cup | undefined>(false);
+    const [cup, setCup] = useState<Entity<Cup> | undefined>(false);
 
-    const updateCup = useCallback(() => {
+    const updateCup = () => {
         (async () => {
             try {
                 const res = await getCurrentCupIfExists();
@@ -16,7 +17,7 @@ const AdminConsole = () => {
                 console.error(err);
             }
         })();
-    }, [setCup]);
+    };
 
     useEffect(updateCup, [updateCup]);
 
