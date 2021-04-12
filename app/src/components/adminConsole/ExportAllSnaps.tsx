@@ -9,45 +9,18 @@ const ERROR = "error";
 const ExportAllSnaps = () => {
     const [status, setStatus] = useState({ status: IDLE });
 
-    function snapsToCsvDownload(csvContent, filename = "snaps.csv") {
-        stringToFileDownload(csvContent, filename, "text/csv;charset=utf-8;");
-    }
-
-    function stringToFileDownload(
-        content: string,
-        filename: string,
-        type = "text/csv;charset=utf-8;"
-    ) {
-        var blob = new Blob([content], { type });
-        var link = document.createElement("a");
-        if (link.download !== undefined) {
-            // feature detection
-            // Browsers that support HTML5 download attribute
-            var url = URL.createObjectURL(blob);
-            link.setAttribute("href", url);
-            link.setAttribute("download", filename);
-            link.style.visibility = "hidden";
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-    }
-
     const downloadSnaps = useCallback(() => {
         setStatus({ status: LOADING });
         (async () => {
             try {
-                const snappables = await getSnaps();
-                csvContentToCsvDownload(
-                    snapsToCsvContent(snappables),
-                    "snaps.csv"
-                );
+                const snaps = await getSnaps();
+                csvContentToCsvDownload(snapsToCsvContent(snaps), "snaps.csv");
                 setStatus({ status: IDLE });
             } catch (err) {
                 console.error(err);
                 setStatus({
                     status: ERROR,
-                    error: "There was an error loading snappable people.",
+                    error: "There was an error loading snaps.",
                 });
             }
         })();
@@ -55,7 +28,10 @@ const ExportAllSnaps = () => {
 
     return (
         <div>
-            <h1>Export</h1>
+            <h1>Export all snaps</h1>
+            <p>
+                To get all of the snaps sent, press the download snaps button.
+            </p>
             <div
                 className="btn-group ml-2"
                 role="group"
