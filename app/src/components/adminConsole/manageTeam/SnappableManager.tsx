@@ -1,6 +1,12 @@
 import React, { useState, useRef, useCallback } from "react";
-import getSnappables from "../../firebase/users/GetSnappables";
-import { snappablesToCsvDownload, readFileAndUpload } from "./csvManager";
+import getSnappables from "../../../firebase/users/GetSnappables";
+import {
+    FileUploadWrapper,
+    SectionHeader,
+    SectionHeaderUnderline,
+} from "../AdminConsoleStyles";
+import { snappablesToCsvDownload, readFileAndUpload } from "../csvManager";
+import DownloadButton from "./DownloadButton";
 
 const LOADING = "loading";
 const IDLE = "idle";
@@ -8,9 +14,10 @@ const ERROR = "error";
 
 const SnappableManager = () => {
     const [status, setStatus] = useState({ status: IDLE });
+    const [filename, setFilename] = useState<String | null>(null);
     const fileRef = useRef(null);
 
-    const downloadSnappables = useCallback(() => {
+    const onClickDownload = useCallback(() => {
         setStatus({ status: LOADING });
         (async () => {
             try {
@@ -25,7 +32,7 @@ const SnappableManager = () => {
                 });
             }
         })();
-    }, []);
+    }, [setStatus]);
 
     const uploadSnappables = useCallback((event) => {
         event.preventDefault();
@@ -52,9 +59,20 @@ const SnappableManager = () => {
         })();
     });
 
+    const handleFilenameChange = (event) => {
+        setFilename(event.target.files[0]?.name ?? null);
+    };
+
     return (
         <>
-            <h5>Snappable People</h5>
+            <SectionHeader className="mb-2">
+                Manage Team{" "}
+                <DownloadButton
+                    onClick={onClickDownload}
+                    disabled={status.status === LOADING}
+                />
+            </SectionHeader>
+            <SectionHeaderUnderline />
             <p>
                 When uploading the list of snappable people please leave the ID
                 cell blank for new users. Leaving the ID column blank tells the
@@ -69,42 +87,33 @@ const SnappableManager = () => {
                 to download the list of users, make edits to it, then reupload
                 it.
             </p>
-            <div
-                className="btn-group ml-2"
-                role="group"
-                aria-label="Buttons for manipulating data"
-            >
-                <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={() => downloadSnappables()}
-                    disabled={status.status === LOADING}
-                >
-                    Download as CSV
-                </button>
-            </div>
-            <form onSubmit={uploadSnappables}>
-                <input
-                    type="file"
-                    ref={fileRef}
-                    disabled={status.status === LOADING}
-                    accept=".csv"
-                />
-                <input
-                    type="submit"
-                    className="btn btn-purple"
-                    value="Upload complete list of users."
-                />
+            <form onSubmit={uploadSnappables} className="my-3">
+                <FileUploadWrapper className="btn btn-outline-purple mr-2 btn-sm">
+                    {filename ??
+                        "Browse files to upload a list of snappable people..."}
+                    <input
+                        type="file"
+                        ref={fileRef}
+                        disabled={status.status === LOADING}
+                        accept=".csv"
+                        onChange={handleFilenameChange}
+                    />
+                </FileUploadWrapper>
+                {filename && (
+                    <button type="submit" className="btn btn-purple btn-sm">
+                        Upload complete list of users
+                    </button>
+                )}
+                {status.status !== IDLE && (
+                    <p>
+                        {status.status === ERROR ? (
+                            <span className="text-danger">{status.error}</span>
+                        ) : (
+                            <b>Loading...</b>
+                        )}
+                    </p>
+                )}
             </form>
-            {status.status !== IDLE && (
-                <p>
-                    {status.status === ERROR ? (
-                        <span className="text-danger">{status.error}</span>
-                    ) : (
-                        <b>Loading...</b>
-                    )}
-                </p>
-            )}
         </>
     );
 };

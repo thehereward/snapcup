@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import SnappableManager from "./SnappableManager";
+import SnappableManager from "./manageTeam/SnappableManager";
 import CurrentCup from "./currentCup/CurrentCup";
 import { getExistsUnpublished } from "../../firebase/cups/CupService";
 
@@ -23,17 +23,14 @@ const AdminConsole = () => {
     }, [setIsCup]);
 
     return (
-        <>
-            <hr />
-            <h2>Admin Console</h2>
+        <div className="my-3">
             <SnappableManager />
-            <hr />
             <CurrentCup
                 isCup={isCup}
                 isOpen={false}
                 updateIsCup={updateIsCup}
             />
-        </>
+        </div>
     );
 };
 
