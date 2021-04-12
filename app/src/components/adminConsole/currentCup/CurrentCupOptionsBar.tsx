@@ -1,10 +1,22 @@
 import React from "react";
+import { CupWithId } from "../../../types/Cup";
+import CurrentCupOpennessButton from "./CurrentCupOpennessButton";
+import CurrentCupPublishButton from "./CurrentCupPublishButton";
 
 const CurrentCupOptionsBar: React.FunctionComponent = (props: {
-    isOpen: Boolean;
-    isPublished: Boolean;
+    cup: CupWithId;
+    setCup;
+    updateCup: () => void;
 }) => {
-    return null;
+    return (
+        <>
+            <CurrentCupOpennessButton cup={props.cup} setCup={props.setCup} />
+            <CurrentCupPublishButton
+                cup={props.cup}
+                updateIsCup={props.updateCup}
+            />
+        </>
+    );
 };
 
 export default CurrentCupOptionsBar;

@@ -1,27 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { getCurrentCupName } from "../../../firebase/cups/CupService";
+import React from "react";
 import { MessageDisplay, CupNameDisplay } from "../AdminConsoleStyles";
 import CurrentCupOptionsBar from "./CurrentCupOptionsBar";
+import { CupWithId } from "../../../types/Cup";
 
 const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
-    isCup: Boolean;
-    isOpen: Boolean;
+    cup: CupWithId | undefined;
+    updateCup: () => void;
+    setCup;
 }) => {
-    const [currentCupName, setCurrentCupName] = useState<String>("");
-    useEffect(() => {
-        getCurrentCupName()
-            .then((res: String) => {
-                setCurrentCupName(res);
-            })
-            .catch((e) => console.log(e));
-    }, [getCurrentCupName, setCurrentCupName]);
-    if (props.isCup) {
-        console.log(currentCupName);
+    if (!(props.cup == undefined)) {
         return (
-            <div>
-                <CupNameDisplay>{currentCupName}</CupNameDisplay>
-                // add snaps in current cup here
-                <CurrentCupOptionsBar />
+            <div className="d-flex">
+                <CupNameDisplay>{props.cup.name}</CupNameDisplay>
+                <div className="flex-grow-1" />
+                <CurrentCupOptionsBar
+                    cup={props.cup}
+                    setCup={props.setCup}
+                    updateCup={props.updateCup}
+                />
             </div>
         );
     } else {

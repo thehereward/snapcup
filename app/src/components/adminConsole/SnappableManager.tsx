@@ -76,7 +76,7 @@ const SnappableManager = () => {
             >
                 <button
                     type="button"
-                    className="btn btn-primary"
+                    className="btn btn-purple"
                     onClick={() => downloadSnappables()}
                     disabled={status.status === LOADING}
                 >

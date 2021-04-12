@@ -58,10 +58,33 @@ export const CupNameDisplay = styled.p`
 `;
 
 export const SectionHeaderUnderline = styled.p`
-    width: 1250px;
+    width: 100%;
     height: 0px;
     left: 37px;
     top: 748px;
 
     border: 1px solid var(--purple-selected);
+`;
+
+export const CurrentCupOptionsButton = styled.button`
+    text-align: center;
+    width: 155px;
+    height: 30px;
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    border-radius: 10px;
+    border-color: #a07ee8;
+    background-color: transparent;
+    color: #a07ee8;
+    margin-left: 10px;
+    &:hover {
+        color: var(--purple-selected);
+        border-color: var(--purple-selected);
+    }
+    &:disabled {
+        color: #aaaaaa;
+    }
 `;
