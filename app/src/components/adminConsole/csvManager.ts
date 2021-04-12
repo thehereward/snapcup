@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/functions";
+import FileUploadError from "./FileUploadError";
 import { formatBody } from "../../components/submissionPage/helpers/snapFormatting";
 
 function snappablesToCsvContent(snappables) {
@@ -54,7 +55,7 @@ export function snappablesToCsvDownload(snappables) {
 
 function assertSnappableRecordValid(fullName, email, username, i = null) {
     if (!(fullName && email && username)) {
-        throw new Error(
+        throw new FileUploadError(
             "All people in the spreadsheet must have name and email and username. " +
                 `Error at line ${i}. Fields at present are fullName=${fullName}, email=${email}, username=${username}.`
         );
