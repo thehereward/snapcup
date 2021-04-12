@@ -4,8 +4,12 @@ import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import SignOutButton from "./SignOutButton";
 import { NavItem, NavItemClickable } from "./NavItem";
+import Gravatar from "react-gravatar";
 
-import { getCurrentUserName } from "../../firebase/users/UserService";
+import {
+    getCurrentUserName,
+    getCurrentEmail,
+} from "../../firebase/users/UserService";
 
 const BrandLink = styled(Link)`
     font-family: var(--open-sans);
@@ -22,6 +26,10 @@ const BrandLink = styled(Link)`
 const LinkList = styled.div`
     display: flex;
     align-items: center;
+`;
+
+const ProfileImage = styled(Gravatar)`
+    border-radius: 10px;
 `;
 
 const PrettyPageWrap: React.FunctionComponent = ({
@@ -47,6 +55,9 @@ const PrettyPageWrap: React.FunctionComponent = ({
                     )}
                     <SignOutButton setLoggedIn={setLoggedIn} />
                     <NavItem>{getCurrentUserName()}</NavItem>
+                    <NavItem className="d-none d-sm-block">
+                        <ProfileImage email={getCurrentEmail()} />
+                    </NavItem>
                 </LinkList>
             </nav>
         </header>

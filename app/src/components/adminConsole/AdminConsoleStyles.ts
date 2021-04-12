@@ -2,7 +2,12 @@ import styled from "styled-components";
 import Elle from "../../images/Elle";
 
 export const SectionHeader = styled.h2`
+<<<<<<< HEAD
     font-family: var(--asap);
+=======
+    position: relative;
+    font-family: Asap;
+>>>>>>> upstream/main
     font-weight: 500;
     font-size: 30px;
     line-height: 34px;
@@ -86,5 +91,37 @@ export const CurrentCupOptionsButton = styled.button`
     }
     &:disabled {
         color: var(--our-grey);
+`;
+
+export const FileUploadWrapper = styled.span`
+    position: relative;
+    overflow: hidden;
+    input[type="file"] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;
+        background: white;
+        cursor: inherit;
+        display: block;
+    }
+`;
+
+export const StyledDownloadButton = styled.button`
+    all: unset;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    img {
+        height: 30px;
+        width: auto;
+        margin: 0;
+        padding: 0;
     }
 `;
