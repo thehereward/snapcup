@@ -6,6 +6,7 @@
     "scripts": {
         "test": "jest",
         "start": "parcel public/index.html",
+        "start:withfirebase": "REACT_APP_EMULATE_FIREBASE=true parcel --no-cache public/index.html",
         "build": "parcel build public/index.html"
     },
     "repository": {
@@ -41,6 +42,7 @@
         "firebase": "^8.3.2",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
+        "react-gravatar": "^2.6.3",
         "react-mentions": "^4.1.1",
         "react-router-dom": "^5.2.0",
         "styled-components": "^5.2.3"

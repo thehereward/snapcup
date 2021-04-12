@@ -55,14 +55,29 @@ To use the firebase emulator simply run
 firebase emulators:start
 ```
 
-from the root directory. It is likely that the command will fail if you do not have the Java JDK installed, however the command will give you instructions on how to install it if that is the case (instructions vary by machine). On my machine I just had to install a zip file with the JDK, unzip it to C:/jdk-16, and then add C:/jdk-16/bin to my global path variable.
+from the root directory. This allows you to open the firebase emulator console and it mocks firestore, auth and firebase functions from your directory. 
 
-This allows you to open the firebase emulator console and it mocks firestore, auth and firebase functions from your directory.
-When you start the emulator you should go to the auth tab and add a test account, with credentials
+**Every time** you start the emulator you should go to the auth tab and add a test account, with credentials
 
 ```
 username: test@test.com
 password: testtest
 ```
 
-You should then start parcel with the environment variable REACT_APP_EMULATE_FIREBASE=true. This will mean that your locally running react app will use the emulator instead of whatever other server you have configured. When you click the log on button you will automatically log in with the test@test.com account instead of using OAuth.
+### JDK
+
+The command will fail if you do not have the Java JDK installed, however the command will give you a link to openjdk, from where you can download it.
+
+On windows you can install a zip file with the JDK, unzip it to C:/jdk-16, and then add C:/jdk-16/bin to the global path variable.
+
+In wsl/ubuntu, you can just run `sudo apt update` and then `sudo apt install default-jdk` and this will install the jdk for you.
+
+### Linking React app to emulator
+
+To start the app and use the emulator instead of the normal remote Firebase servers, `cd` into `app/` and run
+
+```bash
+npm run start:withfirebase
+```
+
+When you click the log on button you will automatically log in with the test@test.com account instead of using OAuth.

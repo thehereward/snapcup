@@ -15,7 +15,6 @@ import {
     SnapCupText,
     SnapItButton,
     LabelText,
-    TaggedTeamMembers,
     HelperText,
 } from "./SnapSubmissionStyles";
 import SubmissionBoxWrapper from "./SubmissionBoxWrapper";
