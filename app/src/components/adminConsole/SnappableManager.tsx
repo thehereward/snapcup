@@ -1,6 +1,10 @@
 import React, { useState, useRef, useCallback } from "react";
 import getSnappables from "../../firebase/users/GetSnappables";
-import { FileUploadWrapper } from "./AdminConsoleStyles";
+import {
+    FileUploadWrapper,
+    SectionHeader,
+    SectionHeaderUnderline,
+} from "./AdminConsoleStyles";
 import { snappablesToCsvDownload, readFileAndUpload } from "./csvManager";
 
 const LOADING = "loading";
@@ -9,7 +13,7 @@ const ERROR = "error";
 
 const SnappableManager = () => {
     const [status, setStatus] = useState({ status: IDLE });
-    const [filetext, setFiletext] = useState("Browse...");
+    const [filename, setFilename] = useState<String | null>(null);
     const fileRef = useRef(null);
 
     const downloadSnappables = useCallback(() => {
@@ -55,12 +59,13 @@ const SnappableManager = () => {
     });
 
     const handleFilenameChange = (event) => {
-        setFiletext(event.target.files[0]?.name ?? "Browse");
+        setFilename(event.target.files[0]?.name ?? null);
     };
 
     return (
         <>
-            <h5>Snappable People</h5>
+            <SectionHeader className="mb-2">Manage Team</SectionHeader>
+            <SectionHeaderUnderline />
             <p>
                 When uploading the list of snappable people please leave the ID
                 cell blank for new users. Leaving the ID column blank tells the
@@ -75,22 +80,17 @@ const SnappableManager = () => {
                 to download the list of users, make edits to it, then reupload
                 it.
             </p>
-            <div
-                role="group"
-                className="mb-3"
-                aria-label="Buttons for manipulating data"
+            <button
+                className="btn btn-outline-purple btn-sm"
+                onClick={downloadSnappables}
+                disabled={status.status === LOADING}
             >
-                <button
-                    className="btn btn-purple"
-                    onClick={downloadSnappables}
-                    disabled={status.status === LOADING}
-                >
-                    Download as CSV
-                </button>
-            </div>
-            <form onSubmit={uploadSnappables}>
-                <FileUploadWrapper className="btn">
-                    {filetext}
+                Download existing list of snappable people as CSV
+            </button>
+            <form onSubmit={uploadSnappables} className="my-3">
+                <FileUploadWrapper className="btn btn-outline-purple mr-2 btn-sm">
+                    {filename ??
+                        "Browse files to upload a list of snappable people..."}
                     <input
                         type="file"
                         ref={fileRef}
@@ -99,9 +99,11 @@ const SnappableManager = () => {
                         onChange={handleFilenameChange}
                     />
                 </FileUploadWrapper>
-                <button type="submit" className="btn btn-purple">
-                    Upload complete list of users
-                </button>
+                {filename && (
+                    <button type="submit" className="btn btn-purple btn-sm">
+                        Upload complete list of users
+                    </button>
+                )}
                 {status.status !== IDLE && (
                     <p>
                         {status.status === ERROR ? (

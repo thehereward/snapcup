@@ -23,17 +23,14 @@ const AdminConsole = () => {
     }, [setIsCup]);
 
     return (
-        <>
-            <hr />
-            <h2>Admin Console</h2>
+        <div className="my-3">
             <SnappableManager />
-            <hr />
             <CurrentCup
                 isCup={isCup}
                 isOpen={false}
                 updateIsCup={updateIsCup}
             />
-        </>
+        </div>
     );
 };
 
