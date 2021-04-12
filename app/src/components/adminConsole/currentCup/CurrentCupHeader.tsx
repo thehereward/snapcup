@@ -14,8 +14,8 @@ export const MiniElleImg = styled(Elle)`
 `;
 
 const CurrentCupHeader: React.FunctionComponent = (props: {
-    cup: Entity<Cup> | undefined;
-    updateCup: () => void;
+    cups: Entity<Cup>[];
+    updateCups: () => void;
 }) => {
     return (
         <div>
@@ -23,13 +23,13 @@ const CurrentCupHeader: React.FunctionComponent = (props: {
                 <div className="col-md-4">
                     <SectionHeader>
                         <MiniElleImg />
-                        Current SnapCup
+                        Current SnapCups
                     </SectionHeader>
                 </div>
                 <div className="col-md-8">
                     <CreateCupButton
-                        cup={props.cup}
-                        updateCup={props.updateCup}
+                        cups={props.cups}
+                        updateCups={props.updateCups}
                     />
                 </div>
             </div>

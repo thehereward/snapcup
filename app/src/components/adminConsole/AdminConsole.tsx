@@ -1,25 +1,27 @@
 import React, { useState, useEffect, useCallback } from "react";
 import SnappableManager from "./SnappableManager";
 import CurrentCup from "./currentCup/CurrentCup";
-import { getCurrentCupIfExists } from "../../firebase/cups/CupService";
+import { getAllCups } from "../../firebase/cups/CupService";
 import Cup from "../../types/Cup";
 import { Entity } from "../../types/Entity";
 
 const AdminConsole = () => {
-    const [cup, setCup] = useState<Entity<Cup> | undefined>(false);
+    const [cups, setCups] = useState<Entity<Cup>[]>([]);
 
-    const updateCup = () => {
+    const updateCups = () => {
         (async () => {
             try {
-                const res = await getCurrentCupIfExists();
-                setCup(res);
+                const res = await getAllCups();
+                setCups(res);
             } catch (err) {
                 console.error(err);
             }
         })();
     };
 
-    useEffect(updateCup, [updateCup]);
+    useEffect(() => {
+        updateCups();
+    }, [setCups, getAllCups]);
 
     return (
         <>
@@ -27,7 +29,7 @@ const AdminConsole = () => {
             <h2>Admin Console</h2>
             <SnappableManager />
             <hr />
-            <CurrentCup cup={cup} updateCup={updateCup} setCup={setCup} />
+            <CurrentCup cups={cups} updateCup={updateCups} setCup={setCups} />
         </>
     );
 };

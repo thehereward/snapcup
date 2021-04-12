@@ -1,5 +1,6 @@
 import Cup from "../../types/Cup";
 import firebase from "firebase/app";
+import { Entity } from "../../types/Entity";
 
 export async function createNewCup(cup: Cup) {
     await firebase.firestore().collection("cups").add(cup);
@@ -17,20 +18,29 @@ export async function getExistsUnpublished() {
     return result.indexOf(false) >= 0;
 }
 
-export async function getCurrentCupIfExists(): Promise<Cup | undefined> {
+export async function getAllCups(): Promise<Entity<Cup>[]> {
     const querySnapshot = await firebase
         .firestore()
         .collection("cups")
         .get({ source: "server" });
-    const publishedDocQuery = querySnapshot.docs.find((doc) => {
-        return !doc.data().isPublished;
+    const result = querySnapshot.docs.map((doc) => {
+        const {
+            isPublished,
+            isOpen,
+            timeCreated,
+            name,
+            timePublished,
+        } = doc.data();
+        return {
+            isPublished: isPublished,
+            isOpen: isOpen,
+            timeCreated: timeCreated,
+            name: name,
+            timePublished: timePublished,
+            id: doc.id,
+        };
     });
-    if (publishedDocQuery) {
-        const publishedDoc = publishedDocQuery.data();
-        publishedDoc.id = publishedDocQuery.id;
-        return publishedDoc as Cup;
-    }
-    return undefined;
+    return result;
 }
 
 export async function GetCupNames(): Promise<string[]> {
@@ -39,7 +49,13 @@ export async function GetCupNames(): Promise<string[]> {
         .collection("cups")
         .get({ source: "server" });
     const result = querySnapshot.docs.map((doc) => {
-        const { isPublished, isOpen, timeCreated, name } = doc.data();
+        const {
+            isPublished,
+            isOpen,
+            timeCreated,
+            name,
+            timePublished,
+        } = doc.data();
         return name;
     });
     return result;

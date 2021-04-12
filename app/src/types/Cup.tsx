@@ -3,6 +3,7 @@ export default interface Cup {
     isOpen: boolean;
     timeCreated: Date;
     name: string;
+    timePublished: Date;
 }
 
 export interface CupWithId extends Cup {

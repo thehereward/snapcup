@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { createNewCup, GetCupNames } from "../../../firebase/cups/CupService";
-import Cup, { CupWithId } from "../../../types/Cup";
+import Cup from "../../../types/Cup";
 import { NewCupButton } from "../AdminConsoleStyles";
 import { Entity } from "../../../types/Entity";
 
@@ -9,12 +9,22 @@ const IDLE = "idle";
 const ERROR = "error";
 
 const CreateCupButton: React.FunctionComponent = (props: {
-    cup: Entity<Cup>;
-    updateCup: () => void;
+    cups: Entity<Cup>[];
+    updateCups: () => void;
 }) => {
     const [status, setStatus] = useState({ status: IDLE });
     const [newCupName, setNewCupName] = useState<string>("");
     const [allCupNames, setAllCupNames] = useState<string[]>([]);
+    const [isCup, setIsCup] = useState<Boolean>(false);
+
+    const existsUnpublished = (cups: Entity<Cup>[]) => {
+        for (const cup of cups) {
+            if (!cup.isPublished) {
+                return true;
+            }
+        }
+        return false;
+    };
 
     useEffect(() => {
         GetCupNames()
@@ -31,11 +41,12 @@ const CreateCupButton: React.FunctionComponent = (props: {
             isOpen: false,
             timeCreated: new Date(),
             name: newCupName,
+            timePublished: new Date(),
         };
         try {
             createNewCup(newCup);
             setNewCupName("");
-            props.updateCup();
+            props.updateCups();
         } catch (error) {
             console.log(error.toString());
             console.log("error in firebase");
@@ -47,7 +58,7 @@ const CreateCupButton: React.FunctionComponent = (props: {
         setNewCupName(event.target.value);
     };
 
-    if (!props.cup) {
+    if (existsUnpublished(props.cups)) {
         return (
             <form>
                 <input
