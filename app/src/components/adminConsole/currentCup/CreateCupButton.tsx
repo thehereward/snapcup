@@ -58,7 +58,7 @@ const CreateCupButton: React.FunctionComponent = (props: {
         setNewCupName(event.target.value);
     };
 
-    if (existsUnpublished(props.cups)) {
+    if (!existsUnpublished(props.cups)) {
         return (
             <form>
                 <input
