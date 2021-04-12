@@ -90,5 +90,5 @@ export function setCupPublished(cupId: string): Promise<void> {
         .firestore()
         .collection("cups")
         .doc(cupId)
-        .update({ isPublished: true });
+        .update({ isPublished: true, isOpen: false });
 }
