@@ -48,14 +48,14 @@ const CreateCupButton: React.FunctionComponent = (props: {
 
     if (!props.isCup) {
         return (
-            <div>
+            <form>
                 <input
                     value={newCupName}
                     onChange={handleNCNChange}
                     placeholder="Name your new Cup..."
                 />
                 <NewCupButton
-                    type="button"
+                    type="submit"
                     className="btn-createCup"
                     onClick={() => handleCreateClick()}
                     disabled={
@@ -64,7 +64,7 @@ const CreateCupButton: React.FunctionComponent = (props: {
                 >
                     + New SnapCup
                 </NewCupButton>
-            </div>
+            </form>
         );
     } else {
         return null;
