@@ -2,7 +2,7 @@ import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 import { CallableContext } from "firebase-functions/lib/providers/https";
 
-admin.initializeApp({ projectId: "snapcup-nina" });
+admin.initializeApp();
 const db = admin.firestore();
 
 const regionalFunctions = functions.region("europe-west2");

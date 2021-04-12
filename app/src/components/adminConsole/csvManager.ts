@@ -55,7 +55,6 @@ export function snappablesToCsvDownload(snappables) {
 
 function assertSnappableRecordValid(fullName, email, username, i = null) {
     if (!(fullName && email && username)) {
-        console.log("error");
         throw new FileUploadError(
             "All people in the spreadsheet must have name and email and username. " +
                 `Error at line ${i}. Fields at present are fullName=${fullName}, email=${email}, username=${username}.`
