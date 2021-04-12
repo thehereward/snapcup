@@ -2,7 +2,7 @@ import firebase from "firebase/app";
 import "firebase/functions";
 import { formatBody } from "../../components/submissionPage/helpers/snapFormatting";
 
-export function snappablesToCsvContent(snappables) {
+function snappablesToCsvContent(snappables) {
     let csvContent = "id,fullName,email,username";
     snappables.forEach(({ id, fullName, email, username }) => {
         csvContent += `\n${id},${fullName},${email},${username}`;
@@ -10,14 +10,15 @@ export function snappablesToCsvContent(snappables) {
     return csvContent;
 }
 
-export function snapsToCsvContent(snaps) {
+function snapsToCsvContent(snaps) {
     let csvContent = "messages";
     snaps.forEach(({ to, from, body, timestamp }) => {
         csvContent += `\n${formatBody(body)}`;
     });
     return csvContent;
 }
-export function stringToFileDownload(
+
+function stringToFileDownload(
     content: string,
     filename: string,
     type = "text/csv;charset=utf-8;"
