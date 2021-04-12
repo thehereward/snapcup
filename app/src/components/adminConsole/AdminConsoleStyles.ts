@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Elle from "../../images/Elle";
 
 export const SectionHeader = styled.h2`
+    position: relative;
     font-family: Asap;
     font-weight: 500;
     font-size: 30px;
@@ -66,25 +67,35 @@ export const SectionHeaderUnderline = styled.p`
     border: 1px solid var(--purple-selected);
 `;
 
-export const CurrentCupOptionsButton = styled.button`
-    text-align: center;
-    width: 155px;
-    height: 30px;
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 22px;
-    border-radius: 10px;
-    border-color: #a07ee8;
-    background-color: transparent;
-    color: #a07ee8;
-    margin-left: 10px;
-    &:hover {
-        color: var(--purple-selected);
-        border-color: var(--purple-selected);
+export const FileUploadWrapper = styled.span`
+    position: relative;
+    overflow: hidden;
+    input[type="file"] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;
+        background: white;
+        cursor: inherit;
+        display: block;
     }
-    &:disabled {
-        color: #aaaaaa;
+`;
+
+export const StyledDownloadButton = styled.button`
+    all: unset;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    img {
+        height: 30px;
+        width: auto;
+        margin: 0;
+        padding: 0;
     }
 `;
