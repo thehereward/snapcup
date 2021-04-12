@@ -7,6 +7,7 @@ import {
 } from "../AdminConsoleStyles";
 import { snappablesToCsvDownload, readFileAndUpload } from "../csvManager";
 import DownloadButton from "./DownloadButton";
+import SnappablesTable from "./SnappablesTable";
 
 const LOADING = "loading";
 const IDLE = "idle";
@@ -113,6 +114,7 @@ const SnappableManager = () => {
                     </p>
                 )}
             </form>
+            <SnappablesTable />
         </>
     );
 };
