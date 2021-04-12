@@ -41,7 +41,7 @@ function stringToFileDownload(
 
 export function snapsToCsvDownload(snaps) {
     const csvContent = snapsToCsvContent(snaps);
-    stringToFileDownload(csvContent, "snaps", "text/csv;charset=utf-8;");
+    stringToFileDownload(csvContent, "snaps.csv", "text/csv;charset=utf-8;");
 }
 
 export function snappablesToCsvDownload(snappables) {
