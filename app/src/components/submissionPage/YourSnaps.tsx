@@ -22,7 +22,7 @@ const YourSnapsHeader = styled.h2`
 `;
 
 const SnapCupName = styled.p`
-   font-family: var(--asap)
+   font-family: var(--asap);
     font-style: normal;
     font-weight: bold;
     font-size: 20px;
