@@ -10,7 +10,7 @@ const CurrentCupPublishButton: React.FunctionComponent = (props: {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
 
-    const handlePublish = () => {
+    const handlePublish = useCallback(() => {
         (async () => {
             try {
                 setLoading(true);
@@ -23,7 +23,7 @@ const CurrentCupPublishButton: React.FunctionComponent = (props: {
                 setError("Error!");
             }
         })();
-    };
+    }, [props.cup, setLoading, setCupPublished, setError, props.updateIsCup]);
 
     return (
         <CurrentCupOptionsButton onClick={handlePublish}>
