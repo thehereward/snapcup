@@ -1,9 +1,9 @@
 import React from "react";
-import SubmissionTextBox from "./SubmissionTextBox";
 import MentionElements from "../../types/MentionElements";
 import { getCurrentUserName } from "../../firebase/users/UserService";
 import YourSnaps from "./YourSnaps";
 import styled from "styled-components";
+import TextBoxIfSnapcupOpen from "./TextBoxIfSnapcupOpen";
 
 const WelcomeMessage = styled.p`
     font-family: var(--asap);
@@ -20,10 +20,7 @@ const SubmissionPage = (props: { snappables: MentionElements[] }) => {
             <WelcomeMessage>
                 Welcome, {getCurrentUserName().split(" ")[0]!}
             </WelcomeMessage>
-            <SubmissionTextBox
-                snappables={props.snappables}
-                user={getCurrentUserName()}
-            />
+            <TextBoxIfSnapcupOpen snappables={props.snappables} />
             <YourSnaps />
         </>
     );
