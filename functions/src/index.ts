@@ -5,6 +5,8 @@ import { CallableContext } from "firebase-functions/lib/providers/https";
 admin.initializeApp();
 const db = admin.firestore();
 
+const regionalFunctions = functions.region("europe-west2");
+
 async function assertUserIsAdmin(context: CallableContext) {
     if (!context.auth) {
         throw new functions.https.HttpsError(
@@ -21,7 +23,7 @@ async function assertUserIsAdmin(context: CallableContext) {
     }
 }
 
-export const setFirstUserAsAdmin = functions.firestore
+export const setFirstUserAsAdmin = regionalFunctions.firestore
     .document("/users/{uid}")
     .onCreate(async (snapshot, context) => {
         const users = await db.collection("users").get();
@@ -47,7 +49,7 @@ interface Snappable {
     username: string;
 }
 
-export const uploadSnappableList = functions.https.onCall(
+export const uploadSnappableList = regionalFunctions.https.onCall(
     async (data, context) => {
         if (!Array.isArray(data)) {
             throw new functions.https.HttpsError(

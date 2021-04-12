@@ -52,10 +52,10 @@ In app.scss bootstrap variables are customised, and a few global CSS variables a
 To use the firebase emulator simply run
 
 ```bash
-firebase emulators:start
+npm run emulator --proj=your-project-id
 ```
 
-from the root directory. This allows you to open the firebase emulator console and it mocks firestore, auth and firebase functions from your directory.
+from the root directory (replace your-project-id with the same project id that you added to .env.local). This allows you to open the firebase emulator console and it mocks firestore, auth and firebase functions from your directory.
 
 **Every time** you start the emulator you should go to the auth tab and add a test account, with credentials
 
