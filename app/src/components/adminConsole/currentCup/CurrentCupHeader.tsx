@@ -3,7 +3,8 @@ import CreateCupButton from "./CreateCupButton";
 import { SectionHeader } from "../AdminConsoleStyles";
 import Elle from "../../../images/Elle";
 import styled from "styled-components";
-import { CupWithId } from "../../../types/Cup";
+import Cup from "../../../types/Cup";
+import { Entity } from "../../../types/Entity";
 
 export const MiniElleImg = styled(Elle)`
     height: 66px;
@@ -13,8 +14,8 @@ export const MiniElleImg = styled(Elle)`
 `;
 
 const CurrentCupHeader: React.FunctionComponent = (props: {
-    cup: CupWithId | undefined;
-    updateCup: () => void;
+    cups: Entity<Cup>[];
+    updateCups: () => void;
 }) => {
     return (
         <div>
@@ -22,13 +23,13 @@ const CurrentCupHeader: React.FunctionComponent = (props: {
                 <div className="col-md-4">
                     <SectionHeader>
                         <MiniElleImg />
-                        Current SnapCup
+                        Current SnapCups
                     </SectionHeader>
                 </div>
                 <div className="col-md-8">
                     <CreateCupButton
-                        cup={props.cup}
-                        updateCup={props.updateCup}
+                        cups={props.cups}
+                        updateCups={props.updateCups}
                     />
                 </div>
             </div>

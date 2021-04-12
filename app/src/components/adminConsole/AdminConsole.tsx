@@ -1,34 +1,41 @@
 import React, { useState, useEffect, useCallback } from "react";
 import SnappableManager from "./manageTeam/SnappableManager";
 import CurrentCup from "./currentCup/CurrentCup";
-import {
-    getCurrentCupIfExists,
-    getExistsUnpublished,
-} from "../../firebase/cups/CupService";
+import { getAllCups } from "../../firebase/cups/CupService";
 import Cup from "../../types/Cup";
-import ExportAllSnaps from "./ExportAllSnaps";
+import { Entity } from "../../types/Entity";
 
 const AdminConsole = () => {
-    const [cup, setCup] = useState<Cup | undefined>(false);
+    const [cups, setCups] = useState<Entity<Cup>[]>([]);
 
-    const updateCup = useCallback(() => {
+    function isCurrent(cup: Cup) {
+        return !cup.isPublished;
+    }
+
+    const updateCups = () => {
         (async () => {
             try {
-                const res = await getCurrentCupIfExists();
-                setCup(res);
+                const res = await getAllCups();
+                setCups(res);
             } catch (err) {
                 console.error(err);
             }
         })();
-    }, [setCup]);
+    };
 
-    useEffect(updateCup, [updateCup]);
+    useEffect(() => {
+        updateCups();
+    }, [setCups, getAllCups]);
 
     return (
         <div className="my-3">
             <SnappableManager />
-            <CurrentCup cup={cup} setCup={setCup} updateCup={updateCup} />
-            <ExportAllSnaps />
+            <hr />
+            <CurrentCup
+                cups={cups.filter(isCurrent)}
+                updateCups={updateCups}
+                setCup={setCups}
+            />
         </div>
     );
 };

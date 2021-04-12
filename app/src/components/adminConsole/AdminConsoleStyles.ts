@@ -2,8 +2,7 @@ import styled from "styled-components";
 import Elle from "../../images/Elle";
 
 export const SectionHeader = styled.h2`
-    position: relative;
-    font-family: Asap;
+    font-family: var(--asap);
     font-weight: 500;
     font-size: 30px;
     line-height: 34px;
@@ -19,10 +18,10 @@ export const MiniElleImg = styled(Elle)`
 `;
 
 export const NewCupButton = styled.button`
-    font-family: Asap;
+    font-family: var(--asap);
     font-weight: 500;
     font-size: 18px;
-    color: #ffffff;
+    color: var(--white);
     margin-right: auto;
     margin-left: 10px;
     background: #a07ee8;
@@ -39,20 +38,20 @@ export const NewCupButton = styled.button`
         box-shadow: none;
     }
     &:disabled {
-        background-color: #aaaaaa;
+        background-color: var(--our-grey);
         border: 0px;
     }
 `;
 
 export const MessageDisplay = styled.p`
-    font-family: Asap;
+    font-family: var(--asap);
     font-weight: 500;
     font-size: 16px;
     color: var(--purple-selected);
 `;
 
 export const CupNameDisplay = styled.p`
-    font-family: Asap;
+    font-family: var(--asap);
     font-weight: 500;
     font-size: 22px;
     color: var(--purple-selected);
@@ -65,6 +64,28 @@ export const SectionHeaderUnderline = styled.p`
     top: 748px;
 
     border: 1px solid var(--purple-selected);
+`;
+
+export const CurrentCupOptionsButton = styled.button`
+    text-align: center;
+    width: 155px;
+    height: 30px;
+    font-family: var(--open-sans);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    border-radius: 10px;
+    border-color: var(--purple-button-default);
+    background-color: transparent;
+    color: var(--purple-button-default);
+    margin-left: 10px;
+    &:hover {
+        color: var(--purple-selected);
+        border-color: var(--purple-selected);
+    }
+    &:disabled {
+        color: var(--our-grey);
 `;
 
 export const FileUploadWrapper = styled.span`

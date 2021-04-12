@@ -1,20 +1,9 @@
 import Cup from "../../types/Cup";
 import firebase from "firebase/app";
+import { Entity } from "../../types/Entity";
 
 export async function createNewCup(cup: Cup) {
     await firebase.firestore().collection("cups").add(cup);
-}
-
-export async function getExistsUnpublished() {
-    const querySnapshot = await firebase
-        .firestore()
-        .collection("cups")
-        .get({ source: "server" });
-    const result = querySnapshot.docs.map((doc) => {
-        const { isPublished, isOpen, timeCreated, name } = doc.data();
-        return isPublished;
-    });
-    return result.indexOf(false) >= 0;
 }
 
 export async function getCurrentCupIfExists(): Promise<Cup | undefined> {
@@ -33,13 +22,56 @@ export async function getCurrentCupIfExists(): Promise<Cup | undefined> {
     return undefined;
 }
 
-export async function GetCupNames(): Promise<string[]> {
+export async function getExistsUnpublished() {
     const querySnapshot = await firebase
         .firestore()
         .collection("cups")
         .get({ source: "server" });
     const result = querySnapshot.docs.map((doc) => {
         const { isPublished, isOpen, timeCreated, name } = doc.data();
+        return isPublished;
+    });
+    return result.indexOf(false) >= 0;
+}
+
+export async function getAllCups(): Promise<Entity<Cup>[]> {
+    const querySnapshot = await firebase
+        .firestore()
+        .collection("cups")
+        .get({ source: "server" });
+    const result = querySnapshot.docs.map((doc) => {
+        const {
+            isPublished,
+            isOpen,
+            timeCreated,
+            name,
+            timePublished,
+        } = doc.data();
+        return {
+            isPublished: isPublished,
+            isOpen: isOpen,
+            timeCreated: timeCreated,
+            name: name,
+            timePublished: timePublished,
+            id: doc.id,
+        };
+    });
+    return result;
+}
+
+export async function GetCupNames(): Promise<string[]> {
+    const querySnapshot = await firebase
+        .firestore()
+        .collection("cups")
+        .get({ source: "server" });
+    const result = querySnapshot.docs.map((doc) => {
+        const {
+            isPublished,
+            isOpen,
+            timeCreated,
+            name,
+            timePublished,
+        } = doc.data();
         return name;
     });
     return result;
@@ -90,5 +122,5 @@ export function setCupPublished(cupId: string): Promise<void> {
         .firestore()
         .collection("cups")
         .doc(cupId)
-        .update({ isPublished: true });
+        .update({ isPublished: true, isOpen: false });
 }

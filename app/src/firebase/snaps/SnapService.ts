@@ -12,8 +12,6 @@ function getSnapsCollectionFromCupId(cupId: string) {
 }
 
 export async function submitSnap(snap: Snap, cupId: string) {
-    console.log(JSON.stringify(firebase.auth().currentUser));
-    console.log(cupId);
     await getSnapsCollectionFromCupId(cupId).add(snap);
 }
 

@@ -69,7 +69,6 @@ export function getCurrentUserUid(): string {
 
 export function onAuthStateChanged(cb: (p: UserProfile) => void) {
     firebase.auth().onAuthStateChanged(async (user) => {
-        console.log("onauthchanged", user);
         if (user) {
             const profile = await getOrCreateUserProfile(user);
             cb(profile);

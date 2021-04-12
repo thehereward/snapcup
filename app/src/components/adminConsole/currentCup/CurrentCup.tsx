@@ -1,22 +1,23 @@
 import React from "react";
-import AdminCurrentSnapsDisplay from "./AdminCurrentSnapsDisplay";
+import AllCurrentCupsDisplay from "./AllCurrentCupsDisplay";
 import CurrentCupHeader from "./CurrentCupHeader";
 import { SectionHeaderUnderline } from "../AdminConsoleStyles";
-import { CupWithId } from "../../../types/Cup";
+import Cup from "../../../types/Cup";
+import { Entity } from "../../../types/Entity";
 
 const CurrentCup: React.FunctionComponent = (props: {
-    cup: CupWithId | undefined;
-    updateCup: () => void;
-    setCup;
+    cups: Entity<Cup>[];
+    updateCups: () => void;
+    setCups;
 }) => {
     return (
         <div className="CurrentCup">
-            <CurrentCupHeader cup={props.cup} updateCup={props.updateCup} />
+            <CurrentCupHeader cups={props.cups} updateCups={props.updateCups} />
             <SectionHeaderUnderline />
-            <AdminCurrentSnapsDisplay
-                cup={props.cup}
-                updateCup={props.updateCup}
-                setCup={props.setCup}
+            <AllCurrentCupsDisplay
+                cups={props.cups}
+                updateCups={props.updateCups}
+                setCups={props.setCups}
             />
         </div>
     );

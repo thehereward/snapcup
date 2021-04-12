@@ -1,7 +1,8 @@
 import React, { useState, useCallback } from "react";
+import { CurrentCupOptionsButton } from "../AdminConsoleStyles";
 import { setCupOpenness } from "../../../firebase/cups/CupService";
 
-const CurrentCupOpennessButton = ({ cup, setCup }) => {
+const CurrentCupOpennessButton = ({ cup, updateCups }) => {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
 
@@ -17,22 +18,18 @@ const CurrentCupOpennessButton = ({ cup, setCup }) => {
                 await setCupOpenness(cup.id, !cup.isOpen);
                 setLoading(false);
                 setError("");
-                setCup({ ...cup, isOpen: !cup.isOpen });
+                updateCups();
             } catch (err) {
                 console.error(err);
                 setError("Error!");
             }
         })();
-    }, [cup.id, cup.isOpen, setLoading, setError, setCup]);
+    }, [cup.id, cup.isOpen, setLoading, setError, updateCups]);
 
     return (
-        <button
-            className="btn btn-purple"
-            disabled={loading}
-            onClick={clickSetOpenness}
-        >
+        <CurrentCupOptionsButton disabled={loading} onClick={clickSetOpenness}>
             {buttonText}
-        </button>
+        </CurrentCupOptionsButton>
     );
 };
 
