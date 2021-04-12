@@ -54,7 +54,7 @@ const PrettyPageWrap: React.FunctionComponent = ({
                         </>
                     )}
                     <SignOutButton setLoggedIn={setLoggedIn} />
-                    <NavItem>{getCurrentUserName().split(" ")[0]}</NavItem>
+                    <NavItem>{getCurrentUserName()}</NavItem>
                     <NavItem className="d-none d-sm-block">
                         <ProfileImage email={getCurrentEmail()} />
                     </NavItem>
