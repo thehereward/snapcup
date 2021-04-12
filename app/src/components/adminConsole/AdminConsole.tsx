@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import SnappableManager from "./SnappableManager";
+import SnappableManager from "./manageTeam/SnappableManager";
 import CurrentCup from "./currentCup/CurrentCup";
 import { getExistsUnpublished } from "../../firebase/cups/CupService";
 

@@ -1,11 +1,12 @@
 import React, { useState, useRef, useCallback } from "react";
-import getSnappables from "../../firebase/users/GetSnappables";
+import getSnappables from "../../../firebase/users/GetSnappables";
 import {
     FileUploadWrapper,
     SectionHeader,
     SectionHeaderUnderline,
-} from "./AdminConsoleStyles";
-import { snappablesToCsvDownload, readFileAndUpload } from "./csvManager";
+} from "../AdminConsoleStyles";
+import { snappablesToCsvDownload, readFileAndUpload } from "../csvManager";
+import DownloadButton from "./DownloadButton";
 
 const LOADING = "loading";
 const IDLE = "idle";
@@ -16,7 +17,7 @@ const SnappableManager = () => {
     const [filename, setFilename] = useState<String | null>(null);
     const fileRef = useRef(null);
 
-    const downloadSnappables = useCallback(() => {
+    const downloadSnappables = () => {
         setStatus({ status: LOADING });
         (async () => {
             try {
@@ -31,7 +32,7 @@ const SnappableManager = () => {
                 });
             }
         })();
-    }, []);
+    };
 
     const uploadSnappables = useCallback((event) => {
         event.preventDefault();
@@ -64,7 +65,13 @@ const SnappableManager = () => {
 
     return (
         <>
-            <SectionHeader className="mb-2">Manage Team</SectionHeader>
+            <SectionHeader className="mb-2">
+                Manage Team{" "}
+                <DownloadButton
+                    onClick={downloadSnappables}
+                    disabled={status.status === LOADING}
+                />
+            </SectionHeader>
             <SectionHeaderUnderline />
             <p>
                 When uploading the list of snappable people please leave the ID
@@ -80,13 +87,6 @@ const SnappableManager = () => {
                 to download the list of users, make edits to it, then reupload
                 it.
             </p>
-            <button
-                className="btn btn-outline-purple btn-sm"
-                onClick={downloadSnappables}
-                disabled={status.status === LOADING}
-            >
-                Download existing list of snappable people as CSV
-            </button>
             <form onSubmit={uploadSnappables} className="my-3">
                 <FileUploadWrapper className="btn btn-outline-purple mr-2 btn-sm">
                     {filename ??

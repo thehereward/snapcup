@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Elle from "../../images/Elle";
 
 export const SectionHeader = styled.h2`
+    position: relative;
     font-family: Asap;
     font-weight: 500;
     font-size: 30px;
@@ -83,5 +84,18 @@ export const FileUploadWrapper = styled.span`
         background: white;
         cursor: inherit;
         display: block;
+    }
+`;
+
+export const StyledDownloadButton = styled.button`
+    all: unset;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    img {
+        height: 30px;
+        width: auto;
+        margin: 0;
+        padding: 0;
     }
 `;
