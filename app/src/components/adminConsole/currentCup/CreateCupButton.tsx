@@ -41,7 +41,7 @@ const CreateCupButton: React.FunctionComponent = (props: {
             isOpen: false,
             timeCreated: new Date(),
             name: newCupName,
-            timePublished: new Date(),
+            timePublished: null,
         };
         try {
             createNewCup(newCup);
