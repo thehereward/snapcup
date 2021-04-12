@@ -2,12 +2,7 @@ import styled from "styled-components";
 import Elle from "../../images/Elle";
 
 export const SectionHeader = styled.h2`
-<<<<<<< HEAD
     font-family: var(--asap);
-=======
-    position: relative;
-    font-family: Asap;
->>>>>>> upstream/main
     font-weight: 500;
     font-size: 30px;
     line-height: 34px;
