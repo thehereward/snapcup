@@ -17,7 +17,7 @@ const SnappableManager = () => {
     const [filename, setFilename] = useState<String | null>(null);
     const fileRef = useRef(null);
 
-    const downloadSnappables = () => {
+    const onClickDownload = useCallback(() => {
         setStatus({ status: LOADING });
         (async () => {
             try {
@@ -32,7 +32,7 @@ const SnappableManager = () => {
                 });
             }
         })();
-    };
+    }, [setStatus]);
 
     const uploadSnappables = useCallback((event) => {
         event.preventDefault();
@@ -68,7 +68,7 @@ const SnappableManager = () => {
             <SectionHeader className="mb-2">
                 Manage Team{" "}
                 <DownloadButton
-                    onClick={downloadSnappables}
+                    onClick={onClickDownload}
                     disabled={status.status === LOADING}
                 />
             </SectionHeader>
