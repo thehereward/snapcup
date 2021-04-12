@@ -15,6 +15,7 @@ const firebaseConfig = {
 export function initializeDatabase() {
     firebase.initializeApp(firebaseConfig);
     if (process.env.REACT_APP_EMULATE_FIREBASE) {
+        console.log("EMULATING FIREBASE");
         firebase.firestore().useEmulator("localhost", 8080);
         firebase.auth().useEmulator("http://localhost:9099");
         firebase.functions().useEmulator("localhost", 5001);

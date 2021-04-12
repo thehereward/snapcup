@@ -25,7 +25,7 @@ const TextBoxIfSnapcupOpen = (props: { snappables: MentionElements[] }) => {
                 setCup(await getCurrentCupIfExists());
                 setStatus("");
             } catch (err) {
-                console.error(err);
+                console.error("Getting cup", err);
                 setStatus("There was an unexpected error loading the snapcup.");
             }
         })();

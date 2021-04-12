@@ -28,8 +28,11 @@ function createUserProfile(user: firebase.User): UserProfile {
 async function getOrCreateUserProfile(
     user: firebase.User
 ): Promise<UserProfile> {
-    const currentProfile = await getCurrentUserProfile(user);
-    return currentProfile ?? createUserProfile(user);
+    try {
+        return await getCurrentUserProfile(user); // Will throw error if it can't find
+    } catch {
+        return createUserProfile(user);
+    }
 }
 
 export async function signIn() {
@@ -62,6 +65,7 @@ export function getCurrentUserUid(): string {
 
 export function onAuthStateChanged(cb: (p: UserProfile) => void) {
     firebase.auth().onAuthStateChanged(async (user) => {
+        console.log("onauthchanged", user);
         if (user) {
             const profile = await getOrCreateUserProfile(user);
             cb(profile);
