@@ -22,13 +22,11 @@ export async function getCurrentCupIfExists(): Promise<Cup | undefined> {
         .firestore()
         .collection("cups")
         .get({ source: "server" });
-    console.log(querySnapshot);
     const publishedDocQuery = querySnapshot.docs.find((doc) => {
         return !doc.data().isPublished;
     });
     if (publishedDocQuery) {
         const publishedDoc = publishedDocQuery.data();
-        console.log(publishedDoc);
         publishedDoc.id = publishedDocQuery.id;
         return publishedDoc as Cup;
     }
@@ -85,4 +83,12 @@ export function setCupOpenness(cupId, openness): Promise<void> {
         .collection("cups")
         .doc(cupId)
         .update({ isOpen: openness });
+}
+
+export function setCupPublished(cupId: string): Promise<void> {
+    return firebase
+        .firestore()
+        .collection("cups")
+        .doc(cupId)
+        .update({ isPublished: true });
 }
