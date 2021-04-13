@@ -10,7 +10,6 @@ const ERROR = "error";
 
 const CreateCupButton: React.FunctionComponent = (props: {
     cups: Entity<Cup>[];
-    updateCups: () => void;
 }) => {
     const [status, setStatus] = useState({ status: IDLE });
     const [newCupName, setNewCupName] = useState<string>("");
@@ -36,7 +35,6 @@ const CreateCupButton: React.FunctionComponent = (props: {
         try {
             createNewCup(newCup);
             setNewCupName("");
-            props.updateCups();
         } catch (error) {
             console.log(error.toString());
         }

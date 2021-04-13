@@ -6,8 +6,6 @@ import MentionElements from "../../types/MentionElements";
 import { getCurrentUserName } from "../../firebase/users/UserService";
 import YourSnaps from "./YourSnaps";
 import styled from "styled-components";
-import Cup from "../../types/Cup";
-import { Entity } from "../../types/Entity";
 import PublishedCups from "../adminConsole/publishedCups/PublishedCups";
 import SubmissionBoxWrapper from "./SubmissionBoxWrapper";
 import SubmissionTextBox from "./SubmissionTextBox";

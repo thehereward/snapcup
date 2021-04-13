@@ -1,21 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { streamAllSnappablePeople } from "../../../firebase/users/GetSnappables";
 import Snappable from "../../../types/Snappable";
+import SnappableRow from "./SnappablesRow";
+import { Entity } from "../../../types/Entity";
+import Snap from "../../../types/Snap";
 
-const SnappablesTable = () => {
+const SnappablesTable = (props: { currentSnaps?: Entity<Snap>[] }) => {
     const [snappables, setSnappables] = useState<Snappable[]>([]);
+
+    const numSnapsForUser = (id: string) => {
+        if (!props.currentSnaps) {
+            return 0;
+        }
+        return props.currentSnaps.filter((snap) => {
+            snap.to.includes(id);
+        }).length;
+    };
 
     const rows = snappables
         .sort((a: Snappable, b: Snappable) =>
             a.fullName.localeCompare(b.fullName)
         )
         .map((p: Snappable) => (
-            <tr key={p.id}>
-                <td>{p.email}</td>
-                <td>{p.fullName}</td>
-                <td>{p.username}</td>
-                <td>2</td>
-            </tr>
+            <SnappableRow snappable={p} numSnaps={numSnapsForUser(p.id)} />
         ));
 
     useEffect(() => {

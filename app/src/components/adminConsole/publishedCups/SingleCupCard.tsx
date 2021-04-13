@@ -3,11 +3,8 @@ import { Entity } from "../../../types/Entity";
 import Cup from "../../../types/Cup";
 import styled from "styled-components";
 
-function formatTimePublished(time: {
-    seconds: number;
-    nanoseconds: number;
-}): string {
-    const d = new Date(time.seconds * 1000);
+function formatTimePublished(seconds: number): string {
+    const d = new Date(seconds * 1000);
     return (
         "Published: " +
         d.toLocaleString(undefined, {
@@ -54,7 +51,7 @@ const SingleCupCard: React.FunctionComponent = (props: {
     const timemsg =
         props.cup.timePublished == undefined
             ? ""
-            : formatTimePublished(props.cup.timePublished);
+            : formatTimePublished(props.cup.timePublished.getSeconds());
     return (
         <div className="col-sm-6 col-md-4 mb-4" key={props.cup.id}>
             <CupCard>

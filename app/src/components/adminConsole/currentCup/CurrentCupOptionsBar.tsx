@@ -7,19 +7,12 @@ import { Entity } from "../../../types/Entity";
 
 const CurrentCupOptionsBar: React.FunctionComponent = (props: {
     cup: Entity<Cup>;
-    updateCups: () => void;
 }) => {
     return (
         <>
             <CurrentCupExportSnaps cup={props.cup} />
-            <CurrentCupOpennessButton
-                cup={props.cup}
-                updateCups={props.updateCups}
-            />
-            <CurrentCupPublishButton
-                cup={props.cup}
-                updateCups={props.updateCups}
-            />
+            <CurrentCupOpennessButton cup={props.cup} />
+            <CurrentCupPublishButton cup={props.cup} />
         </>
     );
 };

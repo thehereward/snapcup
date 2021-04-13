@@ -64,3 +64,18 @@ export function streamSubmittedSnapsForCurrentUser(
             },
         });
 }
+
+export function streamAllSnapsInCup(
+    onSnapsReceived: (snaps: Entity<Snap>[]) => void,
+    onError: (error: Error) => void,
+    cupId: string
+): () => void {
+    return getSnapsCollectionFromCupId(cupId).onSnapshot({
+        next: (querySnapshot) => {
+            onSnapsReceived(querySnapshot.docs.map(docToSnap));
+        },
+        error: (error) => {
+            onError(error);
+        },
+    });
+}

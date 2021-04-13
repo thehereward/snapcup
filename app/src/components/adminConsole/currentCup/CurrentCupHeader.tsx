@@ -7,7 +7,6 @@ import { Entity } from "../../../types/Entity";
 
 const CurrentCupHeader: React.FunctionComponent = (props: {
     cups: Entity<Cup>[];
-    updateCups: () => void;
 }) => {
     return (
         <div>
@@ -19,10 +18,7 @@ const CurrentCupHeader: React.FunctionComponent = (props: {
                     </SectionHeader>
                 </div>
                 <div className="col-md-8">
-                    <CreateCupButton
-                        cups={props.cups}
-                        updateCups={props.updateCups}
-                    />
+                    <CreateCupButton cups={props.cups} />
                 </div>
             </div>
         </div>
