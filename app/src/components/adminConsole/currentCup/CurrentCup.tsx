@@ -16,7 +16,7 @@ const CurrentCup: React.FunctionComponent = (props: {
             <SectionHeaderUnderline />
             <AllCurrentCupsDisplay
                 cups={props.cups}
-                updateCup={props.updateCups}
+                updateCups={props.updateCups}
                 setCups={props.setCups}
             />
         </div>

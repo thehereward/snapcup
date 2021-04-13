@@ -15,8 +15,8 @@ const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
             <div className="flex-grow-1" />
             <CurrentCupOptionsBar
                 cup={props.cup}
-                setCup={props.setCups}
-                updateCup={props.updateCups}
+                setCups={props.setCups}
+                updateCups={props.updateCups}
             />
         </div>
     );

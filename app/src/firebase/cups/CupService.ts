@@ -102,9 +102,10 @@ export function setCupOpenness(cupId, openness): Promise<void> {
 }
 
 export function setCupPublished(cupId: string): Promise<void> {
+    const t = new Date();
     return firebase
         .firestore()
         .collection("cups")
         .doc(cupId)
-        .update({ isPublished: true, isOpen: false });
+        .update({ isPublished: true, isOpen: false, timePublished: t });
 }
