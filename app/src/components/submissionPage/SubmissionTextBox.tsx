@@ -130,10 +130,10 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
                     </div>
                     <SnapItButton
                         type="submit"
-                        className="btn btn-primary"
+                        className={`btn btn-primary ${
+                            confirmation ? "success" : ""
+                        } ${error ? "error" : ""}`}
                         onClick={handleSubmit}
-                        success={confirmation}
-                        error={error}
                     >
                         Snap it
                     </SnapItButton>
