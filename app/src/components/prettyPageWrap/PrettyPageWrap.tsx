@@ -38,7 +38,7 @@ const PrettyPageWrap: React.FunctionComponent = ({
     setLoggedIn,
 }) => (
     <>
-        <header>
+        <header className="sticky-top">
             <nav className="navbar bg-light">
                 <BrandLink to="/">SnapCup</BrandLink>
 

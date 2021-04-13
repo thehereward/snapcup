@@ -8,6 +8,7 @@ import {
 import { snappablesToCsvDownload, readFileAndUpload } from "../csvManager";
 import FileUploadError from "../FileUploadError";
 import DownloadButton from "./DownloadButton";
+import SnappablesTable from "./SnappablesTable";
 
 const LOADING = "loading";
 const IDLE = "idle";
@@ -123,6 +124,7 @@ const SnappableManager = () => {
                     </p>
                 )}
             </form>
+            <SnappablesTable />
         </>
     );
 };
