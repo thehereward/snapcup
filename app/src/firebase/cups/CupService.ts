@@ -60,6 +60,7 @@ export function streamAllCups(
     return firebase
         .firestore()
         .collection("cups")
+        .orderBy("timeCreated", "desc")
         .onSnapshot({
             next: (querySnapshot) => {
                 onSnapsReceived(querySnapshot.docs.map(docToCupEntity));
@@ -74,6 +75,7 @@ export async function getAllCups(): Promise<Entity<Cup>[]> {
     const querySnapshot = await firebase
         .firestore()
         .collection("cups")
+        .orderBy("timeCreated", "desc")
         .get({ source: "server" });
     const result = querySnapshot.docs.map((doc) => {
         const {
