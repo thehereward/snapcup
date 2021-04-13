@@ -5,12 +5,15 @@ import { streamAllCups } from "../../firebase/cups/CupService";
 import { streamAllSnapsInCup } from "../../firebase/snaps/SnapService";
 import Cup from "../../types/Cup";
 import Snap from "../../types/Snap";
+import Snappable from "../../types/Snappable";
+import { streamAllSnappablePeople } from "../../firebase/users/GetSnappables";
 import { Entity } from "../../types/Entity";
 import PublishedCups from "./publishedCups/PublishedCups";
 
 const AdminConsole = () => {
     const [cups, setCups] = useState<Entity<Cup>[]>([]);
     const [snaps, setSnaps] = useState<Entity<Snap>[]>([]);
+    const [snappables, setSnappables] = useState<Snappable[]>([]);
 
     function isCurrent(cup: Cup) {
         return !cup.isPublished;
@@ -38,9 +41,22 @@ const AdminConsole = () => {
         return unsubscribe;
     }, [setSnaps, cups]);
 
+    useEffect(() => {
+        const unsubscribe = streamAllSnappablePeople(
+            (people) => {
+                setSnappables(people);
+            },
+            (error) => console.error(error)
+        );
+        return unsubscribe;
+    }, [setSnappables]);
+
     return (
         <div className="my-3">
-            <SnappableManager currentSnaps={snaps} />
+            <SnappableManager
+                currentSnaps={snaps}
+                snappablePeople={snappables}
+            />
             <hr />
             <CurrentCup cups={cups.filter(isCurrent)} />
             <hr />
