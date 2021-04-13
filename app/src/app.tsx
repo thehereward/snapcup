@@ -47,8 +47,10 @@ const App = () => {
     }, [setLoggedIn, setUserProfile]);
 
     useEffect(() => {
-        updateCups();
-    }, [setCups, getAllCups]);
+        if (loggedIn) {
+            updateCups();
+        }
+    }, [setCups, getAllCups, loggedIn]);
 
     useEffect(async () => {
         try {
