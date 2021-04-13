@@ -6,23 +6,10 @@ import Cup from "../../types/Cup";
 import { Entity } from "../../types/Entity";
 import PublishedCups from "./publishedCups/PublishedCups";
 
-const AdminConsole = () => {
-    const [cups, setCups] = useState<Entity<Cup>[]>([]);
-
+const AdminConsole = ({ cups, setCups, updateCups }) => {
     function isCurrent(cup: Cup) {
         return !cup.isPublished;
     }
-
-    const updateCups = () => {
-        (async () => {
-            try {
-                const res = await getAllCups();
-                setCups(res);
-            } catch (err) {
-                console.error(err);
-            }
-        })();
-    };
 
     useEffect(() => {
         updateCups();

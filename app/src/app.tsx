@@ -13,23 +13,42 @@ import {
     getCurrentUserName,
     onAuthStateChanged,
 } from "./firebase/users/UserService";
+import { getAllCups } from "./firebase/cups/CupService";
 import { UserProfile } from "./types/UserProfile";
 import AdminConsole from "./components/adminConsole/AdminConsole";
 import ManageAdminsConsole from "./components/adminConsole/ManageAdminsConsole";
+import { Entity } from "./types/Entity";
+import Cup from "./types/Cup";
 
 const App = () => {
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
     const [userProfile, setUserProfile] = useState(null);
     const [snappables, setSnappables] = useState<MentionElements[]>([]);
+    const [cups, setCups] = useState<Entity<Cup>[]>([]);
 
     const setUser = (profile: UserProfile) => {
         setUserProfile(profile);
         setLoggedIn(true);
     };
 
+    const updateCups = () => {
+        (async () => {
+            try {
+                const res = await getAllCups();
+                setCups(res);
+            } catch (err) {
+                console.error(err);
+            }
+        })();
+    };
+
     useEffect(() => {
         onAuthStateChanged(setUser);
     }, [setLoggedIn, setUserProfile]);
+
+    useEffect(() => {
+        updateCups();
+    }, [setCups, getAllCups]);
 
     useEffect(async () => {
         try {
@@ -52,7 +71,11 @@ const App = () => {
                 <Switch>
                     {userProfile.isAdmin && (
                         <Route path="/admin">
-                            <AdminConsole />
+                            <AdminConsole
+                                cups={cups}
+                                setCups={setCups}
+                                updateCups={updateCups}
+                            />
                         </Route>
                     )}
                     {userProfile.isAdmin && (
