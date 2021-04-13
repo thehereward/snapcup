@@ -12,7 +12,7 @@ const CurrentCup: React.FunctionComponent = (props: {
 }) => {
     return (
         <div className="CurrentCup">
-            <CurrentCupHeader cups={props.cups} updateCup={props.updateCups} />
+            <CurrentCupHeader cups={props.cups} updateCups={props.updateCups} />
             <SectionHeaderUnderline />
             <AllCurrentCupsDisplay
                 cups={props.cups}
