@@ -10,14 +10,8 @@ const CurrentCupOptionsBar: React.FunctionComponent = (props: {
 }) => {
     return (
         <>
-            <CurrentCupOpennessButton
-                cup={props.cup}
-                updateCups={props.updateCups}
-            />
-            <CurrentCupPublishButton
-                cup={props.cup}
-                updateIsCup={props.updateCups}
-            />
+            <CurrentCupOpennessButton cup={props.cup} />
+            <CurrentCupPublishButton cup={props.cup} />
         </>
     );
 };

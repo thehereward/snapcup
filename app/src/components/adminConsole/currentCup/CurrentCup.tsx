@@ -7,18 +7,12 @@ import { Entity } from "../../../types/Entity";
 
 const CurrentCup: React.FunctionComponent = (props: {
     cups: Entity<Cup>[];
-    updateCups: () => void;
-    setCups;
 }) => {
     return (
         <div className="CurrentCup">
-            <CurrentCupHeader cups={props.cups} updateCups={props.updateCups} />
+            <CurrentCupHeader cups={props.cups} />
             <SectionHeaderUnderline />
-            <AllCurrentCupsDisplay
-                cups={props.cups}
-                updateCups={props.updateCups}
-                setCups={props.setCups}
-            />
+            <AllCurrentCupsDisplay cups={props.cups} />
         </div>
     );
 };

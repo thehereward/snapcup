@@ -6,12 +6,11 @@ import { Entity } from "../../../types/Entity";
 
 const CurrentCupPublishButton: React.FunctionComponent = (props: {
     cup: Entity<Cup>;
-    updateCups: () => void;
 }) => {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
 
-    const handlePublish = useCallback(() => {
+    const handlePublish = useCallback(async () => {
         if (
             !confirm(
                 "Are you sure you want to publish this cup? This cannot be reversed!"
@@ -19,19 +18,16 @@ const CurrentCupPublishButton: React.FunctionComponent = (props: {
         ) {
             return;
         }
-        (async () => {
-            try {
-                setLoading(true);
-                await setCupPublished(props.cup.id);
-                setLoading(false);
-                setError("");
-                props.updateCups();
-            } catch (err) {
-                console.error(err);
-                setError("Error!");
-            }
-        })();
-    }, [props.cup, setLoading, setCupPublished, setError, props.updateCups]);
+        try {
+            setLoading(true);
+            await setCupPublished(props.cup.id);
+            setLoading(false);
+            setError("");
+        } catch (err) {
+            console.error(err);
+            setError("Error!");
+        }
+    }, [setLoading, setError]);
 
     return (
         <CurrentCupOptionsButton onClick={handlePublish}>

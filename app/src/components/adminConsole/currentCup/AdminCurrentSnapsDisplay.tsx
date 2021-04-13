@@ -6,16 +6,12 @@ import { Entity } from "../../../types/Entity";
 
 const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
     cup: Entity<Cup>;
-    updateCups: () => void;
 }) => {
     return (
         <div className="d-flex">
             <CupNameDisplay>{props.cup.name}</CupNameDisplay>
             <div className="flex-grow-1" />
-            <CurrentCupOptionsBar
-                cup={props.cup}
-                updateCups={props.updateCups}
-            />
+            <CurrentCupOptionsBar cup={props.cup} />
         </div>
     );
 };

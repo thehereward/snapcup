@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getCurrentCupIfExists } from "../../firebase/cups/CupService";
-import { CupWithId } from "../../types/Cup";
+import Cup from "../../types/Cup";
 import MentionElements from "../../types/MentionElements";
 import { getCurrentUserName } from "../../firebase/users/UserService";
 import YourSnaps from "./YourSnaps";
@@ -19,7 +19,7 @@ const WelcomeMessage = styled.p`
 
 const SubmissionPage = (props: { snappables: MentionElements[] }) => {
     const [status, setStatus] = useState<string>("Loading...");
-    const [cup, setCup] = useState<CupWithId | undefined>(undefined);
+    const [cup, setCup] = useState<Cup | undefined>(undefined);
 
     useEffect(() => {
         setStatus("Loading...");

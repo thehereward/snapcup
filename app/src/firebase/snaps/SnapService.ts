@@ -65,21 +65,17 @@ export function streamSubmittedSnapsForCurrentUser(
         });
 }
 
-export function streamNumberOfSnapsForSnappable(
-    onNumberReceived: (numSnaps: number) => void,
+export function streamAllSnapsInCup(
+    onSnapsReceived: (snaps: Entity<Snap>[]) => void,
     onError: (error: Error) => void,
-    snappableId: String
+    cupId: string
 ): () => void {
-    return firebase
-        .firestore()
-        .collection("snaps")
-        .where("to", "array-contains", snappableId)
-        .onSnapshot({
-            next: (querySnapshot) => {
-                onNumberReceived(querySnapshot.docs.length);
-            },
-            error: (error) => {
-                onError(error);
-            },
-        });
+    return getSnapsCollectionFromCupId(cupId).onSnapshot({
+        next: (querySnapshot) => {
+            onSnapsReceived(querySnapshot.docs.map(docToSnap));
+        },
+        error: (error) => {
+            onError(error);
+        },
+    });
 }

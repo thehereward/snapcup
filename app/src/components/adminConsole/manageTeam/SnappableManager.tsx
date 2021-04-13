@@ -1,5 +1,7 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import getSnappables from "../../../firebase/users/GetSnappables";
+import { Entity } from "../../../types/Entity";
+import Snap from "../../../types/Snap";
 import {
     FileUploadWrapper,
     SectionHeader,
@@ -14,7 +16,7 @@ const LOADING = "loading";
 const IDLE = "idle";
 const ERROR = "error";
 
-const SnappableManager = () => {
+const SnappableManager = (props: { currentSnaps?: Entity<Snap>[] }) => {
     const [status, setStatus] = useState({ status: IDLE });
     const [filename, setFilename] = useState<String | null>(null);
     const fileRef = useRef(null);
@@ -124,7 +126,7 @@ const SnappableManager = () => {
                     </p>
                 )}
             </form>
-            <SnappablesTable />
+            <SnappablesTable currentSnaps={props.currentSnaps} />
         </>
     );
 };

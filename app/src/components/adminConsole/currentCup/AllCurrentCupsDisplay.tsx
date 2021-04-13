@@ -6,17 +6,11 @@ import { MessageDisplay } from "../AdminConsoleStyles";
 
 const AllCurrentCupsDisplay: React.FunctionComponent = (props: {
     cups: Entity<Cup>[];
-    updateCups: () => void;
-    setCups;
 }) => {
     const cupsList = props.cups.map((cup) => {
         return (
             <div key={cup.id}>
-                <AdminCurrentSnapsDisplay
-                    cup={cup}
-                    updateCups={props.updateCups}
-                    setCups={props.setCups}
-                />
+                <AdminCurrentSnapsDisplay cup={cup} />
             </div>
         );
     });

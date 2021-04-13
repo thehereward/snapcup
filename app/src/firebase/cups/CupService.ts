@@ -33,6 +33,43 @@ export async function getExistsUnpublished() {
     return result.indexOf(false) >= 0;
 }
 
+function docToCupEntity(
+    doc: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>
+): Entity<Cup> {
+    const {
+        isPublished,
+        isOpen,
+        timeCreated,
+        name,
+        timePublished,
+    } = doc.data();
+    return {
+        isPublished: isPublished,
+        isOpen: isOpen,
+        timeCreated: timeCreated,
+        name: name,
+        timePublished: timePublished,
+        id: doc.id,
+    };
+}
+
+export function streamAllCups(
+    onSnapsReceived: (cups: Entity<Cup>[]) => void,
+    onError: (error: Error) => void
+): () => void {
+    return firebase
+        .firestore()
+        .collection("cups")
+        .onSnapshot({
+            next: (querySnapshot) => {
+                onSnapsReceived(querySnapshot.docs.map(docToCupEntity));
+            },
+            error: (error) => {
+                onError(error);
+            },
+        });
+}
+
 export async function getAllCups(): Promise<Entity<Cup>[]> {
     const querySnapshot = await firebase
         .firestore()
