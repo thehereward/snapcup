@@ -5,11 +5,3 @@ export default interface Cup {
     name: string;
     timePublished: Date | null;
 }
-
-export interface CupWithId extends Cup {
-    id: string;
-}
-
-export interface CupWithId extends Cup {
-    id: string;
-}

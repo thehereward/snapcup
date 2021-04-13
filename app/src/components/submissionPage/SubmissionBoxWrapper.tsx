@@ -2,7 +2,7 @@ import React from "react";
 import { SnapSubmissionColumnDiv } from "./SnapSubmissionStyles";
 
 const SubmissionBoxWrapper: React.FunctionComponent = ({ children }) => (
-    <div className="container-sm ">
+    <div className="col">
         <div className="row">
             <div className="col col-lg-8">
                 <SnapSubmissionColumnDiv className="row justify-content-md-center">

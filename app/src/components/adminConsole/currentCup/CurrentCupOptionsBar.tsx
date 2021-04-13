@@ -6,7 +6,6 @@ import { Entity } from "../../../types/Entity";
 
 const CurrentCupOptionsBar: React.FunctionComponent = (props: {
     cup: Entity<Cup>;
-    s;
     updateCups: () => void;
 }) => {
     return (
