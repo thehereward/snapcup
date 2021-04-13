@@ -23,7 +23,7 @@ jobs:
             - name: deploy to firebase
               uses: w9jds/firebase-action@master
               with:
-                  args: deploy --only firestore,functions,hosting
+                  args: deploy --only firestore,functions,hosting --force
               env:
                   FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
             - name: Discord notification
