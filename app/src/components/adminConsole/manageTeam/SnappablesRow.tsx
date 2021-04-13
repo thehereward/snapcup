@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Snappable from "../../../types/Snappable";
 
 const SnappableRow = (props: { snappable: Snappable; numSnaps: number }) => {
