@@ -6,7 +6,6 @@ import SnapList from "./SnapList";
 import styled, { css } from "styled-components";
 // @ts-ignore
 import SectionHeading from "../transferable/SectionHeading";
-import { getCurrentCupName } from "../../firebase/cups/CupService";
 
 const YourSnapsHeader = styled.h2`
     font-family: Asap;
