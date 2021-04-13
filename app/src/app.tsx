@@ -65,11 +65,11 @@ const App = () => {
     if (loggedIn) {
         return (
             <PrettyPageWrap
-                isAdmin={userProfile.isAdmin}
+                isAdmin={userProfile?.isAdmin}
                 setLoggedIn={setLoggedIn}
             >
                 <Switch>
-                    {userProfile.isAdmin && (
+                    {userProfile?.isAdmin && (
                         <Route path="/admin">
                             <AdminConsole
                                 cups={cups}
@@ -78,7 +78,7 @@ const App = () => {
                             />
                         </Route>
                     )}
-                    {userProfile.isAdmin && (
+                    {userProfile?.isAdmin && (
                         <Route path="/manage-admins">
                             <ManageAdminsConsole />
                         </Route>
