@@ -10,7 +10,7 @@ export async function getCurrentCupIfExists(): Promise<Cup | undefined> {
     const querySnapshot = await firebase
         .firestore()
         .collection("cups")
-        .where("isPublished", "==", true)
+        .where("isPublished", "==", false)
         .get({ source: "server" });
     if (querySnapshot.empty) {
         return undefined;
