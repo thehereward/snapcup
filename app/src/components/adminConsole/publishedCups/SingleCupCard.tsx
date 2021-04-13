@@ -2,6 +2,7 @@ import React from "react";
 import { Entity } from "../../../types/Entity";
 import Cup from "../../../types/Cup";
 import styled from "styled-components";
+import ExportSnaps from "../ExportSnaps";
 
 function formatTimePublished(seconds: number): string {
     const d = new Date(seconds * 1000);
@@ -47,6 +48,7 @@ const CupCardDate = styled.p`
 
 const SingleCupCard: React.FunctionComponent = (props: {
     cup: Entity<Cup>;
+    inAdmin: Boolean;
 }) => {
     const timemsg =
         props.cup.timePublished == undefined
@@ -58,6 +60,7 @@ const SingleCupCard: React.FunctionComponent = (props: {
                 <CupText>
                     <CupCardName>{props.cup.name}</CupCardName>
                     <CupCardDate>{timemsg}</CupCardDate>
+                    {props.inAdmin && <ExportSnaps cup={props.cup} />}
                 </CupText>
             </CupCard>
         </div>

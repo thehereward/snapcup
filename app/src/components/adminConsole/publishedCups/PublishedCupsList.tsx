@@ -6,9 +6,10 @@ import SingleCupCard from "./SingleCupCard";
 
 const PublishedCupsList: React.FunctionComponent = (props: {
     cups: Entity<Cup>[];
+    inAdmin: Boolean;
 }) => {
     const listCups = props.cups.map((cup: Entity<Cup>) => {
-        return <SingleCupCard cup={cup} key={cup.id} />;
+        return <SingleCupCard cup={cup} key={cup.id} inAdmin={props.inAdmin} />;
     });
     if (props.cups.length > 0) {
         return <div className="row">{listCups}</div>;

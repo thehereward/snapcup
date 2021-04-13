@@ -50,6 +50,7 @@ const AdminConsole = () => {
                     .sort((a, b) =>
                         a.timePublished < b.timePublished ? 1 : -1
                     )}
+                inAdmin={true}
             />
         </div>
     );

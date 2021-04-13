@@ -71,7 +71,7 @@ const SubmissionPage = (props: {
                 )}
             </SubmissionBoxWrapper>
             {cup && <YourSnaps cup={cup} />}
-            <PublishedCups cups={props.publishedCups} />
+            <PublishedCups cups={props.publishedCups} inAdmin={false} />
         </>
     );
 };
