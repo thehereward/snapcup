@@ -81,6 +81,13 @@ export const CurrentCupOptionsButton = styled.button`
     background-color: transparent;
     color: var(--purple-button-default);
     margin-left: 10px;
+    transition: transform 0.5s;
+    transform: none;
+
+    &.success {
+        transform: scale(1.1) translate(0, -10px);
+        transition: transform 0.5s;
+    }
     &:hover {
         color: var(--purple-selected);
         border-color: var(--purple-selected);
