@@ -6,6 +6,7 @@ import { streamAllSnapsInCup } from "../../firebase/snaps/SnapService";
 import Cup from "../../types/Cup";
 import Snap from "../../types/Snap";
 import { Entity } from "../../types/Entity";
+import PublishedCups from "./publishedCups/PublishedCups";
 
 const AdminConsole = () => {
     const [cups, setCups] = useState<Entity<Cup>[]>([]);
@@ -42,6 +43,14 @@ const AdminConsole = () => {
             <SnappableManager currentSnaps={snaps} />
             <hr />
             <CurrentCup cups={cups.filter(isCurrent)} />
+            <hr />
+            <PublishedCups
+                cups={cups
+                    .filter((cup) => cup.isPublished == true)
+                    .sort((a, b) =>
+                        a.timePublished < b.timePublished ? 1 : -1
+                    )}
+            />
         </div>
     );
 };

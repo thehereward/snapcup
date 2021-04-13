@@ -37,7 +37,6 @@ const CreateCupButton: React.FunctionComponent = (props: {
             setNewCupName("");
         } catch (error) {
             console.log(error.toString());
-            console.log("error in firebase");
         }
         setStatus({ status: IDLE });
     };
