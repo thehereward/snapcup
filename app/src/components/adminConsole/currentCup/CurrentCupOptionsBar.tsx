@@ -16,7 +16,7 @@ const CurrentCupOptionsBar: React.FunctionComponent = (props: {
             />
             <CurrentCupPublishButton
                 cup={props.cup}
-                updateIsCup={props.updateCups}
+                updateCups={props.updateCups}
             />
         </>
     );

@@ -4,24 +4,12 @@ import CurrentCup from "./currentCup/CurrentCup";
 import { getAllCups } from "../../firebase/cups/CupService";
 import Cup from "../../types/Cup";
 import { Entity } from "../../types/Entity";
+import PublishedCups from "./publishedCups/PublishedCups";
 
-const AdminConsole = () => {
-    const [cups, setCups] = useState<Entity<Cup>[]>([]);
-
+const AdminConsole = ({ cups, setCups, updateCups }) => {
     function isCurrent(cup: Cup) {
         return !cup.isPublished;
     }
-
-    const updateCups = () => {
-        (async () => {
-            try {
-                const res = await getAllCups();
-                setCups(res);
-            } catch (err) {
-                console.error(err);
-            }
-        })();
-    };
 
     useEffect(() => {
         updateCups();
@@ -35,6 +23,14 @@ const AdminConsole = () => {
                 cups={cups.filter(isCurrent)}
                 updateCups={updateCups}
                 setCup={setCups}
+            />
+            <hr />
+            <PublishedCups
+                cups={cups
+                    .filter((cup) => cup.isPublished == true)
+                    .sort((a, b) =>
+                        a.timePublished < b.timePublished ? 1 : -1
+                    )}
             />
         </div>
     );

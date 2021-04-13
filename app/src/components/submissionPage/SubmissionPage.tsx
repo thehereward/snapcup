@@ -6,6 +6,9 @@ import MentionElements from "../../types/MentionElements";
 import { getCurrentUserName } from "../../firebase/users/UserService";
 import YourSnaps from "./YourSnaps";
 import styled from "styled-components";
+import Cup from "../../types/Cup";
+import { Entity } from "../../types/Entity";
+import PublishedCups from "../adminConsole/publishedCups/PublishedCups";
 import SubmissionBoxWrapper from "./SubmissionBoxWrapper";
 import SubmissionTextBox from "./SubmissionTextBox";
 
@@ -18,7 +21,10 @@ const WelcomeMessage = styled.p`
     padding-top: 3%;
 `;
 
-const SubmissionPage = (props: { snappables: MentionElements[] }) => {
+const SubmissionPage = (props: {
+    snappables: MentionElements[];
+    publishedCups: Entity<Cup>[];
+}) => {
     const [status, setStatus] = useState<string>("Loading...");
     const [cup, setCup] = useState<Entity<Cup> | undefined>(undefined);
 
@@ -67,6 +73,7 @@ const SubmissionPage = (props: { snappables: MentionElements[] }) => {
                 )}
             </SubmissionBoxWrapper>
             {cup && <YourSnaps cup={cup} />}
+            <PublishedCups cups={props.publishedCups} />
         </>
     );
 };
