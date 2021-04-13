@@ -6,6 +6,7 @@ import SnapList from "./SnapList";
 import styled, { css } from "styled-components";
 // @ts-ignore
 import SectionHeading from "../transferable/SectionHeading";
+import { getCurrentCupName } from "../../firebase/cups/CupService";
 
 const YourSnapsHeader = styled.h2`
     font-family: Asap;
@@ -37,36 +38,29 @@ const PublishedStatus = styled(SnapCupName)`
     line-height: 18px;
 `;
 
-const YourSnaps: React.FunctionComponent = () => {
+const YourSnaps: React.FunctionComponent = ({ cup }) => {
     const [snaps, setSnaps] = useState<Snap[]>([]);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const unsubscribe = streamSubmittedSnapsForCurrentUser(
             (updatedSnaps) => setSnaps(updatedSnaps),
-            (error) => setError(error.message)
+            (error) => setError(error.message),
+            cup.id
         );
         // clean up function
         return unsubscribe;
-    }, [setSnaps, setError]);
-
-    /* Skeleton Function to get snapcup name*/
-    const getSnapCupName = () => {
-        return "SnapCup";
-    };
-
-    /* Skeleton Function to get the status of a snapcup */
-    const getPublishedStatus = () => {
-        return "Not Yet Published";
-    };
+    }, [setSnaps, setError, cup]);
 
     return (
         <div>
             <SectionHeading title={"SnapCups"} />
-            <SnapCupName>CupName {getSnapCupName()}</SnapCupName>
+            <SnapCupName>CupName {cup.name}</SnapCupName>
             {error && <p>Error: {error}</p>}
-            <PublishedStatus>{getPublishedStatus()}</PublishedStatus>
-            {snaps.length > 0 && <SnapList snaps={snaps} />}
+            <PublishedStatus>
+                {cup.isPublished ? "Published" : "Not yet published."}
+            </PublishedStatus>
+            {snaps.length > 0 && <SnapList snaps={snaps} cup={cup} />}
         </div>
     );
 };

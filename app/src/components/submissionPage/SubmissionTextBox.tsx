@@ -1,7 +1,5 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { MentionsInput, Mention } from "react-mentions";
-import MentionElements from "../../types/MentionElements";
 import GetExtraLength from "./GetExtraLength";
 import CharactersLeftDisplay from "./CharactersLeftDisplay";
 import OnSubmitMessageDisplay from "./OnSubmitMessageDisplay";
@@ -9,20 +7,24 @@ import SubmissionBoxErrorDisplay from "./SubmissionBoxErrorDisplay";
 import ValidateSnap from "./ValidateSnap";
 import { getCurrentUserUid } from "../../firebase/users/UserService";
 import Snap from "../../types/Snap";
+import Cup from "../../types/Cup";
+import { Entity } from "../../types/Entity";
+import MentionElements from "../../types/MentionElements";
 import { submitSnap } from "../../firebase/snaps/SnapService";
 import {
     ElleImg,
-    SnapSubmissionColumnDiv,
     SnapCupTextArea,
     SnapCupText,
     SnapItButton,
     LabelText,
     HelperText,
 } from "./SnapSubmissionStyles";
+import SubmissionBoxWrapper from "./SubmissionBoxWrapper";
 
 export interface Props {
     snappables: MentionElements[];
     user: string;
+    cup: Entity<Cup>;
 }
 
 const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
@@ -32,7 +34,7 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
     const [error, setError] = useState<string>("");
     const [snappedUsers, setSnappedUsers] = useState<MentionElements[]>([]);
 
-    function handleSubmit(event) {
+    const handleSubmit = useCallback((event) => {
         const uid = getCurrentUserUid();
         event.preventDefault();
         const ids = snappedUsers.map((u: MentionElements) => u.id);
@@ -42,20 +44,24 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
             body: message,
             timestamp: new Date(),
         };
-        if (ValidateSnap(resultingSnap, snappedUsers)) {
+        if (!ValidateSnap(resultingSnap, snappedUsers)) {
+            setError("Your snap is invalid.");
+            setConfirmation(false);
+            return;
+        }
+
+        (async () => {
             try {
-                submitSnap(resultingSnap);
+                await submitSnap(resultingSnap, props.cup.id);
                 setConfirmation(true);
                 setMessage("");
                 setSnappedUsers([]);
             } catch (error) {
-                setError(error.toString());
+                console.error(error);
+                setError("There was an error submitting the snap!");
             }
-        } else {
-            setError("Your snap is invalid.");
-            setConfirmation(false);
-        }
-    }
+        })();
+    });
 
     /* Updates the value in the webhook "message" */
     function handleMessageTextChanged(
@@ -78,70 +84,60 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
     }
 
     return (
-        <div className="container-sm ">
-            <div className="row">
-                <div className="col col-lg-8">
-                    <SnapSubmissionColumnDiv className="row justify-content-md-center">
-                        <div className="d-none d-sm-block col col-lg-5 ">
-                            <SnapCupText>
-                                Add a Snap to the current SnapCup.
-                            </SnapCupText>
-                            <ElleImg className="w-100" />
-                        </div>
-                        <div className="col col-lg-7">
-                            <form>
-                                <div className="form-group">
-                                    <LabelText>Message:</LabelText>
-                                    <SnapCupTextArea
-                                        className="form-control finalTextBox"
-                                        value={message}
-                                        onChange={handleMessageTextChanged}
-                                        maxLength={GetExtraLength(snappedUsers)}
-                                        rows={5}
-                                        onKeyPress={handleKeyPress}
-                                        placeholder="You can tag users using @."
-                                    >
-                                        <Mention
-                                            style={{
-                                                backgroundColor: "#daf4fa",
-                                                zIndex: 0,
-                                                outline: "none",
-                                            }}
-                                            className="mentions__mention"
-                                            trigger="@"
-                                            data={props.snappables}
-                                            rows={5}
-                                        />
-                                    </SnapCupTextArea>
-                                    {confirmation ? (
-                                        <OnSubmitMessageDisplay
-                                            confirmation={confirmation}
-                                        />
-                                    ) : (
-                                        <CharactersLeftDisplay
-                                            snappedUsers={snappedUsers}
-                                            message={message}
-                                        />
-                                    )}
-                                    {error ? (
-                                        <SubmissionBoxErrorDisplay
-                                            error={error}
-                                        />
-                                    ) : null}
-                                </div>
-                                <SnapItButton
-                                    type="submit"
-                                    className="btn btn-primary"
-                                    onClick={handleSubmit}
-                                >
-                                    Snap it
-                                </SnapItButton>
-                            </form>
-                        </div>
-                    </SnapSubmissionColumnDiv>
-                </div>
+        <>
+            <div className="d-none d-sm-block col col-lg-5 ">
+                <SnapCupText>Add a Snap to the current SnapCup.</SnapCupText>
+                <ElleImg className="w-100" />
             </div>
-        </div>
+            <div className="col col-lg-7">
+                <form>
+                    <div className="form-group">
+                        <LabelText>Message:</LabelText>
+                        <SnapCupTextArea
+                            className="form-control finalTextBox"
+                            value={message}
+                            onChange={handleMessageTextChanged}
+                            maxLength={GetExtraLength(snappedUsers)}
+                            rows={5}
+                            onKeyPress={handleKeyPress}
+                            placeholder="You can tag users using @."
+                        >
+                            <Mention
+                                style={{
+                                    backgroundColor: "#daf4fa",
+                                    zIndex: 0,
+                                    outline: "none",
+                                }}
+                                className="mentions__mention"
+                                trigger="@"
+                                data={props.snappables}
+                                rows={5}
+                            />
+                        </SnapCupTextArea>
+                        {confirmation ? (
+                            <OnSubmitMessageDisplay
+                                confirmation={confirmation}
+                            />
+                        ) : (
+                            <CharactersLeftDisplay
+                                snappedUsers={snappedUsers}
+                                message={message}
+                            />
+                        )}
+                        {error ? (
+                            <SubmissionBoxErrorDisplay error={error} />
+                        ) : null}
+                    </div>
+                    <SnapItButton
+                        type="submit"
+                        className="btn btn-primary"
+                        onClick={handleSubmit}
+                    >
+                        Snap it
+                    </SnapItButton>
+                </form>
+            </div>
+        </>
     );
 };
 

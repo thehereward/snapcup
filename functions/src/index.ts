@@ -38,9 +38,8 @@ export const setFirstUserAsAdmin = regionalFunctions.firestore
             context.params.documentId,
             original
         );
-        const adminUser = { ...original, isAdmin: true };
         // You must return a Promise when performing asynchronous tasks inside a Functions such as writing to Firestore.
-        return snapshot.ref.set(adminUser, { merge: true });
+        return snapshot.ref.update({ isAdmin: true });
     });
 
 interface Snappable {

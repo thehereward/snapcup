@@ -6,6 +6,21 @@ export async function createNewCup(cup: Cup) {
     await firebase.firestore().collection("cups").add(cup);
 }
 
+export async function getCurrentCupIfExists(): Promise<Cup | undefined> {
+    const querySnapshot = await firebase
+        .firestore()
+        .collection("cups")
+        .where("isPublished", "==", false)
+        .get({ source: "server" });
+    if (querySnapshot.empty) {
+        return undefined;
+    }
+    const publishedDocQuery = querySnapshot.docs[0];
+    const publishedDoc = publishedDocQuery.data();
+    publishedDoc.id = publishedDocQuery.id;
+    return publishedDoc as Cup;
+}
+
 export async function getExistsUnpublished() {
     const querySnapshot = await firebase
         .firestore()

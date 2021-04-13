@@ -26,7 +26,7 @@ afterEach(() => {
 
 it("renders without crashing", () => {
     act(() => {
-        render(<YourSnaps />, container);
+        render(<YourSnaps cup={{ id: "blah" }} />, container);
     });
     expect(container.children.length).toBeGreaterThan(0);
 });

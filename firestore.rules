@@ -2,15 +2,31 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     match /{document=**} {
-      allow read, write: if
-          request.time < timestamp.date(2021, 5, 1);
+      allow read, write: if request.auth != null && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true;  // Admins can read/write to anywhere.
     }
-  }
-  match /users/{user} {
-    allow create: if (!request.resource.data.isAdmin);
-  }
-  match /snaps/{snap} {
-    allow create: if request.auth != null && request.auth.uid == request.resource.data.from;
-    allow read, delete: if request.auth != null && request.auth.uid == snap.from;
+
+    match /users/{user} {
+      allow create: if (!request.resource.data.isAdmin);
+      allow read: if (request.auth != null) && (user == request.auth.uid);
+    }
+
+    match /cups/{cup} {
+      allow read: if request.auth != null;
+
+      match /snaps/{snap} {
+        allow create: if request.auth != null && 
+          !get(/databases/$(database)/documents/cups/$(cup)).data.isPublished && 
+          get(/databases/$(database)/documents/cups/$(cup)).data.isOpen;
+
+        allow read: if request.auth != null && 
+          (resource.data.from == request.auth.uid || get(/databases/$(database)/documents/$(cup)).data.isPublished);
+        
+        allow delete: if request.auth != null && resource.data.from == request.auth.uid;
+      }
+    }
+
+    match /snappables/{snappable} {
+      allow read: if request.auth != null;
+    }
   }
 }
