@@ -54,7 +54,7 @@ const YourSnaps: React.FunctionComponent = ({ cup }) => {
     return (
         <div>
             <SectionHeading title={"SnapCups"} />
-            <SnapCupName>CupName {cup.name}</SnapCupName>
+            <SnapCupName>Current cup: {cup.name}</SnapCupName>
             {error && <p>Error: {error}</p>}
             <PublishedStatus>
                 {cup.isPublished ? "Published" : "Not yet published."}
