@@ -33,6 +33,8 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
     --purple-button-hover: #{$elle-purple};
     --purple-button-focus: #{$elle-purple};
     --button-hover-border: #e3daf8;
+    --danger-button: #d11121;
+    --danger-button-hover: #520015;
     --horizontal-divider: #{$light-purple};
 }
 

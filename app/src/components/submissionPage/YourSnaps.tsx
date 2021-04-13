@@ -53,7 +53,7 @@ const YourSnaps: React.FunctionComponent = ({ cup }) => {
 
     return (
         <div>
-            <SectionHeading title={"SnapCups"} />
+            <SectionHeading title={"Your Snaps"} />
             <SnapCupName>Current cup: {cup.name}</SnapCupName>
             {error && <p>Error: {error}</p>}
             <PublishedStatus>

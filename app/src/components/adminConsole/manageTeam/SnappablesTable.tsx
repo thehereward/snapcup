@@ -45,7 +45,7 @@ const SnappablesTable = (props: { currentSnaps?: Entity<Snap>[] }) => {
                     <th scope="col">Email</th>
                     <th scope="col">Full Name</th>
                     <th scope="col">Username</th>
-                    <th scope="col">Snaps Recieved</th>
+                    <th scope="col">Snaps Received</th>
                 </tr>
             </thead>
             <tbody>{rows}</tbody>

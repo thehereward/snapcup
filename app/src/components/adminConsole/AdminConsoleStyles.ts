@@ -83,7 +83,7 @@ export const CurrentCupOptionsButton = styled.button`
     margin-left: 10px;
     transition: transform 0.5s;
     transform: none;
-    
+
     &.success {
         transform: scale(1.1) translate(0, -10px);
         transition: transform 0.5s;
@@ -94,6 +94,18 @@ export const CurrentCupOptionsButton = styled.button`
     }
     &:disabled {
         color: var(--our-grey);
+    }
+    ${(props) =>
+        props.className &&
+        `
+        color: var(--danger-button);
+        border-color: var(--danger-button);
+        &:hover {
+            color: var(--danger-button-hover);
+            border-color: var(--danger-button-hover);
+            background-color: var(--danger-button);
+        }
+    `}
 `;
 
 export const FileUploadWrapper = styled.span`
