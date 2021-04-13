@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import getSnappables from "../../../firebase/users/GetSnappables";
 import { Entity } from "../../../types/Entity";
 import Snap from "../../../types/Snap";
