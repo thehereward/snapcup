@@ -2,10 +2,10 @@ import firebase from "firebase/app";
 import Snap from "../../types/Snap";
 
 /* Gets a list of Snaps */
-export default async function getSnaps(): Promise<Snap[]> {
+export default async function getSnaps(cupId): Promise<Snap[]> {
     const querySnapshot = await firebase
         .firestore()
-        .collection("snaps")
+        .collection(`cups/${cupId}/snaps`)
         .get({ source: "server" });
     const result = querySnapshot.docs.map((doc) => {
         console.log(doc.data());
