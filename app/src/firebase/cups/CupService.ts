@@ -161,3 +161,11 @@ export function setCupPublished(cupId: string): Promise<void> {
         .doc(cupId)
         .update({ isPublished: true, isOpen: false, timePublished: t });
 }
+
+export async function deleteCup(cupId: string): Promise<void> {
+    try {
+        await firebase.firestore().collection("cups").doc(cupId).delete();
+    } catch (error) {
+        throw Error("Error deleting snap " + error.message);
+    }
+}
