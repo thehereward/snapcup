@@ -10,8 +10,7 @@ const PublishedCups: React.FunctionComponent = (props: {
 }) => {
     return (
         <div className="PublishedCups">
-            <PublishedCupsHeader />
-            <SectionHeaderUnderline />
+            <PublishedCupsHeader title={"Published Cups"} />
             <PublishedCupsList cups={props.cups} />
         </div>
     );

@@ -5,7 +5,8 @@ import { streamSubmittedSnapsForCurrentUser } from "../../firebase/snaps/SnapSer
 import SnapList from "./SnapList";
 import styled, { css } from "styled-components";
 // @ts-ignore
-import Elle from "../../images/Elle";
+import SectionHeading from "../transferable/SectionHeading";
+import { SectionHeaderUnderline } from "../adminConsole/AdminConsoleStyles";
 
 const YourSnapsHeader = styled.h2`
     font-family: Asap;
@@ -37,13 +38,6 @@ const PublishedStatus = styled(SnapCupName)`
     line-height: 18px;
 `;
 
-const MiniElleImg = styled(Elle)`
-    height: 66px;
-    width: auto;
-    vertical-align: text-bottom;
-    margin-right: 19px;
-`;
-
 const YourSnaps: React.FunctionComponent = () => {
     const [snaps, setSnaps] = useState<Snap[]>([]);
     const [error, setError] = useState<string | null>(null);
@@ -69,10 +63,7 @@ const YourSnaps: React.FunctionComponent = () => {
 
     return (
         <div>
-            <YourSnapsHeader>
-                <MiniElleImg />
-                SnapCups
-            </YourSnapsHeader>
+            <SectionHeading title={"SnapCups"} />
             <SnapCupName>CupName {getSnapCupName()}</SnapCupName>
             {error && <p>Error: {error}</p>}
             <PublishedStatus>{getPublishedStatus()}</PublishedStatus>
