@@ -58,25 +58,17 @@ const YourSnaps: React.FunctionComponent = ({ cup }) => {
         return unsubscribe;
     }, [setSnaps, setError, cup]);
 
-    /* Skeleton Function to get snapcup name*/
-    const getSnapCupName = () => {
-        return "SnapCup";
-    };
-
-    /* Skeleton Function to get the status of a snapcup */
-    const getPublishedStatus = () => {
-        return "Not Yet Published";
-    };
-
     return (
         <div>
             <YourSnapsHeader>
                 <MiniElleImg />
                 SnapCups
             </YourSnapsHeader>
-            <SnapCupName>CupName {getSnapCupName()}</SnapCupName>
+            <SnapCupName>{cup.name}</SnapCupName>
             {error && <p>Error: {error}</p>}
-            <PublishedStatus>{getPublishedStatus()}</PublishedStatus>
+            <PublishedStatus>
+                {cup.isPublished ? "Published" : "Unpublished"}
+            </PublishedStatus>
             {snaps.length > 0 && <SnapList snaps={snaps} cup={cup} />}
         </div>
     );
