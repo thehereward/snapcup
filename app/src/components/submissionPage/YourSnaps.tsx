@@ -67,7 +67,7 @@ const YourSnaps: React.FunctionComponent = ({ cup }) => {
             <SnapCupName>{cup.name}</SnapCupName>
             {error && <p>Error: {error}</p>}
             <PublishedStatus>
-                {cup.isPublished ? "Published" : "Unpublished"}
+                {cup.isPublished ? "Published" : "Not yet published."}
             </PublishedStatus>
             {snaps.length > 0 && <SnapList snaps={snaps} cup={cup} />}
         </div>
