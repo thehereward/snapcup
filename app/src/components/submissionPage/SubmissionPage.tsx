@@ -27,31 +27,30 @@ const SubmissionPage = (props: {
     const [status, setStatus] = useState<string>("Loading...");
     const [cup, setCup] = useState<Entity<Cup> | undefined>(undefined);
 
-    useEffect(() => {
+    useEffect(async () => {
         setStatus("Loading...");
-        (async () => {
-            try {
-                setCup(await getCurrentCupIfExists());
-                setStatus("");
-            } catch (err) {
-                console.error("Getting cup", err);
-                setStatus("There was an unexpected error loading the snapcup.");
-            }
-        })();
-    }, [setCup]);
+        try {
+            setCup(await getCurrentCupIfExists());
+            setStatus("");
+        } catch (err) {
+            console.error("Getting cup", err);
+            setStatus("There was an unexpected error loading the snapcup.");
+        }
+    }, [setCup, setStatus]);
 
-    let textBoxAreaMessage;
-    if (cup?.isOpen) {
-        textBoxAreaMessage = "";
-    } else if (cup) {
-        textBoxAreaMessage =
-            "Apologies, the SnapCup is closed for new submissions.";
-    } else if (status) {
-        textBoxAreaMessage = status;
-    } else {
-        textBoxAreaMessage =
-            "Apologies, there is no open SnapCup at the moment.";
-    }
+    const getMessage = () => {
+        if (!cup) {
+            return "Apologies, there are no SnapCups at the moment.";
+        }
+        if (status) {
+            return status;
+        }
+        if (!cup.isOpen && !cup.isPublished) {
+            return "Apologies, the SnapCup is closed for new submissions.";
+        } else {
+            return "Apologies, there is no open SnapCup at the moment.";
+        }
+    };
 
     return (
         <>
@@ -59,14 +58,14 @@ const SubmissionPage = (props: {
                 Welcome, {getCurrentUserName().split(" ")[0]!}
             </WelcomeMessage>
             <SubmissionBoxWrapper>
-                {textBoxAreaMessage ? (
-                    <NoTextBoxMessage message={textBoxAreaMessage} />
-                ) : (
+                {cup?.isOpen && !cup?.isPublished ? (
                     <SubmissionTextBox
                         cup={cup}
                         snappables={props.snappables}
                         user={getCurrentUserName()}
                     />
+                ) : (
+                    <NoTextBoxMessage message={getMessage()} />
                 )}
             </SubmissionBoxWrapper>
             {cup && <YourSnaps cup={cup} />}
