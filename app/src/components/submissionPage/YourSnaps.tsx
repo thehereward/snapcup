@@ -44,28 +44,19 @@ const MiniElleImg = styled(Elle)`
     margin-right: 19px;
 `;
 
-const YourSnaps: React.FunctionComponent = () => {
+const YourSnaps: React.FunctionComponent = ({ cup }) => {
     const [snaps, setSnaps] = useState<Snap[]>([]);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const unsubscribe = streamSubmittedSnapsForCurrentUser(
             (updatedSnaps) => setSnaps(updatedSnaps),
-            (error) => setError(error.message)
+            (error) => setError(error.message),
+            cup.id
         );
         // clean up function
         return unsubscribe;
-    }, [setSnaps, setError]);
-
-    /* Skeleton Function to get snapcup name*/
-    const getSnapCupName = () => {
-        return "SnapCup";
-    };
-
-    /* Skeleton Function to get the status of a snapcup */
-    const getPublishedStatus = () => {
-        return "Not Yet Published";
-    };
+    }, [setSnaps, setError, cup]);
 
     return (
         <div>
@@ -73,10 +64,12 @@ const YourSnaps: React.FunctionComponent = () => {
                 <MiniElleImg />
                 SnapCups
             </YourSnapsHeader>
-            <SnapCupName>CupName {getSnapCupName()}</SnapCupName>
+            <SnapCupName>{cup.name}</SnapCupName>
             {error && <p>Error: {error}</p>}
-            <PublishedStatus>{getPublishedStatus()}</PublishedStatus>
-            {snaps.length > 0 && <SnapList snaps={snaps} />}
+            <PublishedStatus>
+                {cup.isPublished ? "Published" : "Not yet published."}
+            </PublishedStatus>
+            {snaps.length > 0 && <SnapList snaps={snaps} cup={cup} />}
         </div>
     );
 };

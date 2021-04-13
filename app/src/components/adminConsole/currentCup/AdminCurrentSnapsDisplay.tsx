@@ -7,7 +7,6 @@ import { Entity } from "../../../types/Entity";
 const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
     cup: Entity<Cup>;
     updateCups: () => void;
-    setCups;
 }) => {
     return (
         <div className="d-flex">
@@ -15,8 +14,7 @@ const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
             <div className="flex-grow-1" />
             <CurrentCupOptionsBar
                 cup={props.cup}
-                setCup={props.setCups}
-                updateCup={props.updateCups}
+                updateCups={props.updateCups}
             />
         </div>
     );

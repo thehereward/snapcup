@@ -33,7 +33,7 @@ const AdminConsole = () => {
             <hr />
             <CurrentCup
                 cups={cups.filter(isCurrent)}
-                updateCup={updateCups}
+                updateCups={updateCups}
                 setCup={setCups}
             />
         </div>
