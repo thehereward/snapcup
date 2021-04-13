@@ -8,7 +8,7 @@ export const TextBoxStyle = {
 
     "&multiLine": {
         control: {
-            fontFamily: "open sans",
+            fontFamily: "var(--open-sans)",
             minHeight: 63,
         },
         highlighter: {
