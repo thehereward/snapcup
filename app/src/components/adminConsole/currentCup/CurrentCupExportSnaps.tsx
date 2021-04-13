@@ -8,7 +8,6 @@ const IDLE = "idle";
 const ERROR = "error";
 
 const CurrentCupExportSnaps = ({ cup }) => {
-    const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
 
     let buttonText = `Export Snaps`;
@@ -29,8 +28,8 @@ const CurrentCupExportSnaps = ({ cup }) => {
                 console.error(err);
                 setStatus({
                     status: ERROR,
-                    error: "There was an error loading snaps.",
                 });
+                setError("There was an error loading snaps.");
             }
         })();
     }, []);
