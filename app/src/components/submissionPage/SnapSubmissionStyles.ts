@@ -27,21 +27,6 @@ export const SnapCupText = styled.p`
     color: white;
 `;
 
-export const SnapCupTextArea = styled(MentionsInput)`
-    font-family: var(--open-sans);
-    font-style: normal;
-    font-weight: normal;
-    font-size: 15px;
-    line-height: 22px;
-    width: 95%;
-    resize: none;
-    background-color: white;
-    height: 250px;
-    outline: none;
-    margin-left: auto;
-    margin-right: auto;
-`;
-
 export const LabelText = styled.p`
     font-family: Open Sans;
     font-style: normal;
