@@ -5,7 +5,8 @@ import MentionElements from "../../types/MentionElements";
 import { getCurrentUserName } from "../../firebase/users/UserService";
 import YourSnaps from "./YourSnaps";
 import styled from "styled-components";
-import TextBoxIfSnapcupOpen from "./TextBoxIfSnapcupOpen";
+import SubmissionBoxWrapper from "./SubmissionBoxWrapper";
+import SubmissionTextBox from "./SubmissionTextBox";
 
 const WelcomeMessage = styled.p`
     font-family: var(--asap);
@@ -33,16 +34,37 @@ const SubmissionPage = (props: { snappables: MentionElements[] }) => {
         })();
     }, [setCup]);
 
+    let textBoxAreaMessage;
+    if (cup?.isOpen) {
+        textBoxAreaMessage = "";
+    } else if (cup) {
+        textBoxAreaMessage =
+            "Apologies, the SnapCup is closed for new submissions.";
+    } else if (status) {
+        textBoxAreaMessage = status;
+    } else {
+        textBoxAreaMessage =
+            "Apologies, there is no open SnapCup at the moment.";
+    }
+
     return (
         <>
             <WelcomeMessage>
                 Welcome, {getCurrentUserName().split(" ")[0]!}
             </WelcomeMessage>
-            <TextBoxIfSnapcupOpen
-                cup={cup}
-                snappables={props.snappables}
-                status={status}
-            />
+            <SubmissionBoxWrapper>
+                {textBoxAreaMessage ? (
+                    <div className="col text-light">
+                        <h3>{textBoxAreaMessage}</h3>
+                    </div>
+                ) : (
+                    <SubmissionTextBox
+                        cup={cup}
+                        snappables={props.snappables}
+                        user={getCurrentUserName()}
+                    />
+                )}
+            </SubmissionBoxWrapper>
             {cup && <YourSnaps cup={cup} />}
         </>
     );

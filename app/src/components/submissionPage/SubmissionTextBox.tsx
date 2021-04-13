@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from "react";
 import { MentionsInput, Mention } from "react-mentions";
-import MentionElements from "../../types/MentionElements";
 import GetExtraLength from "./GetExtraLength";
 import CharactersLeftDisplay from "./CharactersLeftDisplay";
 import OnSubmitMessageDisplay from "./OnSubmitMessageDisplay";
@@ -8,6 +7,9 @@ import SubmissionBoxErrorDisplay from "./SubmissionBoxErrorDisplay";
 import ValidateSnap from "./ValidateSnap";
 import { getCurrentUserUid } from "../../firebase/users/UserService";
 import Snap from "../../types/Snap";
+import Cup from "../../types/Cup";
+import { Entity } from "../../types/Entity";
+import MentionElements from "../../types/MentionElements";
 import { submitSnap } from "../../firebase/snaps/SnapService";
 import {
     ElleImg,
@@ -18,12 +20,11 @@ import {
     HelperText,
 } from "./SnapSubmissionStyles";
 import SubmissionBoxWrapper from "./SubmissionBoxWrapper";
-import { CupWithId } from "../../types/Cup";
 
 export interface Props {
     snappables: MentionElements[];
     user: string;
-    cup: CupWithId;
+    cup: Entity<Cup>;
 }
 
 const SubmissionTextBox: React.FunctionComponent = (props: Props) => {

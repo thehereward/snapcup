@@ -10,16 +10,15 @@ export async function getCurrentCupIfExists(): Promise<Cup | undefined> {
     const querySnapshot = await firebase
         .firestore()
         .collection("cups")
+        .where("isPublished", "==", true)
         .get({ source: "server" });
-    const publishedDocQuery = querySnapshot.docs.find((doc) => {
-        return !doc.data().isPublished;
-    });
-    if (publishedDocQuery) {
-        const publishedDoc = publishedDocQuery.data();
-        publishedDoc.id = publishedDocQuery.id;
-        return publishedDoc as Cup;
+    if (querySnapshot.empty) {
+        return undefined;
     }
-    return undefined;
+    const publishedDocQuery = querySnapshot.docs[0];
+    const publishedDoc = publishedDocQuery.data();
+    publishedDoc.id = publishedDocQuery.id;
+    return publishedDoc as Cup;
 }
 
 export async function getExistsUnpublished() {
