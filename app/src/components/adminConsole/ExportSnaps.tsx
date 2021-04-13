@@ -9,7 +9,7 @@ const IDLE = "idle";
 const ERROR = "error";
 
 const ErrorMessage = styled.p`
-    font-family: Open Sans;
+    font-family: var(--open-sans);
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
