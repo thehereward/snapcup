@@ -5,6 +5,7 @@ import Elle from "../../images/Elle";
 
 export const ElleImg = styled(Elle)`
     max-height: 250px;
+    max-width: 100%;
 `;
 
 export const SnapSubmissionColumnDiv = styled.div`

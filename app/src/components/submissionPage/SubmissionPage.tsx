@@ -9,6 +9,7 @@ import styled from "styled-components";
 import PublishedCups from "../adminConsole/publishedCups/PublishedCups";
 import SubmissionBoxWrapper from "./SubmissionBoxWrapper";
 import SubmissionTextBox from "./SubmissionTextBox";
+import NoTextBoxMessage from "./NoTextBoxMessage";
 
 const WelcomeMessage = styled.p`
     font-family: var(--asap);
@@ -59,9 +60,7 @@ const SubmissionPage = (props: {
             </WelcomeMessage>
             <SubmissionBoxWrapper>
                 {textBoxAreaMessage ? (
-                    <div className="col text-light">
-                        <h3>{textBoxAreaMessage}</h3>
-                    </div>
+                    <NoTextBoxMessage message={textBoxAreaMessage} />
                 ) : (
                     <SubmissionTextBox
                         cup={cup}
