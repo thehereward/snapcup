@@ -90,9 +90,13 @@ const SnapList: React.FunctionComponent<SnapListProps> = ({ snaps, cup }) => {
                     <SnapCardFooter>
                         {formatTimestamp(snap.timestamp)}
                         <SnapCardSpacer />
-                        <TrashButton onClick={() => onDeleteSnapPressed(snap)}>
-                            <StyledTrashIcon alt="Delete snap" />
-                        </TrashButton>
+                        {cup.isOpen && (
+                            <TrashButton
+                                onClick={() => onDeleteSnapPressed(snap)}
+                            >
+                                <StyledTrashIcon alt="Delete snap" />
+                            </TrashButton>
+                        )}
                     </SnapCardFooter>
                 </SnapText>
             </SnapCard>
