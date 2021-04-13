@@ -48,7 +48,6 @@ const CupCardDate = styled.p`
 
 const SingleCupCard: React.FunctionComponent = (props: {
     cup: Entity<Cup>;
-    inAdmin: Boolean;
 }) => {
     const timemsg =
         props.cup.timePublished == undefined
@@ -60,7 +59,7 @@ const SingleCupCard: React.FunctionComponent = (props: {
                 <CupText>
                     <CupCardName>{props.cup.name}</CupCardName>
                     <CupCardDate>{timemsg}</CupCardDate>
-                    {props.inAdmin && <ExportSnaps cup={props.cup} />}
+                    <ExportSnaps cup={props.cup} />
                 </CupText>
             </CupCard>
         </div>
