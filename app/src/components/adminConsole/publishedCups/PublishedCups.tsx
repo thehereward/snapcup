@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { SectionHeaderUnderline } from "../AdminConsoleStyles";
-import PublishedCupsHeader from "./PublishedCupsHeader";
+import React from "react";
+import SectionHeading from "../../transferable/SectionHeading";
 import PublishedCupsList from "./PublishedCupsList";
 import Cup from "../../../types/Cup";
 import { Entity } from "../../../types/Entity";
@@ -10,7 +9,7 @@ const PublishedCups: React.FunctionComponent = (props: {
 }) => {
     return (
         <div className="PublishedCups">
-            <PublishedCupsHeader title={"Published Cups"} />
+            <SectionHeading title={"Published Cups"} />
             <PublishedCupsList cups={props.cups} />
         </div>
     );
