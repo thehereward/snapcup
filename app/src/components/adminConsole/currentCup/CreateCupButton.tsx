@@ -3,6 +3,7 @@ import { createNewCup, GetCupNames } from "../../../firebase/cups/CupService";
 import Cup from "../../../types/Cup";
 import { NewCupButton } from "../AdminConsoleStyles";
 import { Entity } from "../../../types/Entity";
+import type { Timestamp } from "@firebase/firestore-types";
 
 const LOADING = "loading";
 const IDLE = "idle";

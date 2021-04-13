@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback } from "react";
-import getSnappables from "../../../firebase/users/GetSnappables";
+import Snappable from "../../../types/Snappable";
 import { Entity } from "../../../types/Entity";
 import Snap from "../../../types/Snap";
 import {
@@ -16,25 +16,22 @@ const LOADING = "loading";
 const IDLE = "idle";
 const ERROR = "error";
 
-const SnappableManager = (props: { currentSnaps?: Entity<Snap>[] }) => {
+const SnappableManager = (props: {
+    currentSnaps?: Entity<Snap>[];
+    snappablePeople: Snappable[];
+}) => {
     const [status, setStatus] = useState({ status: IDLE });
     const [filename, setFilename] = useState<String | null>(null);
     const fileRef = useRef(null);
+
     const onClickDownload = useCallback(() => {
-        setStatus({ status: LOADING });
-        (async () => {
-            try {
-                const snappables = await getSnappables();
-                snappablesToCsvDownload(snappables);
-                setStatus({ status: IDLE });
-            } catch (err) {
-                console.error(err);
-                setStatus({
-                    status: ERROR,
-                    error: "There was an error loading snappable people.",
-                });
-            }
-        })();
+        try {
+            setStatus({ status: LOADING });
+            snappablesToCsvDownload(props.snappablePeople);
+            setStatus({ status: IDLE });
+        } catch (error) {
+            setStatus({ status: ERROR, error: error.message });
+        }
     }, [setStatus]);
 
     const uploadSnappables = useCallback(

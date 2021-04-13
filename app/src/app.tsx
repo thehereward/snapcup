@@ -8,7 +8,7 @@ import LoginPage from "./components/loginPage/LoginPage";
 import SubmissionPage from "./components/submissionPage/SubmissionPage";
 import MentionElements from "./types/MentionElements";
 
-import getSnappables from "./firebase/users/GetSnappables";
+import { streamAllSnappablePeople } from "./firebase/users/GetSnappables";
 import {
     getCurrentUserName,
     onAuthStateChanged,
@@ -54,17 +54,18 @@ const App = () => {
         }
     }, [setCups, loggedIn]);
 
-    useEffect(async () => {
-        try {
-            const snappables = await getSnappables();
-            const mentionElements: MentionElements[] = snappables.map((s) => {
-                return { id: s.id, display: s.fullName };
-            });
-            setSnappables(mentionElements);
-        } catch (error) {
-            console.log(error.message);
-        }
-    }, [setSnappables, getSnappables]);
+    useEffect(() => {
+        const unsubscribe = streamAllSnappablePeople(
+            (people) => {
+                const mentionElements: MentionElements[] = people.map((s) => {
+                    return { id: s.id, display: s.fullName };
+                });
+                setSnappables(mentionElements);
+            },
+            (error) => console.error(error)
+        );
+        return unsubscribe;
+    }, [setSnappables]);
 
     if (loading) {
         return <Loading />;
