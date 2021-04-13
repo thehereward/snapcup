@@ -13,13 +13,11 @@ import MentionElements from "../../types/MentionElements";
 import { submitSnap } from "../../firebase/snaps/SnapService";
 import {
     ElleImg,
-    SnapCupTextArea,
     SnapCupText,
     SnapItButton,
     LabelText,
-    HelperText,
 } from "./SnapSubmissionStyles";
-import SubmissionBoxWrapper from "./SubmissionBoxWrapper";
+import { TextBoxStyle } from "./TextBoxStyle";
 
 export interface Props {
     snappables: MentionElements[];
@@ -93,7 +91,7 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
                 <form>
                     <div className="form-group">
                         <LabelText>Message:</LabelText>
-                        <SnapCupTextArea
+                        <MentionsInput
                             className="form-control finalTextBox"
                             value={message}
                             onChange={handleMessageTextChanged}
@@ -101,11 +99,13 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
                             rows={5}
                             onKeyPress={handleKeyPress}
                             placeholder="You can tag users using @."
+                            style={TextBoxStyle}
                         >
                             <Mention
                                 style={{
-                                    backgroundColor: "#daf4fa",
-                                    zIndex: 0,
+                                    backgroundColor:
+                                        "var(--button-hover-border)",
+                                    zIndex: 1,
                                     outline: "none",
                                 }}
                                 className="mentions__mention"
@@ -113,7 +113,7 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
                                 data={props.snappables}
                                 rows={5}
                             />
-                        </SnapCupTextArea>
+                        </MentionsInput>
                         {confirmation ? (
                             <OnSubmitMessageDisplay
                                 confirmation={confirmation}
