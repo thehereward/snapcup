@@ -1,4 +1,12 @@
 {
-  "indexes": [],
-  "fieldOverrides": []
+    "indexes": [
+        {
+            "collectionId": "snaps",
+            "fields": [
+                { "fieldPath": "from", "mode": "ASCENDING" },
+                { "fieldPath": "timestamp", "mode": "DESCENDING" }
+            ]
+        }
+    ],
+    "fieldOverrides": []
 }

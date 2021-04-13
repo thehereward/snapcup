@@ -38,11 +38,15 @@ const CupText = styled.div`
     align-items: left;
 `;
 
-const CupCardName = styled.p`
+const NoMarginP = styled.p`
+    margin-bottom: 0;
+`;
+
+const CupCardName = styled(NoMarginP)`
     font-size: 18px;
 `;
 
-const CupCardDate = styled.p`
+const CupCardDate = styled(NoMarginP)`
     font-size: 14px;
 `;
 
