@@ -35,15 +35,13 @@ const App = () => {
         setLoading(false);
     };
 
-    const updateCups = () => {
-        (async () => {
-            try {
-                const res = await getAllCups();
-                setCups(res);
-            } catch (err) {
-                console.error(err);
-            }
-        })();
+    const updateCups = async () => {
+        try {
+            const res = await getAllCups();
+            setCups(res);
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     useEffect(() => {
@@ -51,8 +49,10 @@ const App = () => {
     }, [setLoggedIn, setUserProfile, setLoading]);
 
     useEffect(() => {
-        updateCups();
-    }, [setCups]);
+        if (loggedIn) {
+            updateCups();
+        }
+    }, [setCups, loggedIn]);
 
     useEffect(async () => {
         try {
