@@ -42,16 +42,10 @@ const CupText = styled.div`
 `;
 
 const CupCardName = styled.p`
-    color: var(--white);
-    padding: 0;
-    margin: 0 0 13px 0;
     font-size: 18px;
 `;
 
 const CupCardDate = styled.p`
-    color: var(--white);
-    padding: 0
-    margin: 0 0 13px 0;
     font-size: 14px;
 `;
 
