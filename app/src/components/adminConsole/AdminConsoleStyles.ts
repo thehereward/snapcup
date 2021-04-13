@@ -87,6 +87,18 @@ export const CurrentCupOptionsButton = styled.button`
     }
     &:disabled {
         color: var(--our-grey);
+    }
+    ${(props) =>
+        props.className &&
+        `
+        color: var(--danger-button);
+        border-color: var(--danger-button);
+        &:hover {
+            color: var(--danger-button-hover);
+            border-color: var(--danger-button-hover);
+            background-color: var(--danger-button);
+        }
+    `}
 `;
 
 export const FileUploadWrapper = styled.span`

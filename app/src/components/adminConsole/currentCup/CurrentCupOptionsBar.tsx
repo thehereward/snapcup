@@ -12,9 +12,9 @@ const CurrentCupOptionsBar: React.FunctionComponent = (props: {
     return (
         <>
             <CurrentCupExportSnaps cup={props.cup} />
-            <CurrentCupDeleteButton cup={props.cup} />
             <CurrentCupOpennessButton cup={props.cup} />
             <CurrentCupPublishButton cup={props.cup} />
+            <CurrentCupDeleteButton cup={props.cup} className="warning" />
         </>
     );
 };

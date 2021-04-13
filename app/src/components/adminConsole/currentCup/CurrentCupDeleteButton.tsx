@@ -30,7 +30,7 @@ const CurrentCupDeleteButton: React.FunctionComponent = (props: {
     }, [setLoading, setError]);
 
     return (
-        <CurrentCupOptionsButton onClick={handleDelete}>
+        <CurrentCupOptionsButton className="warning" onClick={handleDelete}>
             Delete SnapCup
         </CurrentCupOptionsButton>
     );
