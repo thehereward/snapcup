@@ -48,7 +48,6 @@ const CupCardDate = styled.p`
 const SingleCupCard: React.FunctionComponent = (props: {
     cup: Entity<Cup>;
 }) => {
-    console.log("heres the problem", props.cup);
     const timemsg =
         props.cup.timePublished == undefined
             ? ""
