@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { MentionsInput } from "react-mentions";
 // @ts-ignore
 import Elle from "../../images/Elle";
@@ -44,6 +44,36 @@ export const HelperText = styled(LabelText)`
     margin-right: 10px;
 `;
 
+const errorWobbleAnimation = keyframes`
+25% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+`;
+
+const successExpandAnimation = keyframes`
+0% {
+    opacity:0;
+    transform:  rotate(0deg) scaleX(1) scaleY(1) ;
+  }
+  50% {
+    opacity:1;
+    transform:  rotate(0deg) scaleX(1.1) scaleY(1.1) ;
+  }
+  100% {
+    opacity:0;
+    transform:  rotate(0deg) scaleX(1) scaleY(1) ;
+  }
+`;
+
 export const SnapItButton = styled.button`
     margin-left: 5%;
     margin-right: auto;
@@ -52,6 +82,13 @@ export const SnapItButton = styled.button`
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
     border: 0px;
+    &:success {
+        animation: ${successExpandAnimation} 1s linear;
+    }
+    &:error {
+        animation: ${errorWobbleAnimation} 1s linear;
+    }
+
     &:hover {
         background-color: var(--purple-button-hover);
         border: 2px solid var(--button-hover-border);
