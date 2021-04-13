@@ -58,8 +58,6 @@ export const HelperText = styled(LabelText)`
     margin-right: 10px;
 `;
 
-//animation: ${successWobbleAnimation} 1s linear;
-
 const errorWobbleAnimation = keyframes`
 25% {
     transform: rotate(5deg);
