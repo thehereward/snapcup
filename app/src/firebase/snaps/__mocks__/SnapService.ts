@@ -10,7 +10,8 @@ export async function deleteSnap(snap: Snap) {
 
 export function streamSubmittedSnapsForCurrentUser(
     onSnapsReceived: (snaps: Snap[]) => void,
-    onError: (error: Error) => void
+    onError: (error: Error) => void,
+    snapId: string
 ): () => void {
     const mockSnaps = [
         {
