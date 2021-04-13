@@ -19,38 +19,40 @@ import AdminConsole from "./components/adminConsole/AdminConsole";
 import ManageAdminsConsole from "./components/adminConsole/ManageAdminsConsole";
 import { Entity } from "./types/Entity";
 import Cup from "./types/Cup";
+import Loading from "./components/Loading";
 
 const App = () => {
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
     const [userProfile, setUserProfile] = useState(null);
     const [snappables, setSnappables] = useState<MentionElements[]>([]);
     const [cups, setCups] = useState<Entity<Cup>[]>([]);
+    const [loading, setLoading] = useState(false);
 
     const setUser = (profile: UserProfile) => {
+        setLoading(true);
         setUserProfile(profile);
         setLoggedIn(true);
+        setLoading(false);
     };
 
-    const updateCups = () => {
-        (async () => {
-            try {
-                const res = await getAllCups();
-                setCups(res);
-            } catch (err) {
-                console.error(err);
-            }
-        })();
+    const updateCups = async () => {
+        try {
+            const res = await getAllCups();
+            setCups(res);
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     useEffect(() => {
         onAuthStateChanged(setUser);
-    }, [setLoggedIn, setUserProfile]);
+    }, [setLoggedIn, setUserProfile, setLoading]);
 
     useEffect(() => {
         if (loggedIn) {
             updateCups();
         }
-    }, [setCups, getAllCups, loggedIn]);
+    }, [setCups, loggedIn]);
 
     useEffect(async () => {
         try {
@@ -64,7 +66,9 @@ const App = () => {
         }
     }, [setSnappables, getSnappables]);
 
-    if (loggedIn) {
+    if (loading) {
+        return <Loading />;
+    } else if (loggedIn) {
         return (
             <PrettyPageWrap
                 isAdmin={userProfile?.isAdmin}

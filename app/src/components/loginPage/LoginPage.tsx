@@ -3,6 +3,7 @@ import { signIn } from "../../firebase/users/UserService";
 import styled from "styled-components";
 // @ts-ignore
 import Elle from "../../images/Elle";
+import Loading from "../Loading";
 
 interface Props {
     setLoggedIn: Dispatch<SetStateAction<boolean>>;
@@ -55,21 +56,22 @@ const ElleImg = styled(Elle)`
 
 const LoginPage: React.FunctionalComponent<Props> = () => {
     const [loginError, setLoginError] = useState("");
+    const [loading, setLoading] = useState(false);
 
-    const handleSignIn = useCallback(() => {
-        (async () => {
-            try {
-                await signIn();
-            } catch (err) {
-                console.error(err);
-                setLoginError(
-                    "There was an error logging in! Please try again."
-                );
-            }
-        })();
+    const handleSignIn = useCallback(async () => {
+        setLoading(true);
+        try {
+            await signIn();
+        } catch (err) {
+            console.error(err);
+            setLoginError("There was an error logging in! Please try again.");
+        }
+        setLoading(false);
     }, []);
 
-    return (
+    return loading ? (
+        <Loading />
+    ) : (
         <LoginBox>
             <div className="flex-grow-1" />
             <div className="container-fluid">
