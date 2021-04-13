@@ -24,7 +24,7 @@ const CupCard = styled.div`
     border-radius: 10px;
     postion: relative;
     height: 100%;
-    background: #7040d6;
+    background: var(--purple-textbox);
 `;
 
 const CupText = styled.div`
@@ -32,7 +32,7 @@ const CupText = styled.div`
     font-style: normal;
     font-weight: bold;
     line-height: 27px;
-    color: #faf8f8;
+    color: var(--text-normal);
     padding: 20px 33px;
     display: flex;
     flex-direction: column;
