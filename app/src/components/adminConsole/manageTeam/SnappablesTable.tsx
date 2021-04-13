@@ -22,7 +22,11 @@ const SnappablesTable = (props: { currentSnaps?: Entity<Snap>[] }) => {
             a.fullName.localeCompare(b.fullName)
         )
         .map((p: Snappable) => (
-            <SnappableRow snappable={p} numSnaps={numSnapsForUser(p.id)} />
+            <SnappableRow
+                key={p.id}
+                snappable={p}
+                numSnaps={numSnapsForUser(p.id)}
+            />
         ));
 
     useEffect(() => {
