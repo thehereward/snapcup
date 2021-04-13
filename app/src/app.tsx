@@ -19,16 +19,20 @@ import AdminConsole from "./components/adminConsole/AdminConsole";
 import ManageAdminsConsole from "./components/adminConsole/ManageAdminsConsole";
 import { Entity } from "./types/Entity";
 import Cup from "./types/Cup";
+import Loading from "./components/Loading";
 
 const App = () => {
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
     const [userProfile, setUserProfile] = useState(null);
     const [snappables, setSnappables] = useState<MentionElements[]>([]);
     const [cups, setCups] = useState<Entity<Cup>[]>([]);
+    const [loading, setLoading] = useState(false);
 
     const setUser = (profile: UserProfile) => {
+        setLoading(true);
         setUserProfile(profile);
         setLoggedIn(true);
+        setLoading(false);
     };
 
     const updateCups = () => {
@@ -44,13 +48,11 @@ const App = () => {
 
     useEffect(() => {
         onAuthStateChanged(setUser);
-    }, [setLoggedIn, setUserProfile]);
+    }, [setLoggedIn, setUserProfile, setLoading]);
 
     useEffect(() => {
-        if (loggedIn) {
-            updateCups();
-        }
-    }, [setCups, getAllCups, loggedIn]);
+        updateCups();
+    }, [setCups]);
 
     useEffect(async () => {
         try {
@@ -64,14 +66,16 @@ const App = () => {
         }
     }, [setSnappables, getSnappables]);
 
-    if (loggedIn) {
+    if (loading) {
+        return <Loading />;
+    } else if (loggedIn) {
         return (
             <PrettyPageWrap
-                isAdmin={userProfile?.isAdmin}
+                isAdmin={userProfile.isAdmin}
                 setLoggedIn={setLoggedIn}
             >
                 <Switch>
-                    {userProfile?.isAdmin && (
+                    {userProfile.isAdmin && (
                         <Route path="/admin">
                             <AdminConsole
                                 cups={cups}
@@ -80,7 +84,7 @@ const App = () => {
                             />
                         </Route>
                     )}
-                    {userProfile?.isAdmin && (
+                    {userProfile.isAdmin && (
                         <Route path="/manage-admins">
                             <ManageAdminsConsole />
                         </Route>
