@@ -37,14 +37,16 @@ const CupText = styled.div`
     align-items: left;
 `;
 
-const CupCardName = styled.p`
-    font-size: 18px;
+const NoMarginP = styled.p`
     margin-bottom: 0;
 `;
 
-const CupCardDate = styled.p`
+const CupCardName = styled(NoMarginP)`
+    font-size: 18px;
+`;
+
+const CupCardDate = styled(NoMarginP)`
     font-size: 14px;
-    margin-bottom: 0;
 `;
 
 const SingleCupCard: React.FunctionComponent = (props: {
