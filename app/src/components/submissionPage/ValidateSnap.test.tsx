@@ -1,8 +1,8 @@
 import MentionElements from "../../types/MentionElements";
 import Snap from "../../types/Snap";
-import ValidateSnap from "./ValidateSnap";
+import validateSnap from "./ValidateSnap";
 
-describe("ValidateSnap", () => {
+describe("validateSnap", () => {
     const elem1: MentionElements = {
         id: "RandomUNiqueID1",
         display: "Jimathy",
@@ -24,8 +24,8 @@ describe("ValidateSnap", () => {
             from: undefined,
             timestamp: new Date(),
         };
-        expect(ValidateSnap(invalidSnap1, emptyMentions)).toBeFalsy();
-        expect(ValidateSnap(invalidSnap2, someMentions)).toBeFalsy();
+        expect(validateSnap(invalidSnap1, emptyMentions)).toBeFalsy();
+        expect(validateSnap(invalidSnap2, someMentions)).toBeFalsy();
     });
     test("test for successful submission of a legitimate snap", () => {
         const validSnap1: Snap = {
@@ -40,7 +40,7 @@ describe("ValidateSnap", () => {
             from: "Timathy",
             timestamp: new Date(),
         };
-        expect(ValidateSnap(validSnap1, emptyMentions)).toBeTruthy();
-        expect(ValidateSnap(validSnap2, someMentions)).toBeTruthy();
+        expect(validateSnap(validSnap1, emptyMentions)).toBeTruthy();
+        expect(validateSnap(validSnap2, someMentions)).toBeTruthy();
     });
 });

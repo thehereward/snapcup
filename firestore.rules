@@ -16,6 +16,7 @@ service cloud.firestore {
       match /snaps/{snap} {
         allow create: if request.auth != null && 
           !get(/databases/$(database)/documents/cups/$(cup)).data.isPublished && 
+          (request.resource.data.body != "") &&
           get(/databases/$(database)/documents/cups/$(cup)).data.isOpen;
 
         allow read: if request.auth != null && 

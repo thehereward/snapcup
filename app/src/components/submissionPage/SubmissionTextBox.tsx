@@ -4,7 +4,7 @@ import GetExtraLength from "./GetExtraLength";
 import CharactersLeftDisplay from "./CharactersLeftDisplay";
 import OnSubmitMessageDisplay from "./OnSubmitMessageDisplay";
 import SubmissionBoxErrorDisplay from "./SubmissionBoxErrorDisplay";
-import ValidateSnap from "./ValidateSnap";
+import validateSnap from "./ValidateSnap";
 import { getCurrentUserUid } from "../../firebase/users/UserService";
 import Snap from "../../types/Snap";
 import Cup from "../../types/Cup";
@@ -44,7 +44,7 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
             body: message,
             timestamp: new Date(),
         };
-        if (!ValidateSnap(resultingSnap, snappedUsers)) {
+        if (!validateSnap(resultingSnap, snappedUsers)) {
             setError("Your snap is invalid.");
             setConfirmation(false);
             return;
