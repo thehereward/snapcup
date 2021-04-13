@@ -24,5 +24,9 @@ service cloud.firestore {
         allow delete: if request.auth != null && resource.data.from == request.auth.uid;
       }
     }
+
+    match /snappables/{snappable} {
+      allow read: if request.auth != null;
+    }
   }
 }
