@@ -28,9 +28,10 @@ function createUserProfile(user: firebase.User): UserProfile {
 async function getOrCreateUserProfile(
     user: firebase.User
 ): Promise<UserProfile> {
-    try {
-        return await getCurrentUserProfile(user); // Will throw error if it can't find
-    } catch {
+    const userProfile = await getCurrentUserProfile(user);
+    if (userProfile) {
+        return userProfile;
+    } else {
         return createUserProfile(user);
     }
 }
