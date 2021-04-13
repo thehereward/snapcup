@@ -39,10 +39,12 @@ const CupText = styled.div`
 
 const CupCardName = styled.p`
     font-size: 18px;
+    margin-bottom: 0;
 `;
 
 const CupCardDate = styled.p`
     font-size: 14px;
+    margin-bottom: 0;
 `;
 
 const SingleCupCard: React.FunctionComponent = (props: {
