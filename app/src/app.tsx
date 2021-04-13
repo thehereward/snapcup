@@ -84,7 +84,12 @@ const App = () => {
                         </Route>
                     )}
                     <Route path="/">
-                        <SubmissionPage snappables={snappables} />
+                        <SubmissionPage
+                            snappables={snappables}
+                            publishedCups={cups.filter(
+                                (cup) => cup.isPublished == true
+                            )}
+                        />
                     </Route>
                 </Switch>
             </PrettyPageWrap>
