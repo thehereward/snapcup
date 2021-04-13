@@ -26,3 +26,14 @@ export function streamSubmittedSnapsForCurrentUser(
         return;
     };
 }
+
+export function streamNumberOfSnapsForSnappable(
+    onNumberReceived: (numSnaps: number) => void,
+    onError: (error: Error) => void,
+    snappableId: String
+): () => void {
+    onNumberReceived(1);
+    return () => {
+        return;
+    };
+}

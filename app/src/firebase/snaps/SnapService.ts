@@ -57,3 +57,22 @@ export function streamSubmittedSnapsForCurrentUser(
             },
         });
 }
+
+export function streamNumberOfSnapsForSnappable(
+    onNumberReceived: (numSnaps: number) => void,
+    onError: (error: Error) => void,
+    snappableId: String
+): () => void {
+    return firebase
+        .firestore()
+        .collection("snaps")
+        .where("to", "array-contains", snappableId)
+        .onSnapshot({
+            next: (querySnapshot) => {
+                onNumberReceived(querySnapshot.docs.length);
+            },
+            error: (error) => {
+                onError(error);
+            },
+        });
+}

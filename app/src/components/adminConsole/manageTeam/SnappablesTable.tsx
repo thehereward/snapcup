@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { streamAllSnappablePeople } from "../../../firebase/users/GetSnappables";
 import Snappable from "../../../types/Snappable";
+import SnappableRow from "./SnappablesRow";
 
 const SnappablesTable = () => {
     const [snappables, setSnappables] = useState<Snappable[]>([]);
@@ -9,14 +10,7 @@ const SnappablesTable = () => {
         .sort((a: Snappable, b: Snappable) =>
             a.fullName.localeCompare(b.fullName)
         )
-        .map((p: Snappable) => (
-            <tr key={p.id}>
-                <td>{p.email}</td>
-                <td>{p.fullName}</td>
-                <td>{p.username}</td>
-                <td>2</td>
-            </tr>
-        ));
+        .map((p: Snappable) => <SnappableRow snappable={p} />);
 
     useEffect(() => {
         const unsubscribe = streamAllSnappablePeople(
