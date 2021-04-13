@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "fir-app-60892"
+    "default": "fir-app-60892",
+    "prod": "snapcup-a2c50"
   }
 }
