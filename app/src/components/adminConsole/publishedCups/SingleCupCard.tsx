@@ -51,7 +51,7 @@ const SingleCupCard: React.FunctionComponent = (props: {
     const timemsg =
         props.cup.timePublished == undefined
             ? ""
-            : formatTimePublished(props.cup.timePublished.getSeconds());
+            : formatTimePublished(props.cup.timePublished.seconds);
     return (
         <div className="col-sm-6 col-md-4 mb-4" key={props.cup.id}>
             <CupCard>

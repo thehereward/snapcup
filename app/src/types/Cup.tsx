@@ -1,7 +1,9 @@
+import type { Timestamp } from "@firebase/firestore-types";
+
 export default interface Cup {
     isPublished: boolean;
     isOpen: boolean;
-    timeCreated: Date;
+    timeCreated: Timestamp;
     name: string;
-    timePublished: Date | null;
+    timePublished: Timestamp | null;
 }
