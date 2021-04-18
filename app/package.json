@@ -5,6 +5,7 @@
     "main": "index.js",
     "scripts": {
         "test": "jest",
+        "test:watch": "jest --watch",
         "start": "parcel public/index.html",
         "start:withfirebase": "REACT_APP_EMULATE_FIREBASE=true parcel --no-cache public/index.html",
         "build": "parcel build public/index.html"
