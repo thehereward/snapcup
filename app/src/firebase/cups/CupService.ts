@@ -21,18 +21,6 @@ export async function getCurrentCupIfExists(): Promise<Cup | undefined> {
     return publishedDoc as Cup;
 }
 
-export async function getExistsUnpublished() {
-    const querySnapshot = await firebase
-        .firestore()
-        .collection("cups")
-        .get({ source: "server" });
-    const result = querySnapshot.docs.map((doc) => {
-        const { isPublished, isOpen, timeCreated, name } = doc.data();
-        return isPublished;
-    });
-    return result.indexOf(false) >= 0;
-}
-
 function docToCupEntity(
     doc: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>
 ): Entity<Cup> {
@@ -71,32 +59,6 @@ export function streamAllCups(
         });
 }
 
-export async function getAllCups(): Promise<Entity<Cup>[]> {
-    const querySnapshot = await firebase
-        .firestore()
-        .collection("cups")
-        .orderBy("timeCreated", "desc")
-        .get({ source: "server" });
-    const result = querySnapshot.docs.map((doc) => {
-        const {
-            isPublished,
-            isOpen,
-            timeCreated,
-            name,
-            timePublished,
-        } = doc.data();
-        return {
-            isPublished: isPublished,
-            isOpen: isOpen,
-            timeCreated: timeCreated,
-            name: name,
-            timePublished: timePublished,
-            id: doc.id,
-        };
-    });
-    return result;
-}
-
 export async function GetCupNames(): Promise<string[]> {
     const querySnapshot = await firebase
         .firestore()
@@ -113,38 +75,6 @@ export async function GetCupNames(): Promise<string[]> {
         return name;
     });
     return result;
-}
-
-export async function getCurrentCupName(): Promise<String> {
-    const querySnapshot = await firebase
-        .firestore()
-        .collection("cups")
-        .get({ source: "server" });
-    const result = querySnapshot.docs.map((doc) => {
-        const { isPublished, isOpen, timeCreated, name } = doc.data();
-        if (!isPublished) {
-            return name;
-        } else {
-            return undefined;
-        }
-    });
-    return result.find((el) => el !== undefined);
-}
-
-export async function getCurrentCupId(): Promise<String> {
-    const querySnapshot = await firebase
-        .firestore()
-        .collection("cups")
-        .get({ source: "server" });
-    const result = querySnapshot.docs.map((doc) => {
-        const { isPublished, isOpen, timeCreated, name } = doc.data();
-        if (!isPublished) {
-            return doc.id;
-        } else {
-            return undefined;
-        }
-    });
-    return result.find((el) => el !== undefined);
 }
 
 export function setCupOpenness(cupId, openness): Promise<void> {
