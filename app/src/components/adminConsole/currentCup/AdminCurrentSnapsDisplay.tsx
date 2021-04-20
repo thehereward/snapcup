@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import { MessageDisplay, CupNameDisplay } from "../AdminConsoleStyles";
 import CurrentCupOptionsBar from "./CurrentCupOptionsBar";
 import { streamAllSnapsInCup } from "../../../firebase/snaps/SnapService";
-import Cup from "../../../types/Cup";
-import Snap from "../../../types/Snap";
-import { Entity } from "../../../types/Entity";
+import { Cup, Entity, Snap } from "../../../types";
 import SnapList from "../../submissionPage/SnapList";
 import styled from "styled-components";
 

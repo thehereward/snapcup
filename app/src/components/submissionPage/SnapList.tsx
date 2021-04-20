@@ -1,7 +1,6 @@
 import React from "react";
-import Snap from "../../types/Snap";
-import { Entity } from "../../types/Entity";
-import styled, { css } from "styled-components";
+import { Entity, Snap } from "../../types";
+import styled from "styled-components";
 import { formatTimestamp, getBodyElements } from "./helpers/snapFormatting";
 import TrashIcon from "../../images/TrashIcon";
 import { deleteSnap } from "../../firebase/snaps/SnapService";

@@ -1,5 +1,4 @@
-import Snap from "../../../types/Snap";
-import { Entity } from "../../../types/Entity";
+import { Snap, Entity } from "../../../types";
 
 export async function submitSnap(snap: Snap) {
     return;

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { createNewCup } from "../../../firebase/cups/CupService";
-import Cup from "../../../types/Cup";
+import { Cup, Entity } from "../../../types";
 import { NewCupButton } from "../AdminConsoleStyles";
-import { Entity } from "../../../types/Entity";
 
 const LOADING = "loading";
 const IDLE = "idle";

@@ -1,8 +1,6 @@
 import React from "react";
-import Snappable from "../../../types/Snappable";
+import { Entity, Snap, Snappable } from "../../../types";
 import SnappableRow from "./SnappablesRow";
-import { Entity } from "../../../types/Entity";
-import Snap from "../../../types/Snap";
 import { countSnapsForUser } from "./CountSnapsForUser";
 import { useSnappablePeople } from "../../../firebase/hooks/UseSnappablePeopleHook";
 

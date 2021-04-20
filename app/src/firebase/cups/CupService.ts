@@ -1,6 +1,5 @@
-import Cup from "../../types/Cup";
+import { Cup, Entity } from "../../types";
 import firebase from "firebase/app";
-import { Entity } from "../../types/Entity";
 
 export async function createNewCup(cup: Cup) {
     await firebase.firestore().collection("cups").add(cup);

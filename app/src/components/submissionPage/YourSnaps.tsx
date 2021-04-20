@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import Snap from "../../types/Snap";
+import { Snap } from "../../types";
 import { streamSubmittedSnapsForCurrentUser } from "../../firebase/snaps/SnapService";
 import SnapList from "./SnapList";
 import styled, { css } from "styled-components";

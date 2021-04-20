@@ -1,4 +1,4 @@
-import Snappable from "../../../types/Snappable";
+import { Snappable } from "../../../types";
 
 export default async function GetSnappables(): Promise<Snappable[]> {
     return [

@@ -1,4 +1,4 @@
-import MentionElements from "../../types/MentionElements";
+import { MentionElements } from "../../types";
 import GetExtraLength from "./GetExtraLength";
 import React from "react";
 import styled from "styled-components";

@@ -2,8 +2,7 @@ import React from "react";
 import CreateCupButton from "./CreateCupButton";
 import { SectionHeader } from "../AdminConsoleStyles";
 import MiniElleImg from "../../transferable/MiniElleImg";
-import Cup from "../../../types/Cup";
-import { Entity } from "../../../types/Entity";
+import { Cup, Entity } from "../../../types";
 
 const CurrentCupHeader: React.FunctionComponent = (props: {
     cups: Entity<Cup>[];

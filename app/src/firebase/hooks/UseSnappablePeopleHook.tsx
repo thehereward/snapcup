@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { streamAllSnappablePeople } from "../users/GetSnappables";
-import Snappable from "../../types/Snappable";
+import { Snappable } from "../../types";
 
 export function useSnappablePeople(): [Snappable[]] {
     const [snappablePeople, setSnappablePeople] = useState<Snappable[]>([]);

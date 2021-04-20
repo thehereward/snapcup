@@ -8,7 +8,7 @@ import LoginPage from "./components/loginPage/LoginPage";
 import SubmissionPage from "./components/submissionPage/SubmissionPage";
 
 import { onAuthStateChanged } from "./firebase/users/UserService";
-import { UserProfile } from "./types/UserProfile";
+import { UserProfile } from "./types";
 import AdminConsole from "./components/adminConsole/AdminConsole";
 import ManageAdminsConsole from "./components/adminConsole/ManageAdminsConsole";
 import Loading from "./components/Loading";

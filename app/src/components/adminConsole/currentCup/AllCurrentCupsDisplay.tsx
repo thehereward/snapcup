@@ -1,6 +1,5 @@
 import React from "react";
-import Cup from "../../../types/Cup";
-import { Entity } from "../../../types/Entity";
+import { Cup, Entity } from "../../../types";
 import AdminCurrentSnapsDisplay from "./AdminCurrentSnapsDisplay";
 import { MessageDisplay } from "../AdminConsoleStyles";
 

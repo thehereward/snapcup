@@ -1,5 +1,5 @@
 import firebase from "firebase/app";
-import Snappable from "../../types/Snappable";
+import { Snappable } from "../../types";
 
 function docToSnappable(
     docSnapshot: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>

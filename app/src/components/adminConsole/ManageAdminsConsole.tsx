@@ -3,8 +3,7 @@ import {
     streamAllUserProfiles,
     updateAdmin,
 } from "../../firebase/users/UserService";
-import { UserProfile } from "../../types/UserProfile";
-import { Entity } from "../../types/Entity";
+import { Entity, UserProfile } from "../../types";
 
 interface UserRowProps {
     user: Entity<UserProfile>;

@@ -1,4 +1,4 @@
-import MentionElements from "../../types/MentionElements";
+import { MentionElements } from "../../types";
 import GetExtraLength from "./GetExtraLength";
 
 describe("GetExtraLength", () => {

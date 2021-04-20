@@ -1,5 +1,5 @@
 import React from "react";
-import Snappable from "../../../types/Snappable";
+import { Snappable } from "../../../types";
 
 const SnappableRow: React.FunctionalComponent = (props: {
     snappable: Snappable;

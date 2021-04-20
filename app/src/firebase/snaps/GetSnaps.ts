@@ -1,5 +1,5 @@
 import firebase from "firebase/app";
-import Snap from "../../types/Snap";
+import { Snap } from "../../types";
 
 /* Gets a list of Snaps */
 export default async function getSnaps(cupId): Promise<Snap[]> {

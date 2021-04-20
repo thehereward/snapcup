@@ -1,4 +1,4 @@
-import MentionElements from "../../types/MentionElements";
+import { MentionElements } from "../../types";
 
 function GetExtraLength(snappedUsers: MentionElements[]): number {
     let total = 280;

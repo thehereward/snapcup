@@ -1,4 +1,4 @@
-import Snap from "../../../types/Snap";
+import { Snap } from "../../../types";
 
 import { countSnapsForUser } from "./CountSnapsForUser";
 

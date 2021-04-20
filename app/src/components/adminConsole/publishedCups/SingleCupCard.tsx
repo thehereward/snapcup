@@ -1,6 +1,5 @@
 import React from "react";
-import { Entity } from "../../../types/Entity";
-import Cup from "../../../types/Cup";
+import { Cup, Entity } from "../../../types";
 import styled from "styled-components";
 import ExportSnaps from "../ExportSnaps";
 

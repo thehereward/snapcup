@@ -1,9 +1,8 @@
 import React from "react";
-import Cup from "../../../types/Cup";
+import { Cup, Entity } from "../../../types";
 import CurrentCupOpennessButton from "./CurrentCupOpennessButton";
 import CurrentCupPublishButton from "./CurrentCupPublishButton";
 import CurrentCupDeleteButton from "./CurrentCupDeleteButton";
-import { Entity } from "../../../types/Entity";
 import ExportSnaps from "../ExportSnaps";
 
 const CurrentCupOptionsBar: React.FunctionComponent = (props: {

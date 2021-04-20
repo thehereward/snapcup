@@ -6,10 +6,7 @@ import OnSubmitMessageDisplay from "./OnSubmitMessageDisplay";
 import SubmissionBoxErrorDisplay from "./SubmissionBoxErrorDisplay";
 import validateSnap from "./ValidateSnap";
 import { getCurrentUserUid } from "../../firebase/users/UserService";
-import Snap from "../../types/Snap";
-import Cup from "../../types/Cup";
-import { Entity } from "../../types/Entity";
-import MentionElements from "../../types/MentionElements";
+import { Cup, Entity, MentionElements, Snap } from "../../types";
 import { submitSnap } from "../../firebase/snaps/SnapService";
 import {
     ElleImg,

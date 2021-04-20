@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { streamAllCups } from "../cups/CupService";
-import Cup from "../../types/Cup";
-import { Entity } from "../../types/Entity";
+import { Cup, Entity } from "../../types";
 
 export function useCups(): [Entity<Cup>[]] {
     const [cups, setCups] = useState<Entity<Cup>[]>([]);

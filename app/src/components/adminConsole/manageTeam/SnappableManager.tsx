@@ -1,7 +1,5 @@
 import React, { useState, useRef, useCallback } from "react";
-import Snappable from "../../../types/Snappable";
-import { Entity } from "../../../types/Entity";
-import Snap from "../../../types/Snap";
+import { Entity, Snap, Snappable } from "../../../types";
 import {
     FileUploadWrapper,
     SectionHeader,

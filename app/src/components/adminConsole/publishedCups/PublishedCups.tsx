@@ -1,8 +1,7 @@
 import React from "react";
 import SectionHeading from "../../transferable/SectionHeading";
 import PublishedCupsList from "./PublishedCupsList";
-import Cup from "../../../types/Cup";
-import { Entity } from "../../../types/Entity";
+import { Cup, Entity } from "../../../types";
 
 const PublishedCups: React.FunctionComponent = (props: {
     cups: Entity<Cup>[];

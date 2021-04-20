@@ -1,5 +1,4 @@
-import MentionElements from "~types/MentionElements";
-import Snap from "../../types/Snap";
+import { MentionElements, Snap } from "../../types";
 import { GetCharacterCountRemaining } from "./CharactersLeftDisplay";
 
 /* Validates a snap */

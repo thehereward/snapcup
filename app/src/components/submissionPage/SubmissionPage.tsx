@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getCurrentCupIfExists } from "../../firebase/cups/CupService";
-import Cup from "../../types/Cup";
-import { Entity } from "../../types/Entity";
-import MentionElements from "../../types/MentionElements";
-import Snappable from "../../types/Snappable";
+import { Cup, Entity, MentionElements, Snappable } from "../../types";
 import { getCurrentUserName } from "../../firebase/users/UserService";
 import YourSnaps from "./YourSnaps";
 import styled from "styled-components";

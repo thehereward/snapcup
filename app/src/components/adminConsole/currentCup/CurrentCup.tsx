@@ -2,8 +2,7 @@ import React from "react";
 import AllCurrentCupsDisplay from "./AllCurrentCupsDisplay";
 import CurrentCupHeader from "./CurrentCupHeader";
 import { SectionHeaderUnderline } from "../AdminConsoleStyles";
-import Cup from "../../../types/Cup";
-import { Entity } from "../../../types/Entity";
+import { Cup, Entity } from "../../../types";
 
 const CurrentCup: React.FunctionComponent = (props: {
     cups: Entity<Cup>[];
