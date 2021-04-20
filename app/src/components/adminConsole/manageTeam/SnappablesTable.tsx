@@ -22,7 +22,7 @@ const SnappablesTable = (props: { currentSnaps?: Entity<Snap>[] }) => {
         ));
 
     return (
-        <table className="table table-light">
+        <table className="table  table-hover">
             <thead>
                 <tr>
                     <th scope="col">Email</th>

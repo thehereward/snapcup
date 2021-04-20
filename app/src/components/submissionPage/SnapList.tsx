@@ -13,7 +13,7 @@ interface SnapListProps {
 const SnapCard = styled.div`
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
-    postion: relative;
+    position: relative;
     height: 100%;
     background: var(--white);
 `;
