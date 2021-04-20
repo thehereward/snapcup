@@ -9,10 +9,7 @@ import SubmissionPage from "./components/submissionPage/SubmissionPage";
 import MentionElements from "./types/MentionElements";
 
 import { streamAllSnappablePeople } from "./firebase/users/GetSnappables";
-import {
-    getCurrentUserName,
-    onAuthStateChanged,
-} from "./firebase/users/UserService";
+import { onAuthStateChanged } from "./firebase/users/UserService";
 import { getAllCups } from "./firebase/cups/CupService";
 import { UserProfile } from "./types/UserProfile";
 import AdminConsole from "./components/adminConsole/AdminConsole";
