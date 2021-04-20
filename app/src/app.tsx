@@ -26,10 +26,9 @@ const App = () => {
     const [userProfile, setUserProfile] = useState(null);
     const [snappables, setSnappables] = useState<MentionElements[]>([]);
     const [cups, setCups] = useState<Entity<Cup>[]>([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const setUser = (profile: UserProfile) => {
-        setLoading(true);
         setUserProfile(profile);
         setLoggedIn(true);
         setLoading(false);
