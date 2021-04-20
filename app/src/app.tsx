@@ -8,7 +8,6 @@ import LoginPage from "./components/loginPage/LoginPage";
 import SubmissionPage from "./components/submissionPage/SubmissionPage";
 import MentionElements from "./types/MentionElements";
 
-import { streamAllSnappablePeople } from "./firebase/users/GetSnappables";
 import { onAuthStateChanged } from "./firebase/users/UserService";
 import { getAllCups } from "./firebase/cups/CupService";
 import { UserProfile } from "./types/UserProfile";
@@ -17,11 +16,17 @@ import ManageAdminsConsole from "./components/adminConsole/ManageAdminsConsole";
 import { Entity } from "./types/Entity";
 import Cup from "./types/Cup";
 import Loading from "./components/Loading";
+import Snappable from "~types/Snappable";
+import { useSnappablePeople } from "./firebase/hooks/UseSnappablePeopleHook";
+
+const toMentionElements = (s: Snappable): MentionElements => {
+    return { id: s.id, display: s.fullName };
+};
 
 const App = () => {
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
     const [userProfile, setUserProfile] = useState(null);
-    const [snappables, setSnappables] = useState<MentionElements[]>([]);
+    const [snappables] = useSnappablePeople();
     const [cups, setCups] = useState<Entity<Cup>[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -50,19 +55,6 @@ const App = () => {
         }
     }, [getAllCups, setCups, loggedIn]);
 
-    useEffect(() => {
-        const unsubscribe = streamAllSnappablePeople(
-            (people) => {
-                const mentionElements: MentionElements[] = people.map((s) => {
-                    return { id: s.id, display: s.fullName };
-                });
-                setSnappables(mentionElements);
-            },
-            (error) => console.error(error)
-        );
-        return unsubscribe;
-    }, [setSnappables]);
-
     if (loading) {
         return <Loading />;
     } else if (loggedIn) {
@@ -88,7 +80,7 @@ const App = () => {
                     )}
                     <Route path="/">
                         <SubmissionPage
-                            snappables={snappables}
+                            snappables={snappables.map(toMentionElements)}
                             publishedCups={cups.filter(
                                 (cup) => cup.isPublished == true
                             )}
