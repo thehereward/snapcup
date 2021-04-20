@@ -1,31 +1,22 @@
 import React, { useState, useEffect } from "react";
 import SnappableManager from "./manageTeam/SnappableManager";
 import CurrentCup from "./currentCup/CurrentCup";
-import { streamAllCups } from "../../firebase/cups/CupService";
 import { streamAllSnapsInCup } from "../../firebase/snaps/SnapService";
 import Cup from "../../types/Cup";
 import Snap from "../../types/Snap";
 import { Entity } from "../../types/Entity";
 import PublishedCups from "./publishedCups/PublishedCups";
 import { useSnappablePeople } from "../../firebase/hooks/UseSnappablePeopleHook";
+import { useCups } from "../../firebase/hooks/UseCupsHook";
 
 const AdminConsole = () => {
-    const [cups, setCups] = useState<Entity<Cup>[]>([]);
+    const [cups] = useCups();
     const [snaps, setSnaps] = useState<Entity<Snap>[]>([]);
     const [snappables] = useSnappablePeople();
 
     function isCurrent(cup: Cup) {
         return !cup.isPublished;
     }
-
-    useEffect(() => {
-        const unsubscribe = streamAllCups(
-            (cups) => setCups(cups),
-            (error) => console.error(error)
-        );
-        // clean up function
-        return unsubscribe;
-    }, [setCups]);
 
     useEffect(() => {
         if (cups.filter(isCurrent).length == 0) {
