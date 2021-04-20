@@ -59,24 +59,6 @@ export function streamAllCups(
         });
 }
 
-export async function GetCupNames(): Promise<string[]> {
-    const querySnapshot = await firebase
-        .firestore()
-        .collection("cups")
-        .get({ source: "server" });
-    const result = querySnapshot.docs.map((doc) => {
-        const {
-            isPublished,
-            isOpen,
-            timeCreated,
-            name,
-            timePublished,
-        } = doc.data();
-        return name;
-    });
-    return result;
-}
-
 export function setCupOpenness(cupId, openness): Promise<void> {
     return firebase
         .firestore()

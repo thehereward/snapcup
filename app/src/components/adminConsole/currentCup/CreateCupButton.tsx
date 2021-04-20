@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { createNewCup, GetCupNames } from "../../../firebase/cups/CupService";
+import React, { useState } from "react";
+import { createNewCup } from "../../../firebase/cups/CupService";
 import Cup from "../../../types/Cup";
 import { NewCupButton } from "../AdminConsoleStyles";
 import { Entity } from "../../../types/Entity";
@@ -13,15 +13,6 @@ const CreateCupButton: React.FunctionComponent = (props: {
 }) => {
     const [status, setStatus] = useState({ status: IDLE });
     const [newCupName, setNewCupName] = useState<string>("");
-    const [allCupNames, setAllCupNames] = useState<string[]>([]);
-
-    useEffect(() => {
-        GetCupNames()
-            .then((res: string[]) => {
-                setAllCupNames(res);
-            })
-            .catch((e) => console.log(e));
-    }, [GetCupNames, setAllCupNames]);
 
     const handleCreateClick = () => {
         setStatus({ status: LOADING });
