@@ -31,7 +31,6 @@ const App = () => {
     const setUser = (profile: UserProfile) => {
         setUserProfile(profile);
         setLoggedIn(true);
-        setLoading(false);
     };
 
     const updateCups = async () => {
@@ -45,13 +44,14 @@ const App = () => {
 
     useEffect(() => {
         onAuthStateChanged(setUser);
+        setLoading(false);
     }, [setLoggedIn, setUserProfile, setLoading]);
 
     useEffect(() => {
         if (loggedIn) {
             updateCups();
         }
-    }, [setCups, loggedIn]);
+    }, [getAllCups, setCups, loggedIn]);
 
     useEffect(() => {
         const unsubscribe = streamAllSnappablePeople(
