@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { streamAllSnappablePeople } from "../../../firebase/users/GetSnappables";
+import React from "react";
 import Snappable from "../../../types/Snappable";
 import SnappableRow from "./SnappablesRow";
 import { Entity } from "../../../types/Entity";
 import Snap from "../../../types/Snap";
 import { countSnapsForUser } from "./CountSnapsForUser";
+import { useSnappablePeople } from "../../../firebase/hooks/UseSnappablePeopleHook";
 
 const SnappablesTable = (props: { currentSnaps?: Entity<Snap>[] }) => {
-    const [snappables, setSnappables] = useState<Snappable[]>([]);
+    const [snappables] = useSnappablePeople();
 
     const rows = snappables
         .sort((a: Snappable, b: Snappable) =>
@@ -20,15 +20,6 @@ const SnappablesTable = (props: { currentSnaps?: Entity<Snap>[] }) => {
                 numSnaps={countSnapsForUser(p.id, props.currentSnaps)}
             />
         ));
-
-    useEffect(() => {
-        const unsubscribe = streamAllSnappablePeople(
-            (people) => setSnappables(people),
-            (error) => console.error(error)
-        );
-        // clean up function
-        return unsubscribe;
-    }, [setSnappables]);
 
     return (
         <table className="table table-light">
