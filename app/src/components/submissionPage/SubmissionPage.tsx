@@ -3,6 +3,7 @@ import { getCurrentCupIfExists } from "../../firebase/cups/CupService";
 import Cup from "../../types/Cup";
 import { Entity } from "../../types/Entity";
 import MentionElements from "../../types/MentionElements";
+import Snappable from "../../types/Snappable";
 import { getCurrentUserName } from "../../firebase/users/UserService";
 import YourSnaps from "./YourSnaps";
 import styled from "styled-components";
@@ -10,6 +11,8 @@ import PublishedCups from "../adminConsole/publishedCups/PublishedCups";
 import SubmissionBoxWrapper from "./SubmissionBoxWrapper";
 import SubmissionTextBox from "./SubmissionTextBox";
 import NoTextBoxMessage from "./NoTextBoxMessage";
+import { useSnappablePeople } from "../../firebase/hooks/UseSnappablePeopleHook";
+import { useCups } from "../../firebase/hooks/UseCupsHook";
 
 const WelcomeMessage = styled.p`
     font-family: var(--asap);
@@ -20,10 +23,13 @@ const WelcomeMessage = styled.p`
     padding-top: 3%;
 `;
 
-const SubmissionPage = (props: {
-    snappables: MentionElements[];
-    publishedCups: Entity<Cup>[];
-}) => {
+const toMentionElements = (s: Snappable): MentionElements => {
+    return { id: s.id, display: s.fullName };
+};
+
+const SubmissionPage = () => {
+    const [snappables] = useSnappablePeople();
+    const [cups] = useCups();
     const [status, setStatus] = useState<string>("Loading...");
     const [cup, setCup] = useState<Entity<Cup> | undefined>(undefined);
 
@@ -61,7 +67,7 @@ const SubmissionPage = (props: {
                 {cup?.isOpen && !cup?.isPublished ? (
                     <SubmissionTextBox
                         cup={cup}
-                        snappables={props.snappables}
+                        snappables={snappables.map(toMentionElements)}
                         user={getCurrentUserName()}
                     />
                 ) : (
@@ -69,7 +75,9 @@ const SubmissionPage = (props: {
                 )}
             </SubmissionBoxWrapper>
             {cup && <YourSnaps cup={cup} />}
-            <PublishedCups cups={props.publishedCups} />
+            <PublishedCups
+                cups={cups.filter((cup) => cup.isPublished == true)}
+            />
         </>
     );
 };
