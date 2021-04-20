@@ -9,15 +9,13 @@ import SubmissionPage from "./components/submissionPage/SubmissionPage";
 import MentionElements from "./types/MentionElements";
 
 import { onAuthStateChanged } from "./firebase/users/UserService";
-import { getAllCups } from "./firebase/cups/CupService";
 import { UserProfile } from "./types/UserProfile";
 import AdminConsole from "./components/adminConsole/AdminConsole";
 import ManageAdminsConsole from "./components/adminConsole/ManageAdminsConsole";
-import { Entity } from "./types/Entity";
-import Cup from "./types/Cup";
 import Loading from "./components/Loading";
 import Snappable from "~types/Snappable";
 import { useSnappablePeople } from "./firebase/hooks/UseSnappablePeopleHook";
+import { useCups } from "./firebase/hooks/UseCupsHook";
 
 const toMentionElements = (s: Snappable): MentionElements => {
     return { id: s.id, display: s.fullName };
@@ -27,7 +25,7 @@ const App = () => {
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
     const [userProfile, setUserProfile] = useState(null);
     const [snappables] = useSnappablePeople();
-    const [cups, setCups] = useState<Entity<Cup>[]>([]);
+    const [cups] = useCups();
     const [loading, setLoading] = useState(true);
 
     const setUser = (profile: UserProfile) => {
@@ -35,25 +33,10 @@ const App = () => {
         setLoggedIn(true);
     };
 
-    const updateCups = async () => {
-        try {
-            const res = await getAllCups();
-            setCups(res);
-        } catch (err) {
-            console.error(err);
-        }
-    };
-
     useEffect(() => {
         onAuthStateChanged(setUser);
         setLoading(false);
     }, [setLoggedIn, setUserProfile, setLoading]);
-
-    useEffect(() => {
-        if (loggedIn) {
-            updateCups();
-        }
-    }, [getAllCups, setCups, loggedIn]);
 
     if (loading) {
         return <Loading />;
@@ -66,11 +49,7 @@ const App = () => {
                 <Switch>
                     {userProfile?.isAdmin && (
                         <Route path="/admin">
-                            <AdminConsole
-                                cups={cups}
-                                setCups={setCups}
-                                updateCups={updateCups}
-                            />
+                            <AdminConsole />
                         </Route>
                     )}
                     {userProfile?.isAdmin && (
