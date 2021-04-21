@@ -12,7 +12,11 @@ export function streamAllSnappablePeople(
     onPeopleReceived: (people: Snappable[]) => void,
     onError: (error: Error) => void
 ): () => void {
-    const collectionRef = firebase.firestore().collection("snappables");
+    const collectionRef = firebase
+        .firestore()
+        .collection("cups")
+        .doc("defaultCupId")
+        .collection("snappablePeople");
     return collectionRef.onSnapshot({
         next: (querySnapshot) => {
             const updated = querySnapshot.docs.map(docToSnappable);

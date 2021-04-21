@@ -45,7 +45,10 @@ const SnappableManager = (props: {
             (async () => {
                 setStatus({ status: LOADING });
                 try {
-                    await readFileAndUpload(fileRef.current.files[0]);
+                    await readFileAndUpload(
+                        "defaultCupId",
+                        fileRef.current.files[0]
+                    );
                     setStatus({ status: IDLE });
                     setFilename(null);
                     fileRef.current.value = "";

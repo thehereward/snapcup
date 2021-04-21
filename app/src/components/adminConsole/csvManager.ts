@@ -85,12 +85,17 @@ function csvTextToSnappableList(csvText) {
     return snappableList;
 }
 
-export async function readFileAndUpload(file: Blob) {
+export async function readFileAndUpload(cupId: string, file: Blob) {
     const csvText = await file.text();
     const snappableList = csvTextToSnappableList(csvText);
+
+    const requestObject = {
+        cupId: cupId,
+        snappablePeople: snappableList,
+    };
 
     return firebase
         .app()
         .functions("europe-west2")
-        .httpsCallable("uploadSnappableList")(snappableList);
+        .httpsCallable("uploadSnappableList")(requestObject);
 }

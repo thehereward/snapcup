@@ -50,10 +50,27 @@ interface Snappable {
 
 export const uploadSnappableList = regionalFunctions.https.onCall(
     async (data, context) => {
-        if (!Array.isArray(data)) {
+        if (!Object.keys(data).includes("cupId")) {
             throw new functions.https.HttpsError(
                 "failed-precondition",
-                "Data must be array."
+                "cupId must be included."
+            );
+        }
+
+        if (!Object.keys(data).includes("snappablePeople")) {
+            throw new functions.https.HttpsError(
+                "failed-precondition",
+                "snappablePeople must be included."
+            );
+        }
+
+        const snappablePeople = data.snappablePeople;
+        const cupId = data.cupId;
+
+        if (!Array.isArray(snappablePeople)) {
+            throw new functions.https.HttpsError(
+                "failed-precondition",
+                "snappablePeople must be array."
             );
         }
 
@@ -64,7 +81,7 @@ export const uploadSnappableList = regionalFunctions.https.onCall(
         const toDeleteIds: string[] = [];
         const toChange: { id: string; data: Snappable }[] = [];
 
-        data.forEach(({ id, fullName, email, username }) => {
+        snappablePeople.forEach(({ id, fullName, email, username }) => {
             if (!fullName || !email || !username) {
                 throw new functions.https.HttpsError(
                     "failed-precondition",
@@ -78,7 +95,10 @@ export const uploadSnappableList = regionalFunctions.https.onCall(
             }
         });
 
-        const snappablesCollection = db.collection("snappables");
+        const snappablesCollection = db
+            .collection("cups")
+            .doc(cupId)
+            .collection("snappablePeople");
         const snappables = await snappablesCollection.get();
         snappables.forEach((outDocSnapshot) => {
             const inDoc = snapsInWithId[outDocSnapshot.id];
