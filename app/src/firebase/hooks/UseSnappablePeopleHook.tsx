@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import { streamAllSnappablePeople } from "../users/GetSnappables";
 import { Snappable } from "../../types";
 
-export function useSnappablePeople(): [Snappable[]] {
+export function useSnappablePeople(cupId: string): [Snappable[]] {
     const [snappablePeople, setSnappablePeople] = useState<Snappable[]>([]);
 
     useEffect(() => {
         const unsubscribe = streamAllSnappablePeople(
             (people) => setSnappablePeople(people),
-            (error) => console.error(error)
+            (error) => console.error(error),
+            cupId
         );
         // clean up function
         return unsubscribe;

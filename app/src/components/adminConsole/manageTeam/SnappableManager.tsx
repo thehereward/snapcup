@@ -17,6 +17,7 @@ const ERROR = "error";
 const SnappableManager = (props: {
     currentSnaps?: Entity<Snap>[];
     snappablePeople: Snappable[];
+    cupId: string;
 }) => {
     const [status, setStatus] = useState({ status: IDLE });
     const [filename, setFilename] = useState<String | null>(null);
@@ -46,7 +47,7 @@ const SnappableManager = (props: {
                 setStatus({ status: LOADING });
                 try {
                     await readFileAndUpload(
-                        "defaultCupId",
+                        props.cupId,
                         fileRef.current.files[0]
                     );
                     setStatus({ status: IDLE });
@@ -124,7 +125,10 @@ const SnappableManager = (props: {
                     </p>
                 )}
             </form>
-            <SnappablesTable currentSnaps={props.currentSnaps} />
+            <SnappablesTable
+                snappables={props.snappablePeople}
+                currentSnaps={props.currentSnaps}
+            />
         </>
     );
 };

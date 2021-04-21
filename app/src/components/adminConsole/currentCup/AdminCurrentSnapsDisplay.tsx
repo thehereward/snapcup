@@ -1,9 +1,11 @@
 import React from "react";
 import { CupNameDisplay } from "../AdminConsoleStyles";
+import SnappableManager from "../manageTeam/SnappableManager";
 import CurrentCupOptionsBar from "./CurrentCupOptionsBar";
 import { Cup, Entity } from "../../../types";
 import SnapList from "../../submissionPage/SnapList";
 import styled from "styled-components";
+import { useSnappablePeople } from "../../../firebase/hooks/UseSnappablePeopleHook";
 import { useSnapsInCup } from "../../../firebase/hooks/UseSnapsInCupHook";
 
 const PublishedStatus = styled(CupNameDisplay)`
@@ -18,6 +20,7 @@ const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
     updateCups: () => void;
 }) => {
     const [snaps] = useSnapsInCup(props.cup.id);
+    const [snappables] = useSnappablePeople(props.cup.id);
 
     return (
         <div>
@@ -36,6 +39,12 @@ const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
                     updateCups={props.updateCups}
                 />
             </div>
+            <SnappableManager
+                currentSnaps={snaps}
+                snappablePeople={snappables}
+                cupId={props.cup.id}
+            />
+            <hr />
             {snaps.length > 0 && <SnapList snaps={snaps} cup={props.cup} />}
         </div>
     );

@@ -2,12 +2,12 @@ import React from "react";
 import { Entity, Snap, Snappable } from "../../../types";
 import SnappableRow from "./SnappablesRow";
 import { countSnapsForUser } from "./CountSnapsForUser";
-import { useSnappablePeople } from "../../../firebase/hooks/UseSnappablePeopleHook";
 
-const SnappablesTable = (props: { currentSnaps?: Entity<Snap>[] }) => {
-    const [snappables] = useSnappablePeople();
-
-    const rows = snappables
+const SnappablesTable = (props: {
+    snappables: Entity<Snappable>[];
+    currentSnaps?: Entity<Snap>[];
+}) => {
+    const rows = props.snappables
         .sort((a: Snappable, b: Snappable) =>
             a.fullName.localeCompare(b.fullName)
         )

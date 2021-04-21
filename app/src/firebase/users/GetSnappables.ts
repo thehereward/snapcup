@@ -10,12 +10,13 @@ function docToSnappable(
 
 export function streamAllSnappablePeople(
     onPeopleReceived: (people: Snappable[]) => void,
-    onError: (error: Error) => void
+    onError: (error: Error) => void,
+    cupId: string
 ): () => void {
     const collectionRef = firebase
         .firestore()
         .collection("cups")
-        .doc("defaultCupId")
+        .doc(cupId)
         .collection("snappablePeople");
     return collectionRef.onSnapshot({
         next: (querySnapshot) => {

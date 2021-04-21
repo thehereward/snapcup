@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { streamAllSnapsInCup } from "../snaps/SnapService";
-import { Snap } from "../../types";
+import { Entity, Snap } from "../../types";
 
-export function useSnapsInCup(cupId: string): [Snap[]] {
+export function useSnapsInCup(cupId: string): [Entity<Snap>[]] {
     const [snaps, setSnaps] = useState<Snap[]>([]);
 
     useEffect(() => {
