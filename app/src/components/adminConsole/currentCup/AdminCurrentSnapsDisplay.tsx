@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { MessageDisplay, CupNameDisplay } from "../AdminConsoleStyles";
+import React from "react";
+import { CupNameDisplay } from "../AdminConsoleStyles";
 import CurrentCupOptionsBar from "./CurrentCupOptionsBar";
-import { streamAllSnapsInCup } from "../../../firebase/snaps/SnapService";
-import { Cup, Entity, Snap } from "../../../types";
+import { Cup, Entity } from "../../../types";
 import SnapList from "../../submissionPage/SnapList";
 import styled from "styled-components";
+import { useSnapsInCup } from "../../../firebase/hooks/UseSnapsInCupHook";
 
 const PublishedStatus = styled(CupNameDisplay)`
     font-style: normal;
@@ -17,18 +17,7 @@ const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
     cup: Entity<Cup>;
     updateCups: () => void;
 }) => {
-    const [snaps, setSnaps] = useState<Entity<Snap>[]>([]);
-    const [error, setError] = useState<string | null>(null);
-
-    useEffect(() => {
-        const unsubscribe = streamAllSnapsInCup(
-            (updatedSnaps) => setSnaps(updatedSnaps),
-            (error) => setError(error.message),
-            props.cup.id
-        );
-        // clean up function
-        return unsubscribe;
-    }, [setSnaps, setError, props.cup]);
+    const [snaps] = useSnapsInCup(props.cup.id);
 
     return (
         <div>
