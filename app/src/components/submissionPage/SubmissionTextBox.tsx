@@ -6,7 +6,7 @@ import OnSubmitMessageDisplay from "./OnSubmitMessageDisplay";
 import SubmissionBoxErrorDisplay from "./SubmissionBoxErrorDisplay";
 import validateSnap from "./ValidateSnap";
 import { getCurrentUserUid } from "../../firebase/users/UserService";
-import { Cup, Entity, MentionElements, Snap } from "../../types";
+import { Cup, Entity, MentionElements, Snap, Snappable } from "../../types";
 import { submitSnap } from "../../firebase/snaps/SnapService";
 import {
     ElleImg,
@@ -15,12 +15,16 @@ import {
     LabelText,
 } from "./SnapSubmissionStyles";
 import { TextBoxStyle } from "./TextBoxStyle";
+import { useSnappablePeople } from "../../firebase/hooks/UseSnappablePeopleHook";
 
 export interface Props {
-    snappables: MentionElements[];
     user: string;
     cup: Entity<Cup>;
 }
+
+const toMentionElements = (s: Snappable): MentionElements => {
+    return { id: s.id, display: s.fullName };
+};
 
 const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
     /* Containing body of the snap */
@@ -28,6 +32,8 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
     const [confirmation, setConfirmation] = useState<Boolean>(false);
     const [error, setError] = useState<string>("");
     const [snappedUsers, setSnappedUsers] = useState<MentionElements[]>([]);
+
+    const [snappables] = useSnappablePeople(props.cup.id);
 
     const handleSubmit = useCallback((event) => {
         const uid = getCurrentUserUid();
@@ -107,7 +113,7 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
                                 }}
                                 className="mentions__mention"
                                 trigger="@"
-                                data={props.snappables}
+                                data={snappables.map(toMentionElements)}
                                 rows={5}
                             />
                         </MentionsInput>

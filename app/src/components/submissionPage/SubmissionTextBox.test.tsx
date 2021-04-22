@@ -3,6 +3,15 @@ import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 import SubmissionTextBox from "./SubmissionTextBox";
 
+function mockUseSnappablePeople() {
+    return [[]];
+}
+
+jest.mock("../../firebase/hooks/UseSnappablePeopleHook", () => ({
+    __esModule: true,
+    useSnappablePeople: mockUseSnappablePeople,
+}));
+
 let container = null;
 beforeEach(() => {
     // setup a DOM element as a render target
@@ -20,10 +29,7 @@ afterEach(() => {
 it("renders without crashing", () => {
     act(() => {
         render(
-            <SubmissionTextBox
-                snappables={[{ id: "test-id", display: "test-display" }]}
-                user={"test-user"}
-            />,
+            <SubmissionTextBox cup={{ id: "test-id" }} user={"test-user"} />,
             container
         );
     });

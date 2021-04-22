@@ -8,7 +8,6 @@ import PublishedCups from "../adminConsole/publishedCups/PublishedCups";
 import SubmissionBoxWrapper from "./SubmissionBoxWrapper";
 import SubmissionTextBox from "./SubmissionTextBox";
 import NoTextBoxMessage from "./NoTextBoxMessage";
-import { useSnappablePeople } from "../../firebase/hooks/UseSnappablePeopleHook";
 import { useCups } from "../../firebase/hooks/UseCupsHook";
 
 const WelcomeMessage = styled.p`
@@ -20,12 +19,7 @@ const WelcomeMessage = styled.p`
     padding-top: 3%;
 `;
 
-const toMentionElements = (s: Snappable): MentionElements => {
-    return { id: s.id, display: s.fullName };
-};
-
 const SubmissionPage = () => {
-    const [snappables] = useSnappablePeople();
     const [cups] = useCups();
     const [status, setStatus] = useState<string>("Loading...");
     const [cup, setCup] = useState<Entity<Cup> | undefined>(undefined);
@@ -62,11 +56,7 @@ const SubmissionPage = () => {
             </WelcomeMessage>
             <SubmissionBoxWrapper>
                 {cup?.isOpen && !cup?.isPublished ? (
-                    <SubmissionTextBox
-                        cup={cup}
-                        snappables={snappables.map(toMentionElements)}
-                        user={getCurrentUserName()}
-                    />
+                    <SubmissionTextBox cup={cup} user={getCurrentUserName()} />
                 ) : (
                     <NoTextBoxMessage message={getMessage()} />
                 )}
