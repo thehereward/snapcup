@@ -39,26 +39,66 @@ const PrettyPageWrap: React.FunctionComponent = ({
 }) => (
     <>
         <header className="sticky-top">
-            <nav className="navbar bg-light">
-                <BrandLink to="/">Snap Cup</BrandLink>
-
-                <LinkList>
-                    {isAdmin && (
-                        <>
-                            <NavItemClickable as={Link} to="/manage-admins">
-                                Manage Admins
-                            </NavItemClickable>
-                            <NavItemClickable as={Link} to="/admin">
-                                Manage Teams
-                            </NavItemClickable>
-                        </>
-                    )}
-                    <SignOutButton setLoggedIn={setLoggedIn} />
-                    <NavItem>{getCurrentUserName()}</NavItem>
-                    <NavItem className="d-none d-sm-block">
-                        <ProfileImage email={getCurrentEmail()} />
-                    </NavItem>
-                </LinkList>
+            <nav className="navbar navbar-expand-md navbar-light bg-light">
+                <Link className="navbar-brand" to="/">
+                    Snap Cup
+                </Link>
+                <button
+                    className="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarTogglerDemo01"
+                    aria-controls="navbarTogglerDemo01"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div
+                    className="collapse navbar-collapse justify-content-end"
+                    id="navbarTogglerDemo01"
+                >
+                    <ul className="navbar-nav align-items-center">
+                        {isAdmin && (
+                            <>
+                                <li className="nav-item">
+                                    <NavItemClickable
+                                        className="nav-link"
+                                        as={Link}
+                                        to="/manage-admins"
+                                    >
+                                        Manage Admins
+                                    </NavItemClickable>
+                                </li>
+                                <li className="nav-item">
+                                    <NavItemClickable
+                                        className="nav-link"
+                                        as={Link}
+                                        to="/admin"
+                                    >
+                                        Manage Teams
+                                    </NavItemClickable>
+                                </li>
+                            </>
+                        )}
+                        <li className="nav-item">
+                            <SignOutButton
+                                className="nav-link"
+                                setLoggedIn={setLoggedIn}
+                            />
+                        </li>
+                        <li className="nav-item">
+                            <NavItem className="nav-link">
+                                {getCurrentUserName()}
+                            </NavItem>
+                        </li>
+                        <li className="nav-item">
+                            <NavItem className="d-none d-sm-block">
+                                <ProfileImage email={getCurrentEmail()} />
+                            </NavItem>
+                        </li>
+                    </ul>
+                </div>
             </nav>
         </header>
         <main className="container">{children}</main>
