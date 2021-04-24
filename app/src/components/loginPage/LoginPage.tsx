@@ -77,7 +77,7 @@ const LoginPage: React.FunctionalComponent<Props> = () => {
             <div className="container-fluid">
                 <div className="row">
                     <FormColumn className="col-12 col-sm-6 order-2 order-sm-1">
-                        <h1>SnapCup</h1>
+                        <h1>Snap Cup</h1>
                         <p>Send compliments to colleagues!</p>
 
                         <button

@@ -30,7 +30,7 @@ const CurrentCupPublishButton: React.FunctionComponent = (props: {
 
     return (
         <CurrentCupOptionsButton onClick={handlePublish}>
-            Publish SnapCup
+            Publish Snap Cup
         </CurrentCupOptionsButton>
     );
 };

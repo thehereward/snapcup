@@ -7,7 +7,7 @@ const CurrentCupOpennessButton = ({ cup }) => {
     const [error, setError] = useState<string>("");
     const [success, setSuccess] = useState<boolean>(false);
 
-    let buttonText = `${cup.isOpen ? "Close" : "Open"} SnapCup`;
+    let buttonText = `${cup.isOpen ? "Close" : "Open"} Snap Cup`;
     if (error) {
         buttonText += "- " + error;
     }

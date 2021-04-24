@@ -87,7 +87,7 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
     return (
         <>
             <div className="d-none d-sm-block col col-lg-5 ">
-                <SnapCupText>Add a Snap to the current SnapCup.</SnapCupText>
+                <SnapCupText>Add a Snap to the current Snap Cup.</SnapCupText>
                 <ElleImg className="w-100" />
             </div>
             <div className="col col-lg-7">

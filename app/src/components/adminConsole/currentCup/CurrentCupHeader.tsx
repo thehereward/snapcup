@@ -13,7 +13,7 @@ const CurrentCupHeader: React.FunctionComponent = (props: {
                 <div className="col-md-4">
                     <SectionHeader>
                         <MiniElleImg />
-                        Current SnapCups
+                        Current Snap Cups
                     </SectionHeader>
                 </div>
                 <div className="col-md-8">

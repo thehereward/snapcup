@@ -1,4 +1,4 @@
-# snapcup
+# Snap Cup
 
 ## Setup repository
 

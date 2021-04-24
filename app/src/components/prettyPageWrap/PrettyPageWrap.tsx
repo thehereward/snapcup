@@ -40,7 +40,7 @@ const PrettyPageWrap: React.FunctionComponent = ({
     <>
         <header className="sticky-top">
             <nav className="navbar bg-light">
-                <BrandLink to="/">SnapCup</BrandLink>
+                <BrandLink to="/">Snap Cup</BrandLink>
 
                 <LinkList>
                     {isAdmin && (

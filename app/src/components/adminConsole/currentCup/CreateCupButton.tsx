@@ -51,7 +51,7 @@ const CreateCupButton: React.FunctionComponent = (props: {
                         status.status === LOADING || newCupName.length == 0
                     }
                 >
-                    + New SnapCup
+                    + New Snap Cup
                 </NewCupButton>
             </form>
         );

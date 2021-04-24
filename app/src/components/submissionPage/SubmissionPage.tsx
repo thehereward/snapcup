@@ -31,21 +31,21 @@ const SubmissionPage = () => {
             setStatus("");
         } catch (err) {
             console.error("Getting cup", err);
-            setStatus("There was an unexpected error loading the snapcup.");
+            setStatus("There was an unexpected error loading the Snap Cup.");
         }
     }, [setCup, setStatus]);
 
     const getMessage = () => {
         if (!cup) {
-            return "Apologies, there are no SnapCups at the moment.";
+            return "Apologies, there are no Snap Cups at the moment.";
         }
         if (status) {
             return status;
         }
         if (!cup.isOpen && !cup.isPublished) {
-            return "Apologies, the SnapCup is closed for new submissions.";
+            return "Apologies, the Snap Cup is closed for new submissions.";
         } else {
-            return "Apologies, there is no open SnapCup at the moment.";
+            return "Apologies, there is no open Snap Cup at the moment.";
         }
     };
 
