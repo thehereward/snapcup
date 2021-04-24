@@ -8,7 +8,7 @@ export const SectionHeader = styled.h2`
     font-size: 30px;
     line-height: 34px;
     color: var(--purple-selected);
-    margin-botton: 10px;
+    margin-bottom: 10px;
 `;
 
 export const MiniElleImg = styled(Elle)`
