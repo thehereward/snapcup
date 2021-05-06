@@ -35,29 +35,23 @@ const CreateCupButton: React.FunctionComponent = (props: {
         setNewCupName(event.target.value);
     };
 
-    if (props.cups.length == 0) {
-        return (
-            <form>
-                <input
-                    value={newCupName}
-                    onChange={handleNCNChange}
-                    placeholder="Name your new Cup..."
-                />
-                <NewCupButton
-                    type="submit"
-                    className="btn-createCup"
-                    onClick={() => handleCreateClick()}
-                    disabled={
-                        status.status === LOADING || newCupName.length == 0
-                    }
-                >
-                    + New Snap Cup
-                </NewCupButton>
-            </form>
-        );
-    } else {
-        return null;
-    }
+    return (
+        <form>
+            <input
+                value={newCupName}
+                onChange={handleNCNChange}
+                placeholder="Name your new Cup..."
+            />
+            <NewCupButton
+                type="submit"
+                className="btn-createCup"
+                onClick={() => handleCreateClick()}
+                disabled={status.status === LOADING || newCupName.length == 0}
+            >
+                + New Snap Cup
+            </NewCupButton>
+        </form>
+    );
 };
 
 export default CreateCupButton;
