@@ -6,9 +6,6 @@ import { deleteCup } from "../../../firebase/cups/CupService";
 const CurrentCupDeleteButton: React.FunctionComponent = (props: {
     cup: Entity<Cup>;
 }) => {
-    const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string>("");
-
     const handleDelete = useCallback(async () => {
         if (
             !confirm(
@@ -18,15 +15,11 @@ const CurrentCupDeleteButton: React.FunctionComponent = (props: {
             return;
         }
         try {
-            setLoading(true);
             await deleteCup(props.cup.id);
-            setLoading(false);
-            setError("");
         } catch (err) {
             console.error(err);
-            setError("Error!");
         }
-    }, [setLoading, setError]);
+    });
 
     return (
         <CurrentCupOptionsButton className="warning" onClick={handleDelete}>
