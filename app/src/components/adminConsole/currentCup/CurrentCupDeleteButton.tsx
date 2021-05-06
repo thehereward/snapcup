@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback } from "react";
 import { CurrentCupOptionsButton } from "../AdminConsoleStyles";
 import { Cup, Entity } from "../../../types";
 import { deleteCup } from "../../../firebase/cups/CupService";

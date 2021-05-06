@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import { CurrentCupOptionsButton } from "./AdminConsoleStyles";
 import getSnaps from "../../firebase/snaps/GetSnaps";
 import { snapsToCsvDownload } from "./csvManager";
+import { Cup, Entity } from "../../types";
 import styled from "styled-components";
 
 const LOADING = "loading";
@@ -18,7 +19,8 @@ const ErrorMessage = styled.p`
     text-align: center;
 `;
 
-const ExportSnaps = ({ cup }) => {
+const ExportSnaps: React.FunctionComponent = (props: { cup: Entity<Cup> }) => {
+    const cup = props.cup;
     const [error, setError] = useState<string>("");
     const [status, setStatus] = useState({ status: IDLE });
 
@@ -40,7 +42,7 @@ const ExportSnaps = ({ cup }) => {
     }, []);
 
     return (
-        <div>
+        <>
             <CurrentCupOptionsButton
                 onClick={downloadSnaps}
                 disabled={status.status === LOADING}
@@ -48,7 +50,7 @@ const ExportSnaps = ({ cup }) => {
                 Export Snaps
             </CurrentCupOptionsButton>
             {error != "" && <ErrorMessage>{error}</ErrorMessage>}
-        </div>
+        </>
     );
 };
 

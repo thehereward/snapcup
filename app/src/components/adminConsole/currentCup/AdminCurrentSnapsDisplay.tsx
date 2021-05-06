@@ -4,16 +4,8 @@ import SnappableManager from "../manageTeam/SnappableManager";
 import CurrentCupOptionsBar from "./CurrentCupOptionsBar";
 import { Cup, Entity } from "../../../types";
 import SnapList from "../../submissionPage/SnapList";
-import styled from "styled-components";
 import { useSnappablePeople } from "../../../firebase/hooks/UseSnappablePeopleHook";
 import { useSnapsInCup } from "../../../firebase/hooks/UseSnapsInCupHook";
-
-const PublishedStatus = styled(CupNameDisplay)`
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 18px;
-`;
 
 const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
     cup: Entity<Cup>;
@@ -25,14 +17,7 @@ const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
     return (
         <div>
             <div className="d-flex">
-                <div>
-                    <CupNameDisplay>{props.cup.name}</CupNameDisplay>
-                    <PublishedStatus>
-                        {props.cup.isPublished
-                            ? "Published"
-                            : "Not yet published."}
-                    </PublishedStatus>
-                </div>
+                <CupNameDisplay>{props.cup.name}</CupNameDisplay>
                 <div className="flex-grow-1" />
                 <CurrentCupOptionsBar
                     cup={props.cup}

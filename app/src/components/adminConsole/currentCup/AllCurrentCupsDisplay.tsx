@@ -1,6 +1,6 @@
 import React from "react";
 import { Cup, Entity } from "../../../types";
-import AdminCurrentSnapsDisplay from "./AdminCurrentSnapsDisplay";
+import CupListItem from "./CupListItem";
 import { MessageDisplay } from "../AdminConsoleStyles";
 
 const AllCurrentCupsDisplay: React.FunctionComponent = (props: {
@@ -9,12 +9,14 @@ const AllCurrentCupsDisplay: React.FunctionComponent = (props: {
     const cupsList = props.cups.map((cup) => {
         return (
             <div key={cup.id}>
-                <AdminCurrentSnapsDisplay cup={cup} />
+                <CupListItem cup={cup} />
             </div>
         );
     });
     if (props.cups.length > 0) {
-        return <div>{cupsList}</div>;
+        return (
+            <div>{cupsList.reduce((prev, next) => [prev, <hr />, next])}</div>
+        );
     } else {
         return (
             <MessageDisplay>

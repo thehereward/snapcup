@@ -1,8 +1,12 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { CurrentCupOptionsButton } from "../AdminConsoleStyles";
 import { setCupOpenness } from "../../../firebase/cups/CupService";
+import { Cup, Entity } from "../../../types";
 
-const CurrentCupOpennessButton = ({ cup }) => {
+const CurrentCupOpennessButton: React.FunctionComponent = (props: {
+    cup: Entity<Cup>;
+}) => {
+    const cup = props.cup;
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
     const [success, setSuccess] = useState<boolean>(false);
