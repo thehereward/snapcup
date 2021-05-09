@@ -5,7 +5,7 @@ const SubmissionBoxWrapper: React.FunctionComponent = ({ children }) => (
     <div className="col mb-4">
         <div className="row">
             <div className="col col-lg-8">
-                <SnapSubmissionColumnDiv className="row justify-content-md-center">
+                <SnapSubmissionColumnDiv className="row align-items-start">
                     {children}
                 </SnapSubmissionColumnDiv>
             </div>

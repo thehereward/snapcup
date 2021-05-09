@@ -82,6 +82,9 @@ export const SnapItButton = styled.button`
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
     border: 0px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+
     &:success {
         animation: ${successExpandAnimation} 1s linear;
     }
@@ -94,6 +97,8 @@ export const SnapItButton = styled.button`
         border: 2px solid var(--button-hover-border);
         box-sizing: border-box;
         box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+        margin-top: 0px;
+        margin-bottom: 0px;
     }
     &:focus {
         background-color: var(--purple-button-focus);
