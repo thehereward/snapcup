@@ -60,7 +60,7 @@ const SingleCupCard: React.FunctionComponent = (props: {
 
     const history = useHistory();
     function onClick() {
-        history.push(`cup/${props.cup.id}`);
+        history.push(`/cups/${props.cup.id}`);
     }
 
     return (

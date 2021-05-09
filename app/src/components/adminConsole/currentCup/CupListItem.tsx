@@ -16,7 +16,9 @@ const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
     return (
         <div className="d-flex row">
             <CupNameDisplay className="flex-grow-1 col-12 col-lg-1">
-                <Link to={`admin/cup/${props.cup.id}`}>{props.cup.name}</Link>
+                <Link to={`/manage/cups/${props.cup.id}`}>
+                    {props.cup.name}
+                </Link>
             </CupNameDisplay>
             <ExportSnaps cup={props.cup} className="col-12 col-lg" />
             <CurrentCupOpennessButton

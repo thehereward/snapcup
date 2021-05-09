@@ -46,21 +46,21 @@ const App = () => {
             setLoggedIn={setLoggedIn}
         >
             <Switch>
-                <Route path="/cup/:id">
+                <Route path="/cups/:id">
                     <CupPage />
                 </Route>
                 {userProfile?.isAdmin && (
-                    <Route path="/admin/cup/:id">
+                    <Route path="/manage/cups/:id" exact={true}>
                         <CupAdminPage />
                     </Route>
                 )}
                 {userProfile?.isAdmin && (
-                    <Route path="/admin">
+                    <Route path="/manage/cups">
                         <ManageCupsPage />
                     </Route>
                 )}
                 {userProfile?.isAdmin && (
-                    <Route path="/manage-admins">
+                    <Route path="/manage/admins">
                         <ManageAdminsPage />
                     </Route>
                 )}

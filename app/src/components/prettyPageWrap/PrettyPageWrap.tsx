@@ -65,7 +65,7 @@ const PrettyPageWrap: React.FunctionComponent = ({
                                     <NavItemClickable
                                         className="nav-link"
                                         as={Link}
-                                        to="/manage-admins"
+                                        to="/manage/admins"
                                     >
                                         Manage Admins
                                     </NavItemClickable>
@@ -74,7 +74,7 @@ const PrettyPageWrap: React.FunctionComponent = ({
                                     <NavItemClickable
                                         className="nav-link"
                                         as={Link}
-                                        to="/admin"
+                                        to="/manage/cups"
                                     >
                                         Manage Cups
                                     </NavItemClickable>
