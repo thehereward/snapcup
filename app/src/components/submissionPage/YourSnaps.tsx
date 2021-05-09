@@ -54,12 +54,10 @@ const YourSnaps: React.FunctionComponent = ({ cup }) => {
     return (
         <div>
             <SectionHeading title={"Your Snaps"} />
-            <SnapCupName>Current cup: {cup.name}</SnapCupName>
             {error && <p>Error: {error}</p>}
-            <PublishedStatus>
-                {cup.isPublished ? "Published" : "Not yet published."}
-            </PublishedStatus>
             {snaps.length > 0 && <SnapList snaps={snaps} cup={cup} />}
+            {snaps.length == 0 &&
+                "You haven't sent any snaps yet. When you do, they'll appear here."}
         </div>
     );
 };

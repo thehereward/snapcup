@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getCurrentCupIfExists } from "../../firebase/cups/CupService";
-import { Cup, Entity, MentionElements, Snappable } from "../../types";
+import { Cup, Entity } from "../../types";
 import { getCurrentUserName } from "../../firebase/users/UserService";
 import YourSnaps from "../submissionPage/YourSnaps";
 import styled from "styled-components";
@@ -24,6 +24,17 @@ const SubmissionPage = () => {
     const [status, setStatus] = useState<string>("Loading...");
     const [cup, setCup] = useState<Entity<Cup> | undefined>(undefined);
 
+    function isAcceptingSnaps(cup?: Entity<Cup>) {
+        if (!cup) {
+            return false;
+        }
+        if (!cup.isOpen) {
+            return false;
+        }
+
+        return true;
+    }
+
     useEffect(async () => {
         setStatus("Loading...");
         try {
@@ -37,15 +48,15 @@ const SubmissionPage = () => {
 
     const getMessage = () => {
         if (!cup) {
-            return "Apologies, there are no Snap Cups at the moment.";
+            return "Uh oh! We're not collecting snaps right now. Try again later.";
         }
         if (status) {
             return status;
         }
         if (!cup.isOpen && !cup.isPublished) {
-            return "Apologies, the Snap Cup is closed for new submissions.";
+            return "Uh oh! We're not collecting snaps right now. Try again later.";
         } else {
-            return "Apologies, there is no open Snap Cup at the moment.";
+            return "Uh oh! We're not collecting snaps right now. Try again later.";
         }
     };
 
@@ -61,7 +72,7 @@ const SubmissionPage = () => {
                     <NoTextBoxMessage message={getMessage()} />
                 )}
             </SubmissionBoxWrapper>
-            {cup && <YourSnaps cup={cup} />}
+            {cup && isAcceptingSnaps(cup) && <YourSnaps cup={cup} />}
             <PublishedCups
                 cups={cups.filter((cup) => cup.isPublished == true)}
             />

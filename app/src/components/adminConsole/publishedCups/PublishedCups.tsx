@@ -8,7 +8,7 @@ const PublishedCups: React.FunctionComponent = (props: {
 }) => {
     return (
         <div className="PublishedCups">
-            <SectionHeading title={"Published Cups"} />
+            <SectionHeading title={"Previous Cups"} />
             <PublishedCupsList cups={props.cups} />
         </div>
     );
