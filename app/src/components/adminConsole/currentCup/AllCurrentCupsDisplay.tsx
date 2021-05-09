@@ -6,24 +6,28 @@ import { MessageDisplay } from "../AdminConsoleStyles";
 const AllCurrentCupsDisplay: React.FunctionComponent = (props: {
     cups: Entity<Cup>[];
 }) => {
-    const cupsList = props.cups.map((cup) => {
-        return (
-            <div key={cup.id}>
-                <CupListItem cup={cup} />
-            </div>
-        );
-    });
-    if (props.cups.length > 0) {
-        return (
-            <div>{cupsList.reduce((prev, next) => [prev, <hr />, next])}</div>
-        );
-    } else {
+    const cups = props.cups;
+
+    if (cups.length == 0) {
         return (
             <MessageDisplay>
                 No cup yet. Create a new cup to let your users get snapping!
             </MessageDisplay>
         );
     }
+
+    const cupsList = cups.map((cup) => {
+        return <CupListItem key={cup.id} cup={cup} />;
+    });
+    return (
+        <div>
+            {cupsList.reduce((prev, next, index) => [
+                prev,
+                <hr key={`hr-${index}`} />,
+                next,
+            ])}
+        </div>
+    );
 };
 
 export default AllCurrentCupsDisplay;
