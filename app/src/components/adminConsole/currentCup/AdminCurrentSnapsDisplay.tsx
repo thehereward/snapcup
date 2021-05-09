@@ -1,5 +1,9 @@
 import React from "react";
-import { CupNameDisplay } from "../AdminConsoleStyles";
+import {
+    CupNameDisplay,
+    SectionHeader,
+    SectionHeaderUnderline,
+} from "../AdminConsoleStyles";
 import SnappableManager from "../manageTeam/SnappableManager";
 import CurrentCupOptionsBar from "./CurrentCupOptionsBar";
 import { Cup, Entity } from "../../../types";
@@ -9,7 +13,6 @@ import { useSnapsInCup } from "../../../firebase/hooks/UseSnapsInCupHook";
 
 const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
     cup: Entity<Cup>;
-    updateCups: () => void;
 }) => {
     const [snaps] = useSnapsInCup(props.cup.id);
     const [snappables] = useSnappablePeople(props.cup.id);
@@ -19,10 +22,7 @@ const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
             <div className="d-flex">
                 <CupNameDisplay>{props.cup.name}</CupNameDisplay>
                 <div className="flex-grow-1" />
-                <CurrentCupOptionsBar
-                    cup={props.cup}
-                    updateCups={props.updateCups}
-                />
+                <CurrentCupOptionsBar cup={props.cup} />
             </div>
             <SnappableManager
                 currentSnaps={snaps}
@@ -30,7 +30,9 @@ const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
                 cupId={props.cup.id}
             />
             <hr />
-            {snaps.length > 0 && <SnapList snaps={snaps} cup={props.cup} />}
+            <SectionHeader className="mb-2">Snaps</SectionHeader>
+            <SectionHeaderUnderline />
+            {<SnapList snaps={snaps} cup={props.cup} />}
         </div>
     );
 };

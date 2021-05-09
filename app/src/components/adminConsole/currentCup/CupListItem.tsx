@@ -6,6 +6,7 @@ import CurrentCupDeleteButton from "./CurrentCupDeleteButton";
 import ExportSnaps from "../ExportSnaps";
 import { Cup, Entity } from "../../../types";
 import { useSnapsInCup } from "../../../firebase/hooks/UseSnapsInCupHook";
+import { Link } from "react-router-dom";
 
 const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
     cup: Entity<Cup>;
@@ -15,7 +16,7 @@ const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
     return (
         <div className="d-flex row">
             <CupNameDisplay className="flex-grow-1 col-12 col-lg-1">
-                {props.cup.name}
+                <Link to={`admin/cup/${props.cup.id}`}>{props.cup.name}</Link>
             </CupNameDisplay>
             <ExportSnaps cup={props.cup} className="col-12 col-lg" />
             <CurrentCupOpennessButton

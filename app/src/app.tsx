@@ -10,6 +10,7 @@ import SubmissionPage from "./components/submissionPage/SubmissionPage";
 import { onAuthStateChanged } from "./firebase/users/UserService";
 import { UserProfile } from "./types";
 import AdminConsole from "./components/adminConsole/AdminConsole";
+import CupAdminPage from "./components/adminConsole/CupAdminPage";
 import ManageAdminsConsole from "./components/adminConsole/ManageAdminsConsole";
 import Loading from "./components/Loading";
 
@@ -37,6 +38,11 @@ const App = () => {
                 setLoggedIn={setLoggedIn}
             >
                 <Switch>
+                    {userProfile?.isAdmin && (
+                        <Route path="/admin/cup/:id">
+                            <CupAdminPage />
+                        </Route>
+                    )}
                     {userProfile?.isAdmin && (
                         <Route path="/admin">
                             <AdminConsole />
