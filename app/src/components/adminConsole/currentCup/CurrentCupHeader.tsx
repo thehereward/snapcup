@@ -10,13 +10,13 @@ const CurrentCupHeader: React.FunctionComponent = (props: {
     return (
         <div>
             <div id="currentCupHeader" className="row">
-                <div className="col-md-4">
+                <div className="col-12">
                     <SectionHeader>
                         <MiniElleImg />
                         Current Snap Cups
                     </SectionHeader>
                 </div>
-                <div className="col-md-8">
+                <div className="col-12">
                     <CreateCupButton cups={props.cups} />
                 </div>
             </div>
