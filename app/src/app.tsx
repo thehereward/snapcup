@@ -34,40 +34,42 @@ const App = () => {
 
     if (loading) {
         return <Loading />;
-    } else if (loggedIn) {
-        return (
-            <PrettyPageWrap
-                isAdmin={userProfile?.isAdmin}
-                setLoggedIn={setLoggedIn}
-            >
-                <Switch>
-                    <Route path="/cup/:id">
-                        <CupPage />
-                    </Route>
-                    {userProfile?.isAdmin && (
-                        <Route path="/admin/cup/:id">
-                            <CupAdminPage />
-                        </Route>
-                    )}
-                    {userProfile?.isAdmin && (
-                        <Route path="/admin">
-                            <ManageCupsPage />
-                        </Route>
-                    )}
-                    {userProfile?.isAdmin && (
-                        <Route path="/manage-admins">
-                            <ManageAdminsPage />
-                        </Route>
-                    )}
-                    <Route path="/">
-                        <SubmissionPage />
-                    </Route>
-                </Switch>
-            </PrettyPageWrap>
-        );
-    } else {
+    }
+
+    if (!loggedIn) {
         return <LoginPage setLoggedIn={setLoggedIn} />;
     }
+
+    return (
+        <PrettyPageWrap
+            isAdmin={userProfile?.isAdmin}
+            setLoggedIn={setLoggedIn}
+        >
+            <Switch>
+                <Route path="/cup/:id">
+                    <CupPage />
+                </Route>
+                {userProfile?.isAdmin && (
+                    <Route path="/admin/cup/:id">
+                        <CupAdminPage />
+                    </Route>
+                )}
+                {userProfile?.isAdmin && (
+                    <Route path="/admin">
+                        <ManageCupsPage />
+                    </Route>
+                )}
+                {userProfile?.isAdmin && (
+                    <Route path="/manage-admins">
+                        <ManageAdminsPage />
+                    </Route>
+                )}
+                <Route path="/">
+                    <SubmissionPage />
+                </Route>
+            </Switch>
+        </PrettyPageWrap>
+    );
 };
 
 export default App;
