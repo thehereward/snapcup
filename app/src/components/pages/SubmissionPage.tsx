@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { getCurrentCupIfExists } from "../../firebase/cups/CupService";
+import React from "react";
 import { Cup, Entity } from "../../types";
 import { getCurrentUserName } from "../../firebase/users/UserService";
 import YourSnaps from "../submissionPage/YourSnaps";
@@ -21,8 +20,15 @@ const WelcomeMessage = styled.p`
 
 const SubmissionPage = () => {
     const [cups] = useCups();
-    const [status, setStatus] = useState<string>("Loading...");
-    const [cup, setCup] = useState<Entity<Cup> | undefined>(undefined);
+
+    function currentCup() {
+        const openCups = cups.filter((cup) => isAcceptingSnaps(cup));
+        if (openCups.length) {
+            return openCups[0];
+        } else {
+            return undefined;
+        }
+    }
 
     function isAcceptingSnaps(cup?: Entity<Cup>) {
         if (!cup) {
@@ -35,44 +41,26 @@ const SubmissionPage = () => {
         return true;
     }
 
-    useEffect(async () => {
-        setStatus("Loading...");
-        try {
-            setCup(await getCurrentCupIfExists());
-            setStatus("");
-        } catch (err) {
-            console.error("Getting cup", err);
-            setStatus("There was an unexpected error loading the Snap Cup.");
-        }
-    }, [setCup, setStatus]);
-
-    const getMessage = () => {
-        if (!cup) {
-            return "Uh oh! We're not collecting snaps right now. Try again later.";
-        }
-        if (status) {
-            return status;
-        }
-        if (!cup.isOpen && !cup.isPublished) {
-            return "Uh oh! We're not collecting snaps right now. Try again later.";
-        } else {
-            return "Uh oh! We're not collecting snaps right now. Try again later.";
-        }
-    };
-
     return (
         <>
             <WelcomeMessage>
                 Welcome, {getCurrentUserName().split(" ")[0]!}
             </WelcomeMessage>
             <SubmissionBoxWrapper>
-                {cup?.isOpen && !cup?.isPublished ? (
-                    <SubmissionTextBox cup={cup} user={getCurrentUserName()} />
+                {currentCup() ? (
+                    <SubmissionTextBox
+                        cup={currentCup()}
+                        user={getCurrentUserName()}
+                    />
                 ) : (
-                    <NoTextBoxMessage message={getMessage()} />
+                    <NoTextBoxMessage
+                        message={
+                            "Uh oh! We're not collecting snaps right now. Try again later."
+                        }
+                    />
                 )}
             </SubmissionBoxWrapper>
-            {cup && isAcceptingSnaps(cup) && <YourSnaps cup={cup} />}
+            {currentCup() && <YourSnaps cup={currentCup()} />}
             <PublishedCups
                 cups={cups.filter((cup) => cup.isPublished == true)}
             />
