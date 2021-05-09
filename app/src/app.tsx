@@ -4,15 +4,17 @@ import React, { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 
 import PrettyPageWrap from "./components/prettyPageWrap/PrettyPageWrap";
-import LoginPage from "./components/loginPage/LoginPage";
-import SubmissionPage from "./components/submissionPage/SubmissionPage";
+import {
+    CupAdminPage,
+    CupPage,
+    LoginPage,
+    ManageCupsPage,
+    ManageAdminsPage,
+    SubmissionPage,
+} from "./components/pages";
 
 import { onAuthStateChanged } from "./firebase/users/UserService";
 import { UserProfile } from "./types";
-import AdminConsole from "./components/adminConsole/AdminConsole";
-import CupAdminPage from "./components/adminConsole/CupAdminPage";
-import CupPage from "./components/adminConsole/CupPage";
-import ManageAdminsConsole from "./components/adminConsole/ManageAdminsConsole";
 import Loading from "./components/Loading";
 
 const App = () => {
@@ -49,12 +51,12 @@ const App = () => {
                     )}
                     {userProfile?.isAdmin && (
                         <Route path="/admin">
-                            <AdminConsole />
+                            <ManageCupsPage />
                         </Route>
                     )}
                     {userProfile?.isAdmin && (
                         <Route path="/manage-admins">
-                            <ManageAdminsConsole />
+                            <ManageAdminsPage />
                         </Route>
                     )}
                     <Route path="/">

@@ -1,9 +1,9 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import CurrentSnapsDisplay from "./currentCup/CurrentSnapsDisplay";
+import AdminCurrentSnapsDisplay from "../adminConsole/currentCup/AdminCurrentSnapsDisplay";
 import { useCups } from "../../firebase/hooks/UseCupsHook";
 
-const CupPage = () => {
+const CupAdminPage = () => {
     const { id } = useParams();
     const [cups] = useCups();
 
@@ -11,10 +11,10 @@ const CupPage = () => {
 
     return (
         <div className="my-3">
-            <h1>Cup Page</h1>
-            {!!cup ? <CurrentSnapsDisplay cup={cup} /> : "Loading..."}
+            <h1>Cup Admin Page</h1>
+            {!!cup ? <AdminCurrentSnapsDisplay cup={cup} /> : "Loading..."}
         </div>
     );
 };
 
-export default CupPage;
+export default CupAdminPage;

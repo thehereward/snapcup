@@ -1,7 +1,7 @@
 import React from "react";
-import CurrentCup from "./currentCup/CurrentCup";
+import CurrentCup from "../adminConsole/currentCup/CurrentCup";
 import { Cup } from "../../types";
-import PublishedCups from "./publishedCups/PublishedCups";
+import PublishedCups from "../adminConsole/publishedCups/PublishedCups";
 import { useCups } from "../../firebase/hooks/UseCupsHook";
 
 const AdminConsole = () => {

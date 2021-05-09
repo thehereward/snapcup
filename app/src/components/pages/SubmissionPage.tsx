@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { getCurrentCupIfExists } from "../../firebase/cups/CupService";
 import { Cup, Entity, MentionElements, Snappable } from "../../types";
 import { getCurrentUserName } from "../../firebase/users/UserService";
-import YourSnaps from "./YourSnaps";
+import YourSnaps from "../submissionPage/YourSnaps";
 import styled from "styled-components";
 import PublishedCups from "../adminConsole/publishedCups/PublishedCups";
-import SubmissionBoxWrapper from "./SubmissionBoxWrapper";
-import SubmissionTextBox from "./SubmissionTextBox";
-import NoTextBoxMessage from "./NoTextBoxMessage";
+import SubmissionBoxWrapper from "../submissionPage/SubmissionBoxWrapper";
+import SubmissionTextBox from "../submissionPage/SubmissionTextBox";
+import NoTextBoxMessage from "../submissionPage/NoTextBoxMessage";
 import { useCups } from "../../firebase/hooks/UseCupsHook";
 
 const WelcomeMessage = styled.p`
