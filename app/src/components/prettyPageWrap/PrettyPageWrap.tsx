@@ -76,7 +76,7 @@ const PrettyPageWrap: React.FunctionComponent = ({
                                         as={Link}
                                         to="/admin"
                                     >
-                                        Manage Teams
+                                        Manage Cups
                                     </NavItemClickable>
                                 </li>
                             </>

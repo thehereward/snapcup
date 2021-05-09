@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { Cup, Entity } from "../../../types";
 import styled from "styled-components";
 import ExportSnaps from "../ExportSnaps";
@@ -56,9 +57,15 @@ const SingleCupCard: React.FunctionComponent = (props: {
         props.cup.timePublished == undefined
             ? ""
             : formatTimePublished(props.cup.timePublished.seconds);
+
+    const history = useHistory();
+    function onClick() {
+        history.push(`cup/${props.cup.id}`);
+    }
+
     return (
         <div className="col-sm-6 col-md-4 mb-4" key={props.cup.id}>
-            <CupCard>
+            <CupCard style={{ cursor: "pointer" }} onClick={onClick}>
                 <CupText>
                     <CupCardName>{props.cup.name}</CupCardName>
                     <CupCardDate>{timemsg}</CupCardDate>
