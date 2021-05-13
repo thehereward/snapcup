@@ -41,3 +41,7 @@ h3 {
     font-family: var(--asap);
     color: var(--purple-selected);
 }
+
+hr {
+    border-top: 1px solid var(--purple-hover);
+}
