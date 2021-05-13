@@ -1,7 +1,7 @@
 import React from "react";
 import AllCurrentCupsDisplay from "./AllCurrentCupsDisplay";
 import CurrentCupHeader from "./CurrentCupHeader";
-import { SectionHeaderUnderline } from "../AdminConsoleStyles";
+import { StyledHorizontalRule } from "../AdminConsoleStyles";
 import { Cup, Entity } from "../../../types";
 
 const CurrentCup: React.FunctionComponent = (props: {
@@ -10,7 +10,7 @@ const CurrentCup: React.FunctionComponent = (props: {
     return (
         <div className="CurrentCup">
             <CurrentCupHeader cups={props.cups} />
-            <SectionHeaderUnderline />
+            <StyledHorizontalRule />
             <AllCurrentCupsDisplay cups={props.cups} />
         </div>
     );

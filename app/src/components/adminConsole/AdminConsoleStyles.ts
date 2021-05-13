@@ -58,7 +58,7 @@ export const CupNameDisplay = styled.p`
     color: var(--purple-selected);
 `;
 
-export const SectionHeaderUnderline = styled.p`
+export const StyledHorizontalRule = styled.p`
     width: 100%;
     height: 0px;
     left: 37px;

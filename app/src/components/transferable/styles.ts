@@ -10,7 +10,7 @@ export const SectionHeadingH2 = styled.h2`
     margin-bottom: 10px;
 `;
 
-export const SectionHeaderUnderline = styled.p`
+export const StyledHorizontalRule = styled.p`
     width: 100%;
     height: 0px;
     left: 37px;

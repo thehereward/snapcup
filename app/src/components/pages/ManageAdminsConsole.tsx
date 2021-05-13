@@ -5,7 +5,7 @@ import {
 } from "../../firebase/users/UserService";
 import {
     SectionHeader,
-    SectionHeaderUnderline,
+    StyledHorizontalRule,
 } from "../adminConsole/AdminConsoleStyles";
 import MiniElleImg from "../transferable/MiniElleImg";
 import { Entity, UserProfile } from "../../types";
@@ -51,7 +51,7 @@ const ManageAdminsConsole = () => {
                 <MiniElleImg />
                 Manage Admins Console
             </SectionHeader>
-            <SectionHeaderUnderline />
+            <StyledHorizontalRule />
             <h3>Admins</h3>
             <div>
                 {users

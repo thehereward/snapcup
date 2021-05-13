@@ -3,7 +3,7 @@ import { Entity, Snap, Snappable } from "../../../types";
 import {
     FileUploadWrapper,
     SectionHeader,
-    SectionHeaderUnderline,
+    StyledHorizontalRule,
 } from "../AdminConsoleStyles";
 import { snappablesToCsvDownload, readFileAndUpload } from "../csvManager";
 import FileUploadError from "../FileUploadError";
@@ -83,7 +83,7 @@ const SnappableManager = (props: {
                     disabled={status.status === LOADING}
                 />
             </SectionHeader>
-            <SectionHeaderUnderline />
+            <StyledHorizontalRule />
             <p>
                 When uploading the list of snappable people please leave the ID
                 cell blank for new users. Leaving the ID column blank tells the
