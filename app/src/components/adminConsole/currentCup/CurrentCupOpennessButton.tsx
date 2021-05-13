@@ -34,7 +34,7 @@ const CurrentCupOpennessButton: React.FunctionComponent = (props: {
 
     return (
         <button
-            className={`button-secondary ${success && "success"}`}
+            className={`button-secondary pops ${success && "success"}`}
             disabled={loading}
             onClick={clickSetOpenness}
         >

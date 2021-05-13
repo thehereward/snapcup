@@ -20,7 +20,7 @@ const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
                     {props.cup.name}
                 </Link>
             </CupNameDisplay>
-            <div className="col-12 col-md-8 col-lg-6 col-xl-8 d-flex flex-column flex-md-row flex-wrap align-content-start">
+            <div className="col-12 col-md-8 col-lg-6 col-xl-8 stack">
                 <ExportSnaps cup={props.cup} />
                 <CurrentCupOpennessButton cup={props.cup} />
                 <CurrentCupPublishButton cup={props.cup} />
