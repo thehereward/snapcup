@@ -11,7 +11,6 @@ const CupPage = () => {
 
     return (
         <div className="my-3">
-            <h1>Cup Page</h1>
             {!!cup ? <CurrentSnapsDisplay cup={cup} /> : "Loading..."}
         </div>
     );
