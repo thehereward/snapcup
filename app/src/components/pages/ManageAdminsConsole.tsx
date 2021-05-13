@@ -3,6 +3,11 @@ import {
     streamAllUserProfiles,
     updateAdmin,
 } from "../../firebase/users/UserService";
+import {
+    SectionHeader,
+    SectionHeaderUnderline,
+} from "../adminConsole/AdminConsoleStyles";
+import MiniElleImg from "../transferable/MiniElleImg";
 import { Entity, UserProfile } from "../../types";
 
 interface UserRowProps {
@@ -41,10 +46,12 @@ const ManageAdminsConsole = () => {
     }, [streamAllUserProfiles, setUsers]);
 
     return (
-        <>
-            <hr />
-            <h2>Manage Admins Console</h2>
-            <hr />
+        <div className="my-3">
+            <SectionHeader>
+                <MiniElleImg />
+                Manage Admins Console
+            </SectionHeader>
+            <SectionHeaderUnderline />
             <h3>Admins</h3>
             <div>
                 {users
@@ -62,7 +69,7 @@ const ManageAdminsConsole = () => {
                         <User user={user} key={user.id} />
                     ))}
             </div>
-        </>
+        </div>
     );
 };
 
