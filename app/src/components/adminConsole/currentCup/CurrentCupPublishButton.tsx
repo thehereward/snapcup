@@ -1,5 +1,4 @@
-import React, { useCallback, useState, useEffect } from "react";
-import { CurrentCupOptionsButton } from "../AdminConsoleStyles";
+import React, { useCallback, useState } from "react";
 import { Cup, Entity } from "../../../types";
 import { setCupPublished } from "../../../firebase/cups/CupService";
 
@@ -29,9 +28,9 @@ const CurrentCupPublishButton: React.FunctionComponent = (props: {
     }, [setLoading, setError]);
 
     return (
-        <CurrentCupOptionsButton onClick={handlePublish}>
+        <button className={`button-secondary`} onClick={handlePublish}>
             Publish Snap Cup
-        </CurrentCupOptionsButton>
+        </button>
     );
 };
 

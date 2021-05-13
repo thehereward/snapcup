@@ -1,5 +1,4 @@
 import React, { useCallback } from "react";
-import { CurrentCupOptionsButton } from "../AdminConsoleStyles";
 import { Cup, Entity } from "../../../types";
 import { deleteCup } from "../../../firebase/cups/CupService";
 
@@ -22,9 +21,9 @@ const CurrentCupDeleteButton: React.FunctionComponent = (props: {
     });
 
     return (
-        <CurrentCupOptionsButton className="warning" onClick={handleDelete}>
+        <button className="button-secondary warning" onClick={handleDelete}>
             Delete Snap Cup
-        </CurrentCupOptionsButton>
+        </button>
     );
 };
 

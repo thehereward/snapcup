@@ -14,25 +14,18 @@ const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
     const [snaps] = useSnapsInCup(props.cup.id);
 
     return (
-        <div className="d-flex row">
-            <CupNameDisplay className="flex-grow-1 col-12 col-lg-1">
+        <div className="row">
+            <CupNameDisplay className="col-12 col-md-4 col-lg-6 col-xl-4">
                 <Link to={`/manage/cups/${props.cup.id}`}>
                     {props.cup.name}
                 </Link>
             </CupNameDisplay>
-            <ExportSnaps cup={props.cup} className="col-12 col-lg" />
-            <CurrentCupOpennessButton
-                cup={props.cup}
-                className="col-12 col-lg"
-            />
-            <CurrentCupPublishButton
-                cup={props.cup}
-                className="col-12 col-lg"
-            />
-            <CurrentCupDeleteButton
-                cup={props.cup}
-                className="warning col-12 col-lg"
-            />
+            <div className="col-12 col-md-8 col-lg-6 col-xl-8 d-flex flex-column flex-md-row flex-wrap align-content-start">
+                <ExportSnaps cup={props.cup} />
+                <CurrentCupOpennessButton cup={props.cup} />
+                <CurrentCupPublishButton cup={props.cup} />
+                <CurrentCupDeleteButton cup={props.cup} />
+            </div>
         </div>
     );
 };

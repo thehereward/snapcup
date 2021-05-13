@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from "react";
-import { CurrentCupOptionsButton } from "./AdminConsoleStyles";
 import getSnaps from "../../firebase/snaps/GetSnaps";
 import { snapsToCsvDownload } from "./csvManager";
 import { Cup, Entity } from "../../types";
@@ -43,12 +42,13 @@ const ExportSnaps: React.FunctionComponent = (props: { cup: Entity<Cup> }) => {
 
     return (
         <>
-            <CurrentCupOptionsButton
+            <button
+                className={`button-secondary`}
                 onClick={downloadSnaps}
                 disabled={status.status === LOADING}
             >
                 Export Snaps
-            </CurrentCupOptionsButton>
+            </button>
             {error != "" && <ErrorMessage>{error}</ErrorMessage>}
         </>
     );

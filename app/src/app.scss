@@ -1,5 +1,4 @@
 // Place bootstrap customisations below
-
 @import "bootstrap/scss/functions"; // Required
 @import "bootstrap/scss/variables"; // Required
 @import "bootstrap/scss/mixins"; // Required
@@ -83,3 +82,5 @@ $font-family-base: var(--open-sans);
 @import "bootstrap/scss/spinners";
 @import "bootstrap/scss/utilities";
 // @import "bootstrap/scss/print";
+
+@import "./style";

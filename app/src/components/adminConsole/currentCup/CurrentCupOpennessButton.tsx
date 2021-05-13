@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { CurrentCupOptionsButton } from "../AdminConsoleStyles";
 import { setCupOpenness } from "../../../firebase/cups/CupService";
 import { Cup, Entity } from "../../../types";
 
@@ -34,13 +33,13 @@ const CurrentCupOpennessButton: React.FunctionComponent = (props: {
     };
 
     return (
-        <CurrentCupOptionsButton
-            className={success && "success"}
+        <button
+            className={`button-secondary ${success && "success"}`}
             disabled={loading}
             onClick={clickSetOpenness}
         >
             {buttonText}
-        </CurrentCupOptionsButton>
+        </button>
     );
 };
 

@@ -1,0 +1,62 @@
+button.button {
+    font-family: var(--open-sans);
+    border-radius: 30px;
+    height: 30px;
+    &.dark {
+        background-color: var(--purple-textbox);
+        color: white;
+        border-color: white;
+    }
+
+    &.light {
+        background-color: transparent;
+    }
+}
+
+.warning-button {
+    color: var(--danger-button);
+    border-color: var(--danger-button);
+    &:hover {
+        color: var(--danger-button-hover);
+        border-color: var(--danger-button-hover);
+        background-color: var(--danger-button);
+    }
+}
+
+.button-secondary {
+    text-align: center;
+    min-width: 155px;
+    width: 10px;
+    height: 30px;
+    font-family: var(--open-sans);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    border-radius: 30px;
+    border-color: var(--purple-button-default);
+    background-color: transparent;
+    color: var(--purple-button-default);
+    transition: transform 0.5s;
+    transform: none;
+    flex-grow: 1;
+    margin: 1px 5px;
+
+    &.success {
+        transform: scale(1.1) translate(0, -10px);
+        transition: transform 0.5s;
+    }
+    &:hover {
+        color: var(--purple-selected);
+        border-color: var(--purple-selected);
+    }
+    &:disabled {
+        color: var(--our-grey);
+    }
+}
+
+@include media-breakpoint-down(sm) {
+    .button-secondary {
+        width: calc(100% - 10px);
+    }
+}
