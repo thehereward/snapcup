@@ -1,16 +1,6 @@
 import styled from "styled-components";
 import Elle from "../../images/Elle";
 
-export const SectionHeader = styled.h2`
-    position: relative;
-    font-family: var(--asap);
-    font-weight: 500;
-    font-size: 30px;
-    line-height: 34px;
-    color: var(--purple-selected);
-    margin-bottom: 10px;
-`;
-
 export const MiniElleImg = styled(Elle)`
     height: 66px;
     width: auto;

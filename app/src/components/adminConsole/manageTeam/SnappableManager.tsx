@@ -1,10 +1,6 @@
 import React, { useState, useRef, useCallback } from "react";
 import { Entity, Snap, Snappable } from "../../../types";
-import {
-    FileUploadWrapper,
-    SectionHeader,
-    StyledHorizontalRule,
-} from "../AdminConsoleStyles";
+import { FileUploadWrapper, StyledHorizontalRule } from "../AdminConsoleStyles";
 import { snappablesToCsvDownload, readFileAndUpload } from "../csvManager";
 import FileUploadError from "../FileUploadError";
 import DownloadButton from "./DownloadButton";
@@ -76,13 +72,13 @@ const SnappableManager = (props: {
 
     return (
         <>
-            <SectionHeader className="mb-2">
+            <h2 className="mb-2">
                 Manage Team{" "}
                 <DownloadButton
                     onClick={onClickDownload}
                     disabled={status.status === LOADING}
                 />
-            </SectionHeader>
+            </h2>
             <StyledHorizontalRule />
             <p>
                 When uploading the list of snappable people please leave the ID

@@ -3,10 +3,7 @@ import {
     streamAllUserProfiles,
     updateAdmin,
 } from "../../firebase/users/UserService";
-import {
-    SectionHeader,
-    StyledHorizontalRule,
-} from "../adminConsole/AdminConsoleStyles";
+import { StyledHorizontalRule } from "../adminConsole/AdminConsoleStyles";
 import MiniElleImg from "../transferable/MiniElleImg";
 import { Entity, UserProfile } from "../../types";
 
@@ -47,10 +44,10 @@ const ManageAdminsConsole = () => {
 
     return (
         <div className="my-3">
-            <SectionHeader>
+            <h2>
                 <MiniElleImg />
                 Manage Admins Console
-            </SectionHeader>
+            </h2>
             <StyledHorizontalRule />
             <h3>Admins</h3>
             <div>

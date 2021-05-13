@@ -1,9 +1,5 @@
 import React from "react";
-import {
-    CupNameDisplay,
-    SectionHeader,
-    StyledHorizontalRule,
-} from "../AdminConsoleStyles";
+import { CupNameDisplay, StyledHorizontalRule } from "../AdminConsoleStyles";
 import SnappableManager from "../manageTeam/SnappableManager";
 import CurrentCupOptionsBar from "./CurrentCupOptionsBar";
 import { Cup, Entity } from "../../../types";
@@ -30,7 +26,7 @@ const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
                 cupId={props.cup.id}
             />
             <hr />
-            <SectionHeader className="mb-2">Snaps</SectionHeader>
+            <h2 className="mb-2">Snaps</h2>
             <StyledHorizontalRule />
             {<SnapList snaps={snaps} cup={props.cup} />}
         </div>
