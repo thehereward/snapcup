@@ -40,7 +40,7 @@ const PrettyPageWrap: React.FunctionComponent = ({
     <>
         <header className="sticky-top">
             <nav className="navbar navbar-expand-md navbar-light bg-light">
-                <Link className="navbar-brand" to="/">
+                <Link className="navbar-brand title" to="/">
                     Snap Cup
                 </Link>
                 <button
