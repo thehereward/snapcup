@@ -1,12 +1,4 @@
 import styled from "styled-components";
-import Elle from "../../images/Elle";
-
-export const MiniElleImg = styled(Elle)`
-    height: 66px;
-    width: auto;
-    vertical-align: text-bottom;
-    margin-right: 19px;
-`;
 
 export const NewCupButton = styled.button`
     font-family: var(--asap);
