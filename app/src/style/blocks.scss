@@ -1,0 +1,15 @@
+.login-page-elle-image {
+    width: 100%;
+    max-height: calc(100vh - 50px);
+
+    @media only screen and (max-width: 576px) {
+        max-width: 250px;
+    }
+}
+
+.login-page-column {
+    p {
+        font-weight: normal;
+        font-size: 22px;
+    }
+}

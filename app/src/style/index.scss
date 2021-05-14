@@ -8,14 +8,20 @@
     color: var(--purple-button-hover) !important;
 }
 
-h2 {
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
     font-family: var(--asap);
     color: var(--purple-selected);
 }
 
-h3 {
-    font-family: var(--asap);
-    color: var(--purple-selected);
+h1 {
+    font-family: var(--open-sans);
+    font-weight: 800;
+    font-size: 50px;
 }
 
 hr {
@@ -29,4 +35,19 @@ body {
         rgba(196, 196, 196, 0) 100.75%
     );
     min-height: 100vh;
+}
+
+.login-box {
+    min-height: 100vh;
+    padding: 50px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+
+    @media only screen and (max-width: 576px) {
+        max-width: 350px;
+    }
 }
