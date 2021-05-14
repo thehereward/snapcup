@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { createNewCup } from "../../../firebase/cups/CupService";
 import { Cup, Entity } from "../../../types";
-import { NewCupButton } from "../AdminConsoleStyles";
 
 const LOADING = "loading";
 const IDLE = "idle";
@@ -42,14 +41,14 @@ const CreateCupButton: React.FunctionComponent = (props: {
                 onChange={handleNCNChange}
                 placeholder="Name your new Cup..."
             />
-            <NewCupButton
+            <button
                 type="submit"
-                className="btn-createCup"
+                className="new-cup-button"
                 onClick={() => handleCreateClick()}
                 disabled={status.status === LOADING || newCupName.length == 0}
             >
                 + New Snap Cup
-            </NewCupButton>
+            </button>
         </form>
     );
 };
