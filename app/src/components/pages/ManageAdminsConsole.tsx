@@ -3,7 +3,7 @@ import {
     streamAllUserProfiles,
     updateAdmin,
 } from "../../firebase/users/UserService";
-import { StyledHorizontalRule } from "../adminConsole/AdminConsoleStyles";
+import { StyledHorizontalRule } from "../transferable/styles";
 import MiniElleImg from "../transferable/MiniElleImg";
 import { Entity, UserProfile } from "../../types";
 

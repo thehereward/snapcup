@@ -1,8 +1,9 @@
 import React from "react";
-import { CupNameDisplay, StyledHorizontalRule } from "../AdminConsoleStyles";
+import { CupNameDisplay } from "../AdminConsoleStyles";
 import SnappableManager from "../manageTeam/SnappableManager";
 import CurrentCupOptionsBar from "./CurrentCupOptionsBar";
 import { Cup, Entity } from "../../../types";
+import { StyledHorizontalRule } from "../../transferable/styles";
 import SnapList from "../../submissionPage/SnapList";
 import { useSnappablePeople } from "../../../firebase/hooks/UseSnappablePeopleHook";
 import { useSnapsInCup } from "../../../firebase/hooks/UseSnapsInCupHook";

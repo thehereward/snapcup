@@ -1,5 +1,5 @@
 import React from "react";
-import { StyledHorizontalRule } from "../AdminConsoleStyles";
+import { StyledHorizontalRule } from "../../transferable/styles";
 import { Cup, Entity } from "../../../types";
 import SnapList from "../../submissionPage/SnapList";
 import { useSnapsInCup } from "../../../firebase/hooks/UseSnapsInCupHook";

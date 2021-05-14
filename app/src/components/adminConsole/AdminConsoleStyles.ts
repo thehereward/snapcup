@@ -40,15 +40,6 @@ export const CupNameDisplay = styled.p`
     color: var(--purple-selected);
 `;
 
-export const StyledHorizontalRule = styled.p`
-    width: 100%;
-    height: 0px;
-    left: 37px;
-    top: 748px;
-
-    border: 1px solid var(--purple-selected);
-`;
-
 export const CurrentCupOptionsButton = styled.button`
     text-align: center;
     width: 155px;
