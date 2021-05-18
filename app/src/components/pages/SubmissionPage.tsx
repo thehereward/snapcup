@@ -3,7 +3,6 @@ import { Cup, Entity } from "../../types";
 import { getCurrentUserName } from "../../firebase/users/UserService";
 import YourSnaps from "../submissionPage/YourSnaps";
 import styled from "styled-components";
-import PublishedCups from "../adminConsole/publishedCups/PublishedCups";
 import SubmissionBoxWrapper from "../submissionPage/SubmissionBoxWrapper";
 import SubmissionTextBox from "../submissionPage/SubmissionTextBox";
 import NoTextBoxMessage from "../submissionPage/NoTextBoxMessage";
@@ -61,9 +60,6 @@ const SubmissionPage = () => {
                 )}
             </SubmissionBoxWrapper>
             {currentCup() && <YourSnaps cup={currentCup()} />}
-            <PublishedCups
-                cups={cups.filter((cup) => cup.isPublished == true)}
-            />
         </>
     );
 };
