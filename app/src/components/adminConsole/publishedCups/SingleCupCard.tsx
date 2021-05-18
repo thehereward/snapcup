@@ -40,6 +40,7 @@ const CupText = styled.div`
 
 const NoMarginP = styled.p`
     margin-bottom: 0;
+    color: white;
 `;
 
 const CupCardName = styled(NoMarginP)`
