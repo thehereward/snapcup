@@ -8,14 +8,9 @@
     color: var(--purple-button-hover) !important;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-p {
-    font-family: var(--asap);
+body {
     color: var(--purple-selected);
+    font-family: var(--asap);
 }
 
 h1 {
