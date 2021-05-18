@@ -13,21 +13,21 @@ service cloud.firestore {
     match /cups/{cup} {
       allow read: if request.auth != null;
 
+      match /snappablePeople/{person} {
+        allow read: if request.auth != null;
+      }
+
       match /snaps/{snap} {
         allow create: if request.auth != null && 
-          !get(/databases/$(database)/documents/cups/$(cup)).data.isPublished && 
-          (request.resource.data.body != "") &&
-          get(/databases/$(database)/documents/cups/$(cup)).data.isOpen;
+        !get(/databases/$(database)/documents/cups/$(cup)).data.isPublished && 
+        (request.resource.data.body != "") &&
+        get(/databases/$(database)/documents/cups/$(cup)).data.isOpen;
 
         allow read: if request.auth != null && 
-          (resource.data.from == request.auth.uid || get(/databases/$(database)/documents/$(cup)).data.isPublished);
-        
+        (resource.data.from == request.auth.uid || get(/databases/$(database)/documents/$(cup)).data.isPublished);
+
         allow delete: if request.auth != null && resource.data.from == request.auth.uid;
       }
-    }
-
-    match /snappables/{snappable} {
-      allow read: if request.auth != null;
     }
   }
 }
