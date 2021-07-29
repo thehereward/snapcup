@@ -26,6 +26,9 @@ const toMentionElements = (s: Snappable): MentionElements => {
     return { id: s.id, display: s.fullName };
 };
 
+const byFullName = (a: Snappable, b: Snappable) =>
+    a.fullName.localeCompare(b.fullName);
+
 const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
     /* Containing body of the snap */
     const [message, setMessage] = useState<string>("");
@@ -113,7 +116,9 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
                                 }}
                                 className="mentions__mention"
                                 trigger="@"
-                                data={snappables.map(toMentionElements)}
+                                data={snappables
+                                    .sort(byFullName)
+                                    .map(toMentionElements)}
                                 rows={5}
                             />
                         </MentionsInput>
