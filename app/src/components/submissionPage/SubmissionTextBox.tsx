@@ -29,6 +29,14 @@ const toMentionElements = (s: Snappable): MentionElements => {
 const byFullName = (a: Snappable, b: Snappable) =>
     a.fullName.localeCompare(b.fullName);
 
+function anyMatch(snappable: Snappable, query: string) {
+    return (
+        snappable.email.includes(query) ||
+        snappable.fullName.includes(query) ||
+        snappable.username.includes(query)
+    );
+}
+
 const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
     /* Containing body of the snap */
     const [message, setMessage] = useState<string>("");
@@ -37,6 +45,13 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
     const [snappedUsers, setSnappedUsers] = useState<MentionElements[]>([]);
 
     const [snappables] = useSnappablePeople(props.cup.id);
+
+    function filterSnappables(query: string) {
+        return snappables
+            .filter((s) => anyMatch(s, query))
+            .sort(byFullName)
+            .map(toMentionElements);
+    }
 
     const handleSubmit = useCallback((event) => {
         const uid = getCurrentUserUid();
@@ -116,9 +131,7 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
                                 }}
                                 className="mentions__mention"
                                 trigger="@"
-                                data={snappables
-                                    .sort(byFullName)
-                                    .map(toMentionElements)}
+                                data={filterSnappables}
                                 rows={5}
                             />
                         </MentionsInput>
