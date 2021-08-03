@@ -20,7 +20,7 @@ const SnappableManager = (props: {
     const [filename, setFilename] = useState<String | null>(null);
     const fileRef = useRef(null);
 
-    const onClickDownload = useCallback(() => {
+    const onClickDownload = () => {
         try {
             setStatus({ status: LOADING });
             snappablesToCsvDownload(props.snappablePeople);
@@ -28,7 +28,7 @@ const SnappableManager = (props: {
         } catch (error) {
             setStatus({ status: ERROR, error: error.message });
         }
-    }, [setStatus]);
+    };
 
     const uploadSnappables = useCallback(
         (event) => {
