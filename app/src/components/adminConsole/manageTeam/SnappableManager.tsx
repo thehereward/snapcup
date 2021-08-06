@@ -2,7 +2,7 @@ import React, { useState, useRef, useCallback } from "react";
 import { Entity, Snap, Snappable } from "../../../types";
 import { FileUploadWrapper } from "../AdminConsoleStyles";
 import { StyledHorizontalRule } from "../../transferable/styles";
-import { snappablesToCsvDownload, readFileAndUpload } from "../csvManager";
+import { snappablesToCsvDownload, readFileAndUpload } from "../csvTools";
 import FileUploadError from "../FileUploadError";
 import DownloadButton from "./DownloadButton";
 import SnappablesTable from "./SnappablesTable";

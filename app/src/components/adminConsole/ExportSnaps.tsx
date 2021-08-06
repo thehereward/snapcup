@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import getSnaps from "../../firebase/snaps/GetSnaps";
-import { snapsToCsvDownload } from "./csvManager";
+import { snapsToCsvDownload } from "./csvTools";
 import { Cup, Entity } from "../../types";
 import styled from "styled-components";
 
