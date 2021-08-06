@@ -73,13 +73,14 @@ const SnappableManager = (props: {
 
     return (
         <>
-            <h2 className="mb-2">
-                Manage Team{" "}
+            <header className="mb-2 d-flex justify-content-between">
+                <h2>Manage Team</h2>
                 <DownloadButton
                     onClick={onClickDownload}
                     disabled={status.status === LOADING}
+                    label="Download current snappable people as CSV."
                 />
-            </h2>
+            </header>
             <StyledHorizontalRule />
             <p>
                 When uploading the list of snappable people please leave the ID
