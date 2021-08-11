@@ -45,7 +45,12 @@ const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
             />
             <hr />
             <header className="mb-2 d-flex justify-content-between">
-                <h2>Snaps</h2>
+                <h2>
+                    <span className="mr-2">Snaps</span>
+                    <span className="badge badge-pill badge-light">
+                        Sent: {snaps.length}
+                    </span>
+                </h2>
                 <DownloadButton
                     onClick={onClickDownload}
                     disabled={status.status === LOADING}
@@ -53,7 +58,7 @@ const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
                 />
             </header>
             <StyledHorizontalRule />
-            {<SnapList snaps={snaps} cup={props.cup} />}
+            <SnapList snaps={snaps} cup={props.cup} />
         </div>
     );
 };

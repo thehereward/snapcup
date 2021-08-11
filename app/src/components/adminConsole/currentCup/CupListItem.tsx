@@ -19,6 +19,9 @@ const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
                 <Link to={`/manage/cups/${props.cup.id}`}>
                     {props.cup.name}
                 </Link>
+                <span className="badge badge-pill badge-light ml-2">
+                    Snaps Sent: {snaps.length}
+                </span>
             </CupNameDisplay>
             <div className="col-12 col-md-8 col-lg-6 col-xl-8 stack">
                 <ExportSnaps cup={props.cup} />
