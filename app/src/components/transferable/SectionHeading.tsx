@@ -1,14 +1,14 @@
 import MiniElleImg from "./MiniElleImg";
 import React from "react";
-import { SectionHeadingH2, StyledHorizontalRule } from "./styles";
+import { StyledHorizontalRule } from "./styles";
 
 const SectionHeading: React.FunctionComponent = (props: { title: string }) => {
     return (
         <div>
-            <SectionHeadingH2>
+            <h2>
                 <MiniElleImg />
                 {props.title}
-            </SectionHeadingH2>
+            </h2>
             <StyledHorizontalRule />
         </div>
     );
