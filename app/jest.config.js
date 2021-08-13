@@ -12,11 +12,12 @@ module.exports = {
     globals: {
         "ts-jest": {
             tsconfig: "jest.tsconfig.json",
+            compiler: "ttypescript",
         },
     },
     moduleNameMapper: {
         /* Mocking all style related files so that we don't need to configure Jest to handle scss */
         "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/stylemock.js",
     },
-    setupFiles: ["./src/jest.setup.js"],
+    setupFiles: ["./src/jest.setup.js", "./src/config.ts"],
 };

@@ -1,6 +1,8 @@
 import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
+import { createMock } from "ts-auto-mock";
+import { Cup, Entity } from "~types";
 
 import YourSnaps from "./YourSnaps";
 
@@ -9,6 +11,8 @@ jest.mock("../../firebase/InitializeDatabase");
 jest.mock("../../firebase/snaps/SnapService");
 jest.mock("../../firebase/users/GetSnappables");
 jest.mock("../../images/TrashIcon");
+
+const testCup = createMock<Entity<Cup>>();
 
 let container = null;
 beforeEach(() => {
@@ -26,7 +30,7 @@ afterEach(() => {
 
 it("renders without crashing", () => {
     act(() => {
-        render(<YourSnaps cup={{ id: "blah" }} />, container);
+        render(<YourSnaps cup={testCup} />, container);
     });
     expect(container.children.length).toBeGreaterThan(0);
 });

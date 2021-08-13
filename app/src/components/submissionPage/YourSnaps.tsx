@@ -1,12 +1,16 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Snap } from "../../types";
+import { Cup, Entity, Snap } from "../../types";
 import { streamSubmittedSnapsForCurrentUser } from "../../firebase/snaps/SnapService";
 import SnapList from "./SnapList";
 // @ts-ignore
 import SectionHeading from "../transferable/SectionHeading";
 
-const YourSnaps: React.FunctionComponent = ({ cup }) => {
+interface YourSnapsProps {
+    cup: Entity<Cup>;
+}
+
+function YourSnaps({ cup }: YourSnapsProps) {
     const [snaps, setSnaps] = useState<Snap[]>([]);
     const [error, setError] = useState<string | null>(null);
 
@@ -29,6 +33,6 @@ const YourSnaps: React.FunctionComponent = ({ cup }) => {
                 "You haven't sent any snaps yet. When you do, they'll appear here."}
         </div>
     );
-};
+}
 
 export default YourSnaps;
