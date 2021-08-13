@@ -24,7 +24,7 @@ service cloud.firestore {
         get(/databases/$(database)/documents/cups/$(cup)).data.isOpen;
 
         allow read: if request.auth != null && 
-        (resource.data.from == request.auth.uid || get(/databases/$(database)/documents/$(cup)).data.isPublished);
+        (resource.data.from == request.auth.uid || get(/databases/$(database)/documents/cups/$(cup)).data.isPublished);
 
         allow delete: if request.auth != null && resource.data.from == request.auth.uid;
       }
