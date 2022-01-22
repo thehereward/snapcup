@@ -1,11 +1,11 @@
 {
-    "name": "snapcuproot",
+    "name": "snap-cup",
     "version": "1.0.0",
     "description": "Give compliments to colleagues!",
     "scripts": {
         "install:all": "npm install && cd app && npm install && cd ../functions && npm install && cd ..",
         "prepare": "husky install",
-        "gitsetup": "chmod +x ./.husky/pre-commit",
+        "git-setup": "chmod +x ./.husky/pre-commit",
         "emulator": "firebase use $npm_config_proj && firebase emulators:start"
     },
     "repository": {

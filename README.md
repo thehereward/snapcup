@@ -13,7 +13,7 @@ This will install the top level npm packages as well as the npm packages for `ap
 and if you are working in a linux environment please then run
 
 ```bash
-npm run gitsetup
+npm run git-setup
 ```
 
 to make the pre-commit hook executable
@@ -77,7 +77,7 @@ In wsl/ubuntu, you can just run `sudo apt update` and then `sudo apt install def
 To start the app and use the emulator instead of the normal remote Firebase servers, `cd` into `app/` and run
 
 ```bash
-npm run start:withfirebase
+npm run start:with-firebase
 ```
 
 When you click the log on button you will automatically log in with the test@test.com account instead of using OAuth.

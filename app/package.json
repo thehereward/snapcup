@@ -1,5 +1,5 @@
 {
-    "name": "snapcup",
+    "name": "snap-cup-app",
     "version": "1.0.0",
     "description": "Give compliments to colleagues!",
     "main": "index.js",
@@ -7,7 +7,7 @@
         "test": "jest",
         "test:watch": "jest --watch",
         "start": "parcel public/index.html",
-        "start:withfirebase": "REACT_APP_EMULATE_FIREBASE=true parcel --no-cache public/index.html",
+        "start:with-firebase": "REACT_APP_EMULATE_FIREBASE=true parcel --no-cache public/index.html",
         "build": "parcel build public/index.html"
     },
     "repository": {
@@ -26,6 +26,9 @@
     "devDependencies": {
         "@testing-library/react": "^11.2.6",
         "@types/jest": "^26.0.22",
+        "@types/react": "^17.0.38",
+        "@types/react-dom": "^17.0.11",
+        "@types/react-router-dom": "^5.3.3",
         "enzyme": "^3.11.0",
         "jest": "^26.6.3",
         "jest-each": "^26.6.2",
