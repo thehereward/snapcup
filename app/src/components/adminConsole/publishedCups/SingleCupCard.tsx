@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Cup, Entity } from "../../../types";
 import styled from "styled-components";
 import ExportSnaps from "../ExportSnaps";
@@ -57,9 +57,9 @@ const SingleCupCard = (props: { cup: Entity<Cup> }) => {
             ? ""
             : formatTimePublished(props.cup.timePublished.getSeconds());
 
-    const history = useHistory();
+    const navigate = useNavigate();
     function onClick() {
-        history.push(`/cups/${props.cup.id}`);
+        navigate(`/cups/${props.cup.id}`);
     }
 
     return (
