@@ -4,9 +4,7 @@ import CurrentCupHeader from "./CurrentCupHeader";
 import { StyledHorizontalRule } from "../../transferable/styles";
 import { Cup, Entity } from "../../../types";
 
-const CurrentCup: React.FunctionComponent = (props: {
-    cups: Entity<Cup>[];
-}) => {
+const CurrentCup = (props: { cups: Entity<Cup>[] }) => {
     return (
         <div className="CurrentCup">
             <CurrentCupHeader cups={props.cups} />

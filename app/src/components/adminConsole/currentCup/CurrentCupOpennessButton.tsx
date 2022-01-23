@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { setCupOpenness } from "../../../firebase/cups/CupService";
 import { Cup, Entity } from "../../../types";
 
-const CurrentCupOpennessButton: React.FunctionComponent = (props: {
-    cup: Entity<Cup>;
-}) => {
+const CurrentCupOpennessButton = (props: { cup: Entity<Cup> }) => {
     const cup = props.cup;
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>("");

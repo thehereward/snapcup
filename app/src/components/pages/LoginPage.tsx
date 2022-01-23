@@ -4,11 +4,7 @@ import { signIn } from "../../firebase/users/UserService";
 import Elle from "../../images/Elle";
 import Loading from "../Loading";
 
-interface Props {
-    setLoggedIn: Dispatch<SetStateAction<boolean>>;
-}
-
-const LoginPage: React.FunctionalComponent<Props> = () => {
+const LoginPage = () => {
     const [loginError, setLoginError] = useState("");
     const [loading, setLoading] = useState(false);
 

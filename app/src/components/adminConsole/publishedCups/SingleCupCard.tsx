@@ -51,13 +51,11 @@ const CupCardDate = styled(NoMarginP)`
     font-size: 14px;
 `;
 
-const SingleCupCard: React.FunctionComponent = (props: {
-    cup: Entity<Cup>;
-}) => {
-    const timemsg =
+const SingleCupCard = (props: { cup: Entity<Cup> }) => {
+    const formattedPublishedTime =
         props.cup.timePublished == undefined
             ? ""
-            : formatTimePublished(props.cup.timePublished.seconds);
+            : formatTimePublished(props.cup.timePublished.getSeconds());
 
     const history = useHistory();
     function onClick() {
@@ -69,7 +67,7 @@ const SingleCupCard: React.FunctionComponent = (props: {
             <CupCard style={{ cursor: "pointer" }} onClick={onClick}>
                 <CupText>
                     <CupCardName>{props.cup.name}</CupCardName>
-                    <CupCardDate>{timemsg}</CupCardDate>
+                    <CupCardDate>{formattedPublishedTime}</CupCardDate>
                     <ExportSnaps cup={props.cup} />
                 </CupText>
             </CupCard>

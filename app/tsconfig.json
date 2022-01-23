@@ -3,6 +3,7 @@
         "jsx": "react",
         "esModuleInterop": true,
         "baseUrl": "./src",
+        "outDir": "./dist",
         "paths": {
             "~*": ["./*"]
         }

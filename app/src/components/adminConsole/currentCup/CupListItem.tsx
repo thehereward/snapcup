@@ -8,9 +8,7 @@ import { Cup, Entity } from "../../../types";
 import { useSnapsInCup } from "../../../firebase/hooks/UseSnapsInCupHook";
 import { Link } from "react-router-dom";
 
-const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
-    cup: Entity<Cup>;
-}) => {
+const AdminCurrentSnapsDisplay = (props: { cup: Entity<Cup> }) => {
     const [snaps] = useSnapsInCup(props.cup.id);
 
     return (

@@ -3,9 +3,7 @@ import { Cup, Entity } from "../../../types";
 import { MessageDisplay } from "../AdminConsoleStyles";
 import SingleCupCard from "./SingleCupCard";
 
-const PublishedCupsList: React.FunctionComponent = (props: {
-    cups: Entity<Cup>[];
-}) => {
+const PublishedCupsList = (props: { cups: Entity<Cup>[] }) => {
     const listCups = props.cups.map((cup: Entity<Cup>) => {
         return <SingleCupCard cup={cup} key={cup.id} />;
     });

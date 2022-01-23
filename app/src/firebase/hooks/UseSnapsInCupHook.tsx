@@ -3,7 +3,7 @@ import { streamAllSnapsInCup } from "../snaps/SnapService";
 import { Entity, Snap } from "../../types";
 
 export function useSnapsInCup(cupId: string): [Entity<Snap>[]] {
-    const [snaps, setSnaps] = useState<Snap[]>([]);
+    const [snaps, setSnaps] = useState<Entity<Snap>[]>([]);
 
     useEffect(() => {
         const unsubscribe = streamAllSnapsInCup(

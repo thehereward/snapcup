@@ -18,7 +18,7 @@ export const GetCharacterCountRemaining = (
     return GetExtraLength(snappedUsers) - message.length;
 };
 
-const CharactersLeftDisplay: React.FunctionComponent = (props: {
+const CharactersLeftDisplay = (props: {
     snappedUsers: MentionElements[];
     message: string;
 }) => {

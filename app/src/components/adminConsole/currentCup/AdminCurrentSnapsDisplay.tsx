@@ -14,12 +14,15 @@ const LOADING = "loading";
 const IDLE = "idle";
 const ERROR = "error";
 
-const AdminCurrentSnapsDisplay: React.FunctionComponent = (props: {
-    cup: Entity<Cup>;
-}) => {
+interface Status {
+    status: string;
+    error?: string;
+}
+
+const AdminCurrentSnapsDisplay = (props: { cup: Entity<Cup> }) => {
     const [snaps] = useSnapsInCup(props.cup.id);
     const [snappables] = useSnappablePeople(props.cup.id);
-    const [status, setStatus] = useState({ status: IDLE });
+    const [status, setStatus] = useState<Status>({ status: IDLE });
 
     const onClickDownload = () => {
         try {

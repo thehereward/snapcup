@@ -1,10 +1,11 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import { Entity } from "~types";
 import AdminCurrentSnapsDisplay from "../adminConsole/currentCup/AdminCurrentSnapsDisplay";
 import { useCups } from "../../firebase/hooks/UseCupsHook";
 
 const CupAdminPage = () => {
-    const { id } = useParams();
+    const { id } = useParams<Entity<{}>>();
     const [cups] = useCups();
 
     const cup = cups.filter((c) => c.id == id)[0];

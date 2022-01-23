@@ -29,7 +29,16 @@ afterEach(() => {
 it("renders without crashing", () => {
     act(() => {
         render(
-            <SubmissionTextBox cup={{ id: "test-id" }} user={"test-user"} />,
+            <SubmissionTextBox
+                cup={{
+                    id: "test-id",
+                    isPublished: false,
+                    isOpen: false,
+                    name: "test-name",
+                    timeCreated: new Date(),
+                }}
+                user={"test-user"}
+            />,
             container
         );
     });

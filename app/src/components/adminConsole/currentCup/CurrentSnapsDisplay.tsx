@@ -4,9 +4,7 @@ import { Cup, Entity } from "../../../types";
 import SnapList from "../../submissionPage/SnapList";
 import { useSnapsInCup } from "../../../firebase/hooks/UseSnapsInCupHook";
 
-const CurrentSnapsDisplay: React.FunctionComponent = (props: {
-    cup: Entity<Cup>;
-}) => {
+const CurrentSnapsDisplay = (props: { cup: Entity<Cup> }) => {
     const [snaps] = useSnapsInCup(props.cup.id);
 
     return (

@@ -32,11 +32,7 @@ const ProfileImage = styled(Gravatar)`
     border-radius: 10px;
 `;
 
-const PrettyPageWrap: React.FunctionComponent = ({
-    children,
-    isAdmin,
-    setLoggedIn,
-}) => (
+const PrettyPageWrap = ({ children, isAdmin, setLoggedIn }) => (
     <>
         <header className="sticky-top">
             <nav className="navbar navbar-expand-md navbar-light bg-light">
@@ -82,10 +78,7 @@ const PrettyPageWrap: React.FunctionComponent = ({
                             </>
                         )}
                         <li className="nav-item">
-                            <SignOutButton
-                                className="nav-link"
-                                setLoggedIn={setLoggedIn}
-                            />
+                            <SignOutButton setLoggedIn={setLoggedIn} />
                         </li>
                         <li className="nav-item">
                             <NavItem className="nav-link">

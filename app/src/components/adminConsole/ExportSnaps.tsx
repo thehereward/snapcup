@@ -18,7 +18,7 @@ const ErrorMessage = styled.p`
     text-align: center;
 `;
 
-const ExportSnaps: React.FunctionComponent = (props: { cup: Entity<Cup> }) => {
+const ExportSnaps = (props: { cup: Entity<Cup> }) => {
     const cup = props.cup;
     const [error, setError] = useState<string>("");
     const [status, setStatus] = useState({ status: IDLE });

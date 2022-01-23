@@ -37,7 +37,7 @@ const App = () => {
     }
 
     if (!loggedIn) {
-        return <LoginPage setLoggedIn={setLoggedIn} />;
+        return <LoginPage />;
     }
 
     return (

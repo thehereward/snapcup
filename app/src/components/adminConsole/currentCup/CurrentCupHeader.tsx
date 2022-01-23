@@ -3,9 +3,7 @@ import CreateCupButton from "./CreateCupButton";
 import MiniElleImg from "../../transferable/MiniElleImg";
 import { Cup, Entity } from "../../../types";
 
-const CurrentCupHeader: React.FunctionComponent = (props: {
-    cups: Entity<Cup>[];
-}) => {
+const CurrentCupHeader = (props: { cups: Entity<Cup>[] }) => {
     return (
         <div>
             <div id="currentCupHeader" className="row">

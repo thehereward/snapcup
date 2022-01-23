@@ -37,7 +37,7 @@ function anyMatch(snappable: Snappable, query: string) {
     );
 }
 
-const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
+const SubmissionTextBox = (props: Props) => {
     /* Containing body of the snap */
     const [message, setMessage] = useState<string>("");
     const [confirmation, setConfirmation] = useState<Boolean>(false);
@@ -53,34 +53,37 @@ const SubmissionTextBox: React.FunctionComponent = (props: Props) => {
             .map(toMentionElements);
     }
 
-    const handleSubmit = useCallback((event) => {
-        const uid = getCurrentUserUid();
-        event.preventDefault();
-        const ids = snappedUsers.map((u: MentionElements) => u.id);
-        const resultingSnap: Snap = {
-            to: ids,
-            from: uid,
-            body: message,
-            timestamp: new Date(),
-        };
-        if (!validateSnap(resultingSnap, snappedUsers)) {
-            setError("Your snap is invalid.");
-            setConfirmation(false);
-            return;
-        }
-
-        (async () => {
-            try {
-                await submitSnap(resultingSnap, props.cup.id);
-                setConfirmation(true);
-                setMessage("");
-                setSnappedUsers([]);
-            } catch (error) {
-                console.error(error);
-                setError("There was an error submitting the snap!");
+    const handleSubmit = useCallback(
+        (event) => {
+            const uid = getCurrentUserUid();
+            event.preventDefault();
+            const ids = snappedUsers.map((u: MentionElements) => u.id);
+            const resultingSnap: Snap = {
+                to: ids,
+                from: uid,
+                body: message,
+                timestamp: new Date(),
+            };
+            if (!validateSnap(resultingSnap, snappedUsers)) {
+                setError("Your snap is invalid.");
+                setConfirmation(false);
+                return;
             }
-        })();
-    });
+
+            (async () => {
+                try {
+                    await submitSnap(resultingSnap, props.cup.id);
+                    setConfirmation(true);
+                    setMessage("");
+                    setSnappedUsers([]);
+                } catch (error) {
+                    console.error(error);
+                    setError("There was an error submitting the snap!");
+                }
+            })();
+        },
+        [snappedUsers, getCurrentUserUid]
+    );
 
     /* Updates the value in the webhook "message" */
     function handleMessageTextChanged(

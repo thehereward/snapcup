@@ -2,7 +2,7 @@ import MiniElleImg from "./MiniElleImg";
 import React from "react";
 import { StyledHorizontalRule } from "./styles";
 
-const SectionHeading: React.FunctionComponent = (props: { title: string }) => {
+const SectionHeading = (props: { title: string }) => {
     return (
         <div>
             <h2>

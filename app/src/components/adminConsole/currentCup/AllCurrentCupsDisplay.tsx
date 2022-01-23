@@ -3,9 +3,7 @@ import { Cup, Entity } from "../../../types";
 import CupListItem from "./CupListItem";
 import { MessageDisplay } from "../AdminConsoleStyles";
 
-const AllCurrentCupsDisplay: React.FunctionComponent = (props: {
-    cups: Entity<Cup>[];
-}) => {
+const AllCurrentCupsDisplay = (props: { cups: Entity<Cup>[] }) => {
     const cups = props.cups;
 
     if (cups.length == 0) {
@@ -19,13 +17,18 @@ const AllCurrentCupsDisplay: React.FunctionComponent = (props: {
     const cupsList = cups.map((cup) => {
         return <CupListItem key={cup.id} cup={cup} />;
     });
+
+    function horizontalRule(index: number) {
+        return <hr key={`hr-${index}`} />;
+    }
+
     return (
         <div>
-            {cupsList.reduce((prev, next, index) => [
-                prev,
-                <hr key={`hr-${index}`} />,
-                next,
-            ])}
+            {cupsList.reduce((prev, next, index) => (
+                <>
+                    {prev}, {horizontalRule(index)}, {next}
+                </>
+            ))}
         </div>
     );
 };

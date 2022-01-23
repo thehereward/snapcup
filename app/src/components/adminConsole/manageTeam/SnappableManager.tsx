@@ -11,12 +11,17 @@ const LOADING = "loading";
 const IDLE = "idle";
 const ERROR = "error";
 
+interface Status {
+    status: string;
+    error?: string;
+}
+
 const SnappableManager = (props: {
     currentSnaps?: Entity<Snap>[];
     snappablePeople: Snappable[];
     cupId: string;
 }) => {
-    const [status, setStatus] = useState({ status: IDLE });
+    const [status, setStatus] = useState<Status>({ status: IDLE });
     const [filename, setFilename] = useState<String | null>(null);
     const fileRef = useRef(null);
 

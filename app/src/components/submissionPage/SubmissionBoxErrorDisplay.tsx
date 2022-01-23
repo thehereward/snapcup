@@ -6,9 +6,7 @@ const ErrorMessage = styled(HelperText)`
     color: var(--text-error);
 `;
 
-const SubmissionBoxErrorDisplay: React.FunctionComponent = (props: {
-    error: string;
-}) => {
+const SubmissionBoxErrorDisplay = (props: { error: string }) => {
     if (props.error.length > 0) {
         return <ErrorMessage>{props.error}</ErrorMessage>;
     } else {

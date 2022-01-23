@@ -6,9 +6,7 @@ const LOADING = "loading";
 const IDLE = "idle";
 const ERROR = "error";
 
-const CreateCupButton: React.FunctionComponent = (props: {
-    cups: Entity<Cup>[];
-}) => {
+const CreateCupButton = (props: { cups: Entity<Cup>[] }) => {
     const [status, setStatus] = useState({ status: IDLE });
     const [newCupName, setNewCupName] = useState<string>("");
 

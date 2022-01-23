@@ -1,10 +1,7 @@
 import React from "react";
 import { Snappable } from "../../../types";
 
-const SnappableRow: React.FunctionalComponent = (props: {
-    snappable: Snappable;
-    numSnaps: number;
-}) => {
+const SnappableRow = (props: { snappable: Snappable; numSnaps: number }) => {
     return (
         <tr>
             <td>{props.snappable.email}</td>

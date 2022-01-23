@@ -34,7 +34,7 @@ const User: React.FC<UserRowProps> = ({ user }) => {
 const ManageAdminsConsole = () => {
     const [users, setUsers] = useState<Entity<UserProfile>[]>([]);
 
-    useEffect(async () => {
+    useEffect(() => {
         const unsubscribe = streamAllUserProfiles(
             (updatedSnaps) => setUsers(updatedSnaps),
             (error) => console.log(error)

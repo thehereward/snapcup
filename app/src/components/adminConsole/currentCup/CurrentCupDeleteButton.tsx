@@ -2,9 +2,7 @@ import React, { useCallback } from "react";
 import { Cup, Entity } from "../../../types";
 import { deleteCup } from "../../../firebase/cups/CupService";
 
-const CurrentCupDeleteButton: React.FunctionComponent = (props: {
-    cup: Entity<Cup>;
-}) => {
+const CurrentCupDeleteButton = (props: { cup: Entity<Cup> }) => {
     const handleDelete = useCallback(async () => {
         if (
             !confirm(
@@ -18,7 +16,7 @@ const CurrentCupDeleteButton: React.FunctionComponent = (props: {
         } catch (err) {
             console.error(err);
         }
-    });
+    }, [deleteCup]);
 
     return (
         <button className="button-secondary warning" onClick={handleDelete}>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Entity, Snap } from "../../types";
+import { Cup, Entity, Snap } from "../../types";
 import styled from "styled-components";
 import { formatTimestamp, getBodyElements } from "./helpers/snapFormatting";
 import TrashIcon from "../../images/TrashIcon";
@@ -7,6 +7,7 @@ import { deleteSnap } from "../../firebase/snaps/SnapService";
 
 interface SnapListProps {
     snaps: Snap[];
+    cup: Entity<Cup>;
 }
 
 const SnapCard = styled.div`
@@ -56,7 +57,8 @@ const TrashButton = styled.button`
     all: unset;
 `;
 
-const SnapList: React.FunctionComponent<SnapListProps> = ({ snaps, cup }) => {
+const SnapList = (props: SnapListProps) => {
+    const { snaps, cup } = props;
     function formatBody(body: string) {
         const elements = getBodyElements(body);
         return elements.map((e, i) => (

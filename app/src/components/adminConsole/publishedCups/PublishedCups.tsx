@@ -3,9 +3,7 @@ import SectionHeading from "../../transferable/SectionHeading";
 import PublishedCupsList from "./PublishedCupsList";
 import { Cup, Entity } from "../../../types";
 
-const PublishedCups: React.FunctionComponent = (props: {
-    cups: Entity<Cup>[];
-}) => {
+const PublishedCups = (props: { cups: Entity<Cup>[] }) => {
     return (
         <div className="PublishedCups">
             <SectionHeading title={"Previous Cups"} />
