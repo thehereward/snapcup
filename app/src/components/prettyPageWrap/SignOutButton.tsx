@@ -1,6 +1,5 @@
 import React, { useCallback } from "react";
 import { signOut } from "../../firebase/users/UserService";
-import { NavItemClickable } from "./NavItem";
 
 const SignOutButton = ({ setLoggedIn }) => {
     const logout = useCallback(() => {
@@ -11,9 +10,9 @@ const SignOutButton = ({ setLoggedIn }) => {
     }, [setLoggedIn]);
 
     return (
-        <NavItemClickable className="nav-link" onClick={logout}>
+        <button className="nav-link my-clickable-nav-item" onClick={logout}>
             Sign Out
-        </NavItemClickable>
+        </button>
     );
 };
 

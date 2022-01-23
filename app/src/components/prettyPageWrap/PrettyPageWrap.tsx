@@ -1,9 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import styled, { css } from "styled-components";
 import SignOutButton from "./SignOutButton";
-import { NavItem, NavItemClickable } from "./NavItem";
 import Gravatar from "react-gravatar";
 
 import {
@@ -11,32 +9,11 @@ import {
     getCurrentEmail,
 } from "../../firebase/users/UserService";
 
-const BrandLink = styled(Link)`
-    font-family: var(--open-sans);
-    font-weight: 800;
-    font-size: 30px;
-    color: var(--purple-selected);
-    text-decoration: none !important;
-
-    &:hover {
-        color: var(--purple-selected-hover);
-    }
-`;
-
-const LinkList = styled.div`
-    display: flex;
-    align-items: center;
-`;
-
-const ProfileImage = styled(Gravatar)`
-    border-radius: 10px;
-`;
-
 const PrettyPageWrap = ({ children, isAdmin, setLoggedIn }) => (
     <>
         <header className="sticky-top">
             <nav className="navbar navbar-expand-md navbar-light bg-light">
-                <Link className="navbar-brand title" to="/">
+                <Link className="navbar-brand title brand-link" to="/">
                     Snap Cup
                 </Link>
                 <button
@@ -58,22 +35,20 @@ const PrettyPageWrap = ({ children, isAdmin, setLoggedIn }) => (
                         {isAdmin && (
                             <>
                                 <li className="nav-item">
-                                    <NavItemClickable
-                                        className="nav-link"
-                                        as={Link}
+                                    <Link
+                                        className="nav-link my-clickable-nav-item"
                                         to="/manage/admins"
                                     >
                                         Manage Admins
-                                    </NavItemClickable>
+                                    </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <NavItemClickable
-                                        className="nav-link"
-                                        as={Link}
+                                    <Link
+                                        className="nav-link my-clickable-nav-item"
                                         to="/manage/cups"
                                     >
                                         Manage Cups
-                                    </NavItemClickable>
+                                    </Link>
                                 </li>
                             </>
                         )}
@@ -81,14 +56,17 @@ const PrettyPageWrap = ({ children, isAdmin, setLoggedIn }) => (
                             <SignOutButton setLoggedIn={setLoggedIn} />
                         </li>
                         <li className="nav-item">
-                            <NavItem className="nav-link">
+                            <span className="nav-link my-nav-item">
                                 {getCurrentUserName()}
-                            </NavItem>
+                            </span>
                         </li>
                         <li className="nav-item">
-                            <NavItem className="d-none d-sm-block">
-                                <ProfileImage email={getCurrentEmail()} />
-                            </NavItem>
+                            <span className="d-none d-sm-block my-nav-item">
+                                <Gravatar
+                                    className="profile-image"
+                                    email={getCurrentEmail()}
+                                />
+                            </span>
                         </li>
                     </ul>
                 </div>

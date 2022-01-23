@@ -1,16 +1,15 @@
 import React from "react";
 import { Cup, Entity } from "../../../types";
 import CupListItem from "./CupListItem";
-import { MessageDisplay } from "../AdminConsoleStyles";
 
 const AllCurrentCupsDisplay = (props: { cups: Entity<Cup>[] }) => {
     const cups = props.cups;
 
     if (cups.length == 0) {
         return (
-            <MessageDisplay>
+            <p className="message-display">
                 No cup yet. Create a new cup to let your users get snapping!
-            </MessageDisplay>
+            </p>
         );
     }
 

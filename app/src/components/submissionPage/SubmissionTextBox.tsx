@@ -8,12 +8,7 @@ import validateSnap from "./ValidateSnap";
 import { getCurrentUserUid } from "../../firebase/users/UserService";
 import { Cup, Entity, MentionElements, Snap, Snappable } from "../../types";
 import { submitSnap } from "../../firebase/snaps/SnapService";
-import {
-    ElleImg,
-    SnapCupText,
-    SnapItButton,
-    LabelText,
-} from "./SnapSubmissionStyles";
+import Elle from "../../images/Elle";
 import { TextBoxStyle } from "./TextBoxStyle";
 import { useSnappablePeople } from "../../firebase/hooks/UseSnappablePeopleHook";
 
@@ -108,13 +103,13 @@ const SubmissionTextBox = (props: Props) => {
     return (
         <>
             <div className="d-none d-sm-block col col-lg-5 ">
-                <SnapCupText>Add a Snap to the Snap Cup!</SnapCupText>
-                <ElleImg className="w-100" />
+                <p className="snap-cup-text">Add a Snap to the Snap Cup!</p>
+                <Elle className="elle-image w-100" />
             </div>
             <div className="col col-lg-7">
                 <form>
                     <div className="form-group">
-                        <LabelText>Message:</LabelText>
+                        <p className="label-text">Message:</p>
                         <MentionsInput
                             className="form-control finalTextBox"
                             value={message}
@@ -152,15 +147,15 @@ const SubmissionTextBox = (props: Props) => {
                             <SubmissionBoxErrorDisplay error={error} />
                         ) : null}
                     </div>
-                    <SnapItButton
+                    <button
                         type="submit"
-                        className={`btn btn-primary ${
+                        className={`btn btn-primary snap-it-button ${
                             confirmation ? "success" : ""
                         } ${error ? "error" : ""}`}
                         onClick={handleSubmit}
                     >
                         Snap!
-                    </SnapItButton>
+                    </button>
                 </form>
             </div>
         </>

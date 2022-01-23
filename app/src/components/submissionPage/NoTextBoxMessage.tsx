@@ -1,10 +1,10 @@
 import React from "react";
-import { ElleImg } from "./SnapSubmissionStyles";
+import Elle from "../../images/Elle";
 
 const NoTextBoxMessage = ({ message }) => (
     <>
         <div className="col-sm-4 text-light text-center">
-            <ElleImg />
+            <Elle className="elle-image" />
         </div>
         <div className="col-sm-8 text-light">
             <h3>{message}</h3>

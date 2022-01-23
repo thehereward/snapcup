@@ -2,20 +2,10 @@ import React from "react";
 import { Cup, Entity } from "../../types";
 import { getCurrentUserName } from "../../firebase/users/UserService";
 import YourSnaps from "../submissionPage/YourSnaps";
-import styled from "styled-components";
 import SubmissionBoxWrapper from "../submissionPage/SubmissionBoxWrapper";
 import SubmissionTextBox from "../submissionPage/SubmissionTextBox";
 import NoTextBoxMessage from "../submissionPage/NoTextBoxMessage";
 import { useCups } from "../../firebase/hooks/UseCupsHook";
-
-const WelcomeMessage = styled.p`
-    font-family: var(--asap);
-    font-weight: 500;
-    font-size: 30px;
-    line-height: 34px;
-    color: var(--purple-selected);
-    padding-top: 3%;
-`;
 
 const SubmissionPage = () => {
     const [cups] = useCups();
@@ -42,9 +32,9 @@ const SubmissionPage = () => {
 
     return (
         <>
-            <WelcomeMessage>
+            <p className="welcome-message-text">
                 Welcome, {getCurrentUserName().split(" ")[0]!}
-            </WelcomeMessage>
+            </p>
             <SubmissionBoxWrapper>
                 {currentCup() ? (
                     <SubmissionTextBox

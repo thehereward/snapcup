@@ -1,5 +1,4 @@
 import React from "react";
-import { StyledHorizontalRule } from "../../transferable/styles";
 import { Cup, Entity } from "../../../types";
 import SnapList from "../../submissionPage/SnapList";
 import { useSnapsInCup } from "../../../firebase/hooks/UseSnapsInCupHook";
@@ -10,7 +9,7 @@ const CurrentSnapsDisplay = (props: { cup: Entity<Cup> }) => {
     return (
         <div>
             <h2 className="mb-2">{props.cup.name}</h2>
-            <StyledHorizontalRule />
+            <p className="styled-horizontal-rule" />
             {<SnapList snaps={snaps} cup={props.cup} />}
         </div>
     );

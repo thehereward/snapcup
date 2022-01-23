@@ -1,7 +1,7 @@
 import React from "react";
 import CreateCupButton from "./CreateCupButton";
-import MiniElleImg from "../../transferable/MiniElleImg";
 import { Cup, Entity } from "../../../types";
+import Elle from "../../../images/Elle";
 
 const CurrentCupHeader = (props: { cups: Entity<Cup>[] }) => {
     return (
@@ -9,7 +9,7 @@ const CurrentCupHeader = (props: { cups: Entity<Cup>[] }) => {
             <div id="currentCupHeader" className="row">
                 <div className="col-12">
                     <h2>
-                        <MiniElleImg />
+                        <Elle className="mini-elle-image" />
                         Current Snap Cups
                     </h2>
                 </div>

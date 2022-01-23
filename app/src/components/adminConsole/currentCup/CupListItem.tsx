@@ -1,5 +1,4 @@
 import React from "react";
-import { CupNameDisplay } from "../AdminConsoleStyles";
 import CurrentCupOpennessButton from "./CurrentCupOpennessButton";
 import CurrentCupPublishButton from "./CurrentCupPublishButton";
 import CurrentCupDeleteButton from "./CurrentCupDeleteButton";
@@ -13,14 +12,14 @@ const AdminCurrentSnapsDisplay = (props: { cup: Entity<Cup> }) => {
 
     return (
         <div className="row">
-            <CupNameDisplay className="col-12 col-md-4 col-lg-6 col-xl-4">
+            <p className="col-12 col-md-4 col-lg-6 col-xl-4 cup-name-display">
                 <Link to={`/manage/cups/${props.cup.id}`}>
                     {props.cup.name}
                 </Link>
                 <span className="badge badge-pill badge-light ml-2">
                     Snaps Sent: {snaps.length}
                 </span>
-            </CupNameDisplay>
+            </p>
             <div className="col-12 col-md-8 col-lg-6 col-xl-8 stack">
                 <ExportSnaps cup={props.cup} />
                 <CurrentCupOpennessButton cup={props.cup} />

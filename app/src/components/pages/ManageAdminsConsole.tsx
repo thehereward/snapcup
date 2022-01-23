@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
+import Elle from "../../images/Elle";
 import {
     streamAllUserProfiles,
     updateAdmin,
 } from "../../firebase/users/UserService";
-import { StyledHorizontalRule } from "../transferable/styles";
-import MiniElleImg from "../transferable/MiniElleImg";
 import { Entity, UserProfile } from "../../types";
 
 interface UserRowProps {
@@ -45,10 +44,10 @@ const ManageAdminsConsole = () => {
     return (
         <div className="my-3">
             <h2>
-                <MiniElleImg />
+                <Elle className="mini-elle-image" />
                 Manage Admins Console
             </h2>
-            <StyledHorizontalRule />
+            <p className="styled-horizontal-rule" />
             <h3>Admins</h3>
             <div>
                 {users

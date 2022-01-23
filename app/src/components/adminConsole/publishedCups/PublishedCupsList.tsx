@@ -1,6 +1,5 @@
 import React from "react";
 import { Cup, Entity } from "../../../types";
-import { MessageDisplay } from "../AdminConsoleStyles";
 import SingleCupCard from "./SingleCupCard";
 
 const PublishedCupsList = (props: { cups: Entity<Cup>[] }) => {
@@ -10,7 +9,7 @@ const PublishedCupsList = (props: { cups: Entity<Cup>[] }) => {
     if (props.cups.length > 0) {
         return <div className="row">{listCups}</div>;
     } else {
-        return <MessageDisplay>No published cups yet!</MessageDisplay>;
+        return <p className="message-display">No published cups yet!</p>;
     }
 };
 

@@ -1,7 +1,5 @@
 import React, { useState, useRef, useCallback } from "react";
 import { Entity, Snap, Snappable } from "../../../types";
-import { FileUploadWrapper } from "../AdminConsoleStyles";
-import { StyledHorizontalRule } from "../../transferable/styles";
 import { snappablesToCsvDownload, readFileAndUpload } from "../csvTools";
 import FileUploadError from "../FileUploadError";
 import DownloadButton from "./DownloadButton";
@@ -86,7 +84,7 @@ const SnappableManager = (props: {
                     label="Download current snappable people as CSV."
                 />
             </header>
-            <StyledHorizontalRule />
+            <p className="styled-horizontal-rule" />
             <p>
                 When uploading the list of snappable people please leave the ID
                 cell blank for new users. Leaving the ID column blank tells the
@@ -102,7 +100,7 @@ const SnappableManager = (props: {
                 it.
             </p>
             <form onSubmit={uploadSnappables} className="my-3">
-                <FileUploadWrapper className="btn btn-outline-purple mr-2 btn-sm">
+                <span className="btn btn-outline-purple mr-2 btn-sm file-upload-wrapper ">
                     {filename ??
                         "Browse files to upload a list of snappable people..."}
                     <input
@@ -112,7 +110,7 @@ const SnappableManager = (props: {
                         accept=".csv"
                         onChange={handleFilenameChange}
                     />
-                </FileUploadWrapper>
+                </span>
                 {filename && (
                     <button type="submit" className="btn btn-purple btn-sm">
                         Upload complete list of users

@@ -2,21 +2,10 @@ import React, { useState, useCallback } from "react";
 import getSnaps from "../../firebase/snaps/GetSnaps";
 import { snapsToCsvDownload } from "./csvTools";
 import { Cup, Entity } from "../../types";
-import styled from "styled-components";
 
 const LOADING = "loading";
 const IDLE = "idle";
 const ERROR = "error";
-
-const ErrorMessage = styled.p`
-    font-family: var(--open-sans);
-    font-style: normal;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 16px;
-    color: var(--text-error);
-    text-align: center;
-`;
 
 const ExportSnaps = (props: { cup: Entity<Cup> }) => {
     const cup = props.cup;
@@ -49,7 +38,7 @@ const ExportSnaps = (props: { cup: Entity<Cup> }) => {
             >
                 Export Snaps
             </button>
-            {error != "" && <ErrorMessage>{error}</ErrorMessage>}
+            {error != "" && <p className="error-message">{error}</p>}
         </>
     );
 };

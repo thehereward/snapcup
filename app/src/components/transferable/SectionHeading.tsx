@@ -1,15 +1,14 @@
-import MiniElleImg from "./MiniElleImg";
 import React from "react";
-import { StyledHorizontalRule } from "./styles";
+import Elle from "../../images/Elle";
 
 const SectionHeading = (props: { title: string }) => {
     return (
         <div>
             <h2>
-                <MiniElleImg />
+                <Elle className="mini-elle-image" />
                 {props.title}
             </h2>
-            <StyledHorizontalRule />
+            <p className="styled-horizontal-rule" />
         </div>
     );
 };

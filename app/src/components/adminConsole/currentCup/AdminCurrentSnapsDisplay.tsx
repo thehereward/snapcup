@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { CupNameDisplay } from "../AdminConsoleStyles";
 import SnappableManager from "../manageTeam/SnappableManager";
 import CurrentCupOptionsBar from "./CurrentCupOptionsBar";
 import { Cup, Entity } from "../../../types";
-import { StyledHorizontalRule } from "../../transferable/styles";
 import SnapList from "../../submissionPage/SnapList";
 import { useSnappablePeople } from "../../../firebase/hooks/UseSnappablePeopleHook";
 import { useSnapsInCup } from "../../../firebase/hooks/UseSnapsInCupHook";
@@ -37,7 +35,7 @@ const AdminCurrentSnapsDisplay = (props: { cup: Entity<Cup> }) => {
     return (
         <div>
             <div className="d-flex">
-                <CupNameDisplay>{props.cup.name}</CupNameDisplay>
+                <p className="cup-name-display">{props.cup.name}</p>
                 <div className="flex-grow-1" />
                 <CurrentCupOptionsBar cup={props.cup} />
             </div>
@@ -60,7 +58,7 @@ const AdminCurrentSnapsDisplay = (props: { cup: Entity<Cup> }) => {
                     label="Download current snaps as CSV."
                 />
             </header>
-            <StyledHorizontalRule />
+            <p className="styled-horizontal-rule" />
             <SnapList snaps={snaps} cup={props.cup} />
         </div>
     );
