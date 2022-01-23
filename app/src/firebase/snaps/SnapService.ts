@@ -1,23 +1,35 @@
 import { Snap, Entity } from "../../types";
-import firebase from "firebase/app";
+import {
+    addDoc,
+    collection,
+    deleteDoc,
+    doc,
+    DocumentData,
+    getDocs,
+    getFirestore,
+    QueryDocumentSnapshot,
+    query,
+    orderBy,
+    where,
+    onSnapshot,
+} from "firebase/firestore";
 import { getCurrentUserUid } from "../users/UserService";
 
 function getSnapsCollectionFromCupId(cupId: string) {
-    return firebase
-        .firestore()
-        .collection("cups")
-        .doc(cupId)
-        .collection("snaps");
+    const db = getFirestore();
+    return collection(db, "cups", cupId, "snaps");
 }
 
-export async function submitSnap(snap: Snap, cupId: string) {
-    await getSnapsCollectionFromCupId(cupId).add(snap);
+export function submitSnap(snap: Snap, cupId: string) {
+    const snaps = getSnapsCollectionFromCupId(cupId);
+    return addDoc(snaps, snap);
 }
 
 export async function deleteSnap(snap: Entity<Snap>, cupId: string) {
     assertHasId(snap);
     try {
-        await getSnapsCollectionFromCupId(cupId).doc(snap.id).delete();
+        const snaps = getSnapsCollectionFromCupId(cupId);
+        deleteDoc(doc(snaps, snap.id));
     } catch (error) {
         throw Error("Error deleting snap " + error.message);
     }
@@ -30,7 +42,7 @@ function assertHasId(snap: Entity<Snap>) {
 }
 
 function docToSnap(
-    docSnapshot: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>
+    docSnapshot: QueryDocumentSnapshot<DocumentData>
 ): Entity<Snap> {
     const data = docSnapshot.data();
     const id = docSnapshot.id;
@@ -43,25 +55,26 @@ function docToSnap(
     };
 }
 
-// returns an unsubscribe function
 export function streamSubmittedSnapsForCurrentUser(
     onSnapsReceived: (snaps: Entity<Snap>[]) => void,
     onError: (error: Error) => void,
     cupId: string
 ): () => void {
     const currentUserUid = getCurrentUserUid();
-    return getSnapsCollectionFromCupId(cupId)
-        .where("from", "==", currentUserUid)
-        .orderBy("timestamp", "desc")
-        .onSnapshot({
-            next: (querySnapshot) => {
-                const updatedSnaps = querySnapshot.docs.map(docToSnap);
-                onSnapsReceived(updatedSnaps);
-            },
-            error: (error) => {
-                onError(error);
-            },
+    const snaps = getSnapsCollectionFromCupId(cupId);
+    const q = query(
+        snaps,
+        where("from", "==", currentUserUid),
+        orderBy("timestamp", "desc")
+    );
+    try {
+        return onSnapshot(q, (querySnapshot) => {
+            const updatedSnaps = querySnapshot.docs.map(docToSnap);
+            onSnapsReceived(updatedSnaps);
         });
+    } catch (error) {
+        onError(error);
+    }
 }
 
 export function streamAllSnapsInCup(
@@ -69,12 +82,15 @@ export function streamAllSnapsInCup(
     onError: (error: Error) => void,
     cupId: string
 ): () => void {
-    return getSnapsCollectionFromCupId(cupId).onSnapshot({
-        next: (querySnapshot) => {
-            onSnapsReceived(querySnapshot.docs.map(docToSnap));
-        },
-        error: (error) => {
-            onError(error);
-        },
-    });
+    const currentUserUid = getCurrentUserUid();
+    const snaps = getSnapsCollectionFromCupId(cupId);
+    const q = query(snaps, orderBy("timestamp", "desc"));
+    try {
+        return onSnapshot(q, (querySnapshot) => {
+            const updatedSnaps = querySnapshot.docs.map(docToSnap);
+            onSnapsReceived(updatedSnaps);
+        });
+    } catch (error) {
+        onError(error);
+    }
 }

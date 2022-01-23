@@ -1,12 +1,15 @@
-import firebase from "firebase/app";
+import {
+    collection,
+    getFirestore,
+    getDocsFromServer,
+} from "firebase/firestore";
 import { Snap } from "../../types";
 
 /* Gets a list of Snaps */
-export default async function getSnaps(cupId): Promise<Snap[]> {
-    const querySnapshot = await firebase
-        .firestore()
-        .collection(`cups/${cupId}/snaps`)
-        .get({ source: "server" });
+export default async function getSnaps(cupId: string): Promise<Snap[]> {
+    const db = getFirestore();
+    const collectionRef = collection(db, "cups", cupId, "snaps");
+    const querySnapshot = await getDocsFromServer(collectionRef);
     const result = querySnapshot.docs.map((doc) => {
         console.log(doc.data());
         const { body, from, to, timestamp } = doc.data();

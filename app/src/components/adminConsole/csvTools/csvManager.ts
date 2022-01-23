@@ -1,5 +1,5 @@
-import firebase from "firebase/app";
-import "firebase/functions";
+import { getApp } from "firebase/app";
+import { getFunctions, httpsCallable } from "firebase/functions";
 import FileUploadError from "../FileUploadError";
 
 function assertSnappableRecordValid(fullName, email, username, i = null) {
@@ -43,8 +43,8 @@ export async function readFileAndUpload(cupId: string, file: Blob) {
         snappablePeople: snappableList,
     };
 
-    return firebase
-        .app()
-        .functions("europe-west2")
-        .httpsCallable("uploadSnappableList")(requestObject);
+    const app = getApp();
+    const functions = getFunctions(app, "europe-west2");
+    const uploadSnappables = httpsCallable(functions, "uploadSnappableList");
+    return uploadSnappables(requestObject);
 }

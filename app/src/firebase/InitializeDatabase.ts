@@ -1,7 +1,7 @@
-import firebase from "firebase/app";
-import "firebase/firestore";
-import "firebase/auth";
-import "firebase/functions";
+import { initializeApp } from "firebase/app";
+import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
+import { getAuth, connectAuthEmulator } from "firebase/auth";
+import { getFunctions, connectFunctionsEmulator } from "firebase/functions";
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -13,11 +13,14 @@ const firebaseConfig = {
 };
 
 export function initializeDatabase() {
-    firebase.initializeApp(firebaseConfig);
+    const firebaseApp = initializeApp(firebaseConfig);
     if (process.env.REACT_APP_EMULATE_FIREBASE) {
         console.log("EMULATING FIREBASE");
-        firebase.firestore().useEmulator("localhost", 8080);
-        firebase.auth().useEmulator("http://localhost:9099");
-        firebase.functions().useEmulator("localhost", 5001);
+        const db = getFirestore();
+        connectFirestoreEmulator(db, "localhost", 8080);
+        const auth = getAuth();
+        connectAuthEmulator(auth, "http://localhost:9099");
+        const functions = getFunctions(firebaseApp);
+        connectFunctionsEmulator(functions, "localhost", 5001);
     }
 }

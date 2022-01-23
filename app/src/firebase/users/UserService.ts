@@ -1,32 +1,49 @@
-import firebase from "firebase/app";
-import "firebase/auth";
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    signInWithPopup,
+    OAuthProvider,
+    onIdTokenChanged,
+    User,
+} from "firebase/auth";
+import {
+    collection,
+    doc,
+    DocumentData,
+    getDoc,
+    getFirestore,
+    onSnapshot,
+    QueryDocumentSnapshot,
+    setDoc,
+    updateDoc,
+} from "firebase/firestore";
 import { Entity, UserProfile } from "../../types";
 
-async function getCurrentUserProfile(
-    user: firebase.User
-): Promise<UserProfile | null> {
-    const docRef = firebase.firestore().collection("users").doc(user.uid);
-    const doc = await docRef.get();
-    if (doc.exists && doc.data()) {
-        return doc.data() as UserProfile;
+async function getCurrentUserProfile(user: User): Promise<UserProfile | null> {
+    const db = getFirestore();
+    const docRef = doc(db, "users", user.uid);
+
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists && docSnap.data()) {
+        return docSnap.data() as UserProfile;
     } else {
         return null;
     }
 }
 
-function createUserProfile(user: firebase.User): UserProfile {
+function createUserProfile(user: User): UserProfile {
     const profileData = {
         isAdmin: false,
         email: user.email,
         displayName: user.displayName,
     };
-    firebase.firestore().collection("users").doc(user.uid).set(profileData);
+    const db = getFirestore();
+    const docRef = doc(db, "users", user.uid);
+    setDoc(docRef, profileData);
     return profileData;
 }
 
-async function getOrCreateUserProfile(
-    user: firebase.User
-): Promise<UserProfile> {
+async function getOrCreateUserProfile(user: User): Promise<UserProfile> {
     const userProfile = await getCurrentUserProfile(user);
     if (userProfile) {
         return userProfile;
@@ -36,39 +53,43 @@ async function getOrCreateUserProfile(
 }
 
 export async function signIn() {
+    const auth = getAuth();
     if (process.env.REACT_APP_EMULATE_FIREBASE) {
-        await firebase
-            .auth()
-            .signInWithEmailAndPassword("test@test.com", "testtest");
+        await signInWithEmailAndPassword(auth, "test@test.com", "testtest");
         return;
     }
-    const provider = new firebase.auth.OAuthProvider("microsoft.com");
+    const provider = new OAuthProvider("microsoft.com");
     provider.setCustomParameters({
         prompt: process.env.REACT_APP_PROMPT,
         // Only users from a particular Azure AD tenant to sign into the application
         tenant: process.env.REACT_APP_TENANT,
     });
-    await firebase.auth().signInWithPopup(provider);
+    await signInWithPopup(auth, provider);
 }
 
 export async function signOut() {
-    firebase.auth().signOut();
+    const auth = getAuth();
+    auth.signOut();
 }
 
 export function getCurrentUserName(): string {
-    return firebase.auth().currentUser.displayName;
+    const auth = getAuth();
+    return auth.currentUser.displayName;
 }
 
 export function getCurrentEmail(): string {
-    return firebase.auth().currentUser.email;
+    const auth = getAuth();
+    return auth.currentUser.email;
 }
 
 export function getCurrentUserUid(): string {
-    return firebase.auth().currentUser.uid;
+    const auth = getAuth();
+    return auth.currentUser.uid;
 }
 
 export function onAuthStateChanged(cb: (p: UserProfile) => void) {
-    firebase.auth().onAuthStateChanged(async (user) => {
+    const auth = getAuth();
+    onIdTokenChanged(auth, async (user) => {
         if (user) {
             const profile = await getOrCreateUserProfile(user);
             cb(profile);
@@ -77,7 +98,7 @@ export function onAuthStateChanged(cb: (p: UserProfile) => void) {
 }
 
 function docToUserProfile(
-    docSnapshot: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>
+    docSnapshot: QueryDocumentSnapshot<DocumentData>
 ): Entity<UserProfile> {
     const data = docSnapshot.data();
     const id = docSnapshot.id;
@@ -92,12 +113,14 @@ function docToUserProfile(
 export function streamAllUserProfiles(
     onSnapsReceived: (snaps: Entity<UserProfile>[]) => void,
     onError: (error: Error) => void
-): () => void {
-    const collectionRef = firebase.firestore().collection("users");
-    return collectionRef.onSnapshot({
+) {
+    const db = getFirestore();
+    const collectionRef = collection(db, "users");
+
+    return onSnapshot(collectionRef, {
         next: (querySnapshot) => {
-            const updatedSnaps = querySnapshot.docs.map(docToUserProfile);
-            onSnapsReceived(updatedSnaps);
+            const allCups = querySnapshot.docs.map(docToUserProfile);
+            onSnapsReceived(allCups);
         },
         error: (error) => {
             onError(error);
@@ -106,6 +129,7 @@ export function streamAllUserProfiles(
 }
 
 export async function updateAdmin(userId: string, isAdmin: boolean) {
-    const docRef = firebase.firestore().collection("users").doc(userId);
-    docRef.update({ isAdmin: isAdmin });
+    const db = getFirestore();
+    const docRef = doc(db, "users", userId);
+    updateDoc(docRef, { isAdmin: isAdmin });
 }
