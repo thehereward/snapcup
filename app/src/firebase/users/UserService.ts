@@ -89,7 +89,7 @@ export function getCurrentUserUid(): string {
 
 export function onAuthStateChanged(cb: (p: UserProfile) => void) {
     const auth = getAuth();
-    onIdTokenChanged(auth, async (user) => {
+    return onIdTokenChanged(auth, async (user) => {
         if (user) {
             const profile = await getOrCreateUserProfile(user);
             cb(profile);

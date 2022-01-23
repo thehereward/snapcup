@@ -25,11 +25,11 @@ const App = () => {
     const setUser = (profile: UserProfile) => {
         setUserProfile(profile);
         setLoggedIn(true);
+        setLoading(false);
     };
 
     useEffect(() => {
-        onAuthStateChanged(setUser);
-        setLoading(false);
+        return onAuthStateChanged(setUser);
     }, [setLoggedIn, setUserProfile, setLoading]);
 
     if (loading) {
@@ -49,21 +49,22 @@ const App = () => {
                 <Route path="/cups/:id" element={<CupPage />} />
 
                 {userProfile?.isAdmin && (
-                    <Route path="/manage/cups/:id" element={<CupAdminPage />} />
-                )}
-                {userProfile?.isAdmin && (
-                    <Route path="/manage/cups" element={<ManageCupsPage />} />
-                )}
-                {userProfile?.isAdmin && (
-                    <Route
-                        path="/manage/admins"
-                        element={<ManageAdminsPage />}
-                    />
+                    <Route path="/manage/*" element={<AdminPages />} />
                 )}
                 <Route path="/" element={<SubmissionPage />} />
             </Routes>
         </PrettyPageWrap>
     );
 };
+
+function AdminPages() {
+    return (
+        <Routes>
+            <Route path="cups/:id" element={<CupAdminPage />} />
+            <Route path="cups" element={<ManageCupsPage />} />
+            <Route path="admins" element={<ManageAdminsPage />} />
+        </Routes>
+    );
+}
 
 export default App;
