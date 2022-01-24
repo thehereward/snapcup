@@ -12,14 +12,20 @@ const AdminCurrentSnapsDisplay = (props: { cup: Entity<Cup> }) => {
 
     return (
         <div className="row">
-            <p className="col-12 col-md-4 col-lg-6 col-xl-4 cup-name-display">
-                <Link to={`/manage/cups/${props.cup.id}`}>
+            <div className="col-12 col-md-4 col-lg-6 col-xl-4">
+                <Link
+                    to={`/manage/cups/${props.cup.id}`}
+                    className="cup-name-display col-12"
+                >
                     {props.cup.name}
                 </Link>
-                <span className="badge badge-pill badge-light ml-2">
-                    Snaps Sent: {snaps.length}
-                </span>
-            </p>
+                <p className="col-12">
+                    <span className="badge badge-dark">
+                        Contains {snaps.length}{" "}
+                        {snaps.length == 1 ? "snap" : "snaps"}
+                    </span>
+                </p>
+            </div>
             <div className="col-12 col-md-8 col-lg-6 col-xl-8 stack">
                 <ExportSnaps cup={props.cup} />
                 <CurrentCupOpennessButton cup={props.cup} />

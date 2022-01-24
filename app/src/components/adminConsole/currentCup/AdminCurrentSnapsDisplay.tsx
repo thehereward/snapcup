@@ -48,9 +48,7 @@ const AdminCurrentSnapsDisplay = (props: { cup: Entity<Cup> }) => {
             <header className="mb-2 d-flex justify-content-between">
                 <h2>
                     <span className="mr-2">Snaps</span>
-                    <span className="badge badge-pill badge-light">
-                        Sent: {snaps.length}
-                    </span>
+                    <span className="badge badge-dark">{snaps.length}</span>
                 </h2>
                 <DownloadButton
                     onClick={onClickDownload}
