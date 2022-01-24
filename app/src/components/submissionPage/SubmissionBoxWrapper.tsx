@@ -4,7 +4,7 @@ const SubmissionBoxWrapper = ({ children }) => (
     <div className="col mb-4">
         <div className="row">
             <div className="col col-lg-8">
-                <div className="row align-items-start snap-submission-column-div">
+                <div className="row align-items-start snap-submission-column-div py-3">
                     {children}
                 </div>
             </div>

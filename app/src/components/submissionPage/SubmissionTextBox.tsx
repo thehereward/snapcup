@@ -107,7 +107,7 @@ const SubmissionTextBox = (props: Props) => {
                 <Elle className="elle-image w-100" />
             </div>
             <div className="col col-lg-7">
-                <form>
+                <form className="d-flex flex-column">
                     <div className="form-group">
                         <p className="label-text">Message:</p>
                         <MentionsInput
@@ -149,7 +149,7 @@ const SubmissionTextBox = (props: Props) => {
                     </div>
                     <button
                         type="submit"
-                        className={`btn btn-primary snap-it-button ${
+                        className={`mx-4 flex-grow-1 btn btn-primary snap-it-button ${
                             confirmation ? "success" : ""
                         } ${error ? "error" : ""}`}
                         onClick={handleSubmit}

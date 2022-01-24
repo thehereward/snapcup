@@ -29,8 +29,10 @@ const SingleCupCard = (props: { cup: Entity<Cup> }) => {
         <div className="col-sm-6 col-md-4 mb-4" key={props.cup.id}>
             <div className="cup-card" onClick={onClick}>
                 <div className="cup-text">
-                    <p className="cup-card-name">{props.cup.name}</p>
-                    <p className="cup-card-date">{formattedPublishedTime}</p>
+                    <p className="cup-card-name mb-0">{props.cup.name}</p>
+                    <p className="cup-card-date mb-0">
+                        {formattedPublishedTime}
+                    </p>
                     <ExportSnaps cup={props.cup} />
                 </div>
             </div>

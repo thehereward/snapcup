@@ -36,15 +36,15 @@ const SnapList = (props: SnapListProps) => {
 
     const listItems = snaps.map((snap: Entity<Snap>) => (
         <div className="col-lg-4 mb-4" key={snap.id}>
-            <div className="snap-card">
-                <div className="snap-text">
+            <div className="snap-card h-100">
+                <div className="snap-text d-flex flex-column w-100 h-100">
                     <div className="snap-card-body">
                         {formatBody(snap.body)}
                     </div>
-                    <div className="snap-card-spacer" />
+                    <div className="flex-grow-1" />
                     <div className="snap-card-footer">
                         {formatTimestamp(snap.timestamp)}
-                        <div className="snap-card-spacer" />
+                        <div className="flex-grow-1" />
                         {cup.isOpen && (
                             <button
                                 className="trash-button "
