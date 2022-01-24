@@ -33,15 +33,21 @@ const CreateCupButton = () => {
     };
 
     return (
-        <form>
+        <form className="form-inline">
+            <label htmlFor="cupNameInput" className="sr-only">
+                Cup Name
+            </label>
             <input
+                type="text"
+                id="cupNameInput"
+                className="form-control mb-2 mr-sm-2"
                 value={newCupName}
                 onChange={handleNCNChange}
-                placeholder="Name your new Cup..."
+                placeholder="Cup name"
             />
             <button
                 type="submit"
-                className="new-cup-button"
+                className="new-cup-button mb-2"
                 onClick={() => handleCreateClick()}
                 disabled={status.status === LOADING || newCupName.length == 0}
             >
