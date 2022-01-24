@@ -3,11 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { Cup, Entity } from "../../../types";
 import ExportSnaps from "../ExportSnaps";
 
-function formatTimePublished(seconds: number): string {
-    const d = new Date(seconds * 1000);
+function formatTimePublished(date: Date): string {
     return (
         "Published: " +
-        d.toLocaleString(undefined, {
+        date.toLocaleString(undefined, {
             year: "numeric",
             month: "long",
             day: "2-digit",
@@ -19,7 +18,7 @@ const SingleCupCard = (props: { cup: Entity<Cup> }) => {
     const formattedPublishedTime =
         props.cup.timePublished == undefined
             ? ""
-            : formatTimePublished(props.cup.timePublished.getSeconds());
+            : formatTimePublished(props.cup.timePublished);
 
     const navigate = useNavigate();
     function onClick() {
