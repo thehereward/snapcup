@@ -25,7 +25,9 @@ const AllCurrentCupsDisplay = (props: { cups: Entity<Cup>[] }) => {
         <div>
             {cupsList.reduce((prev, next, index) => (
                 <>
-                    {prev}, {horizontalRule(index)}, {next}
+                    {prev}
+                    {horizontalRule(index)}
+                    {next}
                 </>
             ))}
         </div>

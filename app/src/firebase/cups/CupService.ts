@@ -32,7 +32,9 @@ function docToCupEntity(doc: QueryDocumentSnapshot<DocumentData>): Entity<Cup> {
         isOpen: isOpen,
         timeCreated: timeCreated,
         name: name,
-        timePublished: timePublished,
+        timePublished: !timePublished
+            ? undefined
+            : new Date(timePublished.toMillis()),
         id: doc.id,
     };
 }

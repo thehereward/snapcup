@@ -25,10 +25,10 @@ const App = () => {
     const setUser = (profile: UserProfile) => {
         setUserProfile(profile);
         setLoggedIn(true);
-        setLoading(false);
     };
 
     useEffect(() => {
+        setLoading(false);
         return onAuthStateChanged(setUser);
     }, [setLoggedIn, setUserProfile, setLoading]);
 
