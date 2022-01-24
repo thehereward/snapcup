@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { createNewCup } from "../../../firebase/cups/CupService";
-import { Cup, Entity } from "../../../types";
+import { Cup } from "../../../types";
 
 const LOADING = "loading";
 const IDLE = "idle";
 const ERROR = "error";
 
-const CreateCupButton = (props: { cups: Entity<Cup>[] }) => {
+const CreateCupButton = () => {
     const [status, setStatus] = useState({ status: IDLE });
     const [newCupName, setNewCupName] = useState<string>("");
 

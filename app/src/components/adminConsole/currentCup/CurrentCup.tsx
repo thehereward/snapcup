@@ -6,7 +6,7 @@ import { Cup, Entity } from "../../../types";
 const CurrentCup = (props: { cups: Entity<Cup>[] }) => {
     return (
         <div className="CurrentCup">
-            <CurrentCupHeader cups={props.cups} />
+            <CurrentCupHeader />
             <p className="styled-horizontal-rule" />
             <AllCurrentCupsDisplay cups={props.cups} />
         </div>
