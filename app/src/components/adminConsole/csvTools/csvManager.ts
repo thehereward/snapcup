@@ -1,5 +1,9 @@
 import { getApp } from "firebase/app";
-import { getFunctions, httpsCallable } from "firebase/functions";
+import {
+    getFunctions,
+    httpsCallable,
+    connectFunctionsEmulator,
+} from "firebase/functions";
 import FileUploadError from "../FileUploadError";
 
 function assertSnappableRecordValid(fullName, email, username, i = null) {
@@ -45,6 +49,9 @@ export async function readFileAndUpload(cupId: string, file: Blob) {
 
     const app = getApp();
     const functions = getFunctions(app, "europe-west2");
+    if (process.env.REACT_APP_EMULATE_FIREBASE) {
+        connectFunctionsEmulator(functions, "localhost", 5001);
+    }
     const uploadSnappables = httpsCallable(functions, "uploadSnappableList");
     return uploadSnappables(requestObject);
 }

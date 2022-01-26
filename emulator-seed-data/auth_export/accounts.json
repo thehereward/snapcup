@@ -4,15 +4,12 @@
         {
             "localId": "oCjJrv5BRW9hyxoBlNb0nrmyTuax",
             "createdAt": "1643234750648",
-            "lastLoginAt": "1643234750647",
+            "lastLoginAt": "1643236549966",
             "displayName": "John Doe",
             "photoUrl": "",
-            "emailVerified": false,
-            "email": "test@test.com",
-            "salt": "fakeSaltXn4RVxn2siE7qOtC06k0",
             "passwordHash": "fakeHash:salt=fakeSaltXn4RVxn2siE7qOtC06k0:password=testtest",
-            "passwordUpdatedAt": 1643234750648,
-            "validSince": "1643234750",
+            "salt": "fakeSaltXn4RVxn2siE7qOtC06k0",
+            "passwordUpdatedAt": 1643236524708,
             "providerUserInfo": [
                 {
                     "providerId": "password",
@@ -22,7 +19,12 @@
                     "displayName": "John Doe",
                     "photoUrl": ""
                 }
-            ]
+            ],
+            "validSince": "1643236524",
+            "email": "test@test.com",
+            "emailVerified": false,
+            "disabled": false,
+            "lastRefreshAt": "2022-01-26T22:35:49.966Z"
         }
     ]
 }

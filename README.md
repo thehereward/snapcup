@@ -49,24 +49,13 @@ In app.scss bootstrap variables are customised, and a few global CSS variables a
 
 ## How to use the Firebase Emulator
 
-To use the firebase emulator simply run
+To use the firebase emulator simply run `npm run start` from the root directory.
 
-```bash
-firebase emulators:start --project demo-project-id
-```
-
-from the root directory (replace `demo-project-id` with the same project id that you added to .env.local). This allows you to open the firebase emulator console and it mocks firestore, auth and firebase functions from your directory.
-
-Note: your should project id **should** start with `demo-` to run a Demo project locally.
+This will start the firebase emulator, populate it with some seed data, _and_ start watching the functions and app code.
 
 If the emulator is running successfully you will be able to access it's UI at `localhost:4000`.
 
-**Every time** you start the emulator you should go to the auth tab and add a test account, with credentials
-
-```
-username: test@test.com
-password: testtest
-```
+The app will be available at `localhost:5000` and will use the emulators for authentication, firestore, and function calls.
 
 ### JDK
 
@@ -75,13 +64,3 @@ The command will fail if you do not have the Java JDK installed, however the com
 On windows you can install a zip file with the JDK, unzip it to C:/jdk-16, and then add C:/jdk-16/bin to the global path variable.
 
 In wsl/ubuntu, you can just run `sudo apt update` and then `sudo apt install default-jdk` and this will install the jdk for you.
-
-### Linking React app to emulator
-
-To start the app and use the emulator instead of the normal remote Firebase servers, `cd` into `app/` and run
-
-```bash
-npm run start:with-firebase
-```
-
-When you click the log on button you will automatically log in with the test@test.com account instead of using OAuth.

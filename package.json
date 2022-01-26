@@ -6,7 +6,10 @@
         "install:all": "npm install && cd app && npm install && cd ../functions && npm install && cd ..",
         "prepare": "husky install",
         "git-setup": "chmod +x ./.husky/pre-commit",
-        "start:firebase": "firebase emulators:start --project demo-project-id --import=./emulator-seed-data"
+        "watch:app": "cd ./app && npm run build:watch:with-firebase",
+        "watch:functions": "cd ./functions && npm run build:watch",
+        "start:firebase": "firebase emulators:start --project demo-project-id --import=./emulator-seed-data",
+        "start": "$(npm bin)/concurrently \"npm run watch:app\" \"npm run watch:functions\" \"npm run start:firebase\""
     },
     "repository": {
         "type": "git",
@@ -22,6 +25,7 @@
     },
     "homepage": "https://github.com/thehereward/snapcup#readme",
     "devDependencies": {
+        "concurrently": "^7.0.0",
         "husky": "^6.0.0",
         "prettier": "^2.2.1",
         "pretty-quick": "^3.1.0"
