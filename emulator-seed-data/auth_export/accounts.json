@@ -1,0 +1,28 @@
+{
+    "kind": "identitytoolkit#DownloadAccountResponse",
+    "users": [
+        {
+            "localId": "oCjJrv5BRW9hyxoBlNb0nrmyTuax",
+            "createdAt": "1643234750648",
+            "lastLoginAt": "1643234750647",
+            "displayName": "John Doe",
+            "photoUrl": "",
+            "emailVerified": false,
+            "email": "test@test.com",
+            "salt": "fakeSaltXn4RVxn2siE7qOtC06k0",
+            "passwordHash": "fakeHash:salt=fakeSaltXn4RVxn2siE7qOtC06k0:password=testtest",
+            "passwordUpdatedAt": 1643234750648,
+            "validSince": "1643234750",
+            "providerUserInfo": [
+                {
+                    "providerId": "password",
+                    "email": "test@test.com",
+                    "federatedId": "test@test.com",
+                    "rawId": "test@test.com",
+                    "displayName": "John Doe",
+                    "photoUrl": ""
+                }
+            ]
+        }
+    ]
+}
