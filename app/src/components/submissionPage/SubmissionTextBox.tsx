@@ -25,10 +25,11 @@ const byFullName = (a: Snappable, b: Snappable) =>
     a.fullName.localeCompare(b.fullName);
 
 function anyMatch(snappable: Snappable, query: string) {
+    query = query.toUpperCase();
     return (
-        snappable.email.includes(query) ||
-        snappable.fullName.includes(query) ||
-        snappable.username.includes(query)
+        snappable.email.toUpperCase().includes(query) ||
+        snappable.fullName.toUpperCase().includes(query) ||
+        snappable.username.toUpperCase().includes(query)
     );
 }
 
