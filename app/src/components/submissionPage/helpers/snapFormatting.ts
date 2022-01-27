@@ -20,10 +20,12 @@ export function getBodyElements(body: string): BodyElement[] {
     const bodyElements: BodyElement[] = [];
     let prevIndex = 0;
     while ((match = tagRegex.exec(body)) !== null) {
-        bodyElements.push({
-            text: body.substring(prevIndex, match.index),
-            isTag: false,
-        });
+        if (prevIndex != match.index) {
+            bodyElements.push({
+                text: body.substring(prevIndex, match.index),
+                isTag: false,
+            });
+        }
         // match[1] is the capture group
         bodyElements.push({ text: match[1], isTag: true });
         prevIndex = tagRegex.lastIndex;

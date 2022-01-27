@@ -13,6 +13,21 @@ test("Extracts tag from text", () => {
     ]);
 });
 
+test("Does not produce an empty tag", () => {
+    expect(
+        getBodyElements("@[some name](somemoretext) is great")
+    ).toMatchObject([
+        {
+            text: "some name",
+            isTag: true,
+        },
+        {
+            text: " is great",
+            isTag: false,
+        },
+    ]);
+});
+
 test("Extracts tag from text without spaces around", () => {
     expect(
         getBodyElements("Hi@[some name](somemoretext)evenmore text")

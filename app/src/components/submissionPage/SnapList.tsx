@@ -1,6 +1,10 @@
 import React from "react";
 import { Cup, Entity, Snap } from "../../types";
-import { formatTimestamp, getBodyElements } from "./helpers/snapFormatting";
+import {
+    BodyElement,
+    formatTimestamp,
+    getBodyElements,
+} from "./helpers/snapFormatting";
 import TrashIcon from "../../images/TrashIcon";
 import { deleteSnap } from "../../firebase/snaps/SnapService";
 
@@ -9,19 +13,32 @@ interface SnapListProps {
     cup: Entity<Cup>;
 }
 
+function BodyElement(props: { element: BodyElement }) {
+    const { element } = props;
+    if (element.isTag) {
+        return (
+            <mark className="text-light-purple font-weight-bold p-0">
+                {`@${props.element.text}`}
+            </mark>
+        );
+    } else {
+        return <span>{element.text}</span>;
+    }
+}
+
+function SnapBody(props: { body: string }) {
+    const elements = getBodyElements(props.body);
+    return (
+        <>
+            {elements.map((e, i) => {
+                return <BodyElement key={i} element={e} />;
+            })}
+        </>
+    );
+}
+
 const SnapList = (props: SnapListProps) => {
     const { snaps, cup } = props;
-    function formatBody(body: string) {
-        const elements = getBodyElements(body);
-        return elements.map((e, i) => (
-            <span
-                key={i}
-                className={e.isTag ? "text-light-purple font-weight-bold" : ""}
-            >
-                {`${e.isTag ? "@" : ""}${e.text}`}
-            </span>
-        ));
-    }
 
     const onDeleteSnapPressed = async (snap: Entity<Snap>) => {
         if (!confirm("Are you sure you want to delete this snap?")) {
@@ -38,7 +55,9 @@ const SnapList = (props: SnapListProps) => {
         <div className="col-lg-4 mb-4" key={snap.id}>
             <div className="snap-card h-100 rounded-lg shadow-lg">
                 <div className="flow snap-text d-flex flex-column w-100 h-100 justify-content-between">
-                    <div>{formatBody(snap.body)}</div>
+                    <div>
+                        <SnapBody body={snap.body} />
+                    </div>
                     <div className="d-flex flex-row justify-content-between align-items-center util-text-muted">
                         {formatTimestamp(snap.timestamp)}
                         {cup.isOpen && (
