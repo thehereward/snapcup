@@ -26,9 +26,12 @@ const SingleCupCard = (props: { cup: Entity<Cup> }) => {
     }
 
     return (
-        <div className="col-sm-6 col-md-4 mb-4" key={props.cup.id}>
-            <div className="cup-card" onClick={onClick}>
-                <div className="cup-text">
+        <div className="col-sm-6 col-lg-4 mb-4" key={props.cup.id}>
+            <div
+                className="cup-card h-100 rounded-lg shadow-lg"
+                onClick={onClick}
+            >
+                <div className="cup-text d-flex flex-column w-100 h-100">
                     <p className="cup-card-name mb-0">{props.cup.name}</p>
                     <p className="cup-card-date mb-0">
                         {formattedPublishedTime}

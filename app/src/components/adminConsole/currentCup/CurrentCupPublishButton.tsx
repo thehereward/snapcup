@@ -26,7 +26,10 @@ const CurrentCupPublishButton = (props: { cup: Entity<Cup> }) => {
     }, [setLoading, setError]);
 
     return (
-        <button className={`button-secondary`} onClick={handlePublish}>
+        <button
+            className={`button-secondary rounded-pill`}
+            onClick={handlePublish}
+        >
             Publish Snap Cup
         </button>
     );

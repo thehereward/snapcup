@@ -13,6 +13,10 @@
     }
 }
 
+.flow > * + * {
+    margin-top: var(--flow-space, 1em);
+}
+
 .stack {
     display: flex;
     flex-direction: column;
@@ -23,12 +27,12 @@
         flex-direction: row;
         align-content: flex-start;
     }
-}
 
-.stack > * {
-    margin: 1px 5px;
-    flex: 1 0 0;
-    @include media-breakpoint-up(md) {
-        flex: 1 1 155px;
+    & > * {
+        margin: 1px 5px;
+        flex: 1 0 0;
+        @include media-breakpoint-up(md) {
+            flex: 1 1 155px;
+        }
     }
 }

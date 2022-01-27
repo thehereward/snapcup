@@ -35,7 +35,9 @@ const AdminCurrentSnapsDisplay = (props: { cup: Entity<Cup> }) => {
     return (
         <div>
             <div className="d-flex">
-                <p className="cup-name-display">{props.cup.name}</p>
+                <p className="cup-name-display text-decoration-none">
+                    {props.cup.name}
+                </p>
                 <div className="flex-grow-1" />
                 <CurrentCupOptionsBar cup={props.cup} />
             </div>

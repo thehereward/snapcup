@@ -22,7 +22,7 @@ const LoginPage = () => {
     return loading ? (
         <Loading />
     ) : (
-        <div className="login-box">
+        <div className="login-box d-flex flex-column justify-content-center w-100">
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-12 col-sm-6 order-2 order-sm-1 d-flex flex-column justify-content-center pt-4 login-page-column">

@@ -36,18 +36,14 @@ const SnapList = (props: SnapListProps) => {
 
     const listItems = snaps.map((snap: Entity<Snap>) => (
         <div className="col-lg-4 mb-4" key={snap.id}>
-            <div className="snap-card h-100">
-                <div className="snap-text d-flex flex-column w-100 h-100">
-                    <div className="snap-card-body">
-                        {formatBody(snap.body)}
-                    </div>
-                    <div className="flex-grow-1" />
-                    <div className="snap-card-footer">
+            <div className="snap-card h-100 rounded-lg shadow-lg">
+                <div className="flow snap-text d-flex flex-column w-100 h-100 justify-content-between">
+                    <div>{formatBody(snap.body)}</div>
+                    <div className="d-flex flex-row justify-content-between align-items-center util-text-muted">
                         {formatTimestamp(snap.timestamp)}
-                        <div className="flex-grow-1" />
                         {cup.isOpen && (
                             <button
-                                className="trash-button "
+                                className="trash-button"
                                 onClick={() => onDeleteSnapPressed(snap)}
                             >
                                 <TrashIcon

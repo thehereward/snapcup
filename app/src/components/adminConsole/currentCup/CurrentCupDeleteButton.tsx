@@ -19,7 +19,10 @@ const CurrentCupDeleteButton = (props: { cup: Entity<Cup> }) => {
     }, [deleteCup]);
 
     return (
-        <button className="button-secondary warning" onClick={handleDelete}>
+        <button
+            className="button-secondary rounded-pill warning"
+            onClick={handleDelete}
+        >
             Delete Snap Cup
         </button>
     );

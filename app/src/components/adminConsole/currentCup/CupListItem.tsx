@@ -15,7 +15,7 @@ const AdminCurrentSnapsDisplay = (props: { cup: Entity<Cup> }) => {
             <div className="col-12 col-md-4 col-lg-6 col-xl-4">
                 <Link
                     to={`/manage/cups/${props.cup.id}`}
-                    className="cup-name-display col-12"
+                    className="cup-name-display col-12 text-decoration-none"
                 >
                     {props.cup.name}
                 </Link>

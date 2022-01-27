@@ -13,7 +13,7 @@ const PrettyPageWrap = ({ children, isAdmin, setLoggedIn }) => (
     <>
         <header className="sticky-top">
             <nav className="navbar navbar-expand-md navbar-light bg-light">
-                <Link className="navbar-brand title brand-link" to="/">
+                <Link className="title text-decoration-none" to="/">
                     Snap Cup
                 </Link>
                 <button
@@ -36,7 +36,7 @@ const PrettyPageWrap = ({ children, isAdmin, setLoggedIn }) => (
                             <>
                                 <li className="nav-item">
                                     <Link
-                                        className="nav-link my-clickable-nav-item"
+                                        className="nav-link my-clickable-nav-item text-decoration-none"
                                         to="/manage/admins"
                                     >
                                         Manage Admins
@@ -44,7 +44,7 @@ const PrettyPageWrap = ({ children, isAdmin, setLoggedIn }) => (
                                 </li>
                                 <li className="nav-item">
                                     <Link
-                                        className="nav-link my-clickable-nav-item"
+                                        className="nav-link my-clickable-nav-item text-decoration-none"
                                         to="/manage/cups"
                                     >
                                         Manage Cups
@@ -56,14 +56,14 @@ const PrettyPageWrap = ({ children, isAdmin, setLoggedIn }) => (
                             <SignOutButton setLoggedIn={setLoggedIn} />
                         </li>
                         <li className="nav-item">
-                            <span className="nav-link my-nav-item">
+                            <span className="nav-link my-nav-item text-decoration-none">
                                 {getCurrentUserName()}
                             </span>
                         </li>
                         <li className="nav-item">
-                            <span className="d-none d-sm-block my-nav-item">
+                            <span className="d-none d-sm-block my-nav-item text-decoration-none">
                                 <Gravatar
-                                    className="profile-image"
+                                    className="rounded-lg"
                                     email={getCurrentEmail()}
                                 />
                             </span>

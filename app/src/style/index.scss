@@ -1,16 +1,17 @@
 @import "./composition.scss";
+@import "./utilities.scss";
 @import "./blocks.scss";
 @import "./buttons";
-
-.title {
-    font-family: var(--open-sans);
-    font-weight: 800;
-    color: var(--purple-button-hover) !important;
-}
 
 body {
     color: var(--purple-selected);
     font-family: var(--asap);
+    background: linear-gradient(
+        240.3deg,
+        rgba(58, 9, 161, 0.4) -17.93%,
+        rgba(196, 196, 196, 0) 100.75%
+    );
+    min-height: 100vh;
 }
 
 h1 {
@@ -21,28 +22,4 @@ h1 {
 
 hr {
     border-top: 1px solid var(--purple-hover);
-}
-
-body {
-    background: linear-gradient(
-        240.3deg,
-        rgba(58, 9, 161, 0.4) -17.93%,
-        rgba(196, 196, 196, 0) 100.75%
-    );
-    min-height: 100vh;
-}
-
-.login-box {
-    min-height: 100vh;
-    padding: 50px 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-
-    @media only screen and (max-width: 576px) {
-        max-width: 350px;
-    }
 }

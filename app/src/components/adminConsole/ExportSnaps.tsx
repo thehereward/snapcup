@@ -32,7 +32,7 @@ const ExportSnaps = (props: { cup: Entity<Cup> }) => {
     return (
         <>
             <button
-                className={`button-secondary`}
+                className={`button-secondary rounded-pill`}
                 onClick={downloadSnaps}
                 disabled={status.status === LOADING}
             >

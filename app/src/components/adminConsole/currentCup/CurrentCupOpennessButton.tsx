@@ -32,7 +32,9 @@ const CurrentCupOpennessButton = (props: { cup: Entity<Cup> }) => {
 
     return (
         <button
-            className={`button-secondary pops ${success && "success"}`}
+            className={`button-secondary rounded-pill pops ${
+                success && "success"
+            }`}
             disabled={loading}
             onClick={clickSetOpenness}
         >
