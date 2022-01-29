@@ -31,9 +31,9 @@ const SingleCupCard = (props: { cup: Entity<Cup> }) => {
                 className="cup-card hover-background-purple-hover h-100 rounded-lg shadow-lg"
                 onClick={onClick}
             >
-                <div className="cup-text d-flex flex-column w-100 h-100">
-                    <p className="font-size-18 mb-0">{props.cup.name}</p>
-                    <p className="font-size-14 mb-0">
+                <div className="cup-text colour-text-normal d-flex flex-column w-100 h-100 p-4">
+                    <p className="font-size-18 mb-1">{props.cup.name}</p>
+                    <p className="font-size-14 mb-1">
                         {formattedPublishedTime}
                     </p>
                     <ExportSnaps cup={props.cup} />

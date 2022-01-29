@@ -10,7 +10,7 @@ const PublishedCupsList = (props: { cups: Entity<Cup>[] }) => {
         return <div className="row">{listCups}</div>;
     } else {
         return (
-            <p className="heading-text-base font-size-16">
+            <p className="heading-text-base colour-purple-hover font-size-16">
                 No published cups yet!
             </p>
         );

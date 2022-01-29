@@ -3,12 +3,12 @@ import React from "react";
 const OnSubmitMessageDisplay = (props: { confirmation: Boolean }) => {
     if (props.confirmation) {
         return (
-            <p className="colour-success helper-text font-size-12">
+            <div className="label-text colour-success font-size-12 ml-1">
                 Snap submitted!
-            </p>
+            </div>
         );
     } else {
-        return <p></p>;
+        return <div></div>;
     }
 };
 

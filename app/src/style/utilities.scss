@@ -55,3 +55,19 @@
         background-color: var(--purple-hover);
     }
 }
+
+.background-colour-purple-textbook {
+    background-color: var(--purple-textbox);
+}
+
+.colour-text-normal {
+    color: var(--text-normal);
+}
+
+.colour-purple-selected {
+    color: var(--purple-selected);
+}
+
+.colour-purple-hover {
+    color: var(--purple-hover) !important;
+}

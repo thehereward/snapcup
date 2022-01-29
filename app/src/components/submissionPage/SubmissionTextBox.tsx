@@ -104,7 +104,7 @@ const SubmissionTextBox = (props: Props) => {
     return (
         <>
             <div className="d-none d-sm-block col col-lg-5 ">
-                <p className="snap-cup-text font-size-20">
+                <p className="heading-text-base colour-text-normal text-center font-size-20">
                     Add a Snap to the Snap Cup!
                 </p>
                 <Elle className="elle-image w-100" />
@@ -112,7 +112,9 @@ const SubmissionTextBox = (props: Props) => {
             <div className="col col-lg-7">
                 <form className="d-flex flex-column">
                     <div className="form-group">
-                        <p className="label-text mb-1 font-size-14">Message:</p>
+                        <p className="label-text colour-text-normal mb-1 font-size-14">
+                            Message:
+                        </p>
                         <MentionsInput
                             className="form-control finalTextBox"
                             value={message}
@@ -152,7 +154,7 @@ const SubmissionTextBox = (props: Props) => {
                     </div>
                     <button
                         type="submit"
-                        className={`rounded-lg mx-4 flex-grow-1 btn btn-primary snap-it-button ${
+                        className={`rounded-lg mx-4 flex-grow-1 btn btn-primary snap-it-button mt-2 ${
                             confirmation ? "success" : ""
                         } ${error ? "error" : ""}`}
                         onClick={handleSubmit}

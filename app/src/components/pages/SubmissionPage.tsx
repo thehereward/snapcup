@@ -32,7 +32,7 @@ const SubmissionPage = () => {
 
     return (
         <>
-            <p className="welcome-message-text font-size-30 pt-4">
+            <p className="heading-text-base colour-purple-selected font-size-30 my-2">
                 Welcome, {getCurrentUserName().split(" ")[0]!}
             </p>
             <SubmissionBoxWrapper>
