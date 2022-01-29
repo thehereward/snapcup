@@ -165,16 +165,11 @@
         animation: wobbleAnimation 1s linear;
     }
 
-    &:hover {
-        background-color: var(--purple-button-hover);
-        border: 2px solid var(--button-hover-border);
-        box-sizing: border-box;
-    }
+    &:hover,
     &:focus,
     &:active {
-        background-color: var(--purple-button-focus);
-        border: 2px solid var(--purple-button-focus);
-        box-shadow: none;
+        background-color: var(--purple-button-hover);
+        border: 2px solid var(--button-hover-border);
     }
 }
 
