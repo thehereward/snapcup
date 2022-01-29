@@ -58,7 +58,7 @@ const SnapList = (props: SnapListProps) => {
                     <div>
                         <SnapBody body={snap.body} />
                     </div>
-                    <div className="d-flex flex-row justify-content-between align-items-center util-text-muted">
+                    <div className="d-flex flex-row justify-content-between align-items-center colour-text-muted">
                         {formatTimestamp(snap.timestamp)}
                         {cup.isOpen && (
                             <button
