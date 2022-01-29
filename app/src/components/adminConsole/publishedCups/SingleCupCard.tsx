@@ -28,10 +28,10 @@ const SingleCupCard = (props: { cup: Entity<Cup> }) => {
     return (
         <div className="col-sm-6 col-lg-4 mb-4" key={props.cup.id}>
             <div
-                className="cup-card hover-background-purple-hover h-100 rounded-lg shadow-lg"
+                className="background-colour-purple-textbook cursor_pointer hover-background-purple-hover h-100 rounded-lg shadow-lg"
                 onClick={onClick}
             >
-                <div className="cup-text colour-text-normal d-flex flex-column w-100 h-100 p-4">
+                <div className="font-weight-bold font-family-open-sans colour-text-normal d-flex flex-column w-100 h-100 p-4">
                     <p className="font-size-18 mb-1">{props.cup.name}</p>
                     <p className="font-size-14 mb-1">
                         {formattedPublishedTime}

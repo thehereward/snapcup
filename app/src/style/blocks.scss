@@ -7,38 +7,7 @@
     }
 }
 
-.label-text {
-    font-family: var(--open-sans);
-    font-style: normal;
-    font-weight: 600;
-    line-height: 19px;
-}
-
-.title {
-    font-family: var(--open-sans);
-    font-weight: 800;
-}
-
-.cup-card {
-    position: relative;
-    background: var(--purple-textbox);
-    cursor: pointer;
-}
-
-.cup-text {
-    font-family: var(--open-sans);
-    font-style: normal;
-    font-weight: bold;
-}
-
-.snap-card {
-    position: relative;
-    background: var(--white);
-}
-
 .snap-text {
-    padding: 20px 40px;
-    font-family: var(--open-sans);
     line-height: 22px;
 }
 
@@ -51,16 +20,7 @@
     all: unset;
 }
 
-.my-nav-item {
-    font-family: var(--open-sans);
-    font-weight: 600;
-    line-height: 27px;
-    padding: 0.5rem 1rem;
-}
-
 .my-clickable-nav-item {
-    @extend .my-nav-item;
-    cursor: pointer;
     border: none;
     background-color: transparent;
 }
@@ -104,7 +64,6 @@
         filter: alpha(opacity=0);
         opacity: 0;
         outline: none;
-        background: white;
         cursor: inherit;
         display: block;
     }

@@ -104,6 +104,7 @@ const SnappableManager = (props: {
                     {filename ??
                         "Browse files to upload a list of snappable people..."}
                     <input
+                        className="background-colour-white"
                         type="file"
                         ref={fileRef}
                         disabled={status.status === LOADING}

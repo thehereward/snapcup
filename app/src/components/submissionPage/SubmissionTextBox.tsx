@@ -112,7 +112,7 @@ const SubmissionTextBox = (props: Props) => {
             <div className="col col-lg-7">
                 <form className="d-flex flex-column">
                     <div className="form-group">
-                        <p className="label-text colour-text-normal mb-1 font-size-14">
+                        <p className="font-family-open-sans font-weight-bold colour-text-normal mb-1 font-size-14">
                             Message:
                         </p>
                         <MentionsInput
