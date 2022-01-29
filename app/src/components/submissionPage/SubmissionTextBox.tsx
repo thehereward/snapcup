@@ -154,7 +154,7 @@ const SubmissionTextBox = (props: Props) => {
                     </div>
                     <button
                         type="submit"
-                        className={`rounded-lg mx-4 flex-grow-1 btn btn-primary snap-it-button colour-text-normal shadow-lg mt-2 ${
+                        className={`rounded-lg mx-4 btn btn-primary snap-it-button colour-text-normal shadow-lg mt-2 ${
                             confirmation ? "success" : ""
                         } ${error ? "error" : ""}`}
                         onClick={handleSubmit}
