@@ -104,13 +104,15 @@ const SubmissionTextBox = (props: Props) => {
     return (
         <>
             <div className="d-none d-sm-block col col-lg-5 ">
-                <p className="snap-cup-text">Add a Snap to the Snap Cup!</p>
+                <p className="snap-cup-text font-size-20">
+                    Add a Snap to the Snap Cup!
+                </p>
                 <Elle className="elle-image w-100" />
             </div>
             <div className="col col-lg-7">
                 <form className="d-flex flex-column">
                     <div className="form-group">
-                        <p className="label-text">Message:</p>
+                        <p className="label-text mb-1 font-size-14">Message:</p>
                         <MentionsInput
                             className="form-control finalTextBox"
                             value={message}

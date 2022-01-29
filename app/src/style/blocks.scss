@@ -7,20 +7,11 @@
     }
 }
 
-.login-page-column {
-    p {
-        font-weight: normal;
-        font-size: 22px;
-    }
-}
-
 .error-message {
     font-family: var(--open-sans);
     font-style: normal;
     font-weight: 600;
-    font-size: 12px;
     line-height: 16px;
-    color: var(--text-error);
     text-align: center;
 }
 
@@ -28,38 +19,24 @@
     font-family: var(--open-sans);
     font-style: normal;
     font-weight: 600;
-    font-size: 14px;
     line-height: 19px;
     color: var(--text-normal);
-    margin-bottom: 5px;
 }
 
 .helper-text {
-    @extend .label-text;
-    font-size: 12px;
+    font-family: var(--open-sans);
+    font-style: normal;
+    font-weight: 600;
+    line-height: 19px;
+    color: var(--text-normal);
+    margin-bottom: 5px;
     line-height: 16px;
     margin-right: 10px;
-}
-
-.submission-box-error-text {
-    @extend .helper-text;
-    color: var(--text-error);
-}
-
-.snap-success-text {
-    @extend .helper-text;
-    color: var(--text-success);
-}
-
-.characters-left-text {
-    @extend .helper-text;
-    text-align: right;
 }
 
 .title {
     font-family: var(--open-sans);
     font-weight: 800;
-    font-size: 30px;
     color: var(--purple-selected);
 
     &:hover {
@@ -86,14 +63,6 @@
     padding: 20px 33px;
 }
 
-.cup-card-name {
-    font-size: 18px;
-}
-
-.cup-card-date {
-    font-size: 14px;
-}
-
 .snap-card {
     position: relative;
     background: var(--white);
@@ -117,7 +86,6 @@
 .my-nav-item {
     font-family: var(--open-sans);
     font-weight: 600;
-    font-size: 20px;
     color: var(--purple-hover) !important;
     line-height: 27px;
     padding: 0.5rem 1rem;
@@ -156,30 +124,32 @@
     margin-right: 19px;
 }
 
-.heading-text-base {
+.welcome-message-text {
     font-family: var(--asap);
     font-weight: 500;
-    font-size: 16px;
-    color: var(--purple-hover);
-}
-
-.welcome-message-text {
-    @extend .heading-text-base;
-    font-size: 30px;
     line-height: 34px;
     color: var(--purple-selected);
 }
 
-.message-display {
-    @extend .heading-text-base;
+.heading-text-base {
+    font-family: var(--asap);
+    font-weight: 500;
+    color: var(--purple-hover);
 }
 
 .cup-name-display {
     @extend .heading-text-base;
-    font-size: 22px;
     &:hover {
         color: var(--purple-selected) !important;
     }
+}
+
+.snap-cup-text {
+    @extend .heading-text-base;
+    text-align: center;
+    font-style: normal;
+    line-height: 36px;
+    color: var(--text-normal);
 }
 
 .file-upload-wrapper {
@@ -191,7 +161,6 @@
         right: 0;
         min-width: 100%;
         min-height: 100%;
-        font-size: 100px;
         text-align: right;
         filter: alpha(opacity=0);
         opacity: 0;
@@ -204,15 +173,6 @@
 
 .snap-submission-column-div {
     background-color: var(--purple-textbox);
-}
-
-.snap-cup-text {
-    @extend .heading-text-base;
-    text-align: center;
-    font-style: normal;
-    font-size: 30px;
-    line-height: 36px;
-    color: var(--text-normal);
 }
 
 .login-box {

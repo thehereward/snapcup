@@ -15,7 +15,7 @@ const CharactersLeftDisplay = (props: {
     message: string;
 }) => {
     return (
-        <p className="characters-left-text">
+        <p className="text-right helper-text font-size-12">
             There are{" "}
             {GetCharacterCountRemaining(props.message, props.snappedUsers)}{" "}
             characters remaining

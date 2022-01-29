@@ -27,7 +27,7 @@ const CurrentCupPublishButton = (props: { cup: Entity<Cup> }) => {
 
     return (
         <button
-            className={`button-secondary rounded-pill`}
+            className={`button-secondary rounded-pill font-size-16`}
             onClick={handlePublish}
         >
             Publish Snap Cup

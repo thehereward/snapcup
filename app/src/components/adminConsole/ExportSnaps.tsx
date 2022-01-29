@@ -32,13 +32,17 @@ const ExportSnaps = (props: { cup: Entity<Cup> }) => {
     return (
         <>
             <button
-                className={`button-secondary rounded-pill`}
+                className={`button-secondary rounded-pill font-size-16`}
                 onClick={downloadSnaps}
                 disabled={status.status === LOADING}
             >
                 Export Snaps
             </button>
-            {error != "" && <p className="error-message">{error}</p>}
+            {error != "" && (
+                <p className="error-message colour-error font-size-12">
+                    {error}
+                </p>
+            )}
         </>
     );
 };

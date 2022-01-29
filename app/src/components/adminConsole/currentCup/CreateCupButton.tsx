@@ -47,7 +47,7 @@ const CreateCupButton = () => {
             />
             <button
                 type="submit"
-                className="new-cup-button rounded-lg mb-2"
+                className="new-cup-button rounded-lg mb-2 font-size-18"
                 onClick={() => handleCreateClick()}
                 disabled={status.status === LOADING || newCupName.length == 0}
             >

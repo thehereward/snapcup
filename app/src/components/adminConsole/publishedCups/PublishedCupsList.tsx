@@ -9,7 +9,11 @@ const PublishedCupsList = (props: { cups: Entity<Cup>[] }) => {
     if (props.cups.length > 0) {
         return <div className="row">{listCups}</div>;
     } else {
-        return <p className="message-display">No published cups yet!</p>;
+        return (
+            <p className="heading-text-base font-size-16">
+                No published cups yet!
+            </p>
+        );
     }
 };
 

@@ -13,7 +13,10 @@ const PrettyPageWrap = ({ children, isAdmin, setLoggedIn }) => (
     <>
         <header className="sticky-top">
             <nav className="navbar navbar-expand-md navbar-light bg-light">
-                <Link className="title text-decoration-none" to="/">
+                <Link
+                    className="title font-size-30 text-decoration-none"
+                    to="/"
+                >
                     Snap Cup
                 </Link>
                 <button
@@ -36,7 +39,7 @@ const PrettyPageWrap = ({ children, isAdmin, setLoggedIn }) => (
                             <>
                                 <li className="nav-item">
                                     <Link
-                                        className="nav-link my-clickable-nav-item text-decoration-none"
+                                        className="nav-link my-clickable-nav-item font-size-20 text-decoration-none"
                                         to="/manage/admins"
                                     >
                                         Manage Admins
@@ -44,7 +47,7 @@ const PrettyPageWrap = ({ children, isAdmin, setLoggedIn }) => (
                                 </li>
                                 <li className="nav-item">
                                     <Link
-                                        className="nav-link my-clickable-nav-item text-decoration-none"
+                                        className="nav-link my-clickable-nav-item font-size-20 text-decoration-none"
                                         to="/manage/cups"
                                     >
                                         Manage Cups
@@ -56,12 +59,12 @@ const PrettyPageWrap = ({ children, isAdmin, setLoggedIn }) => (
                             <SignOutButton setLoggedIn={setLoggedIn} />
                         </li>
                         <li className="nav-item">
-                            <span className="nav-link my-nav-item text-decoration-none">
+                            <span className="nav-link my-nav-item font-size-20 text-decoration-none">
                                 {getCurrentUserName()}
                             </span>
                         </li>
                         <li className="nav-item">
-                            <span className="d-none d-sm-block my-nav-item text-decoration-none">
+                            <span className="d-none d-sm-block my-nav-item font-size-20 text-decoration-none">
                                 <Gravatar
                                     className="rounded-lg"
                                     email={getCurrentEmail()}

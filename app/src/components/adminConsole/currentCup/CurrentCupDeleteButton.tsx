@@ -20,7 +20,7 @@ const CurrentCupDeleteButton = (props: { cup: Entity<Cup> }) => {
 
     return (
         <button
-            className="button-secondary rounded-pill warning"
+            className="button-secondary rounded-pill font-size-16 warning"
             onClick={handleDelete}
         >
             Delete Snap Cup
