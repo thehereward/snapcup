@@ -14,7 +14,7 @@ const PrettyPageWrap = ({ children, isAdmin, setLoggedIn }) => (
         <header className="sticky-top">
             <nav className="navbar navbar-expand-md navbar-light bg-light">
                 <Link
-                    className="title font-size-30 text-decoration-none"
+                    className="title hover-purple-hover font-size-30 text-decoration-none"
                     to="/"
                 >
                     Snap Cup
@@ -39,7 +39,7 @@ const PrettyPageWrap = ({ children, isAdmin, setLoggedIn }) => (
                             <>
                                 <li className="nav-item">
                                     <Link
-                                        className="nav-link my-clickable-nav-item font-size-20 text-decoration-none"
+                                        className="nav-link my-clickable-nav-item hover-purple-selected font-size-20 text-decoration-none"
                                         to="/manage/admins"
                                     >
                                         Manage Admins
@@ -47,7 +47,7 @@ const PrettyPageWrap = ({ children, isAdmin, setLoggedIn }) => (
                                 </li>
                                 <li className="nav-item">
                                     <Link
-                                        className="nav-link my-clickable-nav-item font-size-20 text-decoration-none"
+                                        className="nav-link my-clickable-nav-item hover-purple-selected font-size-20 text-decoration-none"
                                         to="/manage/cups"
                                     >
                                         Manage Cups

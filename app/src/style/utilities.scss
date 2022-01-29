@@ -37,3 +37,21 @@
 .colour-success {
     color: var(--text-success);
 }
+
+.hover-purple-selected {
+    &:hover {
+        color: var(--purple-selected) !important;
+    }
+}
+
+.hover-purple-hover {
+    &:hover {
+        color: var(--purple-hover);
+    }
+}
+
+.hover-background-purple-hover {
+    &:hover {
+        background-color: var(--purple-hover);
+    }
+}

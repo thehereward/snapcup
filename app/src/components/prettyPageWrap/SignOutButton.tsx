@@ -10,7 +10,10 @@ const SignOutButton = ({ setLoggedIn }) => {
     }, [setLoggedIn]);
 
     return (
-        <button className="nav-link my-clickable-nav-item" onClick={logout}>
+        <button
+            className="nav-link my-clickable-nav-item hover-purple-selected font-size-20"
+            onClick={logout}
+        >
             Sign Out
         </button>
     );

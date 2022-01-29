@@ -38,20 +38,12 @@
     font-family: var(--open-sans);
     font-weight: 800;
     color: var(--purple-selected);
-
-    &:hover {
-        color: var(--purple-hover);
-    }
 }
 
 .cup-card {
     position: relative;
     background: var(--purple-textbox);
     cursor: pointer;
-
-    &:hover {
-        background: var(--purple-hover) !important;
-    }
 }
 
 .cup-text {
@@ -94,11 +86,6 @@
 .my-clickable-nav-item {
     @extend .my-nav-item;
     cursor: pointer;
-
-    &:hover {
-        color: var(--purple-selected) !important;
-    }
-
     border: none;
     background-color: transparent;
 }
@@ -139,9 +126,6 @@
 
 .cup-name-display {
     @extend .heading-text-base;
-    &:hover {
-        color: var(--purple-selected) !important;
-    }
 }
 
 .snap-cup-text {
