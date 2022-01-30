@@ -9,7 +9,6 @@ import { getCurrentUserUid } from "../../firebase/users/UserService";
 import { Cup, Entity, MentionElements, Snap, Snappable } from "../../types";
 import { submitSnap } from "../../firebase/snaps/SnapService";
 import Elle from "../../images/Elle";
-import { TextBoxStyle } from "./TextBoxStyle";
 import { useSnappablePeople } from "../../firebase/hooks/UseSnappablePeopleHook";
 
 export interface Props {
@@ -116,22 +115,15 @@ const SubmissionTextBox = (props: Props) => {
                             Message:
                         </p>
                         <MentionsInput
-                            className="form-control finalTextBox"
+                            className="mentions"
                             value={message}
                             onChange={handleMessageTextChanged}
                             maxLength={GetExtraLength(snappedUsers)}
                             rows={5}
                             onKeyPress={handleKeyPress}
                             placeholder="You can tag users using @."
-                            style={TextBoxStyle}
                         >
                             <Mention
-                                style={{
-                                    backgroundColor:
-                                        "var(--button-hover-border)",
-                                    zIndex: 1,
-                                    outline: "none",
-                                }}
                                 className="mentions__mention"
                                 trigger="@"
                                 data={filterSnappables}

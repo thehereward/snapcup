@@ -1,0 +1,70 @@
+.mentions__input {
+    border: 0;
+    outline: 0;
+    padding: 5px;
+    textarea:focus {
+        outline: none;
+    }
+}
+
+.mentions__control {
+    background-color: var(--white);
+    font-size: 14px;
+    font-weight: normal;
+    height: 250px;
+}
+
+.mentions--singleLine .mentions__control {
+    display: "inline-block";
+    width: 180px;
+}
+.mentions--singleLine .mentions__highlighter {
+    padding: 1px;
+    border: 2px inset transparent;
+}
+.mentions--singleLine .mentions__input {
+    padding: 1px;
+    border: 2px inset;
+}
+
+.mentions--multiLine .mentions__control {
+    font-family: var(--open-sans);
+    min-height: 63px;
+}
+.mentions--multiLine .mentions__highlighter {
+    border: 1px solid transparent;
+    padding: 9px;
+    min-height: 63px;
+}
+.mentions--multiLine .mentions__input {
+    border: 1px solid silver;
+    padding: 9px;
+}
+
+.mentions__suggestions__list {
+    background-color: var(--purple);
+    outline: none;
+    z-index: 1;
+    color: var(--text-normal);
+    font-size: 14;
+    overflow: "auto";
+    max-height: 200;
+}
+
+.mentions__suggestions__item {
+    padding: 5px 15px;
+}
+
+.mentions__suggestions__item--focused {
+    background-color: var(--light-purple);
+    font-weight: 600;
+}
+
+.mentions__mention {
+    color: black;
+    position: relative;
+    z-index: 1;
+    pointer-events: none;
+    background-color: var(--button-hover-border);
+    outline: none;
+}
