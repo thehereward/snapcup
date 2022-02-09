@@ -102,13 +102,20 @@ const SubmissionTextBox = (props: Props) => {
 
     return (
         <>
-            <div className="d-none d-sm-block col col-lg-5 ">
+            <div className="d-none d-sm-block col-12 col-md col-lg-5 ">
                 <p className="font-weight-bold colour-text-normal text-center font-size-20">
                     Add a Snap to the Snap Cup!
                 </p>
                 <Elle className="elle-image w-100" />
             </div>
-            <div className="col col-lg-7">
+            <div className="d-block d-md-none col-12 col-md col-lg-5 ">
+                <Elle className="mini-elle-image" />
+                <span className="font-weight-bold colour-text-normal font-size-20">
+                    Send a Snap!
+                </span>
+                <p className="styled-horizontal-rule mb-0 white-borer"></p>
+            </div>
+            <div className="col-12 col-md col-lg-7">
                 <form className="d-flex flex-column">
                     <div className="form-group">
                         <p className="font-family-open-sans font-weight-bold colour-text-normal mb-1 font-size-14">

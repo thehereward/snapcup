@@ -16,7 +16,7 @@ export interface BodyElement {
 export function getBodyElements(body: string): BodyElement[] {
     // The regex matches something of the form @[full name](username) with a capture group to capture the full name part
     const tagRegex = /@\[(.*?)\]\(.*?\)/g;
-    let match;
+    let match: RegExpExecArray;
     const bodyElements: BodyElement[] = [];
     let prevIndex = 0;
     while ((match = tagRegex.exec(body)) !== null) {
@@ -39,9 +39,9 @@ export function getBodyElements(body: string): BodyElement[] {
 /* Formats the body of a snap so the meta data is removed */
 export function formatBody(body: string) {
     var newBody = "";
-    const bodyElems = getBodyElements(body);
-    for (var elem of bodyElems) {
-        newBody += elem.text;
+    const bodyElements = getBodyElements(body);
+    for (var element of bodyElements) {
+        newBody += element.text;
     }
     return newBody;
 }

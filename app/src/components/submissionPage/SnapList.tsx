@@ -52,7 +52,7 @@ const SnapList = (props: SnapListProps) => {
     };
 
     const listItems = snaps.map((snap: Entity<Snap>) => (
-        <div className="col-lg-4 mb-4" key={snap.id}>
+        <div className="col-xl-4 col-md-6 mb-4" key={snap.id}>
             <div className="background-colour-white h-100 rounded-lg shadow-lg px-4 py-3">
                 <div className="flow snap-text font-family-open-sans d-flex flex-column w-100 h-100 justify-content-between">
                     <div>
