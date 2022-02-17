@@ -125,6 +125,11 @@
         margin: 0;
         padding: 0;
     }
+    fill: var(--purple-selected);
+
+    &:hover {
+        fill: var(--purple-hover);
+    }
 }
 
 @keyframes successExpandAnimation {
