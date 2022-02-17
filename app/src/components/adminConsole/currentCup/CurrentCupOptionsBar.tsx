@@ -8,8 +8,8 @@ import ExportSnaps from "../ExportSnaps";
 const CurrentCupOptionsBar = (props: { cup: Entity<Cup> }) => {
     return (
         <>
-            <ExportSnaps cup={props.cup} />
             <CurrentCupOpennessButton cup={props.cup} />
+            <ExportSnaps cup={props.cup} />
             <CurrentCupPublishButton cup={props.cup} />
             <CurrentCupDeleteButton cup={props.cup} />
         </>

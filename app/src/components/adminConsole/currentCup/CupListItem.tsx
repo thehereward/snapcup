@@ -12,7 +12,7 @@ const AdminCurrentSnapsDisplay = (props: { cup: Entity<Cup> }) => {
 
     return (
         <div className="row">
-            <div className="col-12 col-md-4 col-lg-6 col-xl-4">
+            <div className="col-12 col-md-4 col-lg-4 col-xl-4">
                 <Link
                     to={`/manage/cups/${props.cup.id}`}
                     className="fw-bold colour-purple-hover hover-purple-selected font-size-22 col-12 text-decoration-none"
@@ -26,9 +26,11 @@ const AdminCurrentSnapsDisplay = (props: { cup: Entity<Cup> }) => {
                     </span>
                 </p>
             </div>
-            <div className="col-12 col-md-8 col-lg-6 col-xl-8 stack">
-                <ExportSnaps cup={props.cup} />
+            <div className="col-12 col-md-2 col-lg-2 col-xl-2">
                 <CurrentCupOpennessButton cup={props.cup} />
+            </div>
+            <div className="col-12 col-md-6 col-lg-6 col-xl-6 stack">
+                <ExportSnaps cup={props.cup} />
                 <CurrentCupPublishButton cup={props.cup} />
                 <CurrentCupDeleteButton cup={props.cup} />
             </div>

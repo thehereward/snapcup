@@ -5,41 +5,32 @@ import { Cup, Entity } from "../../../types";
 const CurrentCupOpennessButton = (props: { cup: Entity<Cup> }) => {
     const cup = props.cup;
     const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string>("");
-    const [success, setSuccess] = useState<boolean>(false);
-
-    let buttonText = `${cup.isOpen ? "Close" : "Open"} Snap Cup`;
-    if (error) {
-        buttonText += "- " + error;
-    }
-    if (loading) {
-        buttonText = "Loading";
-    }
+    const inputId = `isCupOpen_${cup.id}`;
 
     const clickSetOpenness = async () => {
         try {
             setLoading(true);
             await setCupOpenness(cup.id, !cup.isOpen);
             setLoading(false);
-            setError("");
-            setSuccess(true);
-            setTimeout(() => setSuccess(false), 500);
         } catch (err) {
             console.error(err);
-            setError("Error!");
         }
     };
 
     return (
-        <button
-            className={`button-secondary rounded-pill font-size-16 pops ${
-                success && "success"
-            }`}
-            disabled={loading}
-            onClick={clickSetOpenness}
-        >
-            {buttonText}
-        </button>
+        <div className="form-check form-switch">
+            <input
+                className="form-check-input"
+                disabled={loading}
+                checked={cup.isOpen}
+                onChange={clickSetOpenness}
+                id={inputId}
+                type="checkbox"
+            />
+            <label className="form-check-label" htmlFor={inputId}>
+                Is open?
+            </label>
+        </div>
     );
 };
 
