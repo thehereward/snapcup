@@ -16,10 +16,10 @@ const User: React.FC<UserRowProps> = ({ user }) => {
             <div className="col-md col-12 text-center text-md-left">
                 {user.displayName}
             </div>
-            <div className="col-md col-12">
+            <div className="col-md col-12 d-grid">
                 <button
                     type="button"
-                    className="btn btn-block btn-danger"
+                    className="btn btn-danger"
                     onClick={() => updateAdmin(user.id, !user.isAdmin)}
                 >
                     {user.isAdmin ? "Remove Admin" : "Make Admin"}

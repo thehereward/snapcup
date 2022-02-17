@@ -39,7 +39,7 @@ const ExportSnaps = (props: { cup: Entity<Cup> }) => {
                 Export Snaps
             </button>
             {error != "" && (
-                <p className="font-family-open-sans font-weight-bold text-center colour-error font-size-12">
+                <p className="font-family-open-sans fw-bold text-center colour-error font-size-12">
                     {error}
                 </p>
             )}

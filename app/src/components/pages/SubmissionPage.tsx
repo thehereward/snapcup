@@ -32,9 +32,11 @@ const SubmissionPage = () => {
 
     return (
         <>
-            <p className="font-weight-bold colour-purple-selected font-size-30 my-2">
-                Welcome, {getCurrentUserName().split(" ")[0]!}
-            </p>
+            <div className="row">
+                <p className="col fw-bold colour-purple-selected font-size-30 my-2">
+                    Welcome, {getCurrentUserName().split(" ")[0]!}
+                </p>
+            </div>
             <SubmissionBoxWrapper>
                 {currentCup() ? (
                     <SubmissionTextBox

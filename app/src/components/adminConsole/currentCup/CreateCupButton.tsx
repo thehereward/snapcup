@@ -33,26 +33,32 @@ const CreateCupButton = () => {
     };
 
     return (
-        <form className="form-inline">
-            <label htmlFor="cupNameInput" className="sr-only">
+        <form className="row">
+            <label htmlFor="cupNameInput" className="visually-hidden">
                 Cup Name
             </label>
-            <input
-                type="text"
-                id="cupNameInput"
-                className="form-control mb-2 mr-sm-2"
-                value={newCupName}
-                onChange={handleNCNChange}
-                placeholder="Cup name"
-            />
-            <button
-                type="submit"
-                className="new-cup-button shadow-lg background-colour-purple-textbook hover-background-purple-selected font-family-open-sans colour-white font-weight-bold rounded-lg mb-2 font-size-18 border-0 ml-2"
-                onClick={() => handleCreateClick()}
-                disabled={status.status === LOADING || newCupName.length == 0}
-            >
-                + New Snap Cup
-            </button>
+            <div className="col">
+                <input
+                    type="text"
+                    id="cupNameInput"
+                    className="form-control mb-2 me-sm-2 h-100"
+                    value={newCupName}
+                    onChange={handleNCNChange}
+                    placeholder="Cup name"
+                />
+            </div>
+            <div className="col-auto">
+                <button
+                    type="submit"
+                    className="h-100 new-cup-button shadow-lg background-colour-purple-textbook hover-background-purple-selected font-family-open-sans colour-white fw-bold rounded-3 mb-2 font-size-18 border-0 ms-2"
+                    onClick={() => handleCreateClick()}
+                    disabled={
+                        status.status === LOADING || newCupName.length == 0
+                    }
+                >
+                    + New Snap Cup
+                </button>
+            </div>
         </form>
     );
 };

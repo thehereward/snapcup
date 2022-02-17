@@ -17,7 +17,7 @@ function BodyElement(props: { element: BodyElement }) {
     const { element } = props;
     if (element.isTag) {
         return (
-            <mark className="text-light-purple font-weight-bold p-0">
+            <mark className="text-light-purple fw-bold p-0">
                 {`@${props.element.text}`}
             </mark>
         );
@@ -53,7 +53,7 @@ const SnapList = (props: SnapListProps) => {
 
     const listItems = snaps.map((snap: Entity<Snap>) => (
         <div className="col-xl-4 col-md-6 mb-4" key={snap.id}>
-            <div className="background-colour-white h-100 rounded-lg shadow-lg px-4 py-3">
+            <div className="background-colour-white h-100 rounded-3 shadow-lg px-4 py-3">
                 <div className="flow snap-text font-family-open-sans d-flex flex-column w-100 h-100 justify-content-between">
                     <div>
                         <SnapBody body={snap.body} />

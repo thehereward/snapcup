@@ -8,7 +8,7 @@ const Loading = () => {
             <Elle />
             <div className="d-flex justify-content-center">
                 <div className="spinner-border mt-3 text-purple" role="status">
-                    <span className="sr-only">Loading...</span>
+                    <span className="visually-hidden">Loading...</span>
                 </div>
             </div>
         </div>

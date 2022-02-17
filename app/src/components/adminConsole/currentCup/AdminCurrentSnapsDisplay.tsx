@@ -35,7 +35,7 @@ const AdminCurrentSnapsDisplay = (props: { cup: Entity<Cup> }) => {
     return (
         <div>
             <div className="d-flex">
-                <p className="font-weight-bold colour-purple-hover hover-purple-selected font-size-22 text-decoration-none">
+                <p className="fw-bold colour-purple-hover hover-purple-selected font-size-22 text-decoration-none">
                     {props.cup.name}
                 </p>
                 <div className="flex-grow-1" />
@@ -49,8 +49,8 @@ const AdminCurrentSnapsDisplay = (props: { cup: Entity<Cup> }) => {
             <hr />
             <header className="mb-2 d-flex justify-content-between">
                 <h2>
-                    <span className="mr-2">Snaps</span>
-                    <span className="badge badge-dark">{snaps.length}</span>
+                    <span className="me-2">Snaps</span>
+                    <span className="badge bg-dark">{snaps.length}</span>
                 </h2>
                 <DownloadButton
                     onClick={onClickDownload}

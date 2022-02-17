@@ -193,3 +193,11 @@
     animation: grow-on-hover 1s;
     transform: scale(1.1);
 }
+
+.text-purple {
+    color: var(--purple-selected);
+}
+
+.text-light-purple {
+    color: var(--purple-hover);
+}

@@ -100,7 +100,7 @@ const SnappableManager = (props: {
                 it.
             </p>
             <form onSubmit={uploadSnappables} className="my-3">
-                <span className="btn btn-outline-purple mr-2 btn-sm file-upload-wrapper ">
+                <span className="btn btn-outline-purple me-2 btn-sm file-upload-wrapper ">
                     {filename ??
                         "Browse files to upload a list of snappable people..."}
                     <input

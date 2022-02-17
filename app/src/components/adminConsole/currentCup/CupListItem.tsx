@@ -15,12 +15,12 @@ const AdminCurrentSnapsDisplay = (props: { cup: Entity<Cup> }) => {
             <div className="col-12 col-md-4 col-lg-6 col-xl-4">
                 <Link
                     to={`/manage/cups/${props.cup.id}`}
-                    className="font-weight-bold colour-purple-hover hover-purple-selected font-size-22 col-12 text-decoration-none"
+                    className="fw-bold colour-purple-hover hover-purple-selected font-size-22 col-12 text-decoration-none"
                 >
                     {props.cup.name}
                 </Link>
                 <p className="col-12">
-                    <span className="badge badge-dark">
+                    <span className="badge bg-dark">
                         Contains {snaps.length}{" "}
                         {snaps.length == 1 ? "snap" : "snaps"}
                     </span>
