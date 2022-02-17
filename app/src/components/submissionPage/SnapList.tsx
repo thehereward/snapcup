@@ -65,10 +65,7 @@ const SnapList = (props: SnapListProps) => {
                                 className="trash-button"
                                 onClick={() => onDeleteSnapPressed(snap)}
                             >
-                                <TrashIcon
-                                    className="styled-tash-icon"
-                                    alt="Delete snap"
-                                />
+                                <TrashIcon />
                             </button>
                         )}
                     </div>
