@@ -4,7 +4,7 @@
 @import "./react-mentions.scss";
 
 body {
-    color: var(--purple-selected);
+    color: var(--colour-primary);
     font-family: var(--asap);
     background: linear-gradient(
         240.3deg,
@@ -20,5 +20,5 @@ h1 {
 }
 
 hr {
-    border-top: 1px solid var(--purple-hover);
+    border-top: 1px solid var(--colour-secondary);
 }

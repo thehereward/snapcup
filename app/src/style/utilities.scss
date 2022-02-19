@@ -26,31 +26,31 @@
     font-size: 30px;
 }
 
-.hover-purple-selected {
+.colour-primary-on-hover {
     &:hover {
-        color: var(--purple-selected) !important;
+        color: var(--colour-primary) !important;
     }
 }
 
-.hover-purple-hover {
+.colour-secondary-on-hover {
     &:hover {
-        color: var(--purple-hover);
+        color: var(--colour-secondary);
     }
 }
 
-.hover-background-purple-hover {
+.bg-colour-secondary-on-hover {
     &:hover {
-        background-color: var(--purple-hover);
+        background-color: var(--colour-secondary);
     }
 }
-.hover-background-purple-selected {
+.bg-colour-primary-on-hover {
     &:hover {
-        background-color: var(--purple-selected);
+        background-color: var(--colour-primary);
     }
 }
 
-.background-colour-purple-textbook {
-    background-color: var(--purple-textbox);
+.bg-colour-highlight-1 {
+    background-color: var(--colour-highlight-1);
 }
 
 .colour-white {
@@ -73,12 +73,12 @@
     color: var(--text-muted);
 }
 
-.colour-purple-selected {
-    color: var(--purple-selected);
+.colour-primary {
+    color: var(--colour-primary);
 }
 
-.colour-purple-hover {
-    color: var(--purple-hover) !important;
+.colour-secondary {
+    color: var(--colour-secondary) !important;
 }
 
 .fw-boldest {

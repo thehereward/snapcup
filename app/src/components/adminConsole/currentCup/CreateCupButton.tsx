@@ -50,7 +50,7 @@ const CreateCupButton = () => {
             <div className="col-auto">
                 <button
                     type="submit"
-                    className="h-100 new-cup-button shadow-lg background-colour-purple-textbook hover-background-purple-selected font-family-open-sans colour-white fw-bold rounded-3 mb-2 font-size-18 border-0 ms-2"
+                    className="h-100 new-cup-button shadow-lg bg-colour-highlight-1 bg-colour-primary-on-hover font-family-open-sans colour-white fw-bold rounded-3 mb-2 font-size-18 border-0 ms-2"
                     onClick={() => handleCreateClick()}
                     disabled={
                         status.status === LOADING || newCupName.length == 0

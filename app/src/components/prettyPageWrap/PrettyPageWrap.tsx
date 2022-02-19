@@ -15,7 +15,7 @@ const PrettyPageWrap = ({ children, isAdmin, setLoggedIn }) => (
             <nav className="navbar navbar-expand-md navbar-light bg-light">
                 <div className="container-fluid">
                     <Link
-                        className="font-family-open-sans fw-boldest colour-purple-selected hover-purple-hover font-size-30 text-decoration-none"
+                        className="font-family-open-sans fw-boldest colour-primary colour-secondary-on-hover font-size-30 text-decoration-none"
                         to="/"
                     >
                         Snap Cup
@@ -40,7 +40,7 @@ const PrettyPageWrap = ({ children, isAdmin, setLoggedIn }) => (
                                 <>
                                     <li className="nav-item">
                                         <Link
-                                            className="nav-link font-family-open-sans fw-bold cursor_pointer my-clickable-nav-item colour-purple-hover hover-purple-selected font-size-20 text-decoration-none"
+                                            className="nav-link font-family-open-sans fw-bold cursor_pointer my-clickable-nav-item colour-secondary colour-primary-on-hover font-size-20 text-decoration-none"
                                             to="/manage/admins"
                                         >
                                             Manage Admins
@@ -48,7 +48,7 @@ const PrettyPageWrap = ({ children, isAdmin, setLoggedIn }) => (
                                     </li>
                                     <li className="nav-item">
                                         <Link
-                                            className="nav-link font-family-open-sans fw-bold cursor_pointer my-clickable-nav-item colour-purple-hover hover-purple-selected font-size-20 text-decoration-none"
+                                            className="nav-link font-family-open-sans fw-bold cursor_pointer my-clickable-nav-item colour-secondary colour-primary-on-hover font-size-20 text-decoration-none"
                                             to="/manage/cups"
                                         >
                                             Manage Cups
@@ -60,12 +60,12 @@ const PrettyPageWrap = ({ children, isAdmin, setLoggedIn }) => (
                                 <SignOutButton setLoggedIn={setLoggedIn} />
                             </li>
                             <li className="nav-item">
-                                <span className="nav-link font-family-open-sans fw-bold colour-purple-hover font-size-20 text-decoration-none">
+                                <span className="nav-link font-family-open-sans fw-bold colour-secondary font-size-20 text-decoration-none">
                                     {getCurrentUserName()}
                                 </span>
                             </li>
                             <li className="nav-item">
-                                <span className="d-none d-sm-block font-family-open-sans fw-bold colour-purple-hover font-size-20 text-decoration-none">
+                                <span className="d-none d-sm-block font-family-open-sans fw-bold colour-secondary font-size-20 text-decoration-none">
                                     <Gravatar
                                         className="rounded-3"
                                         email={getCurrentEmail()}

@@ -35,7 +35,7 @@ const AdminCurrentSnapsDisplay = (props: { cup: Entity<Cup> }) => {
     return (
         <div>
             <div className="d-flex">
-                <p className="fw-bold colour-purple-hover hover-purple-selected font-size-22 text-decoration-none">
+                <p className="fw-bold colour-secondary colour-primary-on-hover font-size-22 text-decoration-none">
                     {props.cup.name}
                 </p>
                 <div className="flex-grow-1" />

@@ -32,7 +32,7 @@ const LoginPage = () => {
                         </p>
                         <button
                             role="button"
-                            className="btn btn-purple btn-lg mt-4"
+                            className="btn btn-primary btn-lg mt-4"
                             onClick={handleSignIn}
                         >
                             Log In

@@ -42,7 +42,7 @@
 }
 
 .mentions__suggestions__list {
-    background-color: var(--purple);
+    background-color: var(--colour-primary);
     outline: none;
     z-index: 1;
     color: var(--text-normal);
@@ -56,7 +56,7 @@
 }
 
 .mentions__suggestions__item--focused {
-    background-color: var(--light-purple);
+    background-color: var(--colour-secondary);
     font-weight: 600;
 }
 
@@ -65,6 +65,6 @@
     position: relative;
     z-index: 1;
     pointer-events: none;
-    background-color: var(--button-hover-border);
+    background-color: var(--colour-highlight-3);
     outline: none;
 }

@@ -29,7 +29,7 @@
     left: 37px;
     top: 748px;
 
-    border: 1px solid var(--purple-selected);
+    border: 1px solid var(--colour-primary);
 }
 
 .white-borer {
@@ -78,7 +78,7 @@
 
 .new-cup-button {
     &:focus {
-        background-color: var(--purple-focus);
+        background-color: var(--colour-primary);
         box-shadow: none;
     }
     &:disabled {
@@ -93,15 +93,15 @@
     font-style: normal;
     font-weight: 600;
     line-height: 22px;
-    border-color: var(--purple-button-default);
+    border-color: var(--colour-highlight-2);
     background-color: transparent;
-    color: var(--purple-button-default);
+    color: var(--colour-highlight-2);
     transition: transform 0.5s;
     transform: none;
 
     &:hover {
-        color: var(--purple-selected);
-        border-color: var(--purple-selected);
+        color: var(--colour-primary);
+        border-color: var(--colour-primary);
     }
     &:disabled {
         color: var(--our-grey);
@@ -123,10 +123,10 @@
         margin: 0;
         padding: 0;
     }
-    fill: var(--purple-selected);
+    fill: var(--colour-primary);
 
     &:hover {
-        fill: var(--purple-hover);
+        fill: var(--colour-secondary);
     }
 }
 
@@ -161,8 +161,8 @@
 }
 
 .snap-it-button {
-    background: var(--purple-button-default);
-    border: 2px solid var(--purple-button-default);
+    background: var(--colour-highlight-2);
+    border: 2px solid var(--colour-highlight-2);
 
     &.success {
         animation: successExpandAnimation 1s linear;
@@ -175,8 +175,8 @@
     &:hover,
     &:focus,
     &:active {
-        background-color: var(--purple-button-hover);
-        border: 2px solid var(--button-hover-border);
+        background-color: var(--colour-primary);
+        border: 2px solid var(--colour-highlight-3);
     }
 }
 
@@ -192,12 +192,4 @@
 .grow-on-hover:hover {
     animation: grow-on-hover 1s;
     transform: scale(1.1);
-}
-
-.text-purple {
-    color: var(--purple-selected);
-}
-
-.text-light-purple {
-    color: var(--purple-hover);
 }

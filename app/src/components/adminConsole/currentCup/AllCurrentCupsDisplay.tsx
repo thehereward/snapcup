@@ -7,7 +7,7 @@ const AllCurrentCupsDisplay = (props: { cups: Entity<Cup>[] }) => {
 
     if (cups.length == 0) {
         return (
-            <p className="fw-bold colour-purple-hover font-size-16">
+            <p className="fw-bold colour-secondary font-size-16">
                 No cup yet. Create a new cup to let your users get snapping!
             </p>
         );

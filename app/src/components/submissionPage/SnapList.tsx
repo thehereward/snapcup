@@ -17,7 +17,7 @@ function BodyElement(props: { element: BodyElement }) {
     const { element } = props;
     if (element.isTag) {
         return (
-            <mark className="text-light-purple fw-bold p-0">
+            <mark className="colour-secondary fw-bold p-0">
                 {`@${props.element.text}`}
             </mark>
         );

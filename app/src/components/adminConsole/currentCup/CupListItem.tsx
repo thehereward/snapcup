@@ -15,7 +15,7 @@ const AdminCurrentSnapsDisplay = (props: { cup: Entity<Cup> }) => {
             <div className="col-12 col-md-4 col-lg-4 col-xl-4">
                 <Link
                     to={`/manage/cups/${props.cup.id}`}
-                    className="fw-bold colour-purple-hover hover-purple-selected font-size-22 col-12 text-decoration-none"
+                    className="fw-bold colour-secondary colour-primary-on-hover font-size-22 col-12 text-decoration-none"
                 >
                     {props.cup.name}
                 </Link>
