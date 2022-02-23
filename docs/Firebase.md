@@ -26,8 +26,10 @@ The app will be available at `localhost:5000` and will use the emulators for aut
 
 ### JDK
 
-The command will fail if you do not have the Java JDK installed, however the command will give you a link to openjdk, from where you can download it.
+The command will fail if you do not have the Java JDK installed, however the command will give you [this link](https://openjdk.java.net/install/) to install openjdk. You can install for example [jdk 17](https://jdk.java.net/17/).
 
-On windows you can install a zip file with the JDK, unzip it to C:/jdk-16, and then add C:/jdk-16/bin to the global path variable.
+On windows you can download a zip file with the JDK, unzip it to `C:/jdk-17`, and then add `C:/jdk-17/bin` to the global path variable.
 
 In wsl/ubuntu, you can just run `sudo apt update` and then `sudo apt install default-jdk` and this will install the jdk for you.
+
+The command `java -version` should verify that the installation was successful.

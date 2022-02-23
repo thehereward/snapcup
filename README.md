@@ -20,6 +20,10 @@ Snap Cup has two components: `app` and `functions`
 
 To verify everything works, you should be able to visit the firebase emulator suite at `localhost:4000` and the app itself at `localhost:5000` using a web browser.
 
+### Troubleshooting
+
+If the build completes but no servers start after running `npm run start` you likely do not have `firebase_tools` installed. Verify that you can invoke the command `firebase` from your terminal before retrying.
+
 ## Further Sections
 
 More info on various topics can be found in:
