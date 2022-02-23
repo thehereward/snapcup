@@ -1,34 +1,10 @@
 # Snap Cup
 
-## Setup repository
+## Getting Started
 
-After downloading the repository please run
-
-```bash
-npm run install:all
-```
-
-This will install the top level npm packages as well as the npm packages for `app/` and `functions/`
-
-and if you are working in a linux environment please then run
-
-```bash
-npm run git-setup
-```
-
-to make the pre-commit hook executable
-
-## Environment Variables
-
-To run locally with your own backend, add a `.env.local` file to `app/` with your own firebase credential variables.
-
-Then, `cd` into `app/` and run
-
-```bash
-npm start
-```
-
-to run the front end React app.
+1. Clone this repo.
+2. Snap Cup has two components: `app` and `functions`. To install all dependencies from `npm run install:all` from the root of the repo.
+3. Run everything locally by running `npm run start` from the repo.
 
 ## Testing
 
