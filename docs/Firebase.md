@@ -8,7 +8,7 @@ To install the firebase cli and emulator you must have npm installed already and
 sudo npm install -g firebase-tools
 ```
 
-To verify this has worked try running the `firebase` command in your terminal (may need a restart).
+To verify this has worked try running the `firebase` command in your terminal (you may to restart your terminal).
 
 ## Enabling complex sorting and filtering on Firestore
 
