@@ -10,10 +10,6 @@ sudo npm install -g firebase-tools
 
 To verify this has worked try running the `firebase` command in your terminal (you may need to restart your terminal).
 
-## Enabling complex sorting and filtering on Firestore
-
-In order to be able to chain the filter and sort needed to get a user's snaps and sort by date, navigate to your firestore console and add a index with collection id `snaps`, fields indexed `from: Ascending` `timestamp: Descending` and query scope `Collection`.
-
 ## How to use the Firebase Emulator
 
 To use the firebase emulator simply run `npm run start` from the root directory.
