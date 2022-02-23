@@ -4,7 +4,8 @@ import { getAuth, connectAuthEmulator } from "firebase/auth";
 import { getFunctions, connectFunctionsEmulator } from "firebase/functions";
 
 const firebaseConfig = {
-    apiKey: process.env.REACT_APP_API_KEY,
+    // exception is thrown if api key is undefined even if using emulator
+    apiKey: process.env.REACT_APP_API_KEY || "dummy-api-key",
     authDomain: process.env.REACT_APP_AUTH_DOMAIN,
     projectId: process.env.REACT_APP_PROJECT_ID,
     storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
