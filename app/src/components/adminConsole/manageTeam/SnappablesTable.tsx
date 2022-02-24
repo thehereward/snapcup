@@ -1,12 +1,19 @@
 import React from "react";
 import { Entity, Snap, Snappable } from "../../../types";
 import { countSnapsForUser } from "./CountSnapsForUser";
-import { useTable, useSortBy } from "react-table";
+import { useTable, useSortBy, useFlexLayout } from "react-table";
 
 const SnappablesTable = (props: {
     snappables: Entity<Snappable>[];
     currentSnaps?: Entity<Snap>[];
 }) => {
+    const defaultColumn = React.useMemo(
+        () => ({
+            width: 2, // width is used for both the flex-basis and flex-grow
+        }),
+        []
+    );
+
     const columns = React.useMemo(
         () => [
             {
@@ -45,7 +52,11 @@ const SnappablesTable = (props: {
         [props]
     );
 
-    const table = useTable({ columns, data }, useSortBy);
+    const table = useTable(
+        { defaultColumn, columns, data },
+        useSortBy,
+        useFlexLayout
+    );
 
     return (
         <table {...table.getTableProps()} className="table  table-hover">
@@ -80,7 +91,13 @@ const SnappablesTable = (props: {
                             {row.cells.map((cell) => {
                                 return (
                                     <td {...cell.getCellProps()}>
-                                        {cell.render("Cell")}
+                                        <div
+                                            style={{
+                                                overflowWrap: "break-word",
+                                            }}
+                                        >
+                                            {cell.render("Cell")}
+                                        </div>
                                     </td>
                                 );
                             })}
