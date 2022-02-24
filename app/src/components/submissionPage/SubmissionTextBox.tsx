@@ -39,7 +39,7 @@ const SubmissionTextBox = (props: Props) => {
     const [error, setError] = useState<string>("");
     const [snappedUsers, setSnappedUsers] = useState<MentionElements[]>([]);
 
-    const [snappables] = useSnappablePeople(props.cup.id);
+    const [snappables, setSnappables] = useSnappablePeople(props.cup.id);
 
     function filterSnappables(query: string) {
         return snappables

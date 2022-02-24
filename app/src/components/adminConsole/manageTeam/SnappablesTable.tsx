@@ -1,12 +1,57 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Entity, Snap, Snappable } from "../../../types";
 import { countSnapsForUser } from "./CountSnapsForUser";
-import { useTable, useSortBy, useFlexLayout } from "react-table";
+import { useTable, useSortBy, useFlexLayout, useRowState } from "react-table";
+import EditableCell from "./EditableCell";
+import EditWidget from "./EditWidget";
+import SnappableRow from "./SnappableRow";
+import SnappableHeader from "./SnappableHeader";
+import { CustomCell, CustomColumn, CustomRow } from "./extensionTypes";
+import { uploadSnappables } from "../csvTools/csvManager";
 
-const SnappablesTable = (props: {
+interface Props {
+    cupId: string;
     snappables: Entity<Snappable>[];
     currentSnaps?: Entity<Snap>[];
-}) => {
+    setSnappables: React.Dispatch<React.SetStateAction<Snappable[]>>;
+}
+
+const SnappablesTable = ({
+    cupId,
+    snappables,
+    currentSnaps,
+    setSnappables,
+}: Props) => {
+    const clickHandlers = useMemo(
+        () => ({
+            onEdit: (row: CustomRow) => {
+                row.setState((s) => ({ ...s, isEditing: true }));
+            },
+            onCancel: (row: CustomRow) => {
+                row.setState((s) => ({ ...s, isEditing: false }));
+            },
+            onSave: async (row: CustomRow) => {
+                const newSnappables: Snappable[] = snappables.map((snappable) =>
+                    snappable.id == row.original.id
+                        ? {
+                              id: snappable.id,
+                              email: row.state.email || snappable.email,
+                              fullName:
+                                  row.state.fullName || snappable.fullName,
+                              username:
+                                  row.state.username || snappable.username,
+                          }
+                        : snappable
+                );
+
+                await uploadSnappables(cupId, newSnappables);
+                setSnappables(newSnappables);
+                row.setState((s) => ({ ...s, isEditing: false }));
+            },
+        }),
+        [snappables]
+    );
+
     const defaultColumn = React.useMemo(
         () => ({
             width: 2, // width is used for both the flex-basis and flex-grow
@@ -19,43 +64,79 @@ const SnappablesTable = (props: {
             {
                 Header: "Email",
                 accessor: "email", // must match property keys on data objects
+                Cell: (cell: CustomCell) => (
+                    <EditableCell
+                        cell={cell}
+                        updateData={(val) =>
+                            cell.row.setState((s) => ({ ...s, email: val }))
+                        }
+                    />
+                ),
             },
             {
                 Header: "Full Name",
                 accessor: "fullName",
+                Cell: (cell: CustomCell) => (
+                    <EditableCell
+                        cell={cell}
+                        updateData={(val) =>
+                            cell.row.setState((s) => ({ ...s, fullName: val }))
+                        }
+                    />
+                ),
             },
             {
                 Header: "Username",
                 accessor: "username",
+                Cell: (cell: CustomCell) => (
+                    <EditableCell
+                        cell={cell}
+                        updateData={(val) =>
+                            cell.row.setState((s) => ({ ...s, username: val }))
+                        }
+                    />
+                ),
             },
             {
                 Header: "Snaps Received",
                 accessor: "numSnaps",
+                Cell: ({ value }) => String(value),
+            },
+            {
+                width: 1,
+                accessor: "[editButton]",
+                Cell: (cell: CustomCell) => (
+                    <EditWidget
+                        isEditing={cell.row.state.isEditing}
+                        onEditClick={() => clickHandlers.onEdit(cell.row)}
+                        onCancelClick={() => clickHandlers.onCancel(cell.row)}
+                        onSaveClick={() => clickHandlers.onSave(cell.row)}
+                    />
+                ),
             },
         ],
-        []
+        [clickHandlers]
     );
 
     const data = React.useMemo(
         () =>
-            props.snappables
-                .sort((a: Snappable, b: Snappable) =>
-                    a.fullName.localeCompare(b.fullName)
-                )
-                .map((p: Snappable) => ({
-                    id: p.id,
-                    email: p.email,
-                    fullName: p.fullName,
-                    username: p.username,
-                    numSnaps: countSnapsForUser(p.id, props.currentSnaps),
-                })),
-        [props.snappables, props.currentSnaps]
+            snappables.map((p: Snappable) => ({
+                ...p,
+                numSnaps: countSnapsForUser(p.id, currentSnaps),
+            })),
+        [snappables, currentSnaps]
     );
 
     const table = useTable(
-        { defaultColumn, columns, data },
+        {
+            defaultColumn,
+            columns,
+            data,
+            initialRowStateAccessor: () => ({ isEditing: false }),
+        },
         useSortBy,
-        useFlexLayout
+        useFlexLayout,
+        useRowState
     );
 
     return (
@@ -64,21 +145,11 @@ const SnappablesTable = (props: {
                 {table.headerGroups.map((headerGroup) => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
                         {headerGroup.headers.map((column) => (
-                            <th
-                                {...column.getHeaderProps(
-                                    column.getSortByToggleProps()
-                                )}
-                                scope="col"
-                            >
-                                {column.render("Header")}
-                                <span>
-                                    {column.isSorted
-                                        ? column.isSortedDesc
-                                            ? " ▾"
-                                            : " ▴"
-                                        : ""}
-                                </span>
-                            </th>
+                            <SnappableHeader
+                                columnInstance={
+                                    (column as unknown) as CustomColumn
+                                }
+                            />
                         ))}
                     </tr>
                 ))}
@@ -87,18 +158,10 @@ const SnappablesTable = (props: {
                 {table.rows.map((row) => {
                     table.prepareRow(row);
                     return (
-                        <tr {...row.getRowProps()}>
-                            {row.cells.map((cell) => {
-                                return (
-                                    <td
-                                        {...cell.getCellProps()}
-                                        className="overflow_break_word"
-                                    >
-                                        {cell.render("Cell")}
-                                    </td>
-                                );
-                            })}
-                        </tr>
+                        <SnappableRow
+                            key={row.values.id}
+                            rowInstance={(row as unknown) as CustomRow}
+                        />
                     );
                 })}
             </tbody>

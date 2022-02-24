@@ -19,7 +19,7 @@ interface Status {
 
 const AdminCurrentSnapsDisplay = (props: { cup: Entity<Cup> }) => {
     const [snaps] = useSnapsInCup(props.cup.id);
-    const [snappables] = useSnappablePeople(props.cup.id);
+    const [snappables, setSnappables] = useSnappablePeople(props.cup.id);
     const [status, setStatus] = useState<Status>({ status: IDLE });
 
     const onClickDownload = () => {
@@ -44,6 +44,7 @@ const AdminCurrentSnapsDisplay = (props: { cup: Entity<Cup> }) => {
             <SnappableManager
                 currentSnaps={snaps}
                 snappablePeople={snappables}
+                setSnappablePeople={setSnappables.bind(this)}
                 cupId={props.cup.id}
             />
             <hr />

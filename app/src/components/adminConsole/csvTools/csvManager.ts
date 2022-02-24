@@ -4,6 +4,7 @@ import {
     httpsCallable,
     connectFunctionsEmulator,
 } from "firebase/functions";
+import { Snappable } from "~types";
 import FileUploadError from "../FileUploadError";
 
 function assertSnappableRecordValid(fullName, email, username, i = null) {
@@ -41,10 +42,16 @@ function csvTextToSnappableList(csvText) {
 export async function readFileAndUpload(cupId: string, file: Blob) {
     const csvText = await file.text();
     const snappableList = csvTextToSnappableList(csvText);
+    uploadSnappables(cupId, snappableList);
+}
 
+export async function uploadSnappables(
+    cupId: string,
+    snappablePeople: Snappable[]
+) {
     const requestObject = {
         cupId: cupId,
-        snappablePeople: snappableList,
+        snappablePeople: snappablePeople,
     };
 
     const app = getApp();
