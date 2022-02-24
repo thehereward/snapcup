@@ -2,7 +2,7 @@
 
 ## Installation
 
-To install the firebase cli and emulator you must have npm installed alreadynpm run and run:
+To install the firebase cli and emulator you must have npm installed already and run:
 
 ```bash
 sudo npm install -g firebase-tools
