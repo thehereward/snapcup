@@ -49,7 +49,7 @@ const SnappablesTable = (props: {
                     username: p.username,
                     numSnaps: countSnapsForUser(p.id, props.currentSnaps),
                 })),
-        [props]
+        [props.snappables, props.currentSnaps]
     );
 
     const table = useTable(
@@ -90,7 +90,10 @@ const SnappablesTable = (props: {
                         <tr {...row.getRowProps()}>
                             {row.cells.map((cell) => {
                                 return (
-                                    <td {...cell.getCellProps()}>
+                                    <td
+                                        {...cell.getCellProps()}
+                                        className="overflow_break_word"
+                                    >
                                         <div
                                             style={{
                                                 overflowWrap: "break-word",
