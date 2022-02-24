@@ -7,10 +7,10 @@
         "test": "jest",
         "test:watch": "jest --watch",
         "start": "parcel public/index.html",
-        "start:with-firebase": "REACT_APP_PROJECT_ID=demo-project-id REACT_APP_EMULATE_FIREBASE=true parcel --no-cache public/index.html",
+        "start:with-firebase": "parcel --no-cache public/index.html",
         "tsc": "tsc",
         "build": "parcel build public/index.html",
-        "build:watch:with-firebase": "REACT_APP_PROJECT_ID=demo-project-id REACT_APP_EMULATE_FIREBASE=true parcel watch public/index.html"
+        "build:watch:with-firebase": "parcel watch public/index.html"
     },
     "repository": {
         "type": "git",
