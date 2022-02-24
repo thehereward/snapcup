@@ -94,13 +94,7 @@ const SnappablesTable = (props: {
                                         {...cell.getCellProps()}
                                         className="overflow_break_word"
                                     >
-                                        <div
-                                            style={{
-                                                overflowWrap: "break-word",
-                                            }}
-                                        >
-                                            {cell.render("Cell")}
-                                        </div>
+                                        {cell.render("Cell")}
                                     </td>
                                 );
                             })}
