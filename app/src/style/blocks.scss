@@ -94,10 +94,13 @@
     font-weight: 600;
     line-height: 22px;
     border-color: var(--colour-highlight-2);
+    border-width: 2px;
+    border-style: outset;
     background-color: transparent;
     color: var(--colour-highlight-2);
     transition: transform 0.5s;
     transform: none;
+    padding: 1px 6px;
 
     &:hover {
         color: var(--colour-primary);
