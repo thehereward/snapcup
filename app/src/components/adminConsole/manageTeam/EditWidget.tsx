@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 interface Props {
     isEditing: boolean;
+    disabled: boolean;
     onEditClick: () => void;
     onCancelClick: () => void;
     onSaveClick: () => Promise<void>;
@@ -22,14 +23,14 @@ const EditWidget = ({
     return isEditing ? (
         <>
             <button
-                className="btn btn-danger double-width"
+                className="btn btn-danger triple-width"
                 disabled={uploading}
                 onClick={onCancelClick}
             >
                 X
             </button>
             <button
-                className="btn btn-primary double-width"
+                className="btn btn-primary triple-width"
                 disabled={uploading}
                 onClick={handleSave}
             >
@@ -42,7 +43,7 @@ const EditWidget = ({
         </>
     ) : (
         <button
-            className="btn btn-outline-primary double-width"
+            className="btn btn-outline-primary triple-width"
             onClick={onEditToggle}
         >
             🖉

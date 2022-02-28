@@ -25,7 +25,13 @@ const EditableCell = ({ cell, updateData }: Props) => {
     }, [cell.value]);
 
     return cell.row.state.isEditing ? (
-        <input value={newValue} onChange={onChange} onBlur={onBlur} />
+        <input
+            type="text"
+            className="form-control"
+            value={newValue}
+            onChange={onChange}
+            onBlur={onBlur}
+        />
     ) : (
         <div>{String(cell.value)}</div>
     );

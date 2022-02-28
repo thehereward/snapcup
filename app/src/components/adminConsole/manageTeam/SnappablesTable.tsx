@@ -113,6 +113,7 @@ const SnappablesTable = ({
                         onSaveClick={() => clickHandlers.onSave(cell.row)}
                     />
                 ),
+                disableSortBy: true,
             },
         ],
         [clickHandlers]
