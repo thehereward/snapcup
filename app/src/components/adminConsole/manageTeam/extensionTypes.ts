@@ -1,5 +1,4 @@
 import { Cell, ColumnInstance, Row } from "react-table";
-import { Snappable } from "~types";
 
 export interface RowState {
     email: string;

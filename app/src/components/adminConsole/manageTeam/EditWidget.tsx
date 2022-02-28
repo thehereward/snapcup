@@ -2,7 +2,8 @@ import React, { useState } from "react";
 
 interface Props {
     isEditing: boolean;
-    disabled: boolean;
+    uploading: boolean;
+    disableEdit: boolean;
     onEditClick: () => void;
     onCancelClick: () => void;
     onSaveClick: () => Promise<void>;
@@ -10,29 +11,25 @@ interface Props {
 
 const EditWidget = ({
     isEditing,
-    onEditClick: onEditToggle,
+    uploading,
+    disableEdit,
+    onEditClick,
     onCancelClick,
     onSaveClick,
 }: Props) => {
-    const [uploading, setUploading] = useState(false);
-    const handleSave = async () => {
-        setUploading(true);
-        await onSaveClick();
-        setUploading(false);
-    };
     return isEditing ? (
         <>
             <button
                 className="btn btn-danger triple-width"
                 disabled={uploading}
-                onClick={onCancelClick}
+                onClick={() => onCancelClick()}
             >
                 X
             </button>
             <button
                 className="btn btn-primary triple-width"
                 disabled={uploading}
-                onClick={handleSave}
+                onClick={() => onSaveClick()}
             >
                 {uploading ? (
                     <div className="loading-spinner" role="status" />
@@ -44,7 +41,8 @@ const EditWidget = ({
     ) : (
         <button
             className="btn btn-outline-primary triple-width"
-            onClick={onEditToggle}
+            disabled={disableEdit}
+            onClick={() => onEditClick()}
         >
             🖉
         </button>

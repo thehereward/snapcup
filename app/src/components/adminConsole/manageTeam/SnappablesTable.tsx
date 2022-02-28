@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { Entity, Snap, Snappable } from "../../../types";
 import { countSnapsForUser } from "./CountSnapsForUser";
 import { useTable, useSortBy, useFlexLayout, useRowState } from "react-table";
@@ -22,15 +22,21 @@ const SnappablesTable = ({
     currentSnaps,
     setSnappables,
 }: Props) => {
+    const [editing, setEditing] = useState(false);
+    const [uploading, setUploading] = useState(false);
+
     const clickHandlers = useMemo(
         () => ({
             onEdit: (row: CustomRow) => {
                 row.setState((s) => ({ ...s, isEditing: true }));
+                setEditing(true);
             },
             onCancel: (row: CustomRow) => {
                 row.setState((s) => ({ ...s, isEditing: false }));
+                setEditing(false);
             },
             onSave: async (row: CustomRow) => {
+                setUploading(true);
                 const newSnappables: Snappable[] = snappables.map((snappable) =>
                     snappable.id == row.original.id
                         ? {
@@ -47,6 +53,8 @@ const SnappablesTable = ({
                 await uploadSnappables(cupId, newSnappables);
                 setSnappables(newSnappables);
                 row.setState((s) => ({ ...s, isEditing: false }));
+                setUploading(false);
+                setEditing(false);
             },
         }),
         [snappables]
@@ -67,6 +75,8 @@ const SnappablesTable = ({
                 Cell: (cell: CustomCell) => (
                     <EditableCell
                         cell={cell}
+                        accessor={"email"}
+                        disabled={uploading}
                         updateData={(val) =>
                             cell.row.setState((s) => ({ ...s, email: val }))
                         }
@@ -79,6 +89,8 @@ const SnappablesTable = ({
                 Cell: (cell: CustomCell) => (
                     <EditableCell
                         cell={cell}
+                        accessor={"fullName"}
+                        disabled={uploading}
                         updateData={(val) =>
                             cell.row.setState((s) => ({ ...s, fullName: val }))
                         }
@@ -91,6 +103,8 @@ const SnappablesTable = ({
                 Cell: (cell: CustomCell) => (
                     <EditableCell
                         cell={cell}
+                        accessor={"username"}
+                        disabled={uploading}
                         updateData={(val) =>
                             cell.row.setState((s) => ({ ...s, username: val }))
                         }
@@ -108,6 +122,8 @@ const SnappablesTable = ({
                 Cell: (cell: CustomCell) => (
                     <EditWidget
                         isEditing={cell.row.state.isEditing}
+                        uploading={uploading}
+                        disableEdit={editing}
                         onEditClick={() => clickHandlers.onEdit(cell.row)}
                         onCancelClick={() => clickHandlers.onCancel(cell.row)}
                         onSaveClick={() => clickHandlers.onSave(cell.row)}
@@ -116,7 +132,7 @@ const SnappablesTable = ({
                 disableSortBy: true,
             },
         ],
-        [clickHandlers]
+        [clickHandlers, uploading, editing]
     );
 
     const data = React.useMemo(

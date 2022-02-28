@@ -1,28 +1,26 @@
 import React from "react";
-import { CustomCell, CustomRow } from "./extensionTypes";
+import { CustomCell } from "./extensionTypes";
 
 interface Props {
     cell: CustomCell;
+    accessor: string;
+    disabled: boolean;
     updateData: (value: string) => void;
 }
 
-const EditableCell = ({ cell, updateData }: Props) => {
-    // We need to keep and update the state of the cell normally
-    const [newValue, setNewValue] = React.useState(cell.value);
+const EditableCell = ({ cell, accessor, disabled, updateData }: Props) => {
+    const [newValue, setNewValue] = React.useState(
+        cell.row.state[accessor] || cell.value
+    );
 
     const onChange = (e) => {
         setNewValue(e.target.value);
     };
 
-    // We'll only update the external data when the input is blurred
+    // Triggerred when component comes out of focus
     const onBlur = () => {
         updateData(newValue);
     };
-
-    // If the initialValue is changed external, sync it up with our state
-    React.useEffect(() => {
-        setNewValue(cell.value);
-    }, [cell.value]);
 
     return cell.row.state.isEditing ? (
         <input
@@ -31,6 +29,7 @@ const EditableCell = ({ cell, updateData }: Props) => {
             value={newValue}
             onChange={onChange}
             onBlur={onBlur}
+            disabled={disabled}
         />
     ) : (
         <div>{String(cell.value)}</div>
