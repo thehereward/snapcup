@@ -22,22 +22,29 @@ const EditWidget = ({
     return isEditing ? (
         <>
             <button
-                className="btn btn-danger"
+                className="btn btn-danger double-width"
                 disabled={uploading}
                 onClick={onCancelClick}
             >
                 X
             </button>
             <button
-                className="btn btn-primary"
+                className="btn btn-primary double-width"
                 disabled={uploading}
                 onClick={handleSave}
             >
-                ✓
+                {uploading ? (
+                    <div className="loading-spinner" role="status" />
+                ) : (
+                    "✓"
+                )}
             </button>
         </>
     ) : (
-        <button className="btn btn-purple" onClick={onEditToggle}>
+        <button
+            className="btn btn-outline-primary double-width"
+            onClick={onEditToggle}
+        >
             🖉
         </button>
     );
