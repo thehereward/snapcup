@@ -66,41 +66,44 @@ const SnappablesTable = ({
         [snappables]
     );
 
-    const defaultCellGenerator = (cell: CustomCell, accessor: string) => (
+    const defaultCellGenerator = (
+        cell: CustomCell,
+        disabled: boolean,
+        accessor: string
+    ) => (
         <EditableCell
             initialValue={cell.value}
             newValue={cell.row.state[accessor]}
             editing={cell.row.isSelected}
-            disabled={uploading}
+            disabled={disabled}
             updateData={(val) =>
                 cell.row.setState((s) => ({ ...s, [accessor]: val }))
             }
         />
     );
 
-    const defaultColumn = React.useMemo(
-        () => ({
-            width: 2, // width is used for both the flex-basis and flex-grow
-        }),
-        []
-    );
+    const defaultColumn = {
+        width: 2, // width is used for both the flex-basis and flex-grow
+    };
 
     const columns = React.useMemo(
         () => [
             {
                 Header: "Email",
                 accessor: "email", // must match property keys on data objects
-                Cell: (cell) => defaultCellGenerator(cell, "email"),
+                Cell: (cell) => defaultCellGenerator(cell, uploading, "email"),
             },
             {
                 Header: "Full Name",
                 accessor: "fullName",
-                Cell: (cell) => defaultCellGenerator(cell, "fullName"),
+                Cell: (cell) =>
+                    defaultCellGenerator(cell, uploading, "fullName"),
             },
             {
                 Header: "Username",
                 accessor: "username",
-                Cell: (cell) => defaultCellGenerator(cell, "username"),
+                Cell: (cell) =>
+                    defaultCellGenerator(cell, uploading, "username"),
             },
             {
                 Header: "Snaps Received",
@@ -111,7 +114,7 @@ const SnappablesTable = ({
             },
             {
                 width: 1,
-                accessor: "[editButton]",
+                accessor: "[editButton]", // ignored
                 Cell: (cell: CustomCell) => (
                     <EditWidget
                         isEditing={cell.row.isSelected}
