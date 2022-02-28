@@ -6,7 +6,7 @@ import {
     useSortBy,
     useFlexLayout,
     useRowState,
-    TableOptions,
+    useRowSelect,
 } from "react-table";
 import EditableCell from "./EditableCell";
 import EditWidget from "./EditWidget";
@@ -34,11 +34,11 @@ const SnappablesTable = ({
     const clickHandlers = useMemo(
         () => ({
             onEdit: (row: CustomRow) => {
-                row.setState((s) => ({ ...s, isEditing: true }));
+                row.toggleRowSelected();
                 setEditing(true);
             },
             onCancel: (row: CustomRow) => {
-                row.setState((s) => ({ ...s, isEditing: false }));
+                row.toggleRowSelected();
                 setEditing(false);
             },
             onSave: async (row: CustomRow) => {
@@ -120,14 +120,16 @@ const SnappablesTable = ({
             {
                 Header: "Snaps Received",
                 accessor: "numSnaps",
-                Cell: ({ value }) => String(value),
+                Cell: ({ value }) => (
+                    <div className="center-aligned">{String(value)}</div>
+                ),
             },
             {
                 width: 1,
                 accessor: "[editButton]",
                 Cell: (cell: CustomCell) => (
                     <EditWidget
-                        isEditing={cell.row.state.isEditing}
+                        isEditing={cell.row.isSelected}
                         uploading={uploading}
                         disableEdit={editing}
                         onEditClick={() => clickHandlers.onEdit(cell.row)}
@@ -151,24 +153,25 @@ const SnappablesTable = ({
     );
 
     const table = useTable(
-        ({
+        {
             defaultColumn,
             columns,
             data,
-            initialRowStateAccessor: () => ({ isEditing: false }),
-        } as unknown) as TableOptions<object>, // cast needed due to plug-in options
+        },
         useSortBy,
         useFlexLayout,
-        useRowState
+        useRowState,
+        useRowSelect
     );
 
     return (
-        <table {...table.getTableProps()} className="table  table-hover">
+        <table {...table.getTableProps()} className="table table-hover">
             <thead>
                 {table.headerGroups.map((headerGroup) => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
                         {headerGroup.headers.map((column) => (
                             <SnappableHeader
+                                key={column.id}
                                 columnInstance={
                                     (column as unknown) as CustomColumn
                                 }
@@ -182,7 +185,7 @@ const SnappablesTable = ({
                     table.prepareRow(row);
                     return (
                         <SnappableRow
-                            key={row.values.id}
+                            key={row.id}
                             rowInstance={(row as unknown) as CustomRow}
                         />
                     );

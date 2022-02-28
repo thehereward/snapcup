@@ -22,17 +22,21 @@ const EditableCell = ({ cell, accessor, disabled, updateData }: Props) => {
         updateData(newValue);
     };
 
-    return cell.row.state.isEditing ? (
-        <input
-            type="text"
-            className="form-control"
-            value={newValue}
-            onChange={onChange}
-            onBlur={onBlur}
-            disabled={disabled}
-        />
-    ) : (
-        <div>{String(cell.value)}</div>
+    return (
+        <div className="center-aligned overflow-break-word">
+            {cell.row.isSelected ? (
+                <input
+                    type="text"
+                    className="form-control"
+                    value={newValue}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    disabled={disabled}
+                />
+            ) : (
+                <div>{String(cell.value)}</div>
+            )}
+        </div>
     );
 };
 

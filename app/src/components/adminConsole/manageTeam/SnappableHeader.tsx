@@ -13,7 +13,7 @@ const SnappableHeader = ({ columnInstance }: Props) => {
             )}
             scope="col"
         >
-            <div>{columnInstance.render("Header")}</div>
+            {columnInstance.render("Header")}
             <span>
                 {columnInstance.isSorted
                     ? columnInstance.isSortedDesc

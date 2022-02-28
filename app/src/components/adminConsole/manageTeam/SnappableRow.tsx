@@ -9,14 +9,7 @@ const SnappableRow = ({ rowInstance }: Props) => {
     return (
         <tr {...rowInstance.getRowProps()}>
             {rowInstance.cells.map((cell) => {
-                return (
-                    <td
-                        {...cell.getCellProps()}
-                        className="overflow_break_word"
-                    >
-                        {cell.render("Cell")}
-                    </td>
-                );
+                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
             })}
         </tr>
     );
