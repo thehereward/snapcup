@@ -24,7 +24,7 @@ const EditWidget = ({
                 disabled={uploading}
                 onClick={() => onCancelClick()}
             >
-                X
+                ✕
             </button>
             <button
                 className="btn btn-primary triple-width"
