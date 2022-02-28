@@ -1,40 +1,47 @@
 import React from "react";
-import { CustomCell } from "./extensionTypes";
 
-interface Props {
-    cell: CustomCell;
-    accessor: string;
+interface Props<T> {
+    initialValue: T;
+    newValue?: T;
+    editing: boolean;
     disabled: boolean;
-    updateData: (value: string) => void;
+    updateData: (value: T) => void;
 }
 
-const EditableCell = ({ cell, accessor, disabled, updateData }: Props) => {
-    const [newValue, setNewValue] = React.useState(
-        cell.row.state[accessor] || cell.value
+type value = string | number;
+const EditableCell = ({
+    initialValue,
+    newValue,
+    editing,
+    disabled,
+    updateData,
+}: Props<value>) => {
+    const [modifiedValue, setModifiedValue] = React.useState(
+        newValue || initialValue
     );
 
     const onChange = (e) => {
-        setNewValue(e.target.value);
+        setModifiedValue(e.target.value);
     };
 
     // Triggerred when component comes out of focus
     const onBlur = () => {
-        updateData(newValue);
+        updateData(modifiedValue);
     };
 
     return (
         <div className="center-aligned overflow-break-word">
-            {cell.row.isSelected ? (
+            {editing ? (
                 <input
                     type="text"
                     className="form-control"
-                    value={newValue}
+                    value={modifiedValue}
                     onChange={onChange}
                     onBlur={onBlur}
                     disabled={disabled}
                 />
             ) : (
-                <div>{String(cell.value)}</div>
+                <div>{String(initialValue)}</div>
             )}
         </div>
     );

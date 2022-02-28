@@ -66,6 +66,18 @@ const SnappablesTable = ({
         [snappables]
     );
 
+    const defaultCellGenerator = (cell: CustomCell, accessor: string) => (
+        <EditableCell
+            initialValue={cell.value}
+            newValue={cell.row.state[accessor]}
+            editing={cell.row.isSelected}
+            disabled={uploading}
+            updateData={(val) =>
+                cell.row.setState((s) => ({ ...s, [accessor]: val }))
+            }
+        />
+    );
+
     const defaultColumn = React.useMemo(
         () => ({
             width: 2, // width is used for both the flex-basis and flex-grow
@@ -78,44 +90,17 @@ const SnappablesTable = ({
             {
                 Header: "Email",
                 accessor: "email", // must match property keys on data objects
-                Cell: (cell: CustomCell) => (
-                    <EditableCell
-                        cell={cell}
-                        accessor={"email"}
-                        disabled={uploading}
-                        updateData={(val) =>
-                            cell.row.setState((s) => ({ ...s, email: val }))
-                        }
-                    />
-                ),
+                Cell: (cell) => defaultCellGenerator(cell, "email"),
             },
             {
                 Header: "Full Name",
                 accessor: "fullName",
-                Cell: (cell: CustomCell) => (
-                    <EditableCell
-                        cell={cell}
-                        accessor={"fullName"}
-                        disabled={uploading}
-                        updateData={(val) =>
-                            cell.row.setState((s) => ({ ...s, fullName: val }))
-                        }
-                    />
-                ),
+                Cell: (cell) => defaultCellGenerator(cell, "fullName"),
             },
             {
                 Header: "Username",
                 accessor: "username",
-                Cell: (cell: CustomCell) => (
-                    <EditableCell
-                        cell={cell}
-                        accessor={"username"}
-                        disabled={uploading}
-                        updateData={(val) =>
-                            cell.row.setState((s) => ({ ...s, username: val }))
-                        }
-                    />
-                ),
+                Cell: (cell) => defaultCellGenerator(cell, "username"),
             },
             {
                 Header: "Snaps Received",
