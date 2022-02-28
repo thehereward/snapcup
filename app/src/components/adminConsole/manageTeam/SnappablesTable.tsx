@@ -1,7 +1,13 @@
 import React, { useMemo, useState } from "react";
 import { Entity, Snap, Snappable } from "../../../types";
 import { countSnapsForUser } from "./CountSnapsForUser";
-import { useTable, useSortBy, useFlexLayout, useRowState } from "react-table";
+import {
+    useTable,
+    useSortBy,
+    useFlexLayout,
+    useRowState,
+    TableOptions,
+} from "react-table";
 import EditableCell from "./EditableCell";
 import EditWidget from "./EditWidget";
 import SnappableRow from "./SnappableRow";
@@ -145,12 +151,12 @@ const SnappablesTable = ({
     );
 
     const table = useTable(
-        {
+        ({
             defaultColumn,
             columns,
             data,
             initialRowStateAccessor: () => ({ isEditing: false }),
-        },
+        } as unknown) as TableOptions<object>, // cast needed due to plug-in options
         useSortBy,
         useFlexLayout,
         useRowState
