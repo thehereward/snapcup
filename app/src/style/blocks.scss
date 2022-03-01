@@ -96,8 +96,8 @@
     border-color: var(--colour-highlight-2);
     border-width: 2px;
     border-style: outset;
-    background-color: transparent;
-    color: var(--colour-highlight-2);
+    background-color: var(--colour-highlight-2);
+    color: var(--white);
     transition: transform 0.5s;
     transform: none;
     padding: 1px 6px;

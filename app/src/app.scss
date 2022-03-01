@@ -36,6 +36,9 @@ $colour-muted: #97959c;
 
 $font-family-base: var(--open-sans);
 
+$table-color: $primary;
+$table-border-color: $secondary;
+
 @import "bootstrap/scss/root";
 @import "bootstrap/scss/reboot";
 @import "bootstrap/scss/type";
