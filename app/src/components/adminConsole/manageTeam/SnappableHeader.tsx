@@ -13,14 +13,16 @@ const SnappableHeader = ({ columnInstance }: Props) => {
             )}
             scope="col"
         >
-            {columnInstance.render("Header")}
-            <span>
-                {columnInstance.isSorted
-                    ? columnInstance.isSortedDesc
-                        ? " ▾"
-                        : " ▴"
-                    : ""}
-            </span>
+            <div className="center-aligned overflow-break-word">
+                {columnInstance.render("Header")}
+                <span>
+                    {columnInstance.isSorted
+                        ? columnInstance.isSortedDesc
+                            ? " ▾"
+                            : " ▴"
+                        : ""}
+                </span>
+            </div>
         </th>
     );
 };

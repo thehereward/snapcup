@@ -80,6 +80,7 @@ export const uploadSnappableList = regionalFunctions.https.onCall(
         const toAdd: Snappable[] = [];
         const toDeleteIds: string[] = [];
         const toChange: { id: string; data: Snappable }[] = [];
+        const unchanged: { id: string; data: Snappable }[] = [];
 
         snappablePeople.forEach(({ id, fullName, email, username }) => {
             if (!fullName || !email || !username) {
@@ -113,13 +114,20 @@ export const uploadSnappableList = regionalFunctions.https.onCall(
                 inDoc.username !== outDoc.username
             ) {
                 toChange.push({ id: outDocSnapshot.id, data: inDoc });
+            } else {
+                unchanged.push({ id: outDocSnapshot.id, data: inDoc });
             }
         });
 
         const bulkWriter = db.bulkWriter();
 
-        toAdd.forEach((doc) => {
-            bulkWriter.create(snappablesCollection.doc(), doc);
+        const promisedAdded = toAdd.map(async (doc) => {
+            const ref = snappablesCollection.doc();
+            await bulkWriter.create(ref, doc);
+            return {
+                id: ref.id,
+                ...doc,
+            };
         });
         toDeleteIds.forEach((id) => {
             bulkWriter.delete(snappablesCollection.doc(id));
@@ -129,6 +137,16 @@ export const uploadSnappableList = regionalFunctions.https.onCall(
         });
 
         await bulkWriter.close();
-        return { result: "success" };
+
+        const newlyAdded = await Promise.all(promisedAdded);
+        const existing = unchanged
+            .concat(toChange)
+            .map((s) => ({ id: s.id, ...s.data }));
+
+        const newSnappablePople = newlyAdded.concat(existing);
+        return {
+            cupId: cupId,
+            snappablePeople: newSnappablePople,
+        };
     }
 );

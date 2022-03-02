@@ -13,6 +13,9 @@ export interface CustomRow extends Row {
     toggleRowSelected: (selected?: boolean) => void;
     original: {
         id: string;
+        email: string;
+        fullName: string;
+        username: string;
     };
 }
 
