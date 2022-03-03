@@ -106,23 +106,27 @@ const SnappablesTable = ({
     const columns = React.useMemo(
         () => [
             {
-                Header: "Email",
-                accessor: "email", // must match property keys on data objects
-                Cell: (cell) => defaultCellGenerator(cell, uploading, "email"),
-            },
-            {
-                Header: "Full Name",
-                accessor: "fullName",
-                Cell: (cell) =>
-                    defaultCellGenerator(cell, uploading, "fullName"),
-            },
-            {
+                id: "usernameCol",
                 Header: "Username",
                 accessor: "username",
                 Cell: (cell) =>
                     defaultCellGenerator(cell, uploading, "username"),
             },
             {
+                id: "fullNameCol",
+                Header: "Full Name",
+                accessor: "fullName",
+                Cell: (cell) =>
+                    defaultCellGenerator(cell, uploading, "fullName"),
+            },
+            {
+                id: "emailCol",
+                Header: "Email",
+                accessor: "email", // must match property keys on data objects
+                Cell: (cell) => defaultCellGenerator(cell, uploading, "email"),
+            },
+            {
+                id: "numSnapsCol",
                 Header: "Snaps Received",
                 accessor: "numSnaps",
                 Cell: ({ value }) => (
@@ -132,10 +136,11 @@ const SnappablesTable = ({
             {
                 width: 1,
                 accessor: "[editButton]", // ignored
-                Header: () => (
+                Header: ({ setSortBy }) => (
                     <AddSnappableButton
                         disabled={editing}
                         onClick={() => {
+                            setSortBy([]);
                             setCreatingNew(true);
                             setEditing(true);
                         }}
@@ -185,7 +190,12 @@ const SnappablesTable = ({
             columns,
             data,
             initialState: {
-                selection: {}, // select row ids
+                sortBy: [
+                    {
+                        id: "usernameCol",
+                        desc: false,
+                    },
+                ],
             },
             autoResetSortBy: false,
         } as unknown) as TableOptions<object>,
