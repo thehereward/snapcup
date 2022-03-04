@@ -169,17 +169,17 @@ const SnappablesTable = ({
                     row: CustomRow;
                     rows: CustomRow[];
                 }) => {
-                    const canSubmit = Object.values(thisRow.state).every(
+                    const allValuesFilled = Object.values(thisRow.state).every(
                         (val) => !!val
                     );
+                    const editingThisRow =
+                        thisRow.isSelected || thisRow.original.id === undefined;
                     return (
                         <EditWidget
-                            isEditing={
-                                thisRow.isSelected ||
-                                thisRow.original.id === undefined
-                            }
+                            isEditing={editingThisRow}
                             uploading={uploading}
-                            disableEdit={editing}
+                            disableEdit={editing && !editingThisRow}
+                            disableSave={!allValuesFilled}
                             onEditClick={() => clickHandlers.onEdit(thisRow)}
                             onCancelClick={() =>
                                 clickHandlers.onCancel(thisRow)

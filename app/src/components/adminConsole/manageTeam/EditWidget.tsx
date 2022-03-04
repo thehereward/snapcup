@@ -4,6 +4,7 @@ interface Props {
     isEditing: boolean;
     uploading: boolean;
     disableEdit: boolean;
+    disableSave: boolean;
     onEditClick: () => void;
     onCancelClick: () => void;
     onSaveClick: () => Promise<void>;
@@ -13,6 +14,7 @@ const EditWidget = ({
     isEditing,
     uploading,
     disableEdit,
+    disableSave,
     onEditClick,
     onCancelClick,
     onSaveClick,
@@ -28,7 +30,7 @@ const EditWidget = ({
             </button>
             <button
                 className="btn btn-primary triple-width"
-                disabled={uploading}
+                disabled={disableSave || uploading}
                 onClick={() => onSaveClick()}
             >
                 {uploading ? (
