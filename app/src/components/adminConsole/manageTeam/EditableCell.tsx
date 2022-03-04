@@ -3,6 +3,7 @@ import React from "react";
 interface Props<T> {
     initialValue: T;
     newValue?: T;
+    placeholder: T;
     editing: boolean;
     disabled: boolean;
     updateData: (value: T) => void;
@@ -12,6 +13,7 @@ type value = string | number;
 const EditableCell = ({
     initialValue,
     newValue,
+    placeholder,
     editing,
     disabled,
     updateData,
@@ -36,6 +38,7 @@ const EditableCell = ({
                     type="text"
                     className="form-control"
                     value={modifiedValue}
+                    placeholder={String(placeholder)}
                     onChange={onChange}
                     onBlur={onBlur}
                     disabled={disabled}

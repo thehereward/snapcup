@@ -42,6 +42,11 @@ const SnappablesTable = ({
             },
             onCancel: (row: CustomRow) => {
                 row.toggleRowSelected(false);
+                row.setState({
+                    email: row.original.email,
+                    username: row.original.username,
+                    fullName: row.original.fullName,
+                });
                 setCreatingNew(false);
                 setEditing(false);
             },
@@ -52,11 +57,9 @@ const SnappablesTable = ({
                     return original.id == modifiedRow.original.id
                         ? {
                               id: original.id,
-                              email: modifiedRow.state.email || original.email,
-                              fullName:
-                                  modifiedRow.state.fullName ||
-                                  original.fullName,
-                              username: row.state.username || original.username,
+                              email: modifiedRow.state.email,
+                              fullName: modifiedRow.state.fullName,
+                              username: row.state.username,
                           }
                         : {
                               id: original.id,
@@ -86,13 +89,15 @@ const SnappablesTable = ({
     const defaultCellGenerator = (
         cell: CustomCell,
         disabled: boolean,
-        accessor: string
+        accessor: string,
+        placeholder: string | number
     ) => (
         <EditableCell
             initialValue={cell.value}
             newValue={cell.row.state[accessor]}
             editing={cell.row.isSelected || cell.row.original.id === undefined}
             disabled={disabled}
+            placeholder={placeholder}
             updateData={(val) =>
                 cell.row.setState((s) => ({ ...s, [accessor]: val }))
             }
@@ -110,20 +115,31 @@ const SnappablesTable = ({
                 Header: "Username",
                 accessor: "username",
                 Cell: (cell) =>
-                    defaultCellGenerator(cell, uploading, "username"),
+                    defaultCellGenerator(cell, uploading, "username", "EllWoo"),
             },
             {
                 id: "fullNameCol",
                 Header: "Full Name",
                 accessor: "fullName",
                 Cell: (cell) =>
-                    defaultCellGenerator(cell, uploading, "fullName"),
+                    defaultCellGenerator(
+                        cell,
+                        uploading,
+                        "fullName",
+                        "Elle Woods"
+                    ),
             },
             {
                 id: "emailCol",
                 Header: "Email",
                 accessor: "email", // must match property keys on data objects
-                Cell: (cell) => defaultCellGenerator(cell, uploading, "email"),
+                Cell: (cell) =>
+                    defaultCellGenerator(
+                        cell,
+                        uploading,
+                        "email",
+                        "elle.woods@stanford.edu"
+                    ),
             },
             {
                 id: "numSnapsCol",
@@ -146,21 +162,34 @@ const SnappablesTable = ({
                         }}
                     />
                 ),
-                Cell: ({ row: thisRow, rows: allRows }) => (
-                    <EditWidget
-                        isEditing={
-                            thisRow.isSelected ||
-                            thisRow.original.id === undefined
-                        }
-                        uploading={uploading}
-                        disableEdit={editing}
-                        onEditClick={() => clickHandlers.onEdit(thisRow)}
-                        onCancelClick={() => clickHandlers.onCancel(thisRow)}
-                        onSaveClick={() =>
-                            clickHandlers.onSave(thisRow, allRows)
-                        }
-                    />
-                ),
+                Cell: ({
+                    row: thisRow,
+                    rows: allRows,
+                }: {
+                    row: CustomRow;
+                    rows: CustomRow[];
+                }) => {
+                    const canSubmit = Object.values(thisRow.state).every(
+                        (val) => !!val
+                    );
+                    return (
+                        <EditWidget
+                            isEditing={
+                                thisRow.isSelected ||
+                                thisRow.original.id === undefined
+                            }
+                            uploading={uploading}
+                            disableEdit={editing}
+                            onEditClick={() => clickHandlers.onEdit(thisRow)}
+                            onCancelClick={() =>
+                                clickHandlers.onCancel(thisRow)
+                            }
+                            onSaveClick={() =>
+                                clickHandlers.onSave(thisRow, allRows)
+                            }
+                        />
+                    );
+                },
                 disableSortBy: true,
             },
         ],
@@ -175,9 +204,9 @@ const SnappablesTable = ({
         if (creatingNew) {
             rowData.unshift({
                 id: undefined,
-                fullName: "Elle Woods",
-                email: "elle.woods@stanford.edu",
-                username: "LegallyBlonde",
+                fullName: undefined,
+                email: undefined,
+                username: undefined,
                 numSnaps: 0,
             });
         }
@@ -198,6 +227,11 @@ const SnappablesTable = ({
                 ],
             },
             autoResetSortBy: false,
+            initialRowStateAccessor: (row: CustomRow) => ({
+                username: row.original.username,
+                fullName: row.original.fullName,
+                email: row.original.email,
+            }),
         } as unknown) as TableOptions<object>,
         useSortBy,
         useFlexLayout,
