@@ -19,31 +19,3 @@ export function useSnappablePeople(
 
     return [snappablePeople, setSnappablePeople];
 }
-
-export const updateSnappablePerson = (
-    newSnappable: Snappable,
-    setSnappablePeople: React.Dispatch<React.SetStateAction<Snappable[]>>
-) => {
-    setSnappablePeople((snappablePeople) => {
-        const index = snappablePeople.findIndex(
-            (val) => val.id == newSnappable.id
-        );
-        if (index === -1) {
-            // TODO: Consider adding a new snappable person in this case
-            throw Error(
-                `There is no snappable person in this cup with id=${newSnappable.id}, cannot update.`
-            );
-        }
-
-        const oldSnappable = snappablePeople.at(index);
-        const filledInSnappable: Snappable = {
-            id: newSnappable.id,
-            email: newSnappable.email || oldSnappable.email,
-            fullName: newSnappable.fullName || oldSnappable.fullName,
-            username: newSnappable.username || oldSnappable.username,
-        };
-
-        snappablePeople[index] = filledInSnappable;
-        return snappablePeople;
-    });
-};

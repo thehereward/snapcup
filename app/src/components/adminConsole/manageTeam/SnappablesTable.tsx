@@ -15,7 +15,7 @@ import EditWidget from "./EditWidget";
 import SnappableRow from "./SnappableRow";
 import SnappableHeader from "./SnappableHeader";
 import { CustomCell, CustomColumn, CustomRow } from "./extensionTypes";
-import { uploadSnappables } from "../csvTools/csvManager";
+import { writeAllSnappablePeople } from "../../../firebase/users/SetSnappables";
 
 interface Props {
     cupId: string;
@@ -52,28 +52,26 @@ const SnappablesTable = ({
             },
             onSave: async (modifiedRow: CustomRow, allRows: CustomRow[]) => {
                 setUploading(true);
-                const newSnappables: Snappable[] = allRows.map((row) => {
-                    const original = row.original;
-                    return original.id == modifiedRow.original.id
-                        ? {
-                              id: original.id,
-                              email: modifiedRow.state.email,
-                              fullName: modifiedRow.state.fullName,
-                              username: row.state.username,
-                          }
-                        : {
-                              id: original.id,
-                              email: original.email,
-                              fullName: original.fullName,
-                              username: original.username,
-                          };
-                });
-
                 try {
-                    const result = await uploadSnappables(cupId, newSnappables);
-                    const newSnappablesWithIds = result.data["snappablePeople"];
-                    setSnappables(newSnappablesWithIds);
-                } catch {
+                    const modifiedSnappable = {
+                        id: modifiedRow.original.id,
+                        email: modifiedRow.state.email,
+                        fullName: modifiedRow.state.fullName,
+                        username: modifiedRow.state.username,
+                    };
+                    const [
+                        updatedSnappableSingle,
+                    ] = await writeAllSnappablePeople(cupId, [
+                        modifiedSnappable,
+                    ]);
+                    const updatedSnappableList = allRows.map((row) =>
+                        row.original.id === modifiedRow.original.id
+                            ? updatedSnappableSingle
+                            : row.original
+                    );
+                    setSnappables(updatedSnappableList);
+                } catch (e) {
+                    console.error(e);
                     alert("Error uploading snappables");
                 } finally {
                     modifiedRow.toggleRowSelected(false);

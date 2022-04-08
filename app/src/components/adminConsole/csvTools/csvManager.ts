@@ -45,10 +45,7 @@ export async function readFileAndUpload(cupId: string, file: Blob) {
     uploadSnappables(cupId, snappableList);
 }
 
-export async function uploadSnappables(
-    cupId: string,
-    snappablePeople: Snappable[]
-) {
+async function uploadSnappables(cupId: string, snappablePeople: Snappable[]) {
     const requestObject = {
         cupId: cupId,
         snappablePeople: snappablePeople,
