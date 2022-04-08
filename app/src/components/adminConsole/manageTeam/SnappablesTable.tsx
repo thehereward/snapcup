@@ -90,7 +90,6 @@ const SnappablesTable = ({
     ) => (
         <EditableCell
             initialValue={cell.value}
-            newValue={cell.row.state[accessor]}
             editing={cell.row.isSelected || cell.row.original.id === undefined}
             disabled={disabled}
             placeholder={placeholder}

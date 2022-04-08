@@ -12,15 +12,12 @@ interface Props<T> {
 type value = string | number;
 const EditableCell = ({
     initialValue,
-    newValue,
     placeholder,
     editing,
     disabled,
     updateData,
 }: Props<value>) => {
-    const [modifiedValue, setModifiedValue] = React.useState(
-        newValue || initialValue
-    );
+    const [modifiedValue, setModifiedValue] = React.useState(initialValue);
 
     const onChange = (e) => {
         setModifiedValue(e.target.value);
@@ -37,7 +34,7 @@ const EditableCell = ({
                 <input
                     type="text"
                     className="form-control"
-                    value={modifiedValue}
+                    defaultValue={initialValue}
                     placeholder={String(placeholder)}
                     onChange={onChange}
                     onBlur={onBlur}
