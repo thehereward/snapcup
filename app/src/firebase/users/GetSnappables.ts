@@ -4,6 +4,8 @@ import {
     getFirestore,
     QueryDocumentSnapshot,
     onSnapshot,
+    getDocs,
+    query,
 } from "firebase/firestore";
 import { Snappable } from "../../types";
 
@@ -31,4 +33,13 @@ export function streamAllSnappablePeople(
             onError(error);
         },
     });
+}
+
+export async function getAllSnappablePeopleOnce(
+    cupId: string
+): Promise<Snappable[]> {
+    const db = getFirestore();
+    const collectionRef = collection(db, "cups", cupId, "snappablePeople");
+    const querySnapshot = await getDocs(query(collectionRef));
+    return querySnapshot.docs.map(docToSnappable);
 }

@@ -5,7 +5,6 @@ import {
     deleteDoc,
     doc,
     DocumentData,
-    getDocs,
     getFirestore,
     QueryDocumentSnapshot,
     query,
