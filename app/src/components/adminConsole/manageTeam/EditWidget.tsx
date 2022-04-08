@@ -7,7 +7,7 @@ interface Props {
     disableSave: boolean;
     onEditClick: () => void;
     onCancelClick: () => void;
-    onSaveClick: () => Promise<void>;
+    onSaveClick: () => void;
 }
 
 const EditWidget = ({

@@ -1,22 +1,15 @@
-import {
-    collection,
-    getFirestore,
-    addDoc,
-    updateDoc,
-    doc,
-    writeBatch,
-} from "firebase/firestore";
+import { collection, getFirestore, doc, writeBatch } from "firebase/firestore";
 import { Snappable } from "../../types";
 
-export async function writeAllSnappablePeople(
+export function updateSnappablePeople(
     cupId: string,
     snappablePeople: Snappable[]
-): Promise<Snappable[]> {
+): Snappable[] {
     const db = getFirestore();
     const collectionRef = collection(db, "cups", cupId, "snappablePeople");
-    const promises = [];
     const newSnappables = snappablePeople.map((s) => ({ ...s })); // shallow copy
 
+    const batch = writeBatch(db);
     snappablePeople.forEach((snappable, idx) => {
         const content = {
             // should not contain the id
@@ -26,16 +19,18 @@ export async function writeAllSnappablePeople(
         };
         if (snappable.id) {
             const existingDoc = doc(collectionRef, snappable.id);
-            promises.push(updateDoc(existingDoc, content));
+            batch.update(existingDoc, content);
         } else {
-            promises.push(
-                addDoc(collectionRef, content).then(
-                    (ref) => (newSnappables[idx].id = ref.id)
-                )
-            );
+            const newDoc = doc(collectionRef);
+            newSnappables[idx].id = newDoc.id;
+            batch.set(newDoc, content); // will create new
         }
     });
 
-    await Promise.all(promises);
+    // performs writes in background
+    batch.commit().catch((err) => {
+        alert("Error updating snappables");
+        console.error(err);
+    });
     return newSnappables;
 }

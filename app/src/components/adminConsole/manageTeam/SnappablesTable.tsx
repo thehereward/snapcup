@@ -15,7 +15,7 @@ import EditWidget from "./EditWidget";
 import SnappableRow from "./SnappableRow";
 import SnappableHeader from "./SnappableHeader";
 import { CustomCell, CustomColumn, CustomRow } from "./extensionTypes";
-import { writeAllSnappablePeople } from "../../../firebase/users/SetSnappables";
+import { updateSnappablePeople } from "../../../firebase/users/SetSnappables";
 
 interface Props {
     cupId: string;
@@ -50,7 +50,7 @@ const SnappablesTable = ({
                 setCreatingNew(false);
                 setEditing(false);
             },
-            onSave: async (modifiedRow: CustomRow, allRows: CustomRow[]) => {
+            onSave: (modifiedRow: CustomRow, allRows: CustomRow[]) => {
                 setUploading(true);
                 try {
                     const modifiedSnappable = {
@@ -61,9 +61,7 @@ const SnappablesTable = ({
                     };
                     const [
                         updatedSnappableSingle,
-                    ] = await writeAllSnappablePeople(cupId, [
-                        modifiedSnappable,
-                    ]);
+                    ] = updateSnappablePeople(cupId, [modifiedSnappable]);
                     const updatedSnappableList = allRows.map((row) =>
                         row.original.id === modifiedRow.original.id
                             ? updatedSnappableSingle
