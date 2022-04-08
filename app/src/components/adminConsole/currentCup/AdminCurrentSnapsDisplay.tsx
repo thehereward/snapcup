@@ -19,7 +19,7 @@ interface Status {
 
 const AdminCurrentSnapsDisplay = (props: { cup: Entity<Cup> }) => {
     const [snaps] = useSnapsInCup(props.cup.id);
-    const [snappables, setSnappables] = useSnappablePeople(props.cup.id);
+    const [snappables, setSnappables] = useSnappablePeople(props.cup.id, false);
     const [status, setStatus] = useState<Status>({ status: IDLE });
 
     const onClickDownload = () => {
