@@ -8,7 +8,7 @@ To develop locally, you will need the following installed:
 2. `firebase-tools` installed globally. This will allow you to use the `firebase` command in your shell.
 3. The Java JDK. This is needed to run the firebase emulator locally.
 
-For more info on the last 2 steps, refer to [Firebase.md](Docs/Firebase.md).
+For more info on the last 2 steps, refer to [Firebase.md](docs/Firebase.md).
 
 ## Getting Started
 
