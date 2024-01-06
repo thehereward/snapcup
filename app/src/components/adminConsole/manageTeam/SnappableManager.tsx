@@ -17,6 +17,7 @@ interface Status {
 const SnappableManager = (props: {
     currentSnaps?: Entity<Snap>[];
     snappablePeople: Snappable[];
+    setSnappablePeople: React.Dispatch<React.SetStateAction<Snappable[]>>;
     cupId: string;
 }) => {
     const [status, setStatus] = useState<Status>({ status: IDLE });
@@ -128,8 +129,10 @@ const SnappableManager = (props: {
                 )}
             </form>
             <SnappablesTable
+                cupId={props.cupId}
                 snappables={props.snappablePeople}
                 currentSnaps={props.currentSnaps}
+                setSnappables={props.setSnappablePeople.bind(this)}
             />
         </>
     );
